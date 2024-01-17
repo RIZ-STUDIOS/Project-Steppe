@@ -1,0 +1,13 @@
+.tabBar{
+	flex-direction: row;
+	background-color: #1e1e1e;
+	padding: 5px;
+}
+
+.tabButton{
+	flex-grow: 1;
+}
+
+.pressed{
+	background-color: #46607C;
+}

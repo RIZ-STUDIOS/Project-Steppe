@@ -1,0 +1,32 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using RicTools;
+using RicTools.Editor.Windows;
+using UnityEditor;
+
+    #ROOTNAMESPACEBEGIN#
+public class #SCRIPTNAME# : GenericEditorWindow<#SCRIPTABLEOBJECT#>
+{
+    [MenuItem("#MENULOCATION#/#WINDOWNAME#")]
+	public static #SCRIPTNAME# ShowWindow()
+    {
+        return GetWindow<#SCRIPTNAME#>("#WINDOWNAME#");
+    }
+
+    protected override void CreateEditorGUI()
+    {
+        CreateDefaultGUI();
+    }
+
+    protected override void LoadAsset(#SCRIPTABLEOBJECT# asset, bool isNull)
+    {
+        #NOTRIM#
+    }
+
+    protected override void SaveAsset(ref #SCRIPTABLEOBJECT# asset)
+    {
+        #NOTRIM#
+    }
+}
+#ROOTNAMESPACEEND#
