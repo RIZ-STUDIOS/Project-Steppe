@@ -20,8 +20,8 @@ namespace RicTools.Editor.Windows
             public static readonly GUIContent singletonManagersLabel = new GUIContent("Singleton Managers");
             public static readonly GUIContent singletonManagersListLabel = new GUIContent("Singleton Managers List");
 
-            public static readonly GUIContent singletonPrefabManagersLabel = new GUIContent("Singleton Managers");
-            public static readonly GUIContent singletonPrefabManagersListLabel = new GUIContent("Singleton Managers List");
+            public static readonly GUIContent singletonPrefabManagersLabel = new GUIContent("Singleton Prefab Managers");
+            public static readonly GUIContent singletonPrefabManagersListLabel = new GUIContent("Singleton Prefab Managers List");
 
             public static readonly GUIContent scriptableEditorsAddButtonLabel = new GUIContent("Add Scriptable Editor");
         }
