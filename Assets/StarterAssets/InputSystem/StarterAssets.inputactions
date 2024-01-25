@@ -44,7 +44,7 @@
                 {
                     "name": "Attack",
                     "type": "Button",
-                    "id": "b58db63b-0106-404b-b080-24d2e93f9561",
+                    "id": "23ffc0ed-e493-4923-af64-ab314bbe5daf",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -230,22 +230,22 @@
                 },
                 {
                     "name": "",
-                    "id": "f3a4f409-ac30-480c-892d-61d1a5179a0d",
-                    "path": "<XInputController>/rightTrigger",
+                    "id": "e9d734aa-d044-4b03-9292-3bdb70de5a0c",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardMouse",
                     "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "734d78e8-ed84-4695-abd6-dfeb629764ec",
-                    "path": "<Mouse>/leftButton",
+                    "id": "7d638788-fa0b-459f-96f9-2ee97392bc8c",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false

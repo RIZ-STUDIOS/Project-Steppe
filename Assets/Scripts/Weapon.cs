@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarterAssets;
 
 namespace ProjectSteppe
 {
@@ -8,22 +9,32 @@ namespace ProjectSteppe
     {
         [SerializeField] private WeaponScriptableObject weapon;
         [SerializeField] private List<Collider> collisions;
-        private GameObject player;
 
-        private void Awake()
-        {
-            //player = GameObject.FindGameObjectWithTag("Player").GetComponent<StarterAssetsInputs>();
-            //one way of hooking it up to control scheme, doesn't recognise atm since diff folder
-        }
-
-        public void WeaponEnable()
+        public void EnableWeapon()
         {
             WeaponSwingAction(true);
         }
 
-        public void WeaponDisable()
+        public void DisableWeapon()
         {
             WeaponSwingAction(false);
+        }
+
+        public void ToggleAttack(float duration)
+        {
+            StartCoroutine(AttackActivator(duration));
+        }
+
+        private IEnumerator AttackActivator(float duration)
+        {
+            EnableWeapon();
+            yield return StartCoroutine(Delay(duration));
+            DisableWeapon();
+        }
+
+        private IEnumerator Delay(float duration)
+        {
+            yield return new WaitForSeconds(duration);
         }
 
         private void WeaponSwingAction(bool state)
