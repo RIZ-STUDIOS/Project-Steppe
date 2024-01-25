@@ -13,6 +13,7 @@ namespace ProjectSteppe
         private Animator _animator;
 
         [SerializeField] private GameObject weapon;
+        private float attackDuration = 0.5f;
 
         private void Awake()
         {
@@ -43,7 +44,7 @@ namespace ProjectSteppe
             {
                 _animator.SetBool(_animIDAttacking, true);
                 thirdPersonController.canMove = false;
-                weapon.GetComponent<Weapon>().ToggleAttack(0.5f); // or change to enable/disable
+                weapon.GetComponent<Weapon>().ToggleAttack(attackDuration); // or change to enable/disable
             }
             else if (_input.attack)
             {
