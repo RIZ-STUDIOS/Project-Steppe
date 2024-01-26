@@ -1,22 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using StarterAssets;
+using UnityEngine;
 
-namespace ProjectSteppe
+namespace ProjectSteppe.Entities.Player
 {
+    [RequireComponent(typeof(Entity))]
     public class PlayerAttackController : MonoBehaviour
     {
-        ThirdPersonController thirdPersonController;
+        private ThirdPersonController thirdPersonController;
         private StarterAssetsInputs _input;
         private int _animIDAttacking;
         private Animator _animator;
 
-        [SerializeField] private GameObject weapon;
-        private float attackDuration = 0.5f;
+        private Entity entity;
 
         private void Awake()
         {
+            entity = GetComponent<Entity>();
             thirdPersonController = GetComponent<ThirdPersonController>();
         }
 
@@ -24,7 +23,7 @@ namespace ProjectSteppe
         {
             _input = GetComponent<StarterAssetsInputs>();
 
-            TryGetComponent(out _animator);
+            _animator = GetComponent<Animator>();
             _animIDAttacking = Animator.StringToHash("Attacking");
         }
 
@@ -37,19 +36,34 @@ namespace ProjectSteppe
         {
             if (!thirdPersonController.Grounded)
             {
-                if(_input.attack) _input.attack = false;
+                if (_input.attack) _input.attack = false;
             }
 
             if (_input.attack && thirdPersonController.canMove)
             {
                 _animator.SetBool(_animIDAttacking, true);
                 thirdPersonController.canMove = false;
-                weapon.GetComponent<Weapon>().ToggleAttack(attackDuration); // or change to enable/disable
             }
             else if (_input.attack)
             {
                 _input.attack = false;
             }
+        }
+
+        // Called in Attack animation
+        private void EnableWeapon()
+        {
+            if (!entity.CurrentWeapon) return;
+
+            entity.CurrentWeapon.EnableColliders();
+        }
+
+        // Called in Attack animation
+        private void DisableWeapon()
+        {
+            if (!entity.CurrentWeapon) return;
+
+            entity.CurrentWeapon.DisableColliders();
         }
     }
 }
