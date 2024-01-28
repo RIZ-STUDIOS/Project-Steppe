@@ -21,6 +21,10 @@ namespace StarterAssets
         public bool cursorLocked = true;
         public bool cursorInputForLook = true;
 
+        [Header("Camera Settings")]
+        public float zoom;
+        public bool resetZoom;
+
 #if ENABLE_INPUT_SYSTEM
         public void OnMove(InputValue value)
         {
@@ -49,6 +53,16 @@ namespace StarterAssets
         {
             AttackInput(value.isPressed);
         }
+
+        public void OnZoom(InputValue value)
+        {
+            ZoomInput(value.Get<float>());
+        }
+
+        public void OnResetZoom(InputValue value)
+        {
+            ResetZoomInput(value.isPressed);
+        }
 #endif
 
 
@@ -75,6 +89,16 @@ namespace StarterAssets
         public void AttackInput(bool newAttackState)
         {
             attack = newAttackState;
+        }
+
+        public void ZoomInput(float newZoomValue)
+        {
+            zoom = newZoomValue;
+        }
+
+        public void ResetZoomInput(bool newZoomState)
+        {
+            resetZoom = newZoomState;
         }
 
         private void OnApplicationFocus(bool hasFocus)
