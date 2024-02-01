@@ -13,6 +13,8 @@ namespace ProjectSteppe.Entities.Player
 
         private Entity entity;
 
+        private bool canCombo;
+
         private void Awake()
         {
             entity = GetComponent<Entity>();
@@ -59,11 +61,23 @@ namespace ProjectSteppe.Entities.Player
         }
 
         // Called in Attack animation
-        private void DisableWeapon()
+        public void DisableWeapon()
         {
             if (!entity.CurrentWeapon) return;
 
             entity.CurrentWeapon.DisableColliders();
+        }
+
+        // Called in Attack animation
+        private void DisableRotation()
+        {
+            thirdPersonController.canRotate = false;
+        }
+
+        // Called in Attack animation
+        private void StartAttack()
+        {
+            thirdPersonController.RotationSmoothTime = 0.03f;
         }
     }
 }

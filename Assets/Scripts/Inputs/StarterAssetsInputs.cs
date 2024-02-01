@@ -13,6 +13,7 @@ namespace StarterAssets
         public bool jump;
         public bool sprint;
         public bool attack;
+        public bool targetLock;
 
         [Header("Movement Settings")]
         public bool analogMovement;
@@ -20,10 +21,6 @@ namespace StarterAssets
         [Header("Mouse Cursor Settings")]
         public bool cursorLocked = true;
         public bool cursorInputForLook = true;
-
-        [Header("Camera Settings")]
-        public float zoom;
-        public bool resetZoom;
 
 #if ENABLE_INPUT_SYSTEM
         public void OnMove(InputValue value)
@@ -54,14 +51,9 @@ namespace StarterAssets
             AttackInput(value.isPressed);
         }
 
-        public void OnZoom(InputValue value)
+        public void OnLock(InputValue value)
         {
-            ZoomInput(value.Get<float>());
-        }
-
-        public void OnResetZoom(InputValue value)
-        {
-            ResetZoomInput(value.isPressed);
+            LockInput(value.isPressed);
         }
 #endif
 
@@ -91,14 +83,9 @@ namespace StarterAssets
             attack = newAttackState;
         }
 
-        public void ZoomInput(float newZoomValue)
+        public void LockInput(bool newLockState)
         {
-            zoom = newZoomValue;
-        }
-
-        public void ResetZoomInput(bool newZoomState)
-        {
-            resetZoom = newZoomState;
+            targetLock = newLockState;
         }
 
         private void OnApplicationFocus(bool hasFocus)
