@@ -10,5 +10,16 @@ namespace ProjectSteppe
         {
             return this;
         }
+
+        protected virtual AIState SwitchState(AIController controller, AIState newState)
+        {
+            ResetState(controller);
+            return newState;
+        }
+
+        protected virtual void ResetState(AIController controller)
+        {
+
+        }
     }
 }

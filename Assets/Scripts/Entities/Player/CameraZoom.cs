@@ -20,7 +20,7 @@ namespace ProjectSteppe
             zoomOffset = Vector3.zero;
         }
 
-        private void Update()
+        /*private void Update()
         {
             Zoom();
             ResetZoom();
@@ -28,6 +28,7 @@ namespace ProjectSteppe
 
         public void Zoom()
         {
+            
             if (_input.zoom > 0 && zoomOffset.y > -maxCameraZoom / minimumDivider) //dividing keeps it outside from player clipping!
             {
                 zoomOffset += new Vector3(0f, -zoomScale, zoomScale);
@@ -43,6 +44,6 @@ namespace ProjectSteppe
             {
                 zoomOffset = Vector3.zero;
             }
-        }
+        }*/
     }
 }

@@ -9,15 +9,15 @@ namespace ProjectSteppe
     {
         public override AIState Tick(AIController controller)
         {
+            controller.playerTarget = controller.combatController.playerTarget;
             if (controller.playerTarget != null)
             {
                 Debug.Log("Player Targetted");
-                return this;
+                return SwitchState(controller, controller.chase);
             }
             else
             {
                 Debug.Log("No Targets");
-                controller.combatController.FindTarget(controller);
                 return this;
             }
         }

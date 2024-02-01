@@ -7,32 +7,21 @@ namespace ProjectSteppe
 {
     public class AICombatController : MonoBehaviour
     {
-        [Header("Detection Settings")]
-        [SerializeField] private float detectionRadius = 8.5f;
+        public Transform playerTarget;
 
-        public void FindTarget(AIController controller)
+        private void OnTriggerEnter(Collider other)
         {
-            if (controller.playerTarget != null) return;
-
-            Collider[] colliders = Physics.OverlapSphere(controller.eyeLevel.transform.position, detectionRadius);
-
-            for (int i = 0; i < colliders.Length; i++)
+            if (other.GetComponent<ThirdPersonController>())
             {
-                ThirdPersonController player = colliders[i].transform.GetComponent<ThirdPersonController>();
-
-                if (player == null) continue;
-
-                if (!Physics.Linecast(controller.eyeLevel.transform.position, player.eyeLevel.transform.position))
-                {
-                    controller.playerTarget = player.eyeLevel.transform;
-                }
-                Debug.DrawLine(controller.eyeLevel.transform.position, player.eyeLevel.transform.position, Color.blue);
+                playerTarget = other.transform;
             }
         }
-        private void OnDrawGizmosSelected()
+        private void OnTriggerExit(Collider other)
         {
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawWireSphere(transform.position, detectionRadius);
+            if (other.GetComponent<ThirdPersonController>())
+            {
+                playerTarget = null;
+            }
         }
     }
 }
