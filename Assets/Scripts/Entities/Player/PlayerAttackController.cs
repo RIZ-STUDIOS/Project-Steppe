@@ -13,7 +13,7 @@ namespace ProjectSteppe.Entities.Player
 
         private Entity entity;
 
-        private void canCombo;
+        private bool canCombo;
 
         private void Awake()
         {
