@@ -13,7 +13,7 @@ namespace ProjectSteppe
         [SerializeField, FormerlySerializedAs("weapon")] private WeaponScriptableObject weaponSo;
         [SerializeField, FormerlySerializedAs("collisions")] private List<Collider> weaponColliders;
 
-        [SerializeField, ReadOnly(AvailableMode.Editor)]
+        [SerializeField, ReadOnly(AvailableMode.Play)]
         private bool startEnabled;
 
         public bool WeaponEnabled => _weaponEnabled;

@@ -104,10 +104,15 @@ namespace StarterAssets
 
         public bool strafe;
 
+        [Header("Dashing")]
         [SerializeField]
         private float dashTime = 0.5f;
 
+        [SerializeField]
+        private float dashCooldownTime = .5f;
+
         private float dashTimer;
+        private float dashCooldownTimer;
 
         public bool dashing;
 
@@ -168,6 +173,7 @@ namespace StarterAssets
         private void Update()
         {
             _hasAnimator = TryGetComponent(out _animator);
+            //_input.jump = false;
 
             JumpAndGravity();
             GroundedCheck();
@@ -229,12 +235,12 @@ namespace StarterAssets
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = dashing ? SprintSpeed : MoveSpeed;
 
-            if (_input.sprint && dashing)
+            if (_input.sprint && (dashing || !Grounded))
             {
                 _input.sprint = false;
             }
 
-            if (_input.sprint && !dashing)
+            if (_input.sprint && !dashing && dashCooldownTimer <= 0)
             {
                 dashing = true;
                 canRotate = false;
@@ -249,8 +255,14 @@ namespace StarterAssets
                 if(dashTimer <= 0)
                 {
                     dashing = false;
+                    dashCooldownTimer = dashCooldownTime;
                     canRotate = true;
                 }
+            }
+
+            if(!dashing && dashCooldownTimer > 0)
+            {
+                dashCooldownTimer -= Time.deltaTime;
             }
 
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
@@ -293,13 +305,13 @@ namespace StarterAssets
             if (_input.move != Vector2.zero || dashing)
             {
                 _targetRotation = _mainCamera.transform.eulerAngles.y;
-                if (dashing || (dashing && _input.move != Vector2.zero && strafe))
+                if (dashing)
                 {
                     _targetRotation = transform.eulerAngles.y;
                 }
                 if(dashing && _input.move != Vector2.zero && !strafe)
                 {
-                    _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
+                    _targetRotation = _mainCamera.transform.eulerAngles.y + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
                 }
                 if (!dashing)
                 {
@@ -377,6 +389,9 @@ namespace StarterAssets
             {
                 // reset the jump timeout timer
                 _jumpTimeoutDelta = JumpTimeout;
+                if (dashing)
+                    canRotate = true;
+                dashing = false;
 
                 // fall timeout
                 if (_fallTimeoutDelta >= 0.0f)
