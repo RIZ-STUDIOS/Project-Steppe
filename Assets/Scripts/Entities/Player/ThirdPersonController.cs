@@ -104,6 +104,13 @@ namespace StarterAssets
 
         public bool strafe;
 
+        [SerializeField]
+        private float dashTime = 0.5f;
+
+        private float dashTimer;
+
+        public bool dashing;
+
 #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
 #endif
@@ -220,13 +227,37 @@ namespace StarterAssets
         private void Move()
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+            float targetSpeed = dashing ? SprintSpeed : MoveSpeed;
+
+            if (_input.sprint && dashing)
+            {
+                _input.sprint = false;
+            }
+
+            if (_input.sprint && !dashing)
+            {
+                dashing = true;
+                canRotate = false;
+                dashTimer = dashTime;
+                _input.sprint = false;
+            }
+
+            if (dashing)
+            {
+                dashTimer -= Time.deltaTime;
+
+                if(dashTimer <= 0)
+                {
+                    dashing = false;
+                    canRotate = true;
+                }
+            }
 
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
             // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is no input, set the target speed to 0
-            if (_input.move == Vector2.zero || !canMove) targetSpeed = 0.0f;
+            if ((!dashing && _input.move == Vector2.zero) || !canMove) targetSpeed = 0.0f;
 
             // a reference to the players current horizontal velocity
             float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
@@ -259,17 +290,32 @@ namespace StarterAssets
 
             // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is a move input rotate player when the player is moving
-            if (_input.move != Vector2.zero)
+            if (_input.move != Vector2.zero || dashing)
             {
-                _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-                                  _mainCamera.transform.eulerAngles.y;
-                if (canRotate && !strafe)
+                _targetRotation = _mainCamera.transform.eulerAngles.y;
+                if (dashing || (dashing && _input.move != Vector2.zero && strafe))
+                {
+                    _targetRotation = transform.eulerAngles.y;
+                }
+                if(dashing && _input.move != Vector2.zero && !strafe)
+                {
+                    _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
+                }
+                if (!dashing)
+                {
+                    _targetRotation += Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
+                }
+                if ((canRotate && !strafe) && !dashing)
                 {
                     float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
                         RotationSmoothTime);
 
                     // rotate to face input direction relative to camera position
                     transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                }
+                if (dashing)
+                {
+                    transform.rotation = Quaternion.Euler(0, _targetRotation, 0);
                 }
             }
 
