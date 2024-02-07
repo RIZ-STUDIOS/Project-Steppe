@@ -24,9 +24,15 @@ namespace ProjectSteppe
                 controller.navmesh.isStopped = false;
             }
 
+            if (!controller.isMoving && Vector3.Distance(controller.transform.position, controller.playerTarget.position) < controller.navmesh.stoppingDistance)
+            {
+                return SwitchState(controller, controller.attack);
+            }
+
             NavMeshPath path = new();
             controller.navmesh.CalculatePath(controller.playerTarget.position, path);
             controller.navmesh.SetPath(path);
+            controller.animator.RotateToTarget(controller);
             return this;
         }
     }

@@ -11,17 +11,22 @@ namespace ProjectSteppe
         [SerializeField] private AIState currentState;
 
         public AICombatController combatController;
+        public AIAnimator animator;
+
         public Transform eyeLevel;
         public Transform playerTarget;
         public NavMeshAgent navmesh;
+        public bool isMoving;
 
         [Header("States")]
         public AIIdle idle;
         public AIChase chase;
+        public AIAttack attack;
 
         private void Awake()
         {
             combatController = GetComponent<AICombatController>();
+            animator = GetComponent<AIAnimator>();
             idle = Instantiate(idle);
             chase = Instantiate(chase);
         }
@@ -29,6 +34,7 @@ namespace ProjectSteppe
         private void FixedUpdate()
         {
             UpdateState();
+            animator.SetStates(this);
             DebugInfo();
         }
 
@@ -41,6 +47,22 @@ namespace ProjectSteppe
             {
                 currentState = state;
             }
+
+
+            if (navmesh.enabled)
+            {
+                Vector3 destination = navmesh.destination;
+                float remainingDistance = Vector3.Distance(destination, transform.position);
+
+                if (remainingDistance > navmesh.stoppingDistance)
+                    isMoving = true;
+                else
+                {
+                    isMoving = false;
+                }
+            }
+            else
+                isMoving = false;
         }
 
         private void DebugInfo()
