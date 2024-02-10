@@ -36,7 +36,7 @@ namespace ProjectSteppe.Entities.Player
 
         private void Attack()
         {
-            if (!thirdPersonController.Grounded)
+            if (!thirdPersonController.Grounded || thirdPersonController.dashing)
             {
                 if (_input.attack) _input.attack = false;
             }
