@@ -69,7 +69,7 @@ namespace ProjectSteppe
         {
             if (playerTarget != null)
             {
-                Debug.DrawLine(eyeLevel.position, playerTarget.GetComponent<ThirdPersonController>().eyeLevel.transform.position, Color.blue);
+                Debug.DrawLine(eyeLevel.position, playerTarget.GetComponent<AIController>().eyeLevel.transform.position, Color.blue);
             }
         }
     }
