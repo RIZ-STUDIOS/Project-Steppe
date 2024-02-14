@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 public class MenuNavigation : MonoBehaviour
 {
@@ -15,16 +16,13 @@ public class MenuNavigation : MonoBehaviour
 
     public TMP_Text[] optionsSections;
 
+    [SerializeField]
+    private InputSystemUIInputModule inputSystemUIInputModule;
+
     public int index = 0;
-    private void OnDisable()
-    {
-        cancelAction.Disable();
-    }
     private void Start()
     {
-        cancelAction = new InputAction("ui/cancel", binding: "<Gamepad>/buttonEast");
-        cancelAction.Enable();
-        cancelAction.performed += ctx => OnCancel();
+        //cancelAction.performed += ctx => OnCancel();
         rightBumper = new InputAction("ui/rightbumper", binding: "<Gamepad>/rightShoulder");
         rightBumper.Enable();
         rightBumper.performed += ctx => RightBumper();
@@ -33,7 +31,7 @@ public class MenuNavigation : MonoBehaviour
         leftBumper.performed += ctx => LeftBumper();
     }
 
-    private void OnCancel()
+    private void OnCancel(InputValue inputValue)
     {
         Debug.Log("Cancel");
         menuGroup.alpha = 1;
