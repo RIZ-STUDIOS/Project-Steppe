@@ -21,5 +21,10 @@ namespace ProjectSteppe
             animController.SetBool("Chase", controller.isMoving);
             animController.SetBool("Idle", !controller.isMoving);
         }
+
+        public void PlayTargetAnimation(string animationName)
+        {
+            animController.SetBool(animationName, true);
+        }
     }
 }

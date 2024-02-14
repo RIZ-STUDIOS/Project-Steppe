@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 namespace ProjectSteppe
 {
-    [CreateAssetMenu(menuName = "New AI State/Chase", order = 2)]
+    [CreateAssetMenu(menuName = "AI/State/Chase", order = 2)]
     public class AIChase : AIState
     {
         public override AIState Tick(AIController controller)
@@ -24,7 +24,7 @@ namespace ProjectSteppe
                 controller.navmesh.isStopped = false;
             }
 
-            if (!controller.isMoving && Vector3.Distance(controller.transform.position, controller.playerTarget.position) < controller.navmesh.stoppingDistance)
+            if (!controller.isMoving && controller.distanceFromTarget < controller.navmesh.stoppingDistance)
             {
                 return SwitchState(controller, controller.attack);
             }

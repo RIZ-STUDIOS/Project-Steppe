@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ProjectSteppe
 {
-    [CreateAssetMenu(menuName = "New AI State/Idle", order = 3)]
+    [CreateAssetMenu(menuName = "AI/State/Idle", order = 3)]
     public class AIIdle : AIState
     {
         public override AIState Tick(AIController controller)
