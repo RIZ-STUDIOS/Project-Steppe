@@ -14,6 +14,7 @@ namespace StarterAssets
         public bool sprint;
         public bool attack;
         public bool targetLock;
+        public bool blocking;
 
         [Header("Movement Settings")]
         public bool analogMovement;
@@ -34,6 +35,11 @@ namespace StarterAssets
             {
                 LookInput(value.Get<Vector2>());
             }
+        }
+
+        public void OnBlock(InputValue value)
+        {
+            BlockInput(value.isPressed);
         }
 
         public void OnJump(InputValue value)
@@ -86,6 +92,11 @@ namespace StarterAssets
         public void LockInput(bool newLockState)
         {
             targetLock = newLockState;
+        }
+
+        public void BlockInput(bool newBlockState)
+        {
+            blocking = newBlockState;
         }
 
         private void OnApplicationFocus(bool hasFocus)
