@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ProjectSteppe
 {
-    [CreateAssetMenu(menuName = "New AI State/Idle", order = 3)]
+    [CreateAssetMenu(menuName = "AI/State/Idle", order = 3)]
     public class AIIdle : AIState
     {
         public override AIState Tick(AIController controller)
@@ -12,12 +12,16 @@ namespace ProjectSteppe
             controller.playerTarget = controller.combatController.playerTarget;
             if (controller.playerTarget != null)
             {
-                Debug.Log("Player Targetted");
+                if (controller.combatController.currentRecoveryTime > 0)
+                    return this;
+                if (controller.debugEnabled)
+                    Debug.Log("Player Targetted");
                 return SwitchState(controller, controller.chase);
             }
             else
             {
-                Debug.Log("No Targets");
+                if (controller.debugEnabled)
+                    Debug.Log("No Targets");
                 return this;
             }
         }

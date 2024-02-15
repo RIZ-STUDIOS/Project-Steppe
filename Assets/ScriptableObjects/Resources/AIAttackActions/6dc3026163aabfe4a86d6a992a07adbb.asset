@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c7bceedd527fbf448a17f1e89e5cf66, type: 3}
+  m_Name: 6dc3026163aabfe4a86d6a992a07adbb
+  m_EditorClassIdentifier: 
+  setForDeletion: 0
+  guid: 6dc3026163aabfe4a86d6a992a07adbb
+  nameOfAttackSO: comboOne
+  attackAnimation: Combo1
+  comboAction: {fileID: 0}
+  canThisAnimationCombo: 0
+  weight: 50
+  attackRecovery: 3
+  minDistanceToTarget: 0
+  maxDistanceToTarget: 5
