@@ -1,83 +1,100 @@
 using StarterAssets;
+using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using UnityEngine;
 
 namespace ProjectSteppe.Entities.Player
 {
-    [RequireComponent(typeof(Entity))]
-    public class PlayerAttackController : MonoBehaviour
+    public class PlayerAttackController : EntityBehaviour
     {
-        private ThirdPersonController thirdPersonController;
-        private StarterAssetsInputs _input;
-        private int _animIDAttacking;
-        private Animator _animator;
-
-        private Entity entity;
-
+        private bool firstAttack = true;
         private bool canCombo;
 
-        private void Awake()
+        private StarterAssetsInputs input;
+        private Animator animator;
+
+        private int animIDAttacking;
+        private int animIDNextAttack;
+        private int animIDBlocking;
+
+        private bool attacking;
+        private bool blocking;
+
+        protected override void Awake()
         {
-            entity = GetComponent<Entity>();
-            thirdPersonController = GetComponent<ThirdPersonController>();
+            base.Awake();
+            input = GetComponent<StarterAssetsInputs>();
+            animator = GetComponent<Animator>();
         }
 
         private void Start()
         {
-            _input = GetComponent<StarterAssetsInputs>();
-
-            _animator = GetComponent<Animator>();
-            _animIDAttacking = Animator.StringToHash("Attacking");
+            animIDAttacking = Animator.StringToHash("Attacking");
+            animIDNextAttack = Animator.StringToHash("NextAttack");
+            animIDBlocking = Animator.StringToHash("Blocking");
         }
 
         private void Update()
         {
             Attack();
+            Block();
         }
 
         private void Attack()
         {
-            if (!thirdPersonController.Grounded || thirdPersonController.dashing)
+            if (input.attack)
             {
-                if (_input.attack) _input.attack = false;
+                if ((!firstAttack && !canCombo) || blocking)
+                {
+                    input.attack = false;
+                    return;
+                }
+                Debug.Log("Attacking");
+                if (canCombo)
+                {
+                    animator.SetBool(animIDNextAttack, true);
+                }
+                animator.SetBool(animIDAttacking, true);
+                firstAttack = false;
+                input.attack = false;
+                attacking = true;
             }
+        }
 
-            if (_input.attack && thirdPersonController.canMove)
+        private void Block()
+        {
+            if (input.blocking)
             {
-                _animator.SetBool(_animIDAttacking, true);
-                thirdPersonController.canMove = false;
+                if (attacking)
+                {
+                    input.blocking = false;
+                    return;
+                }
             }
-            else if (_input.attack)
-            {
-                _input.attack = false;
-            }
+            blocking = input.blocking;
+            animator.SetBool(animIDBlocking, input.blocking);
         }
 
-        // Called in Attack animation
-        private void EnableWeapon()
+        private void EnableCombo()
         {
-            if (!entity.CurrentWeapon) return;
-
-            entity.CurrentWeapon.EnableColliders();
+            Debug.Log("Combo enabled");
+            canCombo = true;
         }
 
-        // Called in Attack animation
-        public void DisableWeapon()
+        private void DisableCombo()
         {
-            if (!entity.CurrentWeapon) return;
-
-            entity.CurrentWeapon.DisableColliders();
+            Debug.Log("Combo disabled");
+            canCombo = false;
+            animator.SetBool(animIDAttacking, false);
         }
 
-        // Called in Attack animation
-        private void DisableRotation()
+        public void RestartAttack()
         {
-            thirdPersonController.canRotate = false;
-        }
-
-        // Called in Attack animation
-        private void StartAttack()
-        {
-            thirdPersonController.RotationSmoothTime = 0.03f;
+            if (canCombo) return;
+            Debug.Log("Resetting attack");
+            firstAttack = true;
+            animator.SetBool(animIDAttacking, false);
+            animator.SetBool(animIDNextAttack, false);
+            attacking = false;
         }
     }
 }

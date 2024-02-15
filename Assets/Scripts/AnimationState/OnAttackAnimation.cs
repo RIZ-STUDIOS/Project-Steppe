@@ -32,7 +32,7 @@ public class OnAttackAnimation : StateMachineBehaviour
         thirdPersonController.RotationSmoothTime = 0.12f;
         {
             var playerAttack = animator.GetComponent<PlayerAttackController>();
-            playerAttack.DisableWeapon();
+            //playerAttack.DisableWeapon();
         }
     }
 

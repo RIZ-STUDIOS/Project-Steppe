@@ -10,7 +10,7 @@ using UnityEngine.InputSystem.XR;
 namespace ProjectSteppe.Entities.Player
 {
     [RequireComponent(typeof(CharacterController))]
-    public class PlayerMovement : MonoBehaviour
+    public class PlayerMovementController : MonoBehaviour
     {
         [Header("Gravity")]
         [SerializeField]
