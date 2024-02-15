@@ -13,10 +13,9 @@ namespace ProjectSteppe
             {
                 return SwitchState(controller, controller.chase);
             }
+            
 
-            SwitchState(controller, controller.stance);
-
-            return this;
+            return SwitchState(controller, controller.stance);
         }
     }
 }

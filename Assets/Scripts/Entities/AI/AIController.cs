@@ -26,6 +26,9 @@ namespace ProjectSteppe
         public AIAttack attack;
         public AIAttackStance stance;
 
+        [Header("Debug")]
+        public bool debugEnabled;
+
         private void Awake()
         {
             combatController = GetComponent<AICombatController>();
@@ -38,8 +41,10 @@ namespace ProjectSteppe
         private void FixedUpdate()
         {
             UpdateState();
+            combatController.ManageRecovery(this);
             animator.SetStates(this);
-            DebugInfo();
+            if (debugEnabled)
+                DebugInfo();
         }
 
         private void UpdateState()
@@ -53,7 +58,7 @@ namespace ProjectSteppe
             }
 
 
-            if (navmesh.enabled)
+            if (navmesh.enabled && combatController.currentRecoveryTime <= 0)
             {
                 Vector3 destination = navmesh.destination;
                 float remainingDistance = Vector3.Distance(destination, transform.position);

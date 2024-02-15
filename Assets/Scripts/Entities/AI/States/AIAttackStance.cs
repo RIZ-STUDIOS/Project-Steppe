@@ -12,7 +12,7 @@ namespace ProjectSteppe
         private AIAttackActionScriptableObject currentAttack;
         private AIAttackActionScriptableObject previousAttack;
 
-        protected bool hasValidAttack = false;
+        public bool hasValidAttack = false;
         protected bool canCombo = false;
         protected int chanceToCombo = 25;
         bool hasRolledCombo = false;
@@ -26,14 +26,22 @@ namespace ProjectSteppe
 
             if (controller.playerTarget == null)
                 return SwitchState(controller, controller.idle);
-
+            
             if (!hasValidAttack)
             {
+                if (controller.debugEnabled)
+                    Debug.Log("Selecting an Attack...");
                 NewAttack(controller);
             }
 
             if (controller.distanceFromTarget > minDistanceFromTarget)
+            {
+                if (hasValidAttack && controller.combatController.currentRecoveryTime > 0)
+                {
+                    return SwitchState(controller, controller.idle);
+                }
                 return SwitchState(controller, controller.chase);
+            }
 
             return this;
         }
@@ -42,7 +50,7 @@ namespace ProjectSteppe
         {
             potentialAttacks = new List<AIAttackActionScriptableObject>();
 
-            foreach (var potentialAttack in potentialAttacks)
+            foreach (var potentialAttack in attacks)
             {
                 if (potentialAttack.minDistanceToTarget > controller.distanceFromTarget)
                     continue;
@@ -73,8 +81,17 @@ namespace ProjectSteppe
                     currentAttack = attack;
                     previousAttack = currentAttack;
                     hasValidAttack = true;
+                    if (controller.debugEnabled)
+                        Debug.Log("Selected attack " + currentAttack.attackAnimation);
+                    PlayAttack(controller);
                 }
             }
+        }
+
+        private void PlayAttack(AIController controller)
+        {
+            controller.animator.PlayTargetAnimation(currentAttack.attackAnimation);
+            controller.combatController.AddRecovery(currentAttack.attackRecovery);
         }
 
         protected virtual bool RollForCombo(int chance)

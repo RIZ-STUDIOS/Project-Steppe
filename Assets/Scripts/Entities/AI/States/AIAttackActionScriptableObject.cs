@@ -21,10 +21,5 @@ namespace ProjectSteppe
         [EditorVariable] public float attackRecovery = 1.5f;
         [EditorVariable] public float minDistanceToTarget = 0f;
         [EditorVariable] public float maxDistanceToTarget = 5f;
-
-        public void AttemptAction(AIController controller)
-        {
-            controller.animator.PlayTargetAnimation(attackAnimation);
-        }
     }
 }

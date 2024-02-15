@@ -24,7 +24,7 @@ namespace ProjectSteppe
 
         public void PlayTargetAnimation(string animationName)
         {
-            animController.SetBool(animationName, true);
+            animController.Play(animationName, 1);
         }
     }
 }

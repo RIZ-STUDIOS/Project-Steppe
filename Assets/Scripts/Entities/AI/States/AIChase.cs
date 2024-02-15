@@ -14,7 +14,8 @@ namespace ProjectSteppe
 
             if (controller.playerTarget == null)
             {
-                Debug.Log("Returning to idle");
+                if (controller.debugEnabled)
+                    Debug.Log("Returning to idle");
                 controller.navmesh.isStopped = true;
                 return SwitchState(controller, controller.idle);
             }
