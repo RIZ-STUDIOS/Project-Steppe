@@ -79,7 +79,14 @@ namespace ProjectSteppe
             Debug.Log("Hit " + other.name);
 
             // Damage
-            hitbox.ParentEntity.EntityHealth.DamagePosture(weaponSo.postureDamage);
+            if (hitbox.ParentEntity.EntityBlock.IsBlocking)
+            {
+                hitbox.ParentEntity.EntityHealth.DamagePosture(weaponSo.postureDamage);
+            }
+            else
+            {
+                hitbox.ParentEntity.EntityHealth.DamageHealth(weaponSo.damage);
+            }
         }
     }
 }

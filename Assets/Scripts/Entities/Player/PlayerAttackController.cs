@@ -1,6 +1,7 @@
 using StarterAssets;
 using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace ProjectSteppe.Entities.Player
 {
@@ -19,6 +20,8 @@ namespace ProjectSteppe.Entities.Player
 
         private bool attacking;
         private bool blocking;
+
+        public UnityEvent onAttack;
 
         protected override void Awake()
         {
@@ -55,6 +58,7 @@ namespace ProjectSteppe.Entities.Player
                 {
                     animator.SetBool(animIDNextAttack, true);
                 }
+                onAttack.Invoke();
                 animator.SetBool(animIDAttacking, true);
                 firstAttack = false;
                 input.attack = false;
@@ -71,6 +75,20 @@ namespace ProjectSteppe.Entities.Player
                 {
                     input.blocking = false;
                     return;
+                }
+
+                if (!blocking)
+                {
+                    Entity.EntityBlock.StartBlock();
+                }
+            }
+            else
+            {
+                if (attacking)
+                    return;
+                if (blocking)
+                {
+                    Entity.EntityBlock.EndBlock();
                 }
             }
             blocking = input.blocking;

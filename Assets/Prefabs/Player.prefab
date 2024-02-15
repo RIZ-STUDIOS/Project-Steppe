@@ -200,6 +200,9 @@ GameObject:
   - component: {fileID: 5542280630214860053}
   - component: {fileID: 7636011829946703309}
   - component: {fileID: 5604300743600456141}
+  - component: {fileID: 9094459098607421593}
+  - component: {fileID: 6213953786956694154}
+  - component: {fileID: 1465243806383821097}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -271,7 +274,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: -0.1, z: 0}
+  m_Center: {x: 0, y: 0.95, z: 0}
 --- !u!114 &7383154884052768845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,7 +439,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85d3672466909a24ab77969b26d4d31b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startWeapon: {fileID: 8184387287702288938}
 --- !u!114 &7636011829946703309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,6 +479,51 @@ MonoBehaviour:
   onPostureFull:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &9094459098607421593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503990972408158375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a71a0b60fdceca4ab443376561465b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6213953786956694154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503990972408158375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232680dc0bd518b46b0ca2cbcba4b9ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startWeapon: {fileID: 8184387287702288938}
+--- !u!114 &1465243806383821097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503990972408158375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 244c03ad87063084d8a33ad7e34652fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thirdPersonVirtualCamera: {fileID: 0}
+  targetLockVirtualCamera: {fileID: 0}
+  targetLockLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  maxConeRadius: 5
+  maxConeLength: 10
+  coneAngle: 90
 --- !u!1 &581434247375909466
 GameObject:
   m_ObjectHideFlags: 0
