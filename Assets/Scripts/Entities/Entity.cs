@@ -4,28 +4,10 @@ namespace ProjectSteppe.Entities
 {
     public class Entity : MonoBehaviour
     {
-        private Weapon currentWeapon;
+        private EntityAttacking _entityAttacking;
+        private EntityHealth _entityHealth;
 
-        [SerializeField]
-        private Weapon startWeapon;
-
-        public Weapon CurrentWeapon => currentWeapon;
-
-        private void Start()
-        {
-            SetWeapon(startWeapon);
-        }
-
-        public void SetWeapon(Weapon weapon)
-        {
-            if (currentWeapon)
-            {
-                currentWeapon.parentEntity = null;
-            }
-
-            currentWeapon = weapon;
-            if (currentWeapon)
-                currentWeapon.parentEntity = this;
-        }
+        public EntityAttacking EntityAttacking => this.GetComponentIfNull(ref _entityAttacking);
+        public EntityHealth EntityHealth => this.GetComponentIfNull(ref _entityHealth);
     }
 }

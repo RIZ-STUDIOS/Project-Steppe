@@ -11,6 +11,7 @@ namespace ProjectSteppe.Entities.Player
 
         private StarterAssetsInputs input;
         private Animator animator;
+        private PlayerManager playerManager;
 
         private int animIDAttacking;
         private int animIDNextAttack;
@@ -24,6 +25,7 @@ namespace ProjectSteppe.Entities.Player
             base.Awake();
             input = GetComponent<StarterAssetsInputs>();
             animator = GetComponent<Animator>();
+            playerManager = GetComponent<PlayerManager>();
         }
 
         private void Start()
@@ -48,7 +50,7 @@ namespace ProjectSteppe.Entities.Player
                     input.attack = false;
                     return;
                 }
-                Debug.Log("Attacking");
+                //Debug.Log("Attacking");
                 if (canCombo)
                 {
                     animator.SetBool(animIDNextAttack, true);
@@ -57,6 +59,7 @@ namespace ProjectSteppe.Entities.Player
                 firstAttack = false;
                 input.attack = false;
                 attacking = true;
+                playerManager.DisableCapability(PlayerCapability.Move);
             }
         }
 
@@ -76,13 +79,13 @@ namespace ProjectSteppe.Entities.Player
 
         private void EnableCombo()
         {
-            Debug.Log("Combo enabled");
+            //Debug.Log("Combo enabled");
             canCombo = true;
         }
 
         private void DisableCombo()
         {
-            Debug.Log("Combo disabled");
+            //Debug.Log("Combo disabled");
             canCombo = false;
             animator.SetBool(animIDAttacking, false);
         }
@@ -90,11 +93,13 @@ namespace ProjectSteppe.Entities.Player
         public void RestartAttack()
         {
             if (canCombo) return;
-            Debug.Log("Resetting attack");
+            //Debug.Log("Resetting attack");
             firstAttack = true;
             animator.SetBool(animIDAttacking, false);
             animator.SetBool(animIDNextAttack, false);
             attacking = false;
+            playerManager.EnableCapability(PlayerCapability.Move);
+            playerManager.EnableCapability(PlayerCapability.Rotate);
         }
     }
 }

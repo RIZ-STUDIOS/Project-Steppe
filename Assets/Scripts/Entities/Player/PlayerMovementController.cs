@@ -32,8 +32,7 @@ namespace ProjectSteppe.Entities.Player
 
         [Header("Camera")]
 
-        [SerializeField]
-        private Camera playerCamera;
+        public Camera playerCamera;
 
         [Tooltip("How far in degrees can you move the camera up")]
         public float TopClamp = 70.0f;
@@ -69,6 +68,7 @@ namespace ProjectSteppe.Entities.Player
         private CharacterController characterController;
         private Animator animator;
         private PlayerInput playerInput;
+        private PlayerManager playerManager;
 
         private CinemachineVirtualCamera virtualCamera;
 
@@ -88,6 +88,7 @@ namespace ProjectSteppe.Entities.Player
             playerInput = GetComponent<PlayerInput>();
             animator = GetComponent<Animator>();
             virtualCamera = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
+            playerManager = GetComponent<PlayerManager>();
         }
 
         private void Start()
@@ -155,7 +156,7 @@ namespace ProjectSteppe.Entities.Player
         {
             float targetSpeed = walkSpeed;
 
-            if(_input.move == Vector2.zero) targetSpeed = 0;
+            if(_input.move == Vector2.zero || !playerManager.HasCapability(PlayerCapability.Move)) targetSpeed = 0;
 
             float currentHorizontalSpeed = new Vector3(characterController.velocity.x, 0.0f, characterController.velocity.z).magnitude;
 
@@ -184,7 +185,7 @@ namespace ProjectSteppe.Entities.Player
 
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
-            if(_input.move != Vector2.zero)
+            if(_input.move != Vector2.zero && playerManager.HasCapability(PlayerCapability.Rotate))
             {
                 targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
 

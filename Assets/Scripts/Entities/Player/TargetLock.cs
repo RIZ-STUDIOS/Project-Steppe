@@ -13,7 +13,7 @@ namespace ProjectSteppe.Entities.Player
         private StarterAssetsInputs _input;
 
         private Transform lookAtTransform;
-        private ThirdPersonController thirdPersonController;
+        private PlayerMovementController playerMovement;
 
         /*[SerializeField]
         private Transform bossTransform;*/
@@ -44,7 +44,7 @@ namespace ProjectSteppe.Entities.Player
         private void Awake()
         {
             _input = GetComponent<StarterAssetsInputs>();
-            thirdPersonController = GetComponent<ThirdPersonController>();
+            playerMovement = GetComponent<PlayerMovementController>();
             if (!thirdPersonVirtualCamera)
                 thirdPersonVirtualCamera = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
             if (!targetLockVirtualCamera)
@@ -82,7 +82,7 @@ namespace ProjectSteppe.Entities.Player
 
         private void StartLockOn()
         {
-            var hits = ConeCastExtension.ConeCastAll(transform.position, maxConeRadius, thirdPersonController._mainCamera.transform.forward, maxConeLength, coneAngle, targetLockLayer);
+            var hits = ConeCastExtension.ConeCastAll(transform.position, maxConeRadius, playerMovement.playerCamera.transform.forward, maxConeLength, coneAngle, targetLockLayer);
             int index = -1;
             float angle = float.MaxValue;
             for (int i = 0; i < hits.Length; i++)
@@ -91,7 +91,7 @@ namespace ProjectSteppe.Entities.Player
                 if (!hit.collider.GetComponentInParent<TargetLockTarget>()) return;
                 Vector3 hitPoint = hit.point;
                 Vector3 directionToHit = hitPoint - transform.position;
-                float angleToHit = Vector3.Angle(thirdPersonController._mainCamera.transform.forward, directionToHit);
+                float angleToHit = Vector3.Angle(playerMovement.playerCamera.transform.forward, directionToHit);
 
                 if (angleToHit < angle)
                 {
@@ -117,7 +117,7 @@ namespace ProjectSteppe.Entities.Player
             this.lockOn = lockOn;
             thirdPersonVirtualCamera.enabled = !lockOn;
             targetLockVirtualCamera.enabled = lockOn;
-            thirdPersonController.strafe = lockOn;
+            //playerMovement.strafe = lockOn;
         }
 
         private void SetLockTarget(Transform target)
