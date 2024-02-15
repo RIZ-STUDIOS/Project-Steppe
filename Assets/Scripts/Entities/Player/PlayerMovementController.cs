@@ -155,7 +155,7 @@ namespace ProjectSteppe.Entities.Player
         {
             float targetSpeed = walkSpeed;
 
-            if(_input.move == Vector2.zero) targetSpeed = 0;
+            if (_input.move == Vector2.zero) targetSpeed = 0;
 
             float currentHorizontalSpeed = new Vector3(characterController.velocity.x, 0.0f, characterController.velocity.z).magnitude;
 
@@ -178,6 +178,10 @@ namespace ProjectSteppe.Entities.Player
             {
                 speed = targetSpeed;
             }
+
+            if (_input.blocking) speed *= 0.9f;
+
+            Debug.Log(speed);
 
             animationBlend = Mathf.Lerp(animationBlend, targetSpeed, Time.deltaTime * speedChangeRate);
             if (animationBlend < 0.01f) animationBlend = 0f;
