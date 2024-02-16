@@ -963,6 +963,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1814298542}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 989aca16ab2384a42bbaeee5a7d3c016,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1814298545}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 989aca16ab2384a42bbaeee5a7d3c016,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1814298544}
   m_SourcePrefab: {fileID: 100100000, guid: 989aca16ab2384a42bbaeee5a7d3c016, type: 3}
 --- !u!4 &1814298538 stripped
 Transform:
@@ -999,6 +1007,9 @@ MonoBehaviour:
   posture: 0
   maxHealth: 100
   maxPosture: 100
+  timeBeforePostureRegeneration: 1.5
+  postureRegenerationRate: 2
+  postureHealthRegenerationRatio: 0.5
   onHealthChange:
     m_PersistentCalls:
       m_Calls: []
@@ -1023,6 +1034,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85d3672466909a24ab77969b26d4d31b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1814298544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365984481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c47a6e47f8d2584fae1c80ec34df26e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perfectBlockTimeWindow: 0.12
+--- !u!114 &1814298545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365984481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232680dc0bd518b46b0ca2cbcba4b9ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startWeapon: {fileID: 0}
 --- !u!1 &1848872456
 GameObject:
   m_ObjectHideFlags: 0
@@ -3360,6 +3397,11 @@ PrefabInstance:
       propertyPath: thirdPersonVirtualCamera
       value: 
       objectReference: {fileID: 721526558}
+    - target: {fileID: 5604300743600456141, guid: e6f8f79dce7886148a6f261e8d8d5352,
+        type: 3}
+      propertyPath: postureRegenerationRate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7383154884052768845, guid: e6f8f79dce7886148a6f261e8d8d5352,
         type: 3}
       propertyPath: playerCamera
@@ -3499,6 +3541,11 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 8104316814137009306}
+    - target: {fileID: 8213402799084441861, guid: 4b59a83de954a194da9780f6e4f52516,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.17
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

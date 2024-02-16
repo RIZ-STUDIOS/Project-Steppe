@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 9094459098607421593}
   - component: {fileID: 6213953786956694154}
   - component: {fileID: 1465243806383821097}
+  - component: {fileID: 427260509209221287}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -451,6 +452,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff929a281be99594f9dd7871523cdf5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onAttack:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5604300743600456141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,8 +469,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   posture: 0
-  maxHealth: 1
+  maxHealth: 200
   maxPosture: 100
+  timeBeforePostureRegeneration: 1.5
+  postureRegenerationRate: 20
   onHealthChange:
     m_PersistentCalls:
       m_Calls: []
@@ -524,6 +530,19 @@ MonoBehaviour:
   maxConeRadius: 5
   maxConeLength: 10
   coneAngle: 90
+--- !u!114 &427260509209221287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503990972408158375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c47a6e47f8d2584fae1c80ec34df26e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perfectBlockTimeWindow: 0.12
 --- !u!1 &581434247375909466
 GameObject:
   m_ObjectHideFlags: 0
