@@ -5,6 +5,7 @@ namespace ProjectSteppe.Entities
     [RequireComponent(typeof(EntityAttacking))]
     [RequireComponent(typeof(EntityHealth))]
     [RequireComponent(typeof(EntityBlock))]
+    [RequireComponent(typeof(EntityCollision))]
     public class Entity : MonoBehaviour
     {
         private EntityAttacking _entityAttacking;
