@@ -48916,8 +48916,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0
+  - time: 0.5
     functionName: EnableWeaponCollision
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.6666667
+    functionName: DisableWeaponCollision
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -48925,13 +48932,6 @@ AnimationClip:
     messageOptions: 0
   - time: 0.8333333
     functionName: DisableCombo
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.8333333
-    functionName: DisableWeaponCollision
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
