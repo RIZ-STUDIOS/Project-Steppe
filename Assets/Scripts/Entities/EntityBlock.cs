@@ -15,6 +15,7 @@ namespace ProjectSteppe.Entities
 
         public bool IsBlocking => blocking;
 
+        [ContextMenu("Start Block")]
         public void StartBlock()
         {
             blocking = true;
