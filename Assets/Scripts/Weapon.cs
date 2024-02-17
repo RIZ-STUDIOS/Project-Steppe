@@ -48,9 +48,9 @@ namespace ProjectSteppe
             StartCoroutine(AttackActivator(startTime, endTime));
         }
 
-        private IEnumerator AttackActivator(float startTiem, float endTime)
+        private IEnumerator AttackActivator(float startTime, float endTime)
         {
-            yield return Delay(startTiem);
+            yield return Delay(startTime);
             EnableColliders();
             yield return Delay(endTime);
             DisableColliders();
@@ -86,6 +86,7 @@ namespace ProjectSteppe
             else
             {
                 hitbox.ParentEntity.EntityHealth.DamageHealth(weaponSo.damage);
+                hitbox.ParentEntity.EntityHealth.DamagePosture(weaponSo.postureDamage);
             }
         }
     }

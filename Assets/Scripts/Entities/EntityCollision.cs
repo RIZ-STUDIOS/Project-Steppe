@@ -7,42 +7,9 @@ namespace ProjectSteppe.Entities
 {
     public class EntityCollision : MonoBehaviour
     {
-        private EntityHealth entityHealth;
-
-        public float damageBufferDuration = 0.1f;
-
-        private bool canDamage = true;
-
-        private void Awake()
-        {
-            entityHealth = GetComponent<EntityHealth>();
-        }
-
         private void Start()
         {
             IgnoreSelfCollisions();
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            var weapon = other.GetComponent<Weapon>();
-            if (weapon != null)
-            {
-                if (canDamage) entityHealth.DamagePosture(20);
-                weapon.DisableColliders();
-            }
-        }
-
-        private IEnumerator DamageBuffer()
-        {
-            canDamage = false;
-            float timer = 0;
-            while (timer < damageBufferDuration)
-            {
-                timer += Time.deltaTime;
-                yield return null;
-            }
-            canDamage = true;
         }
 
         private void IgnoreSelfCollisions()

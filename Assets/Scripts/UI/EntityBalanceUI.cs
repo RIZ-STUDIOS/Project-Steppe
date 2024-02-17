@@ -1,12 +1,8 @@
-using Codice.Client.BaseCommands;
 using ProjectSteppe.Entities;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace ProjectSteppe
+namespace ProjectSteppe.UI
 {
     public class EntityBalanceUI : MonoBehaviour
     {

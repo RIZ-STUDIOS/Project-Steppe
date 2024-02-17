@@ -1,21 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
+using ProjectSteppe.Entities;
 using UnityEngine;
+using UnityEngine.UI;
 
-namespace ProjectSteppe
+namespace ProjectSteppe.UI
 {
     public class EntityHealthUI : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        [SerializeField]
+        private EntityHealth entityHealth;
+
+        [SerializeField]
+        private Slider slider;
+
+        private void Start()
         {
-        
+            entityHealth.onHealthChange.AddListener(OnHealthChange);
         }
 
-        // Update is called once per frame
-        void Update()
+        private void OnHealthChange(int health, int maxHealth)
         {
-        
+            slider.value = health;
         }
     }
 }
