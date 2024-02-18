@@ -27,7 +27,7 @@ namespace ProjectSteppe
             if (controller.playerTarget == null)
                 return SwitchState(controller, controller.idle);
             
-            if (!hasValidAttack)
+            if (!hasValidAttack || hasValidAttack && controller.combatController.currentRecoveryTime < 0)
             {
                 if (controller.debugEnabled)
                     Debug.Log("Selecting an Attack...");

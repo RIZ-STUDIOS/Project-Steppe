@@ -77,6 +77,10 @@ namespace ProjectSteppe
             {
                 distanceFromTarget = Vector3.Distance(transform.position, playerTarget.position);
             }
+            else
+            {
+                isMoving = false;
+            }
         }
 
         private void DebugInfo()
