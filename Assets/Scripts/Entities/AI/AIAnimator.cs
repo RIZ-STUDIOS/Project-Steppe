@@ -24,7 +24,9 @@ namespace ProjectSteppe
 
         public void PlayTargetAnimation(string animationName)
         {
-            animController.Play(animationName, 1);
+            animController.SetBool("IsAttacking", true);
+            //animController.Play(animationName, 1);
+            
         }
     }
 }

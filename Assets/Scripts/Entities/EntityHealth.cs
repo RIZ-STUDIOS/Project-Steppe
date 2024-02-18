@@ -13,30 +13,30 @@ namespace ProjectSteppe.Entities
         [SerializeField, ReadOnly]
         private int health;
         [SerializeField, ReadOnly]
-        private int posture;
+        private int balance;
 
         [SerializeField, ReadOnly(AvailableMode.Play), MinValue(1)]
         private int maxHealth;
 
         [SerializeField, ReadOnly(AvailableMode.Play), MinValue(1)]
-        private int maxPosture = 100;
+        private int maxBalance = 100;
 
         [SerializeField]
-        private float timeBeforePostureRegeneration = 1.5f;
+        private float timeBeforeBalanceRegeneration = 1.5f;
 
         [SerializeField]
         [Range(0f, 1f)]
-        private float postureRegenerationRate = 0.2f;
+        private float balanceRegenerationRate = 0.2f;
 
         [SerializeField]
         [Tooltip("The ratio at which health affects amount of posture.")]
         [Range(0f, 1f)]
-        private float postureHealthRegenerationRatio = .5f;
+        private float balanceHealthRegenerationRatio = .5f;
 
-        private float startPostureHealthRatio;
+        private float startBalanceHealthRatio;
 
         public int Health { get { return health; } private set { health = value; onHealthChange.Invoke(health, maxHealth); } }
-        public int Posture { get {  return posture; } private set { posture = value; if (posture < 0) posture = 0; onPostureChange.Invoke(posture, maxPosture); } }
+        public int Balance { get {  return balance; } private set { balance = value; if (balance < 0) balance = 0; onPostureChange.Invoke(balance, maxBalance); } }
 
         [Header("Unity Events")]
         public UnityEvent<int, int> onHealthChange;
@@ -44,13 +44,13 @@ namespace ProjectSteppe.Entities
         public UnityEvent onKill;
         public UnityEvent onPostureFull;
 
-        private float postureRegenerationTimer;
+        private float balanceRegenerationTimer;
 
         private void Start()
         {
             Health = maxHealth;
-            Posture = posture;
-            startPostureHealthRatio = maxPosture / (float)maxHealth;
+            Balance = balance;
+            startBalanceHealthRatio = maxBalance / (float)maxHealth;
         }
 
         public void DamageHealth(int amount)
@@ -68,17 +68,17 @@ namespace ProjectSteppe.Entities
             Health = maxHealth;
         }
 
-        public void ResetPosture()
+        public void ResetBalance()
         {
-            Posture = posture;
+            Balance = balance;
         }
 
-        public void DamagePosture(int amount)
+        public void DamageBalance(int amount)
         {
-            postureRegenerationTimer = 0;
-            Posture += amount;
+            balanceRegenerationTimer = 0;
+            Balance += amount;
 
-            if(Posture >= maxPosture)
+            if(Balance >= maxBalance)
             {
                 onPostureFull.Invoke();
             }
@@ -86,12 +86,12 @@ namespace ProjectSteppe.Entities
 
         private void Update()
         {
-            if(Posture > 0)
+            if(Balance > 0)
             {
-                postureRegenerationTimer += Time.deltaTime;
-                if(postureRegenerationTimer >= timeBeforePostureRegeneration)
+                balanceRegenerationTimer += Time.deltaTime;
+                if(balanceRegenerationTimer >= timeBeforeBalanceRegeneration)
                 {
-                    Posture -= Mathf.CeilToInt(maxPosture * postureRegenerationRate * Time.deltaTime);
+                    Balance -= Mathf.CeilToInt(maxBalance * balanceRegenerationRate * Time.deltaTime);
                 }
             }
         }

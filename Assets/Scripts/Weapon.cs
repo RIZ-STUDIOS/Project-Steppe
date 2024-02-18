@@ -23,6 +23,10 @@ namespace ProjectSteppe
 
         private bool _weaponEnabled;
 
+        [SerializeField] private Entity hitEntity;
+
+        [SerializeField] private float ignoreTimer = 0.5f;
+
         private void Start()
         {
             foreach (var collider in weaponColliders)
@@ -75,19 +79,35 @@ namespace ProjectSteppe
             var hitbox = other.GetComponent<HitBox>();
             if (!hitbox) return;
             if (!hitbox.IsValidHit(parentEntity)) return;
+            if (hitbox.ParentEntity == hitEntity) return;
 
             Debug.Log("Hit " + other.name);
 
             // Damage
             if (hitbox.ParentEntity.EntityBlock.IsBlocking)
             {
-                hitbox.ParentEntity.EntityHealth.DamagePosture(weaponSo.postureDamage);
+                hitbox.ParentEntity.EntityHealth.DamageBalance(weaponSo.postureDamage);
             }
             else
             {
                 hitbox.ParentEntity.EntityHealth.DamageHealth(weaponSo.damage);
-                hitbox.ParentEntity.EntityHealth.DamagePosture(weaponSo.postureDamage);
+                hitbox.ParentEntity.EntityHealth.DamageBalance(weaponSo.postureDamage);
             }
+
+            hitEntity = hitbox.ParentEntity;
+            StartCoroutine(IgnoreHits());
+        }
+
+        private IEnumerator IgnoreHits()
+        {
+            float timer = 0;
+            while (timer < ignoreTimer)
+            {
+                timer += Time.deltaTime;
+                yield return null;
+            }
+
+            hitEntity = null;
         }
     }
 }
