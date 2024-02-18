@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using StarterAssets;
+using ProjectSteppe.Entities.Player;
 
 namespace ProjectSteppe
 {
@@ -12,14 +13,14 @@ namespace ProjectSteppe
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponent<ThirdPersonController>())
+            if (other.CompareTag("Player"))
             {
                 playerTarget = other.transform;
             }
         }
         private void OnTriggerExit(Collider other)
         {
-            if (other.GetComponent<ThirdPersonController>())
+            if (other.CompareTag("Player"))
             {
                 playerTarget = null;
             }
