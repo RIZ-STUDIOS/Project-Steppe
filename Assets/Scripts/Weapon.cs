@@ -83,8 +83,10 @@ namespace ProjectSteppe
 
             Debug.Log("Hit " + other.name);
 
+            float hitAngle = Vector3.Angle(hitbox.ParentEntity.transform.forward, parentEntity.transform.forward);
+
             // Damage
-            if (hitbox.ParentEntity.EntityBlock.IsBlocking)
+            if (hitbox.ParentEntity.EntityBlock.IsBlocking && hitAngle > 90)
             {
                 hitbox.ParentEntity.EntityHealth.DamageBalance(weaponSo.postureDamage);
             }
