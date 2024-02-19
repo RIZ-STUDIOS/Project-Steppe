@@ -3636,7 +3636,7 @@ NavMeshAgent:
   m_Acceleration: 28
   avoidancePriority: 50
   m_AngularSpeed: 180
-  m_StoppingDistance: 2
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -5895,7 +5895,7 @@ GameObject:
   - component: {fileID: 623214204398046483}
   - component: {fileID: 416636251899258655}
   - component: {fileID: 6389090734533276624}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: LongSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
