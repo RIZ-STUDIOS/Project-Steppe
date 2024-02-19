@@ -3521,8 +3521,8 @@ GameObject:
   - component: {fileID: 456423417877126069}
   - component: {fileID: 6966881428109865778}
   - component: {fileID: 7556168611865910723}
-  - component: {fileID: 4555251827366960597}
   - component: {fileID: 7668679436667222116}
+  - component: {fileID: 1140883260880315423}
   m_Layer: 11
   m_Name: Boss_Oswald
   m_TagString: Untagged
@@ -3636,7 +3636,7 @@ NavMeshAgent:
   m_Acceleration: 28
   avoidancePriority: 50
   m_AngularSpeed: 180
-  m_StoppingDistance: 1
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -3746,7 +3746,20 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 16
   m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &4555251827366960597
+--- !u!114 &7668679436667222116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4208630089096047747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 033193727a77fb14296f5d181e9e08f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lookAtTransform: {fileID: 6317011407559998776}
+--- !u!136 &1140883260880315423
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3766,22 +3779,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.6
-  m_Height: 2.25
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 1.05, z: 0}
---- !u!114 &7668679436667222116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4208630089096047747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 033193727a77fb14296f5d181e9e08f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lookAtTransform: {fileID: 6317011407559998776}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &4298198174835988079
 GameObject:
   m_ObjectHideFlags: 0

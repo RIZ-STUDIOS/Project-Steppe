@@ -17,7 +17,7 @@ namespace ProjectSteppe
         protected int chanceToCombo = 25;
         bool hasRolledCombo = false;
 
-        protected float minDistanceFromTarget = 5f;
+        protected float minDistanceFromTarget = 2f;
 
         public override AIState Tick(AIController controller)
         {
