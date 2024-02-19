@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1668370361331399579}
   - component: {fileID: 7687097406252617978}
   - component: {fileID: 2663693774020443528}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: LeftShoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 256
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -473,7 +473,7 @@ GameObject:
   - component: {fileID: 7825321126169834851}
   - component: {fileID: 7801632983247113331}
   - component: {fileID: 5489241010383229360}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: RightUpLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -511,7 +511,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 256
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1090,7 +1090,7 @@ GameObject:
   - component: {fileID: 7647709584665824035}
   - component: {fileID: 4424342319256271640}
   - component: {fileID: 4483610272364873147}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: LeftForeArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1128,7 +1128,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 256
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1505,7 +1505,7 @@ GameObject:
   - component: {fileID: 5445422140849789835}
   - component: {fileID: 871225215304923882}
   - component: {fileID: 2835703025514330104}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: RightShoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1543,7 +1543,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 256
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2724,7 +2724,7 @@ GameObject:
   - component: {fileID: 654138557100581501}
   - component: {fileID: 751468583830710191}
   - component: {fileID: 6655083726184786254}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2762,7 +2762,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 256
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2995,7 +2995,7 @@ GameObject:
   - component: {fileID: 2568240270047666535}
   - component: {fileID: 876912634252899798}
   - component: {fileID: 3111347008538610980}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: LeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3033,7 +3033,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 256
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -3636,7 +3636,7 @@ NavMeshAgent:
   m_Acceleration: 28
   avoidancePriority: 50
   m_AngularSpeed: 180
-  m_StoppingDistance: 3
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -3668,7 +3668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 232680dc0bd518b46b0ca2cbcba4b9ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startWeapon: {fileID: 0}
+  startWeapon: {fileID: 416636251899258655}
 --- !u!114 &7229880406094835270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4349,7 +4349,7 @@ GameObject:
   - component: {fileID: 911744130048281582}
   - component: {fileID: 8488195886418127351}
   - component: {fileID: 3261901224793349364}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: RightLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4387,7 +4387,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 256
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -4607,7 +4607,7 @@ GameObject:
   - component: {fileID: 8750318117650259545}
   - component: {fileID: 16135917869795490}
   - component: {fileID: 1524715545003137073}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: RightToeBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4645,7 +4645,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 256
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -4794,7 +4794,7 @@ GameObject:
   - component: {fileID: 5937452462827762042}
   - component: {fileID: 3511702715867113337}
   - component: {fileID: 3634287441709690921}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4832,7 +4832,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 256
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -4951,7 +4951,7 @@ GameObject:
   - component: {fileID: 6544797930301458}
   - component: {fileID: 4996892624080557800}
   - component: {fileID: 5210080107809761439}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: LeftUpLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4989,7 +4989,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 256
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -5326,7 +5326,7 @@ GameObject:
   - component: {fileID: 994813725797475267}
   - component: {fileID: 2539076705273346736}
   - component: {fileID: 8739833263273144842}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: LeftLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5364,7 +5364,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 256
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -5822,7 +5822,7 @@ GameObject:
   - component: {fileID: 5163701313050720703}
   - component: {fileID: 5640151123681779347}
   - component: {fileID: 957023836839928867}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Spine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5862,7 +5862,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 256
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -5998,7 +5998,7 @@ MeshCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -6018,7 +6018,7 @@ GameObject:
   - component: {fileID: 8956184712097158305}
   - component: {fileID: 3580362115346920781}
   - component: {fileID: 644674004606692339}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6060,7 +6060,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 256
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -6569,7 +6569,7 @@ GameObject:
   - component: {fileID: 7347523692869253136}
   - component: {fileID: 6592219671146761947}
   - component: {fileID: 6718946366317710001}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6610,7 +6610,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 256
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -6641,7 +6641,7 @@ GameObject:
   - component: {fileID: 6024735981420403407}
   - component: {fileID: 2253993182948168325}
   - component: {fileID: 2650404192084073759}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: RightArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6679,7 +6679,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 256
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -6862,7 +6862,7 @@ GameObject:
   - component: {fileID: 8291566203272223716}
   - component: {fileID: 8567903020808985500}
   - component: {fileID: 4215705802252465480}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: LeftToeBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6900,7 +6900,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 256
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -7088,7 +7088,7 @@ GameObject:
   - component: {fileID: 4397616006255298702}
   - component: {fileID: 7123030451352616023}
   - component: {fileID: 1493960379552768954}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Spine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7126,7 +7126,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 256
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -7298,7 +7298,7 @@ GameObject:
   - component: {fileID: 5738280214109034986}
   - component: {fileID: 7612965013157692}
   - component: {fileID: 633088914396757525}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: RightForeArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7336,7 +7336,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 256
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
