@@ -550,12 +550,12 @@ MonoBehaviour:
   maxHealth: 100
   maxBalance: 100
   timeBeforeBalanceRegeneration: 1.5
-  balanceRegenerationRate: 0.2
+  balanceRegenerationRate: 0.05
   balanceHealthRegenerationRatio: 0.5
   onHealthChange:
     m_PersistentCalls:
       m_Calls: []
-  onPostureChange:
+  onBalanceChange:
     m_PersistentCalls:
       m_Calls: []
   onKill:

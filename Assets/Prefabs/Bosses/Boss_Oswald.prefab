@@ -8236,7 +8236,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.1, y: 0.1, z: 0.1}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1754230162339215287
 MonoBehaviour:
@@ -13379,12 +13379,12 @@ MonoBehaviour:
   maxHealth: 100
   maxBalance: 100
   timeBeforeBalanceRegeneration: 1.5
-  balanceRegenerationRate: 0.2
+  balanceRegenerationRate: 0.05
   balanceHealthRegenerationRatio: 0.5
   onHealthChange:
     m_PersistentCalls:
       m_Calls: []
-  onPostureChange:
+  onBalanceChange:
     m_PersistentCalls:
       m_Calls: []
   onKill:
@@ -13417,6 +13417,9 @@ MonoBehaviour:
   onPostureFull:
     m_PersistentCalls:
       m_Calls: []
+  onHit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &456423417877126069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13429,7 +13432,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c47a6e47f8d2584fae1c80ec34df26e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perfectBlockTimeWindow: 0.12
+  perfectBlockTimeWindow: 0.5
+  normalBlockColor: {r: 1, g: 0, b: 0, a: 0}
+  perfectBlockColor: {r: 1, g: 0.73324853, b: 0, a: 0}
+  blockFX: []
 --- !u!114 &6966881428109865778
 MonoBehaviour:
   m_ObjectHideFlags: 0
