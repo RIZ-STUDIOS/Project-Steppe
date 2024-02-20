@@ -50,6 +50,20 @@ namespace ProjectSteppe.Entities.Player
         [SerializeField]
         private LayerMask groundLayers;
 
+        [Header("Dashing")]
+
+        [SerializeField]
+        private float dashSpeed = 2f;
+
+        [SerializeField]
+        private float dashTime = 2f;
+
+        [SerializeField]
+        private float dashCooldown = 2f;
+
+        private float dashTimer;
+        private float dashCooldownTimer;
+
         [Header("Events")]
         public UnityEvent onJump;
         public UnityEvent onDash;
@@ -81,6 +95,10 @@ namespace ProjectSteppe.Entities.Player
 
         private const float _threshold = 0.01f;
 
+        private bool dashing;
+
+        private Vector3 moveDirection;
+
         private void Awake()
         {
             characterController = GetComponent<CharacterController>();
@@ -102,12 +120,55 @@ namespace ProjectSteppe.Entities.Player
         {
             CheckJump();
             CheckGrounded();
+            CheckDash();
             CheckMovement();
         }
 
         private void LateUpdate()
         {
             CameraRotation();
+        }
+
+        private void CheckDash()
+        {
+            if (_input.dash)
+            {
+                if (!dashing && dashCooldownTimer <= 0 && playerManager.HasCapability(PlayerCapability.Dash))
+                {
+                    dashing = true;
+                    dashTimer = 0;
+
+                }
+                _input.dash = false;
+            }
+
+            if (dashing)
+            {
+                dashTimer += Time.deltaTime;
+                if(dashTimer >= dashTime)
+                {
+                    DisableDashing();
+                }
+            }
+            else
+            {
+                if(dashCooldownTimer > 0)
+                dashCooldownTimer -= Time.deltaTime;
+            }
+        }
+
+        public void OnPlayerCapability()
+        {
+            if (!playerManager.HasCapability(PlayerCapability.Dash))
+            {
+                DisableDashing();
+            }
+        }
+
+        private void DisableDashing()
+        {
+            dashing = false;
+            dashCooldownTimer = dashCooldown;
         }
 
         private void CheckJump()
@@ -154,9 +215,9 @@ namespace ProjectSteppe.Entities.Player
 
         private void CheckMovement()
         {
-            float targetSpeed = walkSpeed;
+            float targetSpeed = dashing ? dashSpeed : walkSpeed;
 
-            if(_input.move == Vector2.zero || !playerManager.HasCapability(PlayerCapability.Move)) targetSpeed = 0;
+            if(!dashing && (_input.move == Vector2.zero || !playerManager.HasCapability(PlayerCapability.Move))) targetSpeed = 0;
 
             float currentHorizontalSpeed = new Vector3(characterController.velocity.x, 0.0f, characterController.velocity.z).magnitude;
 
@@ -185,15 +246,22 @@ namespace ProjectSteppe.Entities.Player
 
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
-            if(_input.move != Vector2.zero && playerManager.HasCapability(PlayerCapability.Rotate))
+            if((_input.move != Vector2.zero || dashing) && playerManager.HasCapability(PlayerCapability.Rotate))
             {
                 if (playerManager.PlayerTargetLock.lockOn)
                 {
                     targetRotation = playerCamera.transform.eulerAngles.y;
                 }
-                else
+                if (!dashing)
                 {
-                    targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
+                    if (!playerManager.PlayerTargetLock.lockOn)
+                    {
+                        targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
+                    }
+                    else
+                    {
+                    }
+                this.moveDirection = inputDirection;
                 }
 
                 float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref _rotationVelocity,
@@ -206,9 +274,13 @@ namespace ProjectSteppe.Entities.Player
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
 
-            if (playerManager.PlayerTargetLock.lockOn)
+            if (playerManager.PlayerTargetLock.lockOn && !dashing)
             {
                 targetDirection = Quaternion.Euler(0, targetRotation + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg, 0) * Vector3.forward;
+            }
+            else if(playerManager.PlayerTargetLock.lockOn && dashing)
+            {
+                targetDirection = Quaternion.Euler(0, targetRotation + Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg, 0) * Vector3.forward;
             }
 
             characterController.Move(targetDirection.normalized * (speed * Time.deltaTime) + new Vector3(0, usingGravity ? verticalVelocity : 0, 0) * Time.deltaTime);
