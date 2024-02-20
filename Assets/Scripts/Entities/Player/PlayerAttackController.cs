@@ -73,10 +73,12 @@ namespace ProjectSteppe.Entities.Player
             {
                 if (attacking)
                 {
-                    input.blocking = false;
-                    return;
+                    canCombo = false;
+                    RestartAttack();
+                    Entity.EntityAttacking.DisableWeaponCollision();
+                    animator.SetTrigger("ForcedBlocking");
+                    animator.SetTrigger("ForcedExit");
                 }
-
                 if (!blocking)
                 {
                     Entity.EntityBlock.StartBlock();
@@ -84,8 +86,6 @@ namespace ProjectSteppe.Entities.Player
             }
             else
             {
-                if (attacking)
-                    return;
                 if (blocking)
                 {
                     Entity.EntityBlock.EndBlock();

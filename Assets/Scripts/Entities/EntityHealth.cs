@@ -46,6 +46,8 @@ namespace ProjectSteppe.Entities
 
         private float balanceRegenerationTimer;
 
+        private bool invicible;
+
         private void Start()
         {
             Health = maxHealth;
@@ -94,6 +96,16 @@ namespace ProjectSteppe.Entities
                     Balance -= Mathf.CeilToInt(maxBalance * balanceRegenerationRate * Time.deltaTime);
                 }
             }
+        }
+
+        public void SetInvicible(bool value)
+        {
+            this.invicible = value;
+        }
+
+        public bool IsInvicible()
+        {
+            return invicible;
         }
     }
 }
