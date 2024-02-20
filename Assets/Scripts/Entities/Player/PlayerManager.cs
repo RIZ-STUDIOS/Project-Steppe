@@ -8,8 +8,10 @@ namespace ProjectSteppe.Entities.Player
     public class PlayerManager : MonoBehaviour
     {
         private TargetLock playerTargetLock;
+        private Animator playerAnimator;
 
         public TargetLock PlayerTargetLock => this.GetComponentIfNull(ref playerTargetLock);
+        public Animator PlayerAnimator => this.GetComponentIfNull(ref playerAnimator);
 
         private PlayerCapability capabilities;
 
@@ -30,6 +32,12 @@ namespace ProjectSteppe.Entities.Player
         public bool HasCapability(PlayerCapability capability)
         {
             return this.capabilities.HasFlag(capability);
+        }
+
+        public void DoHit()
+        {
+            PlayerAnimator.SetTrigger("ForcedExit");
+            PlayerAnimator.SetTrigger("Hit");
         }
     }
 

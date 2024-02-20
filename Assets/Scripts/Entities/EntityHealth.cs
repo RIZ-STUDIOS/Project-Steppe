@@ -43,6 +43,7 @@ namespace ProjectSteppe.Entities
         public UnityEvent<int, int> onPostureChange;
         public UnityEvent onKill;
         public UnityEvent onPostureFull;
+        public UnityEvent onHit;
 
         private float balanceRegenerationTimer;
 
@@ -58,6 +59,8 @@ namespace ProjectSteppe.Entities
         public void DamageHealth(int amount)
         {
             Health -= amount;
+
+            onHit.Invoke();
 
             if(Health <= 0)
             {

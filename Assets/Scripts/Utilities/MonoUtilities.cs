@@ -6,7 +6,7 @@ namespace ProjectSteppe
 {
     public static class MonoUtilities
     {
-        public static T GetComponentIfNull<T>(this Behaviour behaviour, ref T component, bool includeChildren = true, bool includeInactive = true) where T : MonoBehaviour
+        public static T GetComponentIfNull<T>(this Behaviour behaviour, ref T component, bool includeChildren = true, bool includeInactive = true) where T : Behaviour
         {
             if (component == null)
             {
@@ -18,7 +18,7 @@ namespace ProjectSteppe
 
             return component;
         }
-        public static T[] GetComponentsIfNull<T>(this Behaviour behaviour, ref T[] component, bool includeChildren = true, bool includeInactive = true) where T : MonoBehaviour
+        public static T[] GetComponentsIfNull<T>(this Behaviour behaviour, ref T[] component, bool includeChildren = true, bool includeInactive = true) where T : Behaviour
         {
             if (component == null)
             {
