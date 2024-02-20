@@ -20,10 +20,10 @@ namespace ProjectSteppe.UI
             entityHealth.onPostureChange.AddListener(OnBalanceChange);
         }
 
-        private void OnBalanceChange(int balance, int maxBalance)
+        private void OnBalanceChange(float balance, float maxBalance)
         {
-            sliderL.value = balance;
-            sliderR.value = balance;
+            sliderL.value = balance/(float)maxBalance;
+            sliderR.value = balance/(float)maxBalance;
         }
     }
 }

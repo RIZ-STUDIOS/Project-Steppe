@@ -96,6 +96,10 @@ namespace ProjectSteppe
                 {
                     hitbox.ParentEntity.EntityHealth.DamageBalance(weaponSo.postureDamage);
                 }
+                else
+                {
+                    parentEntity.EntityHealth.DamageBalance(hitbox.ParentEntity.EntityAttacking.CurrentWeapon.weaponSo.postureDamage);
+                }
 
                 hitbox.ParentEntity.EntityBlock.PlayBlockFX();
             }

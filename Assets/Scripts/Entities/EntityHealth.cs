@@ -11,15 +11,15 @@ namespace ProjectSteppe.Entities
     {
 
         [SerializeField, ReadOnly]
-        private int health;
+        private float health;
         [SerializeField, ReadOnly]
-        private int balance;
+        private float balance;
 
         [SerializeField, ReadOnly(AvailableMode.Play), MinValue(1)]
-        private int maxHealth;
+        private float maxHealth;
 
         [SerializeField, ReadOnly(AvailableMode.Play), MinValue(1)]
-        private int maxBalance = 100;
+        private float maxBalance = 100;
 
         [SerializeField]
         private float timeBeforeBalanceRegeneration = 1.5f;
@@ -35,12 +35,12 @@ namespace ProjectSteppe.Entities
 
         private float startBalanceHealthRatio;
 
-        public int Health { get { return health; } private set { health = value; onHealthChange.Invoke(health, maxHealth); } }
-        public int Balance { get {  return balance; } private set { balance = value; if (balance < 0) balance = 0; onPostureChange.Invoke(balance, maxBalance); } }
+        public float Health { get { return health; } private set { health = value; onHealthChange.Invoke(health, maxHealth); } }
+        public float Balance { get {  return balance; } private set { balance = value; if (balance < 0) balance = 0; onPostureChange.Invoke(balance, maxBalance); } }
 
         [Header("Unity Events")]
-        public UnityEvent<int, int> onHealthChange;
-        public UnityEvent<int, int> onPostureChange;
+        public UnityEvent<float, float> onHealthChange;
+        public UnityEvent<float, float> onPostureChange;
         public UnityEvent onKill;
         public UnityEvent onPostureFull;
         public UnityEvent onHit;
@@ -56,7 +56,7 @@ namespace ProjectSteppe.Entities
             startBalanceHealthRatio = maxBalance / (float)maxHealth;
         }
 
-        public void DamageHealth(int amount)
+        public void DamageHealth(float amount)
         {
             Health -= amount;
 
@@ -78,7 +78,7 @@ namespace ProjectSteppe.Entities
             Balance = balance;
         }
 
-        public void DamageBalance(int amount)
+        public void DamageBalance(float amount)
         {
             balanceRegenerationTimer = 0;
             Balance += amount;
@@ -96,7 +96,7 @@ namespace ProjectSteppe.Entities
                 balanceRegenerationTimer += Time.deltaTime;
                 if(balanceRegenerationTimer >= timeBeforeBalanceRegeneration)
                 {
-                    Balance -= Mathf.CeilToInt(maxBalance * balanceRegenerationRate * Time.deltaTime);
+                    Balance -= maxBalance * balanceRegenerationRate * Time.deltaTime;
                 }
             }
         }
