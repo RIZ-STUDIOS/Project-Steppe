@@ -206,6 +206,11 @@ namespace ProjectSteppe.Entities.Player
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
 
+            if (playerManager.PlayerTargetLock.lockOn)
+            {
+                targetDirection = Quaternion.Euler(0, Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg, 0) * Vector3.forward;
+            }
+
             characterController.Move(targetDirection.normalized * (speed * Time.deltaTime) + new Vector3(0, usingGravity ? verticalVelocity : 0, 0) * Time.deltaTime);
 
             animator.SetFloat(_animIDSpeed, animationBlend);
