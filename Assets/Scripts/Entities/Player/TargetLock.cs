@@ -12,7 +12,8 @@ namespace ProjectSteppe.Entities.Player
     {
         private StarterAssetsInputs _input;
 
-        private Transform lookAtTransform;
+        [System.NonSerialized]
+        public Transform lookAtTransform;
         private PlayerMovementController playerMovement;
 
         /*[SerializeField]
