@@ -17,7 +17,7 @@ namespace ProjectSteppe.UI
 
         private void Start()
         {
-            entityHealth.onPostureChange.AddListener(OnBalanceChange);
+            entityHealth.onBalanceChange.AddListener(OnBalanceChange);
         }
 
         private void OnBalanceChange(float balance, float maxBalance)

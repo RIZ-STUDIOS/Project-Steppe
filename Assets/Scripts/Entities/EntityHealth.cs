@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace ProjectSteppe.Entities
 {
@@ -36,11 +37,12 @@ namespace ProjectSteppe.Entities
         private float startBalanceHealthRatio;
 
         public float Health { get { return health; } private set { health = value; onHealthChange.Invoke(health, maxHealth); } }
-        public float Balance { get {  return balance; } private set { balance = value; if (balance < 0) balance = 0; onPostureChange.Invoke(balance, maxBalance); } }
+        public float Balance { get {  return balance; } private set { balance = value; if (balance < 0) balance = 0; onBalanceChange.Invoke(balance, maxBalance); } }
 
         [Header("Unity Events")]
         public UnityEvent<float, float> onHealthChange;
-        public UnityEvent<float, float> onPostureChange;
+        [FormerlySerializedAs("onPostureChange")]
+        public UnityEvent<float, float> onBalanceChange;
         public UnityEvent onKill;
         public UnityEvent onPostureFull;
         public UnityEvent onHit;
