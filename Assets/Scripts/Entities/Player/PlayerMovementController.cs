@@ -164,7 +164,7 @@ namespace ProjectSteppe.Entities.Player
             float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
 
             // accelerate or decelerate to target speed
-            if (currentHorizontalSpeed < targetSpeed - speedOffset ||
+            /*if (currentHorizontalSpeed < targetSpeed - speedOffset ||
                 currentHorizontalSpeed > targetSpeed + speedOffset)
             {
                 // creates curved result rather than a linear one giving a more organic speed change
@@ -173,12 +173,12 @@ namespace ProjectSteppe.Entities.Player
                     Time.deltaTime * speedChangeRate);
 
                 // round speed to 3 decimal places
-                speed = Mathf.Round(speed * 1000f) / 1000f;
+                //speed = Mathf.Round(speed * 1000f) / 1000f;
             }
             else
             {
-                speed = targetSpeed;
-            }
+            }*/
+            speed = targetSpeed;
 
             animationBlend = Mathf.Lerp(animationBlend, targetSpeed, Time.deltaTime * speedChangeRate);
             if (animationBlend < 0.01f) animationBlend = 0f;
@@ -208,7 +208,7 @@ namespace ProjectSteppe.Entities.Player
 
             if (playerManager.PlayerTargetLock.lockOn)
             {
-                targetDirection = Quaternion.Euler(0, Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg, 0) * Vector3.forward;
+                targetDirection = Quaternion.Euler(0, targetRotation + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg, 0) * Vector3.forward;
             }
 
             characterController.Move(targetDirection.normalized * (speed * Time.deltaTime) + new Vector3(0, usingGravity ? verticalVelocity : 0, 0) * Time.deltaTime);
