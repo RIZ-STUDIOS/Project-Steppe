@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace ProjectSteppe.Entities.Player
 {
@@ -12,14 +13,18 @@ namespace ProjectSteppe.Entities.Player
 
         private PlayerCapability capabilities;
 
+        public UnityEvent onCapabilityChange;
+
         public void EnableCapability(PlayerCapability capability)
         {
             this.capabilities |= capability;
+            onCapabilityChange.Invoke();
         }
 
         public void DisableCapability(PlayerCapability capability)
         {
             this.capabilities &= ~capability;
+            onCapabilityChange.Invoke();
         }
 
         public bool HasCapability(PlayerCapability capability)
@@ -32,6 +37,7 @@ namespace ProjectSteppe.Entities.Player
     public enum PlayerCapability
     {
         Move = 1,
-        Rotate = 2
+        Rotate = 2,
+        Dash = 4
     }
 }
