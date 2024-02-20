@@ -88,6 +88,7 @@ namespace ProjectSteppe
             // Damage
             if (hitbox.ParentEntity.EntityBlock.IsBlocking && hitAngle > 90)
             {
+                if (hitbox.ParentEntity.EntityBlock.IsPerfectBlock()) return;
                 hitbox.ParentEntity.EntityHealth.DamageBalance(weaponSo.postureDamage);
             }
             else

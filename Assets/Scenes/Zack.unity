@@ -15270,6 +15270,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 427260509209221287, guid: e6f8f79dce7886148a6f261e8d8d5352,
+        type: 3}
+      propertyPath: perfectBlockTimeWindow
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 503990972408158375, guid: e6f8f79dce7886148a6f261e8d8d5352,
         type: 3}
       propertyPath: m_Name
