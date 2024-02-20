@@ -15297,6 +15297,21 @@ PrefabInstance:
       objectReference: {fileID: 1533891217}
     - target: {fileID: 7383154884052768845, guid: e6f8f79dce7886148a6f261e8d8d5352,
         type: 3}
+      propertyPath: dashTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7383154884052768845, guid: e6f8f79dce7886148a6f261e8d8d5352,
+        type: 3}
+      propertyPath: dashSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7383154884052768845, guid: e6f8f79dce7886148a6f261e8d8d5352,
+        type: 3}
+      propertyPath: dashCooldown
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7383154884052768845, guid: e6f8f79dce7886148a6f261e8d8d5352,
+        type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 699085200}
