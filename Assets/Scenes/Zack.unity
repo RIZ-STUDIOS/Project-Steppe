@@ -5151,8 +5151,8 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
+    m_Bits: 1
+  m_UseGeometry: 1
   m_DefaultArea: 0
   m_GenerateLinks: 0
   m_IgnoreNavMeshAgent: 1
@@ -15564,6 +15564,11 @@ PrefabInstance:
     - target: {fileID: 4777589370883011570, guid: 760189c7b9a6e664d997b953223e98ad,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6245711186125161259, guid: 760189c7b9a6e664d997b953223e98ad,
+        type: 3}
+      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7229880406094835270, guid: 760189c7b9a6e664d997b953223e98ad,
