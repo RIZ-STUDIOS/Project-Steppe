@@ -85,6 +85,8 @@ namespace ProjectSteppe
 
             float hitAngle = Vector3.Angle(hitbox.ParentEntity.transform.forward, parentEntity.transform.forward);
 
+            if (hitbox.ParentEntity.EntityHealth.IsInvicible()) return;
+
             // Damage
             if (hitbox.ParentEntity.EntityBlock.IsBlocking && hitAngle > 90)
             {

@@ -10,7 +10,7 @@ using UnityEngine.InputSystem.XR;
 namespace ProjectSteppe.Entities.Player
 {
     [RequireComponent(typeof(CharacterController))]
-    public class PlayerMovementController : MonoBehaviour
+    public class PlayerMovementController : EntityBehaviour
     {
         [Header("Gravity")]
         [SerializeField]
@@ -99,8 +99,9 @@ namespace ProjectSteppe.Entities.Player
 
         private Vector3 moveDirection;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             characterController = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
             playerInput = GetComponent<PlayerInput>();
@@ -137,6 +138,7 @@ namespace ProjectSteppe.Entities.Player
                 {
                     dashing = true;
                     dashTimer = 0;
+                    Entity.EntityHealth.SetInvicible(true);
 
                 }
                 _input.dash = false;
@@ -169,6 +171,7 @@ namespace ProjectSteppe.Entities.Player
         {
             dashing = false;
             dashCooldownTimer = dashCooldown;
+            Entity.EntityHealth.SetInvicible(false);
         }
 
         private void CheckJump()

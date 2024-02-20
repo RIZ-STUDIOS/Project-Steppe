@@ -43,8 +43,11 @@ namespace ProjectSteppe.Entities
         public UnityEvent<int, int> onPostureChange;
         public UnityEvent onKill;
         public UnityEvent onPostureFull;
+        public UnityEvent onHit;
 
         private float balanceRegenerationTimer;
+
+        private bool invicible;
 
         private void Start()
         {
@@ -56,6 +59,8 @@ namespace ProjectSteppe.Entities
         public void DamageHealth(int amount)
         {
             Health -= amount;
+
+            onHit.Invoke();
 
             if(Health <= 0)
             {
@@ -94,6 +99,16 @@ namespace ProjectSteppe.Entities
                     Balance -= Mathf.CeilToInt(maxBalance * balanceRegenerationRate * Time.deltaTime);
                 }
             }
+        }
+
+        public void SetInvicible(bool value)
+        {
+            this.invicible = value;
+        }
+
+        public bool IsInvicible()
+        {
+            return invicible;
         }
     }
 }
