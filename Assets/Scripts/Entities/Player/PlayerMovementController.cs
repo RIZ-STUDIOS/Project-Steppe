@@ -187,7 +187,14 @@ namespace ProjectSteppe.Entities.Player
 
             if(_input.move != Vector2.zero && playerManager.HasCapability(PlayerCapability.Rotate))
             {
-                targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
+                if (playerManager.PlayerTargetLock.lockOn)
+                {
+                    targetRotation = playerCamera.transform.eulerAngles.y;
+                }
+                else
+                {
+                    targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
+                }
 
                 float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref _rotationVelocity,
                         RotationSmoothTime);

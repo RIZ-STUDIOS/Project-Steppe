@@ -6,6 +6,10 @@ namespace ProjectSteppe.Entities.Player
 {
     public class PlayerManager : MonoBehaviour
     {
+        private TargetLock playerTargetLock;
+
+        public TargetLock PlayerTargetLock => this.GetComponentIfNull(ref playerTargetLock);
+
         private PlayerCapability capabilities;
 
         public void EnableCapability(PlayerCapability capability)
