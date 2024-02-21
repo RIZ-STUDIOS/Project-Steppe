@@ -10,7 +10,7 @@ using UnityEngine.InputSystem.XR;
 namespace ProjectSteppe.Entities.Player
 {
     [RequireComponent(typeof(CharacterController))]
-    public class PlayerMovementController : MonoBehaviour
+    public class PlayerMovementController : EntityBehaviour
     {
         [Header("Gravity")]
         [SerializeField]
@@ -50,6 +50,20 @@ namespace ProjectSteppe.Entities.Player
         [SerializeField]
         private LayerMask groundLayers;
 
+        [Header("Dashing")]
+
+        [SerializeField]
+        private float dashSpeed = 2f;
+
+        [SerializeField]
+        private float dashTime = 2f;
+
+        [SerializeField]
+        private float dashCooldown = 2f;
+
+        private float dashTimer;
+        private float dashCooldownTimer;
+
         [Header("Events")]
         public UnityEvent onJump;
         public UnityEvent onDash;
@@ -69,26 +83,35 @@ namespace ProjectSteppe.Entities.Player
         private Animator animator;
         private PlayerInput playerInput;
         private PlayerManager playerManager;
+        private PlayerMovementController playerMovement;
 
         private CinemachineVirtualCamera virtualCamera;
 
         private int _animIDJump;
         private int _animIDMotionSpeed;
         private int _animIDSpeed;
+        private int _animIDVelocityX;
+        private int _animIDVelocityY;
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
         private float _rotationVelocity;
 
         private const float _threshold = 0.01f;
 
-        private void Awake()
+        private bool dashing;
+
+        private Vector3 moveDirection;
+
+        protected override void Awake()
         {
+            base.Awake();
             characterController = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
             playerInput = GetComponent<PlayerInput>();
             animator = GetComponent<Animator>();
             virtualCamera = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
             playerManager = GetComponent<PlayerManager>();
+            playerMovement = GetComponent<PlayerMovementController>();
         }
 
         private void Start()
@@ -96,18 +119,65 @@ namespace ProjectSteppe.Entities.Player
             _animIDJump = Animator.StringToHash("Jumping");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
             _animIDSpeed = Animator.StringToHash("Speed");
+            _animIDVelocityX = Animator.StringToHash("VelocityX");
+            _animIDVelocityY = Animator.StringToHash("VelocityY");
         }
 
         private void Update()
         {
             CheckJump();
             CheckGrounded();
+            CheckDash();
             CheckMovement();
         }
 
         private void LateUpdate()
         {
             CameraRotation();
+        }
+
+        private void CheckDash()
+        {
+            if (_input.dash)
+            {
+                if (!dashing && dashCooldownTimer <= 0 && playerManager.HasCapability(PlayerCapability.Dash))
+                {
+                    dashing = true;
+                    dashTimer = 0;
+                    Entity.EntityHealth.SetInvicible(true);
+
+                }
+                _input.dash = false;
+            }
+
+            if (dashing)
+            {
+                dashTimer += Time.deltaTime;
+                if(dashTimer >= dashTime)
+                {
+                    DisableDashing();
+                }
+            }
+            else
+            {
+                if(dashCooldownTimer > 0)
+                dashCooldownTimer -= Time.deltaTime;
+            }
+        }
+
+        public void OnPlayerCapability()
+        {
+            if (!playerManager.HasCapability(PlayerCapability.Dash))
+            {
+                DisableDashing();
+            }
+        }
+
+        private void DisableDashing()
+        {
+            dashing = false;
+            dashCooldownTimer = dashCooldown;
+            Entity.EntityHealth.SetInvicible(false);
         }
 
         private void CheckJump()
@@ -154,9 +224,9 @@ namespace ProjectSteppe.Entities.Player
 
         private void CheckMovement()
         {
-            float targetSpeed = walkSpeed;
+            float targetSpeed = dashing ? dashSpeed : walkSpeed;
 
-            if(_input.move == Vector2.zero || !playerManager.HasCapability(PlayerCapability.Move)) targetSpeed = 0;
+            if(!dashing && (_input.move == Vector2.zero || !playerManager.HasCapability(PlayerCapability.Move))) targetSpeed = 0;
 
             float currentHorizontalSpeed = new Vector3(characterController.velocity.x, 0.0f, characterController.velocity.z).magnitude;
 
@@ -164,7 +234,7 @@ namespace ProjectSteppe.Entities.Player
             float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
 
             // accelerate or decelerate to target speed
-            if (currentHorizontalSpeed < targetSpeed - speedOffset ||
+            /*if (currentHorizontalSpeed < targetSpeed - speedOffset ||
                 currentHorizontalSpeed > targetSpeed + speedOffset)
             {
                 // creates curved result rather than a linear one giving a more organic speed change
@@ -173,21 +243,35 @@ namespace ProjectSteppe.Entities.Player
                     Time.deltaTime * speedChangeRate);
 
                 // round speed to 3 decimal places
-                speed = Mathf.Round(speed * 1000f) / 1000f;
+                //speed = Mathf.Round(speed * 1000f) / 1000f;
             }
             else
             {
-                speed = targetSpeed;
-            }
+            }*/
+            speed = targetSpeed;
 
             animationBlend = Mathf.Lerp(animationBlend, targetSpeed, Time.deltaTime * speedChangeRate);
             if (animationBlend < 0.01f) animationBlend = 0f;
 
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
-            if(_input.move != Vector2.zero && playerManager.HasCapability(PlayerCapability.Rotate))
+            if((_input.move != Vector2.zero || dashing) && playerManager.HasCapability(PlayerCapability.Rotate))
             {
-                targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
+                if (playerManager.PlayerTargetLock.lockOn)
+                {
+                    targetRotation = playerCamera.transform.eulerAngles.y;
+                }
+                if (!dashing)
+                {
+                    if (!playerManager.PlayerTargetLock.lockOn)
+                    {
+                        targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
+                    }
+                    else
+                    {
+                    }
+                this.moveDirection = inputDirection;
+                }
 
                 float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref _rotationVelocity,
                         RotationSmoothTime);
@@ -199,10 +283,36 @@ namespace ProjectSteppe.Entities.Player
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
 
+            if (playerManager.PlayerTargetLock.lockOn && !dashing)
+            {
+                targetDirection = Quaternion.Euler(0, targetRotation + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg, 0) * Vector3.forward;
+            }
+            else if(playerManager.PlayerTargetLock.lockOn && dashing)
+            {
+                targetDirection = Quaternion.Euler(0, targetRotation + Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg, 0) * Vector3.forward;
+            }
+
             characterController.Move(targetDirection.normalized * (speed * Time.deltaTime) + new Vector3(0, usingGravity ? verticalVelocity : 0, 0) * Time.deltaTime);
 
             animator.SetFloat(_animIDSpeed, animationBlend);
             animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+
+            float velY = animationBlend / playerMovement.walkSpeed;
+
+            var cam = playerCamera.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
+
+            Debug.Log(cam.Name);
+
+            if (cam.Name == "TargetLockCamera")
+            {
+                animator.SetFloat(_animIDVelocityX, _input.move.x);
+                animator.SetFloat(_animIDVelocityY, _input.move.y);
+            }
+            else
+            {
+                animator.SetFloat(_animIDVelocityX, 0);
+                animator.SetFloat(_animIDVelocityY, velY);
+            }            
         }
 
         private void CameraRotation()

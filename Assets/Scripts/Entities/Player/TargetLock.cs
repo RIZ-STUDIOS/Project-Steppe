@@ -12,7 +12,8 @@ namespace ProjectSteppe.Entities.Player
     {
         private StarterAssetsInputs _input;
 
-        private Transform lookAtTransform;
+        [System.NonSerialized]
+        public Transform lookAtTransform;
         private PlayerMovementController playerMovement;
 
         /*[SerializeField]
@@ -82,7 +83,7 @@ namespace ProjectSteppe.Entities.Player
 
         private void StartLockOn()
         {
-            var hits = ConeCastExtension.ConeCastAll(transform.position, maxConeRadius, playerMovement.playerCamera.transform.forward, maxConeLength, coneAngle, targetLockLayer);
+            var hits = ConeCastExtension.ConeCastAll(playerMovement.playerCamera.transform.position, maxConeRadius, playerMovement.playerCamera.transform.forward, maxConeLength, coneAngle, targetLockLayer);
             int index = -1;
             float angle = float.MaxValue;
             for (int i = 0; i < hits.Length; i++)

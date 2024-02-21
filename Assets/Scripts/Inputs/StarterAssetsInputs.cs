@@ -12,6 +12,7 @@ namespace StarterAssets
         public Vector2 look;
         public bool jump;
         public bool sprint;
+        public bool dash;
         public bool attack;
         public bool targetLock;
         public bool blocking;
@@ -52,6 +53,11 @@ namespace StarterAssets
             SprintInput(value.isPressed);
         }
 
+        public void OnDash(InputValue value)
+        {
+            DashInput(value.isPressed);
+        }
+
         public void OnAttack(InputValue value)
         {
             AttackInput(value.isPressed);
@@ -82,6 +88,11 @@ namespace StarterAssets
         public void SprintInput(bool newSprintState)
         {
             sprint = newSprintState;
+        }
+
+        public void DashInput(bool newDashState)
+        {
+            dash = newDashState;
         }
 
         public void AttackInput(bool newAttackState)

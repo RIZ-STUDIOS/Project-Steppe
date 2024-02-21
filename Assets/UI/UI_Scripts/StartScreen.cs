@@ -10,7 +10,7 @@ public class StartScreen : MonoBehaviour
 
     private void Start()
     {
-        startAction = new InputAction("ui/start", binding: "<Gamepad>/start");
+        startAction = new InputAction("ui/start", binding: "<Gamepad>/buttonSouth");
         startAction.Enable();
     }
 

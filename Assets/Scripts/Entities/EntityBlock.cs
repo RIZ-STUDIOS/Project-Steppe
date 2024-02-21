@@ -13,6 +13,17 @@ namespace ProjectSteppe.Entities
 
         private bool blocking;
 
+        [SerializeField]
+        [ColorUsage(false)]
+        private Color normalBlockColor;
+
+        [SerializeField]
+        [ColorUsage(false)]
+        private Color perfectBlockColor;
+
+        [SerializeField]
+        private ParticleSystem[] blockFX;
+
         public bool IsBlocking => blocking;
 
         [ContextMenu("Start Block")]
@@ -38,6 +49,25 @@ namespace ProjectSteppe.Entities
             if(blocking)
             {
                 blockTime += Time.deltaTime;
+            }
+        }
+
+        public void ChangeBlockColor(bool isPerfect)
+        {
+            foreach (var fx in blockFX)
+            {
+                var main = fx.main;
+                var color = isPerfect ? perfectBlockColor : normalBlockColor;
+                color.a = 1;
+                main.startColor = color;
+            }
+        }
+
+        public void PlayBlockFX()
+        {
+            foreach (var fx in blockFX)
+            {
+                fx.Play();
             }
         }
     }

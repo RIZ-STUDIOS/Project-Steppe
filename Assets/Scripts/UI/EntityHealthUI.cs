@@ -17,9 +17,9 @@ namespace ProjectSteppe.UI
             entityHealth.onHealthChange.AddListener(OnHealthChange);
         }
 
-        private void OnHealthChange(int health, int maxHealth)
+        private void OnHealthChange(float health, float maxHealth)
         {
-            slider.value = health;
+            slider.value = health/(float)maxHealth;
         }
     }
 }
