@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace ProjectSteppe.Entities
 {
@@ -11,34 +12,57 @@ namespace ProjectSteppe.Entities
     {
 
         [SerializeField, ReadOnly]
-        private int health;
+        private float health;
         [SerializeField, ReadOnly]
-        private int posture;
+        private float balance;
 
         [SerializeField, ReadOnly(AvailableMode.Play), MinValue(1)]
-        private int maxHealth;
+        private float maxHealth;
 
         [SerializeField, ReadOnly(AvailableMode.Play), MinValue(1)]
-        private int maxPosture = 100;
+        private float maxBalance = 100;
 
-        public int Health { get { return health; } private set { health = value; onHealthChange.Invoke(health); } }
-        public int Posture { get {  return posture; } private set { posture = value; onPostureChange.Invoke(posture); } }
+        [SerializeField]
+        private float timeBeforeBalanceRegeneration = 1.5f;
+
+        [SerializeField]
+        [Range(0f, 1f)]
+        private float balanceRegenerationRate = 0.2f;
+
+        [SerializeField]
+        [Tooltip("The ratio at which health affects amount of posture.")]
+        [Range(0f, 1f)]
+        private float balanceHealthRegenerationRatio = .5f;
+
+        private float startBalanceHealthRatio;
+
+        public float Health { get { return health; } private set { health = value; onHealthChange.Invoke(health, maxHealth); } }
+        public float Balance { get {  return balance; } private set { balance = value; if (balance < 0) balance = 0; onBalanceChange.Invoke(balance, maxBalance); } }
 
         [Header("Unity Events")]
-        public UnityEvent<int> onHealthChange;
-        public UnityEvent<int> onPostureChange;
+        public UnityEvent<float, float> onHealthChange;
+        [FormerlySerializedAs("onPostureChange")]
+        public UnityEvent<float, float> onBalanceChange;
         public UnityEvent onKill;
         public UnityEvent onPostureFull;
+        public UnityEvent onHit;
+
+        private float balanceRegenerationTimer;
+
+        private bool invicible;
 
         private void Start()
         {
             Health = maxHealth;
-            Posture = posture;
+            Balance = balance;
+            startBalanceHealthRatio = maxBalance / (float)maxHealth;
         }
 
-        public void DamageHealth(int amount)
+        public void DamageHealth(float amount)
         {
             Health -= amount;
+
+            onHit.Invoke();
 
             if(Health <= 0)
             {
@@ -51,19 +75,42 @@ namespace ProjectSteppe.Entities
             Health = maxHealth;
         }
 
-        public void ResetPosture()
+        public void ResetBalance()
         {
-            Posture = posture;
+            Balance = balance;
         }
 
-        public void DamagePosture(int amount)
+        public void DamageBalance(float amount)
         {
-            Posture += amount;
+            balanceRegenerationTimer = 0;
+            Balance += amount;
 
-            if(Posture >= maxPosture)
+            if(Balance >= maxBalance)
             {
                 onPostureFull.Invoke();
             }
+        }
+
+        private void Update()
+        {
+            if(Balance > 0)
+            {
+                balanceRegenerationTimer += Time.deltaTime;
+                if(balanceRegenerationTimer >= timeBeforeBalanceRegeneration)
+                {
+                    Balance -= maxBalance * balanceRegenerationRate * Time.deltaTime;
+                }
+            }
+        }
+
+        public void SetInvicible(bool value)
+        {
+            this.invicible = value;
+        }
+
+        public bool IsInvicible()
+        {
+            return invicible;
         }
     }
 }

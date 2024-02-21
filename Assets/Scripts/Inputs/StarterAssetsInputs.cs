@@ -12,8 +12,10 @@ namespace StarterAssets
         public Vector2 look;
         public bool jump;
         public bool sprint;
+        public bool dash;
         public bool attack;
         public bool targetLock;
+        public bool blocking;
 
         [Header("Movement Settings")]
         public bool analogMovement;
@@ -36,6 +38,11 @@ namespace StarterAssets
             }
         }
 
+        public void OnBlock(InputValue value)
+        {
+            BlockInput(value.isPressed);
+        }
+
         public void OnJump(InputValue value)
         {
             JumpInput(value.isPressed);
@@ -44,6 +51,11 @@ namespace StarterAssets
         public void OnSprint(InputValue value)
         {
             SprintInput(value.isPressed);
+        }
+
+        public void OnDash(InputValue value)
+        {
+            DashInput(value.isPressed);
         }
 
         public void OnAttack(InputValue value)
@@ -78,6 +90,11 @@ namespace StarterAssets
             sprint = newSprintState;
         }
 
+        public void DashInput(bool newDashState)
+        {
+            dash = newDashState;
+        }
+
         public void AttackInput(bool newAttackState)
         {
             attack = newAttackState;
@@ -86,6 +103,11 @@ namespace StarterAssets
         public void LockInput(bool newLockState)
         {
             targetLock = newLockState;
+        }
+
+        public void BlockInput(bool newBlockState)
+        {
+            blocking = newBlockState;
         }
 
         private void OnApplicationFocus(bool hasFocus)

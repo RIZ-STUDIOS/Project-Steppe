@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Cinemachine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -63,6 +64,8 @@ namespace StarterAssets
         [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
         public GameObject CinemachineCameraTarget;
 
+        private CinemachineVirtualCamera virtualCamera;
+
         [Tooltip("How far in degrees can you move the camera up")]
         public float TopClamp = 70.0f;
 
@@ -104,13 +107,25 @@ namespace StarterAssets
 
         public bool strafe;
 
+        [Header("Dashing")]
+        [SerializeField]
+        private float dashTime = 0.5f;
+
+        [SerializeField]
+        private float dashCooldownTime = .5f;
+
+        private float dashTimer;
+        private float dashCooldownTimer;
+
+        public bool dashing;
+
 #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
 #endif
         private Animator _animator;
         private CharacterController _controller;
         private StarterAssetsInputs _input;
-        private GameObject _mainCamera;
+        public GameObject _mainCamera;
 
         private const float _threshold = 0.01f;
 
@@ -136,6 +151,7 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
+            virtualCamera = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
         }
 
         private void Start()
@@ -161,6 +177,7 @@ namespace StarterAssets
         private void Update()
         {
             _hasAnimator = TryGetComponent(out _animator);
+            //_input.jump = false;
 
             JumpAndGravity();
             GroundedCheck();
@@ -198,6 +215,7 @@ namespace StarterAssets
 
         private void CameraRotation()
         {
+            if (!virtualCamera.enabled) return;
             // if there is an input and camera position is not fixed
             if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
             {
@@ -220,13 +238,43 @@ namespace StarterAssets
         private void Move()
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+            float targetSpeed = dashing ? SprintSpeed : MoveSpeed;
+
+            if (_input.sprint && (dashing || !Grounded))
+            {
+                _input.sprint = false;
+            }
+
+            if (_input.sprint && !dashing && dashCooldownTimer <= 0)
+            {
+                dashing = true;
+                canRotate = false;
+                dashTimer = dashTime;
+                _input.sprint = false;
+            }
+
+            if (dashing)
+            {
+                dashTimer -= Time.deltaTime;
+
+                if(dashTimer <= 0)
+                {
+                    dashing = false;
+                    dashCooldownTimer = dashCooldownTime;
+                    canRotate = true;
+                }
+            }
+
+            if(!dashing && dashCooldownTimer > 0)
+            {
+                dashCooldownTimer -= Time.deltaTime;
+            }
 
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
             // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is no input, set the target speed to 0
-            if (_input.move == Vector2.zero || !canMove) targetSpeed = 0.0f;
+            if ((!dashing && _input.move == Vector2.zero) || !canMove) targetSpeed = 0.0f;
 
             // a reference to the players current horizontal velocity
             float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
@@ -259,17 +307,32 @@ namespace StarterAssets
 
             // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is a move input rotate player when the player is moving
-            if (_input.move != Vector2.zero)
+            if (_input.move != Vector2.zero || dashing)
             {
-                _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-                                  _mainCamera.transform.eulerAngles.y;
-                if (canRotate && !strafe)
+                _targetRotation = _mainCamera.transform.eulerAngles.y;
+                if (dashing)
+                {
+                    _targetRotation = transform.eulerAngles.y;
+                }
+                if(dashing && _input.move != Vector2.zero && !strafe)
+                {
+                    _targetRotation = _mainCamera.transform.eulerAngles.y + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
+                }
+                if (!dashing)
+                {
+                    _targetRotation += Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
+                }
+                if ((canRotate && !strafe) && !dashing)
                 {
                     float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
                         RotationSmoothTime);
 
                     // rotate to face input direction relative to camera position
                     transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                }
+                if (dashing)
+                {
+                    transform.rotation = Quaternion.Euler(0, _targetRotation, 0);
                 }
             }
 
@@ -331,6 +394,9 @@ namespace StarterAssets
             {
                 // reset the jump timeout timer
                 _jumpTimeoutDelta = JumpTimeout;
+                if (dashing)
+                    canRotate = true;
+                dashing = false;
 
                 // fall timeout
                 if (_fallTimeoutDelta >= 0.0f)

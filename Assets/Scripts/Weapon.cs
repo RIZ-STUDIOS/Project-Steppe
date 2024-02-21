@@ -13,7 +13,7 @@ namespace ProjectSteppe
         [SerializeField, FormerlySerializedAs("weapon")] private WeaponScriptableObject weaponSo;
         [SerializeField, FormerlySerializedAs("collisions")] private List<Collider> weaponColliders;
 
-        [SerializeField, ReadOnly(AvailableMode.Editor)]
+        [SerializeField, ReadOnly(AvailableMode.Play)]
         private bool startEnabled;
 
         public bool WeaponEnabled => _weaponEnabled;
@@ -22,6 +22,10 @@ namespace ProjectSteppe
         public Entity parentEntity;
 
         private bool _weaponEnabled;
+
+        [SerializeField] private Entity hitEntity;
+
+        [SerializeField] private float ignoreTimer = 0.5f;
 
         private void Start()
         {
@@ -48,9 +52,9 @@ namespace ProjectSteppe
             StartCoroutine(AttackActivator(startTime, endTime));
         }
 
-        private IEnumerator AttackActivator(float startTiem, float endTime)
+        private IEnumerator AttackActivator(float startTime, float endTime)
         {
-            yield return Delay(startTiem);
+            yield return Delay(startTime);
             EnableColliders();
             yield return Delay(endTime);
             DisableColliders();
@@ -75,10 +79,50 @@ namespace ProjectSteppe
             var hitbox = other.GetComponent<HitBox>();
             if (!hitbox) return;
             if (!hitbox.IsValidHit(parentEntity)) return;
+            if (hitbox.ParentEntity == hitEntity) return;
 
             Debug.Log("Hit " + other.name);
 
+            float hitAngle = Vector3.Angle(hitbox.ParentEntity.transform.forward, parentEntity.transform.forward);
+
+            if (hitbox.ParentEntity.EntityHealth.IsInvicible()) return;
+
             // Damage
+            if (hitbox.ParentEntity.EntityBlock.IsBlocking && hitAngle > 90)
+            {
+                hitbox.ParentEntity.EntityBlock.ChangeBlockColor(hitbox.ParentEntity.EntityBlock.IsPerfectBlock());
+
+                if (!hitbox.ParentEntity.EntityBlock.IsPerfectBlock())
+                {
+                    hitbox.ParentEntity.EntityHealth.DamageBalance(weaponSo.postureDamage);
+                }
+                else
+                {
+                    parentEntity.EntityHealth.DamageBalance(hitbox.ParentEntity.EntityAttacking.CurrentWeapon.weaponSo.postureDamage);
+                }
+
+                hitbox.ParentEntity.EntityBlock.PlayBlockFX();
+            }
+            else
+            {
+                hitbox.ParentEntity.EntityHealth.DamageHealth(weaponSo.damage);
+                hitbox.ParentEntity.EntityHealth.DamageBalance(weaponSo.postureDamage);
+            }
+
+            hitEntity = hitbox.ParentEntity;
+            StartCoroutine(IgnoreHits());
+        }
+
+        private IEnumerator IgnoreHits()
+        {
+            float timer = 0;
+            while (timer < ignoreTimer)
+            {
+                timer += Time.deltaTime;
+                yield return null;
+            }
+
+            hitEntity = null;
         }
     }
 }

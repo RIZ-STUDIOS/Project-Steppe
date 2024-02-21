@@ -2,30 +2,18 @@ using UnityEngine;
 
 namespace ProjectSteppe.Entities
 {
+    [RequireComponent(typeof(EntityAttacking))]
+    [RequireComponent(typeof(EntityHealth))]
+    [RequireComponent(typeof(EntityBlock))]
+    [RequireComponent(typeof(EntityCollision))]
     public class Entity : MonoBehaviour
     {
-        private Weapon currentWeapon;
+        private EntityAttacking _entityAttacking;
+        private EntityHealth _entityHealth;
+        private EntityBlock _entityBlock;
 
-        [SerializeField]
-        private Weapon startWeapon;
-
-        public Weapon CurrentWeapon => currentWeapon;
-
-        private void Start()
-        {
-            SetWeapon(startWeapon);
-        }
-
-        public void SetWeapon(Weapon weapon)
-        {
-            if (currentWeapon)
-            {
-                currentWeapon.parentEntity = null;
-            }
-
-            currentWeapon = weapon;
-            if (currentWeapon)
-                currentWeapon.parentEntity = this;
-        }
+        public EntityAttacking EntityAttacking => this.GetComponentIfNull(ref _entityAttacking);
+        public EntityHealth EntityHealth => this.GetComponentIfNull(ref _entityHealth);
+        public EntityBlock EntityBlock => this.GetComponentIfNull(ref _entityBlock);
     }
 }
