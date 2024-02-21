@@ -83,12 +83,15 @@ namespace ProjectSteppe.Entities.Player
         private Animator animator;
         private PlayerInput playerInput;
         private PlayerManager playerManager;
+        private PlayerMovementController playerMovement;
 
         private CinemachineVirtualCamera virtualCamera;
 
         private int _animIDJump;
         private int _animIDMotionSpeed;
         private int _animIDSpeed;
+        private int _animIDVelocityX;
+        private int _animIDVelocityY;
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
         private float _rotationVelocity;
@@ -108,6 +111,7 @@ namespace ProjectSteppe.Entities.Player
             animator = GetComponent<Animator>();
             virtualCamera = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
             playerManager = GetComponent<PlayerManager>();
+            playerMovement = GetComponent<PlayerMovementController>();
         }
 
         private void Start()
@@ -115,6 +119,8 @@ namespace ProjectSteppe.Entities.Player
             _animIDJump = Animator.StringToHash("Jumping");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
             _animIDSpeed = Animator.StringToHash("Speed");
+            _animIDVelocityX = Animator.StringToHash("VelocityX");
+            _animIDVelocityY = Animator.StringToHash("VelocityY");
         }
 
         private void Update()
@@ -290,6 +296,23 @@ namespace ProjectSteppe.Entities.Player
 
             animator.SetFloat(_animIDSpeed, animationBlend);
             animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+
+            float velY = animationBlend / playerMovement.walkSpeed;
+
+            var cam = playerCamera.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
+
+            Debug.Log(cam.Name);
+
+            if (cam.Name == "TargetLockCamera")
+            {
+                animator.SetFloat(_animIDVelocityX, _input.move.x);
+                animator.SetFloat(_animIDVelocityY, _input.move.y);
+            }
+            else
+            {
+                animator.SetFloat(_animIDVelocityX, 0);
+                animator.SetFloat(_animIDVelocityY, velY);
+            }            
         }
 
         private void CameraRotation()
