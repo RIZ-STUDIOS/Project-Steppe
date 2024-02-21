@@ -13,16 +13,20 @@ public class MainMenu : MonoBehaviour
     private InputAction leftBumper;
 
     [SerializeField]
-    private CanvasGroup visualsGroup;
+    private CanvasGroup mainMenu;
     [SerializeField]
-    private CanvasGroup audioGroup;
+    private CanvasGroup generalOptions;
     [SerializeField]
-    private CanvasGroup controlsGroup;
+    private CanvasGroup tutorial;
+
     [SerializeField]
-    private CanvasGroup mainMenuGroup;
+    private GameObject[] optionTabs;
 
+    private bool optionsOn = false;
+    private bool tutorialOn = false;
+    private bool menuOn = true;
 
-
+    private int index;
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -30,6 +34,7 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
+        index = 0;
         cancelAction = playerInput.actions["Cancel"];
         rightBumper = playerInput.actions["RightBumper"];
         leftBumper = playerInput.actions["LeftBumper"];
@@ -39,7 +44,22 @@ public class MainMenu : MonoBehaviour
     {
         if (cancelAction.triggered)
         {
-            BackToMainMenu();
+            BackToMenu();
+        }
+        if (optionsOn)
+        {
+            if (rightBumper.triggered)
+            {
+                optionTabs[index].SetActive(false);
+                index = (index + 1) % optionTabs.Length;
+                optionTabs[index].SetActive(true);
+            }
+            else if (leftBumper.triggered)
+            {
+                optionTabs[index].SetActive(false);
+                index = (index - 1 + optionTabs.Length) % optionTabs.Length;
+                optionTabs[index].SetActive(true);
+            }
         }
     }
     public void StartGame()
@@ -53,31 +73,60 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Quit");
     }
 
-    public void Options()
+    public void OpenOptions()
     {
-        ManageGroups(mainMenuGroup, false);
-        ManageGroups(visualsGroup, true);
+        mainMenu.interactable = false;
+        menuOn = false;
+        StartCoroutine(Open(generalOptions, true));
+        optionsOn = true;
     }
 
-    private void BackToMainMenu()
+    public void OpenTutorial()
     {
-        ManageGroups(visualsGroup, false);
-        ManageGroups(audioGroup, false);
-        ManageGroups(controlsGroup, false);
-        ManageGroups(mainMenuGroup, true);
+        mainMenu.interactable = false;
+        menuOn = false;
+        StartCoroutine(Open(tutorial, true));
+        tutorialOn = true;
     }
 
-    private void ManageGroups(CanvasGroup temp, bool tep)
+    public void BackToMenu()
     {
-        if (tep)
+        mainMenu.interactable = true;
+        if(!menuOn && tutorialOn)
         {
-            temp.alpha = 1;
-            temp.interactable = true;
+            tutorial.alpha = 0;
+            tutorial.interactable = false;
+            StartCoroutine(Open(tutorial, false));
+            tutorialOn = false;
+        }
+        else if(!menuOn && optionsOn)
+        {
+            generalOptions.alpha = 0;
+            generalOptions.interactable = false;
+            StartCoroutine(Open(generalOptions, false));
+            optionsOn = false;
+        }
+        menuOn = true;
+    }
+    public IEnumerator Open(CanvasGroup group, bool par)
+    {
+        if (par)
+        {
+            for (float f = 0.05f; f <= 1.1f; f += 0.05f)
+            {
+                group.alpha = f;
+                yield return new WaitForSeconds(0.01f);
+            }
+            group.interactable = true;
         }
         else
         {
-            temp.alpha = 0;
-            temp.interactable = false;
+            for (float f = 1f; f >= -0.05f; f -= 0.05f)
+            {
+                group.alpha = f;
+                yield return new WaitForSeconds(0.01f);
+            }
+            group.interactable = false;
         }
     }
 }
