@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -27,6 +29,10 @@ public class MainMenu : MonoBehaviour
     private bool menuOn = true;
 
     private int index;
+
+    [SerializeField]
+    private GameObject controlsFirstButton;
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -79,6 +85,7 @@ public class MainMenu : MonoBehaviour
         menuOn = false;
         StartCoroutine(Open(generalOptions, true));
         optionsOn = true;
+        EventSystem.current.SetSelectedGameObject(controlsFirstButton);
     }
 
     public void OpenTutorial()
