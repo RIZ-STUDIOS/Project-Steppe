@@ -1,3 +1,4 @@
+using ProjectSteppe.ScriptableObjects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace ProjectSteppe.Entities
         private Weapon startWeapon;
 
         public Weapon CurrentWeapon => currentWeapon;
+
+        public AttackScriptableObject currentAttack;
 
         private void Start()
         {
