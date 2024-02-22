@@ -6,7 +6,7 @@ using RicTools.ScriptableObjects;
 using RicTools.EditorAttributes;
 using Cinemachine;
 
-namespace ProjectSteppe.ScriptableObjects
+namespace ProjectSteppe.ScriptableObjects.CameraData
 {
     [DefaultScriptableObjectName(nameof(presetName))]
     public class CameraDataScriptableObject : GenericScriptableObject
@@ -20,6 +20,9 @@ namespace ProjectSteppe.ScriptableObjects
         public float farClipPlane;
         public float dutch;
 
+        public BaseBodyCameraDataScriptableObject bodyCameraData;
+        public BaseAimCameraDataScriptableObject aimCameraData;
+
         public void ApplyCameraData(CinemachineVirtualCamera camera)
         {
             camera.m_StandbyUpdate = standbyUpdateMode;
@@ -28,6 +31,16 @@ namespace ProjectSteppe.ScriptableObjects
             camera.m_Lens.NearClipPlane = nearClipPlane;
             camera.m_Lens.FarClipPlane = farClipPlane;
             camera.m_Lens.Dutch = dutch;
+
+            if (!bodyCameraData)
+            {
+                bodyCameraData.ApplyCameraData(camera);
+            }
+
+            if (!aimCameraData)
+            {
+                aimCameraData.ApplyCameraData(camera);
+            }
         }
     }
 }

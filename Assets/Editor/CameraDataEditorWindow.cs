@@ -4,7 +4,7 @@ using UnityEngine;
 using RicTools;
 using RicTools.Editor.Windows;
 using UnityEditor;
-using ProjectSteppe.ScriptableObjects;
+using ProjectSteppe.ScriptableObjects.CameraData;
 using RicTools.Editor.Utilities;
 using Cinemachine;
 using UnityEngine.UIElements;
@@ -25,6 +25,9 @@ namespace ProjectSteppe.Editor
         public EditorContainer<BodyDataType> bodyDataType = new EditorContainer<BodyDataType>();
 
         public EditorContainer<AimDataType> aimDataType = new EditorContainer<AimDataType>();
+
+        public EditorContainer<BaseBodyCameraDataScriptableObject> baseBodyScriptableObject = new EditorContainer<BaseBodyCameraDataScriptableObject>();
+        public EditorContainer<BaseAimCameraDataScriptableObject> baseAimScriptableObject = new EditorContainer<BaseAimCameraDataScriptableObject>();
 
         [MenuItem("Window/RicTools Windows/Camera Data Editor")]
     	public static CameraDataEditorWindow ShowWindow()
@@ -107,6 +110,15 @@ namespace ProjectSteppe.Editor
 
                 {
                     var element = bodyFoldout.AddEnumField(bodyDataType, "");
+
+                    RegisterLoadChange(element, bodyDataType);
+                }
+
+                {
+                    var element = bodyFoldout.AddObjectField(baseBodyScriptableObject, "Body Scriptable Object");
+                    element.SetEnabled(false);
+
+                    AddElementToDebugView(element);
                 }
             }
 
@@ -115,6 +127,15 @@ namespace ProjectSteppe.Editor
 
                 {
                     var element = aimFoldout.AddEnumField(aimDataType, "");
+
+                    RegisterLoadChange(element, aimDataType);
+                }
+
+                {
+                    var element = aimFoldout.AddObjectField(baseAimScriptableObject, "Aim Scriptable Object");
+                    element.SetEnabled(false);
+
+                    AddElementToDebugView(element);
                 }
             }
         }
@@ -131,6 +152,12 @@ namespace ProjectSteppe.Editor
                 nearClipPlane.Reset();
                 farClipPlane.Reset();
                 dutch.Reset();
+
+                bodyDataType.Reset();
+                aimDataType.Reset();
+
+                baseBodyScriptableObject.Reset();
+                baseAimScriptableObject.Reset();
             }
             else
             {
@@ -142,6 +169,19 @@ namespace ProjectSteppe.Editor
                 nearClipPlane.Value = asset.nearClipPlane;
                 farClipPlane.Value = asset.farClipPlane;
                 dutch.Value = asset.dutch;
+
+                baseBodyScriptableObject.Value = asset.bodyCameraData;
+                baseAimScriptableObject.Value = asset.aimCameraData;
+
+                if (!asset.bodyCameraData)
+                {
+                    bodyDataType.Reset();
+                }
+
+                if (!asset.aimCameraData)
+                {
+                    aimDataType.Reset();
+                }
             }
         }
 
