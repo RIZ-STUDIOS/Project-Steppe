@@ -79,6 +79,11 @@ namespace ProjectSteppe.Entities.Player
                 var d = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 5 * Time.deltaTime).eulerAngles;
                 transform.rotation = Quaternion.Euler(0, d.y, 0);
             }
+
+            if(lockOn && !lookAtTransform)
+            {
+                StopLockOn();
+            }
         }
 
         private void StartLockOn()
