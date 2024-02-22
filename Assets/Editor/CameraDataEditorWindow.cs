@@ -8,6 +8,10 @@ using ProjectSteppe.ScriptableObjects.CameraData;
 using RicTools.Editor.Utilities;
 using Cinemachine;
 using UnityEngine.UIElements;
+using ProjectSteppe.ScriptableObjects.CameraData.BodyCameraData;
+using ProjectSteppe.ScriptableObjects.CameraData.AimCameraData;
+using ProjectSteppe.Editor.CameraDataSubEditors;
+using System;
 
 namespace ProjectSteppe.Editor
 {
@@ -28,6 +32,9 @@ namespace ProjectSteppe.Editor
 
         public EditorContainer<BaseBodyCameraDataScriptableObject> baseBodyScriptableObject = new EditorContainer<BaseBodyCameraDataScriptableObject>();
         public EditorContainer<BaseAimCameraDataScriptableObject> baseAimScriptableObject = new EditorContainer<BaseAimCameraDataScriptableObject>();
+
+        private List<BodyCameraDataSubEditor> bodySubEditors = new List<BodyCameraDataSubEditor>();
+        private List<AimCameraDataSubEditor> aimSubEditors = new List<AimCameraDataSubEditor>();
 
         [MenuItem("Window/RicTools Windows/Camera Data Editor")]
     	public static CameraDataEditorWindow ShowWindow()
@@ -109,7 +116,10 @@ namespace ProjectSteppe.Editor
                 var bodyFoldout = rootVisualElement.AddFoldout("Body");
 
                 {
-                    var element = bodyFoldout.AddEnumField(bodyDataType, "");
+                    var element = bodyFoldout.AddEnumField(bodyDataType, "", () =>
+                    {
+                        CheckBodyVisibility();
+                    });
 
                     RegisterLoadChange(element, bodyDataType);
                 }
@@ -118,15 +128,22 @@ namespace ProjectSteppe.Editor
                     var element = bodyFoldout.AddObjectField(baseBodyScriptableObject, "Body Scriptable Object");
                     element.SetEnabled(false);
 
+
+                    RegisterLoadChange(element, baseBodyScriptableObject);
                     AddElementToDebugView(element);
                 }
+
+                CheckBodyVisibility();
             }
 
             {
                 var aimFoldout = rootVisualElement.AddFoldout("Aim");
 
                 {
-                    var element = aimFoldout.AddEnumField(aimDataType, "");
+                    var element = aimFoldout.AddEnumField(aimDataType, "", () =>
+                    {
+                        CheckAimVisibility();
+                    });
 
                     RegisterLoadChange(element, aimDataType);
                 }
@@ -135,8 +152,29 @@ namespace ProjectSteppe.Editor
                     var element = aimFoldout.AddObjectField(baseAimScriptableObject, "Aim Scriptable Object");
                     element.SetEnabled(false);
 
+                    RegisterLoadChange(element, baseAimScriptableObject);
                     AddElementToDebugView(element);
                 }
+
+                aimSubEditors.Add(new AimHardLookAtCameraDataSubEditor(aimFoldout));
+                aimSubEditors.Add(new AimSameAsTargetCameraDataSubEditor(aimFoldout));
+                CheckAimVisibility();
+            }
+        }
+
+        private void CheckAimVisibility()
+        {
+            foreach (var subEditor in aimSubEditors)
+            {
+                subEditor.CheckVisibility((int)aimDataType.Value);
+            }
+        }
+
+        private void CheckBodyVisibility()
+        {
+            foreach (var subEditor in bodySubEditors)
+            {
+                subEditor.CheckVisibility((int)bodyDataType.Value);
             }
         }
 
@@ -158,6 +196,16 @@ namespace ProjectSteppe.Editor
 
                 baseBodyScriptableObject.Reset();
                 baseAimScriptableObject.Reset();
+
+                foreach (var subEditor in bodySubEditors)
+                {
+                    subEditor.Load(true, null);
+                }
+
+                foreach (var subEditor in aimSubEditors)
+                {
+                    subEditor.Load(true, null);
+                }
             }
             else
             {
@@ -177,10 +225,48 @@ namespace ProjectSteppe.Editor
                 {
                     bodyDataType.Reset();
                 }
+                else
+                {
+                    foreach (var bodySubEditor in bodySubEditors)
+                    {
+                        if (bodySubEditor.IsSameType(asset.bodyCameraData.GetType()))
+                        {
+                            bodyDataType.Value = bodySubEditor.bodyDataType;
+                            break;
+                        }
+                    }
+                }
 
                 if (!asset.aimCameraData)
                 {
                     aimDataType.Reset();
+                }
+                else
+                {
+                    foreach (var aimSubEditor in aimSubEditors)
+                    {
+                        if (aimSubEditor.IsSameType(asset.aimCameraData.GetType()))
+                        {
+                            aimDataType.Value = aimSubEditor.aimDataType;
+                            break;
+                        }
+                    }
+                }
+
+                foreach (var bodySubEditor in bodySubEditors)
+                {
+                    if (asset.bodyCameraData && bodySubEditor.IsSameType(asset.bodyCameraData.GetType()))
+                        bodySubEditor.Load(false, asset.bodyCameraData);
+                    else
+                        bodySubEditor.Load(true, null);
+                }
+
+                foreach (var aimSubEditor in aimSubEditors)
+                {
+                    if (asset.aimCameraData && aimSubEditor.IsSameType(asset.aimCameraData.GetType()))
+                        aimSubEditor.Load(false, asset.aimCameraData);
+                    else
+                        aimSubEditor.Load(true, null);
                 }
             }
         }
@@ -195,6 +281,54 @@ namespace ProjectSteppe.Editor
             asset.nearClipPlane = nearClipPlane;
             asset.farClipPlane = farClipPlane;
             asset.dutch = dutch;
+
+            {
+                bool found = false;
+                foreach (var bodySubEditor in bodySubEditors)
+                {
+                    if (bodySubEditor.bodyDataType == bodyDataType)
+                    {
+                        var bodyCameraData = bodySubEditor.CreateScriptableObject();
+                        AssetDatabase.CreateAsset(bodyCameraData, $"{SavePath}/{asset.guid} - Body Data.asset");
+                        asset.bodyCameraData = bodyCameraData;
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    if (asset.bodyCameraData)
+                    {
+                        AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(asset.bodyCameraData));
+                        asset.bodyCameraData = null;
+                    }
+                }
+            }
+
+            {
+                bool found = false;
+                foreach (var aimSubEditor in aimSubEditors)
+                {
+                    if (aimSubEditor.aimDataType == aimDataType)
+                    {
+                        var aimCameraData = aimSubEditor.CreateScriptableObject();
+                        AssetDatabase.CreateAsset(aimCameraData, $"{SavePath}/{asset.guid} - Aim Data.asset");
+                        asset.aimCameraData = aimCameraData;
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    if (asset.aimCameraData)
+                    {
+                        AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(asset.aimCameraData));
+                        asset.aimCameraData = null;
+                    }
+                }
+            }
         }
 
         protected override IEnumerable<CompletionCriteria> GetCompletionCriteria()
@@ -204,7 +338,15 @@ namespace ProjectSteppe.Editor
 
         protected override void OnDeleteAsset(CameraDataScriptableObject asset)
         {
-            base.OnDeleteAsset(asset);
+            if (asset.bodyCameraData)
+            {
+                AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(asset.bodyCameraData));
+            }
+
+            if (asset.aimCameraData)
+            {
+                AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(asset.aimCameraData));
+            }
         }
 
         public enum BodyDataType

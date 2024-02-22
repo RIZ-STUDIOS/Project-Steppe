@@ -5,6 +5,8 @@ using RicTools;
 using RicTools.ScriptableObjects;
 using RicTools.EditorAttributes;
 using Cinemachine;
+using ProjectSteppe.ScriptableObjects.CameraData.BodyCameraData;
+using ProjectSteppe.ScriptableObjects.CameraData.AimCameraData;
 
 namespace ProjectSteppe.ScriptableObjects.CameraData
 {
