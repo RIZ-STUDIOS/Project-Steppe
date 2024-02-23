@@ -156,6 +156,7 @@ namespace ProjectSteppe.Editor
                     AddElementToDebugView(element);
                 }
 
+                aimSubEditors.Add(new AimComposerCameraDataSubEditor(aimFoldout));
                 aimSubEditors.Add(new AimHardLookAtCameraDataSubEditor(aimFoldout));
                 aimSubEditors.Add(new AimSameAsTargetCameraDataSubEditor(aimFoldout));
                 CheckAimVisibility();
