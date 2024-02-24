@@ -134,6 +134,7 @@ namespace ProjectSteppe.Editor
                 }
 
                 bodySubEditors.Add(new Body3rdFollowCameraDataSubEditor(bodyFoldout));
+                bodySubEditors.Add(new BodyFramingTransposerCameraDataSubEditor(bodyFoldout));
                 CheckBodyVisibility();
             }
 
