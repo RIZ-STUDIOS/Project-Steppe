@@ -9,8 +9,6 @@ namespace ProjectSteppe.ScriptableObjects.CameraData.AimCameraData
     {
         public override void ApplyCameraData(CinemachineVirtualCamera camera)
         {
-            DeleteComponentInCamera(camera);
-
             camera.AddCinemachineComponent<CinemachineHardLookAt>();
         }
     }

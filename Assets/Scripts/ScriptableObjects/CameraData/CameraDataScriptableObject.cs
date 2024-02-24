@@ -34,6 +34,9 @@ namespace ProjectSteppe.ScriptableObjects.CameraData
             camera.m_Lens.FarClipPlane = farClipPlane;
             camera.m_Lens.Dutch = dutch;
 
+            DeleteComponentInCamera(CinemachineCore.Stage.Body, camera);
+            DeleteComponentInCamera(CinemachineCore.Stage.Aim, camera);
+
             if (!bodyCameraData)
             {
                 bodyCameraData.ApplyCameraData(camera);
@@ -43,6 +46,14 @@ namespace ProjectSteppe.ScriptableObjects.CameraData
             {
                 aimCameraData.ApplyCameraData(camera);
             }
+        }
+
+        private void DeleteComponentInCamera(CinemachineCore.Stage stage, CinemachineVirtualCamera camera)
+        {
+            var comp = camera.GetCinemachineComponent(stage);
+            comp.enabled = false;
+            RuntimeUtility.DestroyObject(comp);
+            camera.InvalidateComponentPipeline();
         }
     }
 }

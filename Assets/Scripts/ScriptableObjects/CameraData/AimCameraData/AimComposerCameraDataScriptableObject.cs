@@ -29,8 +29,6 @@ namespace ProjectSteppe.ScriptableObjects.CameraData.AimCameraData
 
         public override void ApplyCameraData(CinemachineVirtualCamera camera)
         {
-            DeleteComponentInCamera(camera);
-
             var comp = camera.AddCinemachineComponent<CinemachineComposer>();
 
             comp.m_TrackedObjectOffset = trackedObjectOffset;

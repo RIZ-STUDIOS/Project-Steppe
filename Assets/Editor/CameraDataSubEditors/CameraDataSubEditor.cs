@@ -61,6 +61,14 @@ namespace ProjectSteppe.Editor.CameraDataSubEditors
 
         protected abstract void LoadData(bool isNull, T asset);
 
+        protected void RegisterLoadChange(LayerMaskField element, EditorContainer<LayerMask> editorContainer)
+        {
+            onLoad += () =>
+            {
+                element.value = editorContainer.Value;
+            };
+        }
+
         protected void RegisterLoadChange<TValueType>(ObjectField element, EditorContainer<TValueType> editorContainer) where TValueType : Object
         {
             onLoad += () =>
@@ -68,6 +76,7 @@ namespace ProjectSteppe.Editor.CameraDataSubEditors
                 element.value = editorContainer.Value;
             };
         }
+
         protected void RegisterLoadChange<TValueType>(BaseField<TValueType> element, EditorContainer<TValueType> editorContainer)
         {
             onLoad += () =>

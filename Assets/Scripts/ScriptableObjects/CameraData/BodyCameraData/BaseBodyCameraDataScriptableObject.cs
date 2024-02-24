@@ -11,13 +11,5 @@ namespace ProjectSteppe.ScriptableObjects.CameraData.BodyCameraData
         {
 
         }
-
-        protected void DeleteComponentInCamera(CinemachineVirtualCamera camera)
-        {
-            var comp = camera.GetCinemachineComponent(CinemachineCore.Stage.Body);
-            comp.enabled = false;
-            RuntimeUtility.DestroyObject(comp);
-            camera.InvalidateComponentPipeline();
-        }
     }
 }

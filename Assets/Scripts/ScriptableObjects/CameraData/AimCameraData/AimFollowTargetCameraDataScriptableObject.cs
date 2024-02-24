@@ -11,8 +11,6 @@ namespace ProjectSteppe.ScriptableObjects.CameraData.AimCameraData
 
         public override void ApplyCameraData(CinemachineVirtualCamera camera)
         {
-            DeleteComponentInCamera(camera);
-
             var comp = camera.AddCinemachineComponent<CinemachineSameAsFollowTarget>();
             comp.m_Damping = damping;
         }

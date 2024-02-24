@@ -133,6 +133,7 @@ namespace ProjectSteppe.Editor
                     AddElementToDebugView(element);
                 }
 
+                bodySubEditors.Add(new Body3rdFollowCameraDataSubEditor(bodyFoldout));
                 CheckBodyVisibility();
             }
 
