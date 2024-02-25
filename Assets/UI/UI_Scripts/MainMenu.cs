@@ -29,10 +29,6 @@ public class MainMenu : MonoBehaviour
     private bool menuOn = true;
 
     private int index;
-
-    [SerializeField]
-    private GameObject controlsFirstButton;
-
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -59,12 +55,14 @@ public class MainMenu : MonoBehaviour
                 optionTabs[index].SetActive(false);
                 index = (index + 1) % optionTabs.Length;
                 optionTabs[index].SetActive(true);
+                SetSelectedButton(optionTabs[index].GetComponentInChildren<Button>().gameObject);
             }
             else if (leftBumper.triggered)
             {
                 optionTabs[index].SetActive(false);
                 index = (index - 1 + optionTabs.Length) % optionTabs.Length;
                 optionTabs[index].SetActive(true);
+                SetSelectedButton(optionTabs[index].GetComponentInChildren<Button>().gameObject);
             }
         }
     }
@@ -85,7 +83,7 @@ public class MainMenu : MonoBehaviour
         menuOn = false;
         StartCoroutine(Open(generalOptions, true));
         optionsOn = true;
-        EventSystem.current.SetSelectedGameObject(controlsFirstButton);
+        SetSelectedButton(optionTabs[index].GetComponentInChildren<Button>().gameObject);
     }
 
     public void OpenTutorial()
@@ -98,7 +96,6 @@ public class MainMenu : MonoBehaviour
 
     public void BackToMenu()
     {
-        mainMenu.interactable = true;
         if(!menuOn && tutorialOn)
         {
             tutorial.alpha = 0;
@@ -113,6 +110,8 @@ public class MainMenu : MonoBehaviour
             StartCoroutine(Open(generalOptions, false));
             optionsOn = false;
         }
+        SetSelectedButton(mainMenu.GetComponentInChildren<Button>().gameObject);
+        mainMenu.interactable = true;
         menuOn = true;
     }
     public IEnumerator Open(CanvasGroup group, bool par)
@@ -135,5 +134,10 @@ public class MainMenu : MonoBehaviour
             }
             group.interactable = false;
         }
+    }
+
+    private void SetSelectedButton(GameObject gameObject)
+    {
+        EventSystem.current.SetSelectedGameObject(gameObject);
     }
 }
