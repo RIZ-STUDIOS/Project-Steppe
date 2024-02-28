@@ -43,6 +43,31 @@ namespace ProjectSteppe.Editor.CameraDataSubEditors
         {
             var asset = ScriptableObject.CreateInstance<BodyFramingTransposerCameraDataScriptableObject>();
 
+            asset.trackedObjectOffset = trackedObjectOffset;
+            asset.lookaheadTime = lookaheadTime;
+            asset.lookaheadSmoothing = lookaheadSmoothing;
+            asset.lookaheadIgnoreY = lookaheadIgnoreY;
+
+            asset.xDamping = xDamping;
+            asset.yDamping = yDamping;
+            asset.zDamping = zDamping;
+            asset.targetMovementOnly = targetMovementOnly;
+
+            asset.screenX = screenX;
+            asset.screenY = screenY;
+            asset.cameraDistance = cameraDistance;
+
+            asset.deadZoneWidth = deadZoneWidth;
+            asset.deadZoneHeight = deadZoneHeight;
+            asset.deadZoneDepth = deadZoneDepth;
+
+            asset.unlimitedSoftZone = unlimitedSoftZone;
+            asset.softZoneWidth = softZoneWidth;
+            asset.softZoneHeight = softZoneHeight;
+            asset.biasX = biasX;
+            asset.biasY = biasY;
+            asset.centerOnActivate = centerOnActivate;
+
             return asset;
         }
 
@@ -50,6 +75,23 @@ namespace ProjectSteppe.Editor.CameraDataSubEditors
         {
             {
                 var element = rootVisualElement.AddVector3Field(trackedObjectOffset, "Tracked Object Offset");
+
+                element.RegisterValueChangedCallback(callback =>
+                {
+                    var value = trackedObjectOffset.Value;
+
+                    if (value.x < 0)
+                        value.x = 0;
+
+                    if (value.y < 0)
+                        value.y = 0;
+
+                    if (value.z < 0)
+                        value.z = 0;
+
+                    trackedObjectOffset.Value = value;
+                    element.value = trackedObjectOffset;
+                });
 
                 RegisterLoadChange(element, trackedObjectOffset);
             }
