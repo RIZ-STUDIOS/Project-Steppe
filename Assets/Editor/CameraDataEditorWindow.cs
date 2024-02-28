@@ -160,6 +160,7 @@ namespace ProjectSteppe.Editor
 
                 aimSubEditors.Add(new AimComposerCameraDataSubEditor(aimFoldout));
                 aimSubEditors.Add(new AimGroupComposerCameraDataSubEditor(aimFoldout));
+                aimSubEditors.Add(new AimPOVCameraDataSubEditor(aimFoldout));
                 aimSubEditors.Add(new AimHardLookAtCameraDataSubEditor(aimFoldout));
                 aimSubEditors.Add(new AimSameAsTargetCameraDataSubEditor(aimFoldout));
                 CheckAimVisibility();
