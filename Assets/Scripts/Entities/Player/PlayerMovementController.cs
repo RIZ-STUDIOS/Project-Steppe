@@ -301,9 +301,7 @@ namespace ProjectSteppe.Entities.Player
 
             var cam = playerCamera.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
 
-            Debug.Log(cam.Name);
-
-            if (cam.Name == "TargetLockCamera")
+            if (playerManager.PlayerTargetLock.lockOn)
             {
                 animator.SetFloat(_animIDVelocityX, _input.move.x);
                 animator.SetFloat(_animIDVelocityY, _input.move.y);

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3607e258360e934d823f1f6d386f1e1, type: 3}
+  m_Name: dd84dde41ef2693488115bc4e5433836
+  m_EditorClassIdentifier: 
+  setForDeletion: 0
+  guid: dd84dde41ef2693488115bc4e5433836
+  presetName: LockFramingTransposer
+  standbyUpdateMode: 2
+  verticalFov: 40
+  nearClipPlane: 0.2
+  farClipPlane: 2000
+  dutch: 0
+  bodyCameraData: {fileID: 11400000, guid: e248b0ab6cec7d6418be2fcd7462fcf6, type: 2}
+  aimCameraData: {fileID: 11400000, guid: 4634f6c73665d3e44a4df2f4955d8db6, type: 2}
