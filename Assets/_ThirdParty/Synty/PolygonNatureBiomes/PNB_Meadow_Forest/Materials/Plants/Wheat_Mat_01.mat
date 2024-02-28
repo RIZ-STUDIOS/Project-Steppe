@@ -11,11 +11,13 @@ Material:
   m_Shader: {fileID: 4800000, guid: 6697e1f185bc8b840a2f02567abf15b5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _RECEIVE_SHADOWS_OFF
   m_InvalidKeywords:
   - _ALPHATEST_ON
   - _FLATCOLOURSWITCH_ON
   - _LEAFFLATCOLOURSWITCH_ON
+  - _RECEIVESHADOWS_OFF
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -229,7 +231,7 @@ Material:
     - _LeafMetallic: 0
     - _LeafNoiseAmount: 0.371
     - _LeafNoiseScale: 1
-    - _LeafNormalAmount: 0.5
+    - _LeafNormalAmount: 0
     - _LeafSmoothness: 0.2
     - _Metallic: 0.132
     - _Mode: 0
@@ -242,7 +244,7 @@ Material:
     - _PulseTiling: 0.03
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ReceiveShadows: 1
+    - _ReceiveShadows: 0
     - _Small_Wave: 2.1
     - _Smoothness: 0.2
     - _SmoothnessTextureChannel: 0
