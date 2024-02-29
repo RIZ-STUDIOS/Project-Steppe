@@ -12,6 +12,7 @@ using ProjectSteppe.ScriptableObjects.CameraData.BodyCameraData;
 using ProjectSteppe.ScriptableObjects.CameraData.AimCameraData;
 using ProjectSteppe.Editor.CameraDataSubEditors;
 using System;
+using Cinemachine.Utility;
 
 namespace ProjectSteppe.Editor
 {
@@ -36,10 +37,36 @@ namespace ProjectSteppe.Editor
         private List<BodyCameraDataSubEditor> bodySubEditors = new List<BodyCameraDataSubEditor>();
         private List<AimCameraDataSubEditor> aimSubEditors = new List<AimCameraDataSubEditor>();
 
+        static Type[] sExtensionTypes;  // First entry is null
+        static string[] sExtensionNames;
+
         [MenuItem("Window/RicTools Windows/Camera Data Editor")]
     	public static CameraDataEditorWindow ShowWindow()
         {
             return GetWindow<CameraDataEditorWindow>("Camera Data Editor");
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            if (sExtensionTypes == null)
+            {
+                // Populate the extension list
+                List<Type> exts = new List<Type>();
+                List<string> names = new List<string>();
+                exts.Add(null);
+                names.Add("(select)");
+                var allExtensions
+                    = ReflectionHelpers.GetTypesInAllDependentAssemblies(
+                            (Type t) => typeof(CinemachineExtension).IsAssignableFrom(t) && !t.IsAbstract);
+                foreach (Type t in allExtensions)
+                {
+                    exts.Add(t);
+                    names.Add(t.Name);
+                }
+                sExtensionTypes = exts.ToArray();
+                sExtensionNames = names.ToArray();
+            }
         }
 
         protected override void CreateEditorGUI()
@@ -167,6 +194,40 @@ namespace ProjectSteppe.Editor
                 aimSubEditors.Add(new AimSameAsTargetCameraDataSubEditor(aimFoldout));
                 CheckAimVisibility();
             }
+
+            rootVisualElement.AddSeparator().style.backgroundImage = null;
+
+            {
+                {
+                    var element = rootVisualElement.AddLabel("Extensions");
+
+                    element.style.unityFontStyleAndWeight = FontStyle.Bold;
+                    element.style.marginLeft = new StyleLength(new Length(5, LengthUnit.Pixel));
+                }
+
+                {
+                    var element = new DropdownField();
+
+                    element.RegisterValueChangedCallback(callback =>
+                    {
+                        var index = element.index;
+                        if (index > 0)
+                            AddNewExtension(index);
+
+                        element.index = 0;
+                    });
+
+                    element.choices = new List<string>(sExtensionNames);
+                    element.index = 0;
+
+                    rootVisualElement.Add(element);
+                }
+            }
+        }
+
+        private void AddNewExtension(int extensionIndex)
+        {
+
         }
 
         private void CheckAimVisibility()

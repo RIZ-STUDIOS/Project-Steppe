@@ -7,6 +7,7 @@ using RicTools.EditorAttributes;
 using Cinemachine;
 using ProjectSteppe.ScriptableObjects.CameraData.BodyCameraData;
 using ProjectSteppe.ScriptableObjects.CameraData.AimCameraData;
+using ProjectSteppe.ScriptableObjects.CameraData.ExtensionCameraData;
 
 namespace ProjectSteppe.ScriptableObjects.CameraData
 {
@@ -24,6 +25,8 @@ namespace ProjectSteppe.ScriptableObjects.CameraData
 
         public BaseBodyCameraDataScriptableObject bodyCameraData;
         public BaseAimCameraDataScriptableObject aimCameraData;
+
+        public BaseExtensionCameraDataScriptableObject[] extensions;
 
         public void ApplyCameraData(CinemachineVirtualCamera camera)
         {
@@ -45,6 +48,16 @@ namespace ProjectSteppe.ScriptableObjects.CameraData
             if (!aimCameraData)
             {
                 aimCameraData.ApplyCameraData(camera);
+            }
+
+            foreach(var comp in camera.GetComponents<CinemachineExtension>())
+            {
+                Destroy(comp);
+            }
+
+            foreach(var extension in extensions)
+            {
+                extension.ApplyCameraData(camera);
             }
         }
 
