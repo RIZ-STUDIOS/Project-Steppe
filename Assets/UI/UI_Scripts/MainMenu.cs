@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField]
+    private EventSystem eventSystem;
+
     private PlayerInput playerInput;
 
     private InputAction cancelAction;
@@ -23,12 +26,15 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField]
     private GameObject[] optionTabs;
+    private GameObject lastSelectedMenuButton;
 
     private bool optionsOn = false;
     private bool tutorialOn = false;
     private bool menuOn = true;
 
     private int index;
+
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -79,6 +85,7 @@ public class MainMenu : MonoBehaviour
 
     public void OpenOptions()
     {
+        lastSelectedMenuButton = eventSystem.currentSelectedGameObject;
         mainMenu.interactable = false;
         menuOn = false;
         StartCoroutine(Open(generalOptions, true));
@@ -88,6 +95,7 @@ public class MainMenu : MonoBehaviour
 
     public void OpenTutorial()
     {
+        lastSelectedMenuButton = eventSystem.currentSelectedGameObject;
         mainMenu.interactable = false;
         menuOn = false;
         StartCoroutine(Open(tutorial, true));
@@ -105,12 +113,14 @@ public class MainMenu : MonoBehaviour
         }
         else if(!menuOn && optionsOn)
         {
+            ResetOptionsTab();
             generalOptions.alpha = 0;
             generalOptions.interactable = false;
             StartCoroutine(Open(generalOptions, false));
             optionsOn = false;
         }
-        SetSelectedButton(mainMenu.GetComponentInChildren<Button>().gameObject);
+        SetSelectedButton(lastSelectedMenuButton);
+        
         mainMenu.interactable = true;
         menuOn = true;
     }
@@ -139,5 +149,13 @@ public class MainMenu : MonoBehaviour
     private void SetSelectedButton(GameObject gameObject)
     {
         EventSystem.current.SetSelectedGameObject(gameObject);
+    }
+
+    private void ResetOptionsTab()
+    {
+        optionTabs[index].SetActive(false);
+        index = 0;
+        optionTabs[index].SetActive(true);
+        SetSelectedButton(optionTabs[index].GetComponentInChildren<Button>().gameObject);
     }
 }

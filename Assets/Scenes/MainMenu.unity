@@ -2698,6 +2698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1db304883bf97e4bbe39bf69d338afa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventSystem: {fileID: 533173224}
   mainMenu: {fileID: 469195803}
   generalOptions: {fileID: 1203311109}
   tutorial: {fileID: 2080957859}
@@ -5693,6 +5694,7 @@ GameObject:
   - component: {fileID: 1354693492}
   - component: {fileID: 1354693491}
   - component: {fileID: 1354693490}
+  - component: {fileID: 1354693493}
   m_Layer: 5
   m_Name: Vibration
   m_TagString: Untagged
@@ -5803,6 +5805,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1354693488}
   m_CullTransparentMesh: 1
+--- !u!114 &1354693493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354693488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a90dcf38380d18f4a96c6952d795ca0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1367166593
 GameObject:
   m_ObjectHideFlags: 0
