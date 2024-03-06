@@ -196,9 +196,9 @@ Material:
     - _Big_WindAmount: 1.22
     - _Big_Windspeed: 1.84
     - _BumpScale: 1
-    - _ColourNoiseLargeScale: 0.124
+    - _ColourNoiseLargeScale: 0.3
     - _ColourNoiseScale: 0.108
-    - _ColourNoiseSmallScale: 0.335
+    - _ColourNoiseSmallScale: 0.15
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -213,11 +213,11 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _GustAmount: 0.166
+    - _GustAmount: 0.082
     - _GustFreq: 0.224
     - _GustLargeFreq: 0.094
-    - _GustScale: 0.311
-    - _GustSmallFreq: 0.468
+    - _GustScale: 0.335
+    - _GustSmallFreq: 0.213
     - _JitterAmount: 0.552
     - _JitterFreq: 0.19
     - _LOD_FADE_CROSSFADE: 1
@@ -232,7 +232,7 @@ Material:
     - _LeafNoiseAmount: 0.371
     - _LeafNoiseScale: 1
     - _LeafNormalAmount: 0
-    - _LeafSmoothness: 0.2
+    - _LeafSmoothness: 0
     - _Metallic: 0.132
     - _Mode: 0
     - _NormalAmount: 0.5
@@ -255,7 +255,7 @@ Material:
     - _SrcBlend: 1
     - _Tiling: 1
     - _Tint_Tiling: 0.5
-    - _TotalWindAmount: 0.5
+    - _TotalWindAmount: 0.099
     - _TrunkFlatColourSwitch: 0
     - _TrunkMetallic: 0
     - _TrunkNormalAmount: 0.5
@@ -263,7 +263,7 @@ Material:
     - _UVSec: 0
     - _WindAmount: 1
     - _WindBaseline: 0
-    - _WindDirection: 0.77
+    - _WindDirection: 0.702
     - _WindDirection1: 0
     - _WindNoiseScale: 1
     - _WindNoiseScale1: 14.76
@@ -288,18 +288,18 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Emissive2Colour: {r: 0, g: 0, b: 0, a: 0}
-    - _EmissiveColour: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissiveColour: {r: 0.20784315, g: 0.21960786, b: 0.20784315, a: 0}
     - _FrostingColour: {r: 1, g: 1, b: 1, a: 0}
-    - _GustHighlight: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 0}
+    - _GustHighlight: {r: 0.509434, g: 0.5056755, b: 0.36285156, a: 0}
     - _GustSmoothing: {r: 0.5, g: 0.5, b: 0.5, a: 0}
-    - _LeafBaseColour: {r: 0.4245283, g: 0.36436114, b: 0.23829654, a: 0}
-    - _LeafNoiseColour: {r: 0.709, g: 0.5018751, b: 0.281473, a: 0}
-    - _LeafNoiseLargeColour: {r: 0.4627451, g: 0.43369895, b: 0.13234511, a: 0}
+    - _LeafBaseColour: {r: 0, g: 0, b: 0, a: 0}
+    - _LeafNoiseColour: {r: 0.38679248, g: 0.36444247, b: 0.29739234, a: 0}
+    - _LeafNoiseLargeColour: {r: 0.2264151, g: 0.21513149, b: 0.13990745, a: 0}
     - _LeafTint: {r: 0.07843138, g: 0.02015968, b: 0, a: 0}
     - _SnowColour: {r: 1, g: 1, b: 1, a: 0}
     - _Tint: {r: 0, g: 0, b: 0, a: 0}
-    - _TrunkBaseColour: {r: 0.07843138, g: 0.02015968, b: 0, a: 0}
+    - _TrunkBaseColour: {r: 1, g: 1, b: 1, a: 1}
     - _TrunkEmissiveColour: {r: 0, g: 0, b: 0, a: 0}
-    - _TrunkNoiseColour: {r: 0, g: 0, b: 0, a: 0}
+    - _TrunkNoiseColour: {r: 1, g: 1, b: 1, a: 1}
     - _TrunkTint: {r: 0.07843138, g: 0.02015968, b: 0, a: 0}
   m_BuildTextureStacks: []
