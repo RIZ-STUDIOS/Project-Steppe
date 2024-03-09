@@ -7,7 +7,7 @@ namespace ProjectSteppe.Entities
     public class EntityBlock : EntityBehaviour
     {
         [SerializeField]
-        private float perfectBlockTimeWindow = 0.12f;
+        private float perfectBlockTimeWindow = 0.5f;
 
         private float blockTime;
 
@@ -26,10 +26,14 @@ namespace ProjectSteppe.Entities
 
         public bool IsBlocking => blocking;
 
+        public System.Action onBlockStart;
+        public System.Action onBlockEnd;
+
         [ContextMenu("Start Block")]
         public void StartBlock()
         {
             blocking = true;
+            onBlockStart?.Invoke();
         }
 
         public void EndBlock()
@@ -37,6 +41,7 @@ namespace ProjectSteppe.Entities
             blocking = false;
             Debug.Log($"Blocked for {blockTime} seconds");
             blockTime = 0;
+            onBlockEnd?.Invoke();
         }
 
         public bool IsPerfectBlock()
