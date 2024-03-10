@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace ProjectSteppe
 {
@@ -27,7 +28,18 @@ namespace ProjectSteppe
             if (controller.playerTarget == null)
                 return SwitchState(controller, controller.idle);
 
-            controller.transform.LookAt(controller.playerTarget.transform);
+            var dir = controller.playerTarget.transform.position - controller.transform.position;
+            Debug.DrawRay(controller.transform.position, dir * 5, Color.green);
+
+            controller.transform.forward = Vector3.Lerp(controller.transform.forward, dir, 3 * Time.fixedDeltaTime).normalized;
+            
+            /*var qEul = Quaternion.Euler(dir);
+
+            var q = Quaternion.Lerp(controller.transform.rotation, qEul, .1f);
+
+            controller.transform.rotation = qEul;*/
+
+            //if (controller.canRotate) controller.transform.LookAt(controller.playerTarget.transform);
             
             if (!hasValidAttack || hasValidAttack && controller.combatController.currentRecoveryTime < 0)
             {

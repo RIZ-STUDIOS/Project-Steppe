@@ -29,6 +29,8 @@ namespace ProjectSteppe
         [Header("Debug")]
         public bool debugEnabled;
 
+        public bool canRotate = true;
+
         private void Awake()
         {
             combatController = GetComponent<AICombatController>();

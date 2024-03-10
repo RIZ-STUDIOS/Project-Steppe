@@ -26,7 +26,11 @@ namespace ProjectSteppe
         {
             animController.SetBool("IsAttacking", true);
             //animController.Play(animationName, 1);
-            
+        }
+
+        public void StoppedAttacking()
+        {
+            animController.SetBool("IsAttacking", false);
         }
     }
 }
