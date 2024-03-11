@@ -314,6 +314,7 @@ GameObject:
   - component: {fileID: 5107500031534770968}
   - component: {fileID: 398342721691027515}
   - component: {fileID: 327713701813357442}
+  - component: {fileID: 5290898255052241882}
   m_Layer: 8
   m_Name: PlayerZ
   m_TagString: Player
@@ -337,6 +338,7 @@ Transform:
   - {fileID: 7066923297430197527}
   - {fileID: 1025509828331840061}
   - {fileID: 681409787822990788}
+  - {fileID: 4878931706271502478}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &5064871415378094384
@@ -808,6 +810,19 @@ MonoBehaviour:
   - m_Rig: {fileID: 8968321385127411021}
     m_Active: 1
   m_Effectors: []
+--- !u!114 &5290898255052241882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503990972408158375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b97e1d87f523af944b4e3228d2ef53d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentUsable: {fileID: 327199165248955519}
 --- !u!1 &581434247375909466
 GameObject:
   m_ObjectHideFlags: 0
@@ -6008,6 +6023,54 @@ Transform:
   - {fileID: 4191492031873598179}
   m_Father: {fileID: 4810905805868778662}
   m_LocalEulerAnglesHint: {x: -6.2081146, y: 0.00009972471, z: 0.00019967658}
+--- !u!1 &1104368724084587349
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3807225471620787473}
+  - component: {fileID: 327199165248955519}
+  m_Layer: 8
+  m_Name: HealingItem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3807225471620787473
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104368724084587349}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4878931706271502478}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &327199165248955519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104368724084587349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e95652b48f937d9428ba28ce81209d1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Mare's Milk
+  charges: 5
+  healAmount: 30
+  healSpeed: 1
 --- !u!1 &1178923191893112910
 GameObject:
   m_ObjectHideFlags: 0
@@ -17149,6 +17212,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 791101534515512841}
   m_LocalEulerAnglesHint: {x: -2.8050646e-12, y: 0, z: 0}
+--- !u!1 &5997662285645363016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4878931706271502478}
+  m_Layer: 8
+  m_Name: UsableItemSlot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4878931706271502478
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997662285645363016}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3807225471620787473}
+  m_Father: {fileID: 7922659632175977506}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6015685314555825487
 GameObject:
   m_ObjectHideFlags: 0

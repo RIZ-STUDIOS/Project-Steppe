@@ -145,11 +145,13 @@ namespace ProjectSteppe.Entities.Player
         private void OnBlockStart()
         {
             spineConstraint.weight = 1;
+            headConstraint.weight = 1;
         }
 
         private void OnBlockEnd()
         {
             spineConstraint.weight = 0;
+            headConstraint.weight = 0;
         }
 
         private IEnumerator ParryReset()

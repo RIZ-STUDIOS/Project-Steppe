@@ -16,9 +16,13 @@ namespace ProjectSteppe
 
         public Transform eyeLevel;
         public Transform playerTarget;
+        
+        [Header("Movement")]
         public NavMeshAgent navmesh;
         public bool isMoving;
         public float distanceFromTarget;
+        public float rotationSpeed = 6;
+        public bool canRotate;
 
         [Header("States")]
         public AIIdle idle;
@@ -29,7 +33,6 @@ namespace ProjectSteppe
         [Header("Debug")]
         public bool debugEnabled;
 
-        public bool canRotate = true;
 
         private void Awake()
         {
@@ -83,6 +86,16 @@ namespace ProjectSteppe
             {
                 isMoving = false;
             }
+        }
+
+        private void EnableAIRotation()
+        {
+            canRotate = true;
+        }
+
+        private void DisableAIRotation()
+        {
+            canRotate = false;
         }
 
         private void DebugInfo()
