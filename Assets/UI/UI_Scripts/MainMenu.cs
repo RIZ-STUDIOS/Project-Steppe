@@ -148,7 +148,8 @@ public class MainMenu : MonoBehaviour
 
     private void SetSelectedButton(GameObject gameObject)
     {
-        EventSystem.current.SetSelectedGameObject(gameObject);
+        //EventSystem.current.SetSelectedGameObject(gameObject);
+        eventSystem.SetSelectedGameObject(gameObject);
     }
 
     private void ResetOptionsTab()
