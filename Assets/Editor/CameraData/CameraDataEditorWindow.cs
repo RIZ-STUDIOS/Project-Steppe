@@ -36,37 +36,12 @@ namespace ProjectSteppe.Editor
 
         private List<BodyCameraDataSubEditor> bodySubEditors = new List<BodyCameraDataSubEditor>();
         private List<AimCameraDataSubEditor> aimSubEditors = new List<AimCameraDataSubEditor>();
-
-        static Type[] sExtensionTypes;  // First entry is null
-        static string[] sExtensionNames;
+        private List<ExtensionCameraDataSubEditor> extensionSubEditors = new List<ExtensionCameraDataSubEditor>();
 
         [MenuItem("Window/RicTools Windows/Camera Data Editor")]
     	public static CameraDataEditorWindow ShowWindow()
         {
             return GetWindow<CameraDataEditorWindow>("Camera Data Editor");
-        }
-
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-            if (sExtensionTypes == null)
-            {
-                // Populate the extension list
-                List<Type> exts = new List<Type>();
-                List<string> names = new List<string>();
-                exts.Add(null);
-                names.Add("(select)");
-                var allExtensions
-                    = ReflectionHelpers.GetTypesInAllDependentAssemblies(
-                            (Type t) => typeof(CinemachineExtension).IsAssignableFrom(t) && !t.IsAbstract);
-                foreach (Type t in allExtensions)
-                {
-                    exts.Add(t);
-                    names.Add(t.Name);
-                }
-                sExtensionTypes = exts.ToArray();
-                sExtensionNames = names.ToArray();
-            }
         }
 
         protected override void CreateEditorGUI()
@@ -205,7 +180,7 @@ namespace ProjectSteppe.Editor
                     element.style.marginLeft = new StyleLength(new Length(5, LengthUnit.Pixel));
                 }
 
-                {
+                /*{
                     var element = new DropdownField();
 
                     element.RegisterValueChangedCallback(callback =>
@@ -221,13 +196,35 @@ namespace ProjectSteppe.Editor
                     element.index = 0;
 
                     rootVisualElement.Add(element);
+                }*/
+
+                {
+                    var element = new EnumField();
+
+                    element.Init(ExtensionDataType.none);
+
+                    element.RegisterValueChangedCallback(callback =>
+                    {
+                        if ((ExtensionDataType)callback.newValue != ExtensionDataType.none)
+                            AddNewExtension((ExtensionDataType)callback.newValue);
+
+                        element.value = ExtensionDataType.none;
+                    });
+
+                    rootVisualElement.Add(element);
                 }
             }
         }
 
-        private void AddNewExtension(int extensionIndex)
+        private void AddNewExtension(ExtensionDataType extensionDataType)
         {
-
+            foreach(var subEditor in extensionSubEditors)
+            {
+                if (subEditor.IsSelectedEditor((int)extensionDataType))
+                {
+                    subEditor.Show();
+                }
+            }
         }
 
         private void CheckAimVisibility()
@@ -248,6 +245,11 @@ namespace ProjectSteppe.Editor
 
         protected override void LoadAsset(CameraDataScriptableObject asset, bool isNull)
         {
+            foreach(var subEditor in extensionSubEditors)
+            {
+                subEditor.Hide();
+            }
+
             if (isNull)
             {
                 presetName.Reset();
@@ -271,6 +273,11 @@ namespace ProjectSteppe.Editor
                 }
 
                 foreach (var subEditor in aimSubEditors)
+                {
+                    subEditor.Load(true, null);
+                }
+
+                foreach(var subEditor in extensionSubEditors)
                 {
                     subEditor.Load(true, null);
                 }
@@ -335,6 +342,22 @@ namespace ProjectSteppe.Editor
                         aimSubEditor.Load(false, asset.aimCameraData);
                     else
                         aimSubEditor.Load(true, null);
+                }
+
+                foreach(var subEditor in extensionSubEditors)
+                {
+                    foreach(var d in asset.extensions)
+                    {
+                        if (subEditor.IsSameType(d.GetType()))
+                        {
+                            subEditor.Load(false, d);
+                            AddNewExtension(subEditor.extensionDataType);
+                        }
+                        else
+                        {
+                            subEditor.Load(true, null);
+                        }
+                    }
                 }
             }
         }
@@ -449,6 +472,13 @@ namespace ProjectSteppe.Editor
             POV,
             [InspectorName("Same As Follow Target")]
             FollowTarget
+        }
+
+        public enum ExtensionDataType
+        {
+            [InspectorName("(select)")]
+            none,
+            Collider
         }
     }
 }

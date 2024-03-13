@@ -1,6 +1,7 @@
 using ProjectSteppe.ScriptableObjects.CameraData;
 using ProjectSteppe.ScriptableObjects.CameraData.AimCameraData;
 using ProjectSteppe.ScriptableObjects.CameraData.BodyCameraData;
+using ProjectSteppe.ScriptableObjects.CameraData.ExtensionCameraData;
 using RicTools.Editor.UIElements;
 using RicTools.Editor.Utilities;
 using System.Collections;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static ProjectSteppe.Editor.CameraDataEditorWindow;
 
 namespace ProjectSteppe.Editor.CameraDataSubEditors
 {
@@ -142,6 +144,29 @@ namespace ProjectSteppe.Editor.CameraDataSubEditors
         public override bool IsSelectedEditor(int index)
         {
             return index == (int)aimDataType;
+        }
+
+        public override bool IsSameType(System.Type type)
+        {
+            return type == componentType;
+        }
+    }
+
+    [System.Serializable]
+    public abstract class ExtensionCameraDataSubEditor : CameraDataSubEditor<BaseExtensionCameraDataScriptableObject>
+    {
+        public CameraDataEditorWindow.ExtensionDataType extensionDataType;
+        private readonly System.Type componentType;
+
+        protected ExtensionCameraDataSubEditor(VisualElement rootVisualElement, CameraDataEditorWindow.ExtensionDataType extensionDataType, System.Type componentType) : base(rootVisualElement)
+        {
+            this.extensionDataType = extensionDataType;
+            this.componentType = componentType;
+        }
+
+        public override bool IsSelectedEditor(int index)
+        {
+            return index == (int)extensionDataType;
         }
 
         public override bool IsSameType(System.Type type)
