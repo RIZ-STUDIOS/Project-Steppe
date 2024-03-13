@@ -8,12 +8,12 @@ public class MasterVolumeButton : MonoBehaviour, ISelectHandler, IDeselectHandle
     private Image image;
     public void OnSelect(BaseEventData baseEventData)
     {
-        image.color = new Color(image.color.r, image.color.g, image.color.b, 0.1f);
+        image.enabled = true;
     }
 
     public void OnDeselect(BaseEventData baseEventData)
     {
-        image.color = new Color(image.color.r, image.color.g, image.color.b, 0f);
+        image.enabled = false;
     }
     private void Start()
     {
