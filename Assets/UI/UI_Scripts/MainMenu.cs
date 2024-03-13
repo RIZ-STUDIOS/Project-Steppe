@@ -85,6 +85,7 @@ public class MainMenu : MonoBehaviour
 
     public void OpenOptions()
     {
+        ResetOptionsTab();
         lastSelectedMenuButton = eventSystem.currentSelectedGameObject;
         mainMenu.interactable = false;
         menuOn = false;
@@ -106,20 +107,16 @@ public class MainMenu : MonoBehaviour
     {
         if(!menuOn && tutorialOn)
         {
-            tutorial.alpha = 0;
-            tutorial.interactable = false;
             StartCoroutine(Open(tutorial, false));
             tutorialOn = false;
+            SetSelectedButton(lastSelectedMenuButton);
         }
         else if(!menuOn && optionsOn)
         {
-            ResetOptionsTab();
-            generalOptions.alpha = 0;
-            generalOptions.interactable = false;
             StartCoroutine(Open(generalOptions, false));
             optionsOn = false;
+            SetSelectedButton(lastSelectedMenuButton);
         }
-        SetSelectedButton(lastSelectedMenuButton);
         
         mainMenu.interactable = true;
         menuOn = true;
@@ -157,6 +154,5 @@ public class MainMenu : MonoBehaviour
         optionTabs[index].SetActive(false);
         index = 0;
         optionTabs[index].SetActive(true);
-        SetSelectedButton(optionTabs[index].GetComponentInChildren<Button>().gameObject);
     }
 }
