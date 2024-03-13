@@ -40,12 +40,12 @@ namespace ProjectSteppe.ScriptableObjects.CameraData
             DeleteComponentInCamera(CinemachineCore.Stage.Body, camera);
             DeleteComponentInCamera(CinemachineCore.Stage.Aim, camera);
 
-            if (!bodyCameraData)
+            if (bodyCameraData)
             {
                 bodyCameraData.ApplyCameraData(camera);
             }
 
-            if (!aimCameraData)
+            if (aimCameraData)
             {
                 aimCameraData.ApplyCameraData(camera);
             }
@@ -64,8 +64,13 @@ namespace ProjectSteppe.ScriptableObjects.CameraData
         private void DeleteComponentInCamera(CinemachineCore.Stage stage, CinemachineVirtualCamera camera)
         {
             var comp = camera.GetCinemachineComponent(stage);
-            comp.enabled = false;
-            RuntimeUtility.DestroyObject(comp);
+
+            if (comp)
+            {
+                comp.enabled = false;
+                RuntimeUtility.DestroyObject(comp);
+            }
+
             camera.InvalidateComponentPipeline();
         }
     }

@@ -9,9 +9,11 @@ namespace ProjectSteppe.Entities.Player
     {
         private TargetLock playerTargetLock;
         private Animator playerAnimator;
+        private PlayerCamera playerCamera;
 
         public TargetLock PlayerTargetLock => this.GetComponentIfNull(ref playerTargetLock);
         public Animator PlayerAnimator => this.GetComponentIfNull(ref playerAnimator);
+        public PlayerCamera PlayerCamera => this.GetComponentIfNull(ref playerCamera);
 
         private PlayerCapability capabilities;
 

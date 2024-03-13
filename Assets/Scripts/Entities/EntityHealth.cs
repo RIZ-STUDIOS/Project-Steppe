@@ -58,6 +58,13 @@ namespace ProjectSteppe.Entities
             startBalanceHealthRatio = maxBalance / (float)maxHealth;
         }
 
+        public void HealHealth(float amount)
+        {
+            Health += amount;
+
+            if (Health > maxHealth) Health = maxHealth;
+        }
+
         public void DamageHealth(float amount)
         {
             Health -= amount;

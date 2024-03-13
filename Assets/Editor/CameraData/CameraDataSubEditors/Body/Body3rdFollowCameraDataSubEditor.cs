@@ -94,9 +94,9 @@ namespace ProjectSteppe.Editor.CameraDataSubEditors
             }
 
             {
-                var element = rootVisualElement.AddFloatField(cameraSide, "Camera Side");
+                var element = rootVisualElement.AddFloatField(cameraDistance, "Camera Distance");
 
-                RegisterLoadChange(element, cameraSide);
+                RegisterLoadChange(element, cameraDistance);
             }
 
             rootVisualElement.AddSeparator().style.backgroundImage = null;

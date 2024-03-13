@@ -27,6 +27,12 @@ namespace ProjectSteppe
 
         [SerializeField] private float ignoreTimer = 0.5f;
 
+        public System.Action onBlock;
+        public System.Action onParry;
+        public System.Action onBlockEnd;
+
+        private Coroutine ignoreHitCoroutine;
+
         private void Start()
         {
             foreach (var collider in weaponColliders)
@@ -99,9 +105,12 @@ namespace ProjectSteppe
                 else
                 {
                     parentEntity.EntityHealth.DamageBalance(hitbox.ParentEntity.EntityAttacking.currentAttack.balanceDamage);
+                    hitbox.ParentEntity.EntityAttacking.CurrentWeapon.onParry?.Invoke();
                 }
 
                 hitbox.ParentEntity.EntityBlock.PlayBlockFX();
+
+                hitbox.ParentEntity.EntityAttacking.CurrentWeapon.onBlockEnd?.Invoke();
             }
             else
             {
@@ -110,7 +119,9 @@ namespace ProjectSteppe
             }
 
             hitEntity = hitbox.ParentEntity;
-            StartCoroutine(IgnoreHits());
+
+            if (ignoreHitCoroutine != null) StopCoroutine(ignoreHitCoroutine);
+            ignoreHitCoroutine = StartCoroutine(IgnoreHits());
         }
 
         private IEnumerator IgnoreHits()

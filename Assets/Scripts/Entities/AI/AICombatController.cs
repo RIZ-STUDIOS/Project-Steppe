@@ -32,7 +32,7 @@ namespace ProjectSteppe
             {
                 if (!controller.isMoving)
                 {
-                    currentRecoveryTime -= Time.deltaTime;
+                    currentRecoveryTime -= Time.fixedDeltaTime;
                 }
             }
         }

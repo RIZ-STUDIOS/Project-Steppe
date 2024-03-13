@@ -4,6 +4,7 @@ using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem.HID;
 
 namespace ProjectSteppe.Entities.Player
@@ -15,15 +16,10 @@ namespace ProjectSteppe.Entities.Player
         [System.NonSerialized]
         public Transform lookAtTransform;
         private PlayerMovementController playerMovement;
+        private PlayerManager playerManager;
 
         /*[SerializeField]
         private Transform bossTransform;*/
-
-        [SerializeField]
-        private CinemachineVirtualCamera thirdPersonVirtualCamera;
-
-        [SerializeField]
-        private CinemachineVirtualCamera targetLockVirtualCamera;
 
         [System.NonSerialized]
         public bool lockOn;
@@ -42,14 +38,13 @@ namespace ProjectSteppe.Entities.Player
         [SerializeField]
         private float coneAngle;
 
+        public UnityEvent onLockStateChange;
+
         private void Awake()
         {
             _input = GetComponent<StarterAssetsInputs>();
             playerMovement = GetComponent<PlayerMovementController>();
-            if (!thirdPersonVirtualCamera)
-                thirdPersonVirtualCamera = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
-            if (!targetLockVirtualCamera)
-                targetLockVirtualCamera = GameObject.FindGameObjectWithTag("TargetLockCamera").GetComponent<CinemachineVirtualCamera>();
+            playerManager = GetComponent<PlayerManager>();
         }
 
         private void Update()
@@ -121,15 +116,23 @@ namespace ProjectSteppe.Entities.Player
         private void SetLockOn(bool lockOn)
         {
             this.lockOn = lockOn;
-            thirdPersonVirtualCamera.enabled = !lockOn;
-            targetLockVirtualCamera.enabled = lockOn;
             //playerMovement.strafe = lockOn;
+
+            onLockStateChange.Invoke();
         }
 
         private void SetLockTarget(Transform target)
         {
             lookAtTransform = target;
-            targetLockVirtualCamera.LookAt = target;
+            playerManager.PlayerCamera.vCam.LookAt = target;
+            if (target)
+            {
+                playerManager.PlayerCamera.SwitchToLockFramingTransposer();
+            }
+            else
+            {
+                playerManager.PlayerCamera.SwitchToThirdPersonFollow();
+            }
         }
     }
 }

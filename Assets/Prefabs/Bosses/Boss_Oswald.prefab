@@ -13297,6 +13297,8 @@ MonoBehaviour:
   navmesh: {fileID: 2840605431069378812}
   isMoving: 0
   distanceFromTarget: 0
+  rotationSpeed: 6
+  canRotate: 1
   idle: {fileID: 11400000, guid: c6c146c50b2b7364c89338922e041637, type: 2}
   chase: {fileID: 11400000, guid: b6af32c0b9db8c74aa2e075655988e82, type: 2}
   attack: {fileID: 11400000, guid: 665337f80df27ef428fc6040583328c0, type: 2}
@@ -13468,7 +13470,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 16
+  m_Radius: 24
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &1140883260880315423
 CapsuleCollider:
