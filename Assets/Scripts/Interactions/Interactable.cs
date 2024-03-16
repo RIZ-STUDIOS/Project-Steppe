@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProjectSteppe.Interactables
+namespace ProjectSteppe.Interactions
 {
     public abstract class Interactable : MonoBehaviour
     {
@@ -29,6 +29,9 @@ namespace ProjectSteppe.Interactables
             }
         }
 
-        public virtual void Interact() { }
+        public virtual void Interact()
+        {
+            player.PlayerInteractor.CurrentInteractable = null;
+        }
     }
 }

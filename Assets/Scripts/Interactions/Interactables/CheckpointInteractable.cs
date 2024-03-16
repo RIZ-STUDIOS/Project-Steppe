@@ -1,11 +1,10 @@
 using ProjectSteppe.Entities.Player;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
 
-namespace ProjectSteppe.Interactables
+namespace ProjectSteppe.Interactions.Interactables
 {
-    public class Checkpoint : Interactable
+    public class CheckpointInteractable : Interactable
     {
         [SerializeField] private Material discoveredMaterial;
 
@@ -15,6 +14,12 @@ namespace ProjectSteppe.Interactables
         {
             base.OnTriggerEnter(other);
             interactText = discovered ? "<sprite=8>Rest" : "<sprite=8>Rekindle";
+        }
+
+        protected override void OnTriggerExit(Collider other)
+        {
+            base.OnTriggerExit(other);
+            player.PlayerInput.OnInteraction.RemoveListener(CheckpointInteract);
         }
 
         public override void Interact()
@@ -57,8 +62,9 @@ namespace ProjectSteppe.Interactables
 
         private void CheckpointInteract()
         {
+            base.Interact();
             player.PlayerUI.messagePrompt.ShowMessage("...");
-            player.PlayerInteractor.CurrentInteractable = null;
+            player.PlayerInput.OnInteraction.RemoveListener(CheckpointInteract);
         }
     }
 }

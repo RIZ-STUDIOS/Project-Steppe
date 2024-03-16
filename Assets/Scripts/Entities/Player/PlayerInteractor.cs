@@ -1,10 +1,10 @@
-using ProjectSteppe.Interactables;
+using ProjectSteppe.Interactions;
 using ProjectSteppe.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProjectSteppe
+namespace ProjectSteppe.Entities.Player
 {
     public class PlayerInteractor : MonoBehaviour
     {
