@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using ProjectSteppe.UI;
+using StarterAssets;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 namespace ProjectSteppe.Entities.Player
 {
@@ -10,10 +11,14 @@ namespace ProjectSteppe.Entities.Player
         private TargetLock playerTargetLock;
         private Animator playerAnimator;
         private PlayerCamera playerCamera;
+        private PlayerUIManager playerUI;
+        private StarterAssetsInputs playerInput;
 
         public TargetLock PlayerTargetLock => this.GetComponentIfNull(ref playerTargetLock);
         public Animator PlayerAnimator => this.GetComponentIfNull(ref playerAnimator);
         public PlayerCamera PlayerCamera => this.GetComponentIfNull(ref playerCamera);
+        public PlayerUIManager PlayerUI => this.GetComponentIfNull(ref playerUI);
+        public StarterAssetsInputs PlayerInput => this.GetComponentIfNull(ref playerInput);
 
         private PlayerCapability capabilities;
 

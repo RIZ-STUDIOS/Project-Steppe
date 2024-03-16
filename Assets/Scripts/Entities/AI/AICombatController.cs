@@ -1,4 +1,4 @@
-using ProjectSteppe.UI;
+using ProjectSteppe.Entities.Player;
 using UnityEngine;
 
 namespace ProjectSteppe
@@ -13,8 +13,11 @@ namespace ProjectSteppe
             if (other.CompareTag("Player"))
             {
                 playerTarget = other.transform;
-                
-                other.GetComponentInChildren<BossUI>().ShowBossUI();
+
+                var playerUI = other.GetComponent<PlayerManager>().PlayerUI;
+
+                playerUI.playerDetails.ShowPlayerDetails();
+                playerUI.bossDetails.ShowBossDetails();
             }
         }
         private void OnTriggerExit(Collider other)

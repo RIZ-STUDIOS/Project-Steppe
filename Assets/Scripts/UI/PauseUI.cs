@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProjectSteppe
+namespace ProjectSteppe.UI
 {
     public class PauseUI : MonoBehaviour
     {

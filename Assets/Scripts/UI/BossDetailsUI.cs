@@ -1,10 +1,11 @@
+using ProjectSteppe.ZedExtensions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectSteppe.UI
 {
-    public class BossUI : MonoBehaviour
+    public class BossDetailsUI : MonoBehaviour
     {
         private CanvasGroup canvasGroup;
 
@@ -13,14 +14,14 @@ namespace ProjectSteppe.UI
             canvasGroup = GetComponent<CanvasGroup>();
         }
 
-        public void ShowBossUI()
+        public void ShowBossDetails()
         {
-            canvasGroup.alpha = 1f;
+            StartCoroutine(canvasGroup.FadeIn());
         }
 
-        public void HideBossUI()
+        public void HideBossDetails()
         {
-            canvasGroup.alpha = 0f;
+            StartCoroutine(canvasGroup.FadeOut());
         }
     }
 }

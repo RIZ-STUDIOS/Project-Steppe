@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace ProjectSteppe
+namespace ProjectSteppe.UI
 {
     public class UsableItemSlotUI : MonoBehaviour
     {
