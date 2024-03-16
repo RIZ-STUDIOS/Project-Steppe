@@ -1,63 +1,64 @@
 using ProjectSteppe.Entities.Player;
-using ProjectSteppe.UI;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
-namespace ProjectSteppe
+namespace ProjectSteppe.Interactables
 {
-    public class Checkpoint : MonoBehaviour
+    public class Checkpoint : Interactable
     {
+        [SerializeField] private Material discoveredMaterial;
+
         private bool discovered;
 
-        private PlayerManager player;
-
-        private void OnTriggerEnter(Collider other)
+        protected override void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player"))
-            {
-                if (!discovered)
-                {
-                    player = other.GetComponent<PlayerManager>();
-
-                    Debug.Log(player + " is here!");
-                    player.PlayerUI.interactPrompt.ShowPrompt("<sprite=8> Rekindle");
-
-                    player.PlayerInput.OnInteraction.AddListener(OnCheckpointFirstInteract);
-                }
-                else
-                {
-                    player.PlayerUI.interactPrompt.ShowPrompt("<sprite=8> Rest");
-                    
-                    player.PlayerInput.OnInteraction.AddListener(OnCheckpointInteract);
-                }
-            }
+            base.OnTriggerEnter(other);
+            interactText = discovered ? "<sprite=8>Rest" : "<sprite=8>Rekindle";
         }
 
-        private void OnTriggerExit(Collider other)
+        public override void Interact()
         {
-            if (other.CompareTag("Player"))
-            {
-                if (!discovered) player.PlayerInput.OnInteraction.RemoveListener(OnCheckpointFirstInteract);
-                else player.PlayerInput.OnInteraction.RemoveListener(OnCheckpointInteract);
-
-                player.PlayerUI.interactPrompt.HidePrompt();
-            }
+            if (!discovered) FirstCheckpointInteract();
+            else CheckpointInteract();
         }
 
-        private void OnCheckpointFirstInteract()
+        private void FirstCheckpointInteract()
+        {
+            StartCoroutine(OnCheckpointFirstInteract());
+        }
+
+        private IEnumerator OnCheckpointFirstInteract()
         {
             discovered = true;
 
-            StartCoroutine(player.PlayerUI.contextScreen.PlayRespiteFound());
+            player.PlayerInput.OnInteraction.RemoveListener(FirstCheckpointInteract);
 
-            player.PlayerInput.OnInteraction.RemoveListener(OnCheckpointFirstInteract);
-            player.PlayerInput.OnInteraction.AddListener(OnCheckpointInteract);
+            player.PlayerUI.interactPrompt.HidePrompt();
+
+            player.DisableCapability(PlayerCapability.Move);
+            player.DisableCapability(PlayerCapability.Rotate);
+            player.DisableCapability(PlayerCapability.Dash);
+
+            GetComponent<MeshRenderer>().material = discoveredMaterial;
+            GetComponentInChildren<ParticleSystem>().Play();
+            GetComponentInChildren<Light>().intensity = 1;
+
+            IEnumerator respite = player.PlayerUI.contextScreen.PlayRespiteFound();
+            yield return respite;
+
+            player.EnableCapability(PlayerCapability.Move);
+            player.EnableCapability(PlayerCapability.Rotate);
+            player.EnableCapability(PlayerCapability.Dash);
+
+            player.PlayerInput.OnInteraction.AddListener(CheckpointInteract);
+            player.PlayerUI.interactPrompt.ShowPrompt("<sprite=8>Rest");
         }
 
-        private void OnCheckpointInteract()
+        private void CheckpointInteract()
         {
             player.PlayerUI.messagePrompt.ShowMessage("...");
+            player.PlayerInteractor.CurrentInteractable = null;
         }
     }
 }

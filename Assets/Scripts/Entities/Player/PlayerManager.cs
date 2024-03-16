@@ -13,12 +13,14 @@ namespace ProjectSteppe.Entities.Player
         private PlayerCamera playerCamera;
         private PlayerUIManager playerUI;
         private StarterAssetsInputs playerInput;
+        private PlayerInteractor playerInteractor;
 
         public TargetLock PlayerTargetLock => this.GetComponentIfNull(ref playerTargetLock);
         public Animator PlayerAnimator => this.GetComponentIfNull(ref playerAnimator);
         public PlayerCamera PlayerCamera => this.GetComponentIfNull(ref playerCamera);
         public PlayerUIManager PlayerUI => this.GetComponentIfNull(ref playerUI);
         public StarterAssetsInputs PlayerInput => this.GetComponentIfNull(ref playerInput);
+        public PlayerInteractor PlayerInteractor => this.GetComponentIfNull(ref playerInteractor);
 
         private PlayerCapability capabilities;
 

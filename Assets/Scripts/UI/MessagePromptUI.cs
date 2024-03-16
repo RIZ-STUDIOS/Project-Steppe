@@ -1,8 +1,10 @@
+using ProjectSteppe.Entities.Player;
 using ProjectSteppe.ZedExtensions;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ProjectSteppe.UI
@@ -24,12 +26,14 @@ namespace ProjectSteppe.UI
         {
             messageTMP.text = message;
             StartCoroutine(canvasGroup.FadeIn(true, true));
-            button.Select();
+
+            GetComponentInParent<PlayerManager>().PlayerInput.OnInteraction.AddListener(HideMessage);
         }
 
         public void HideMessage()
         {
             StartCoroutine(canvasGroup.FadeOut(true, true));
+            GetComponentInParent<PlayerManager>().PlayerInput.OnInteraction.RemoveListener(HideMessage);
         }
     }
 }

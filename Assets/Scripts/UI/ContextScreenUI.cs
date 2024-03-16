@@ -72,9 +72,8 @@ namespace ProjectSteppe.UI
 
             yield return new WaitForSeconds(waitTime * 2);
 
-            StartCoroutine(canvasGroup.FadeOut());
-
-            yield return new WaitForSeconds(waitTime);
+            IEnumerator fadeOut = canvasGroup.FadeOut();
+            yield return fadeOut;
         }
     }
 }
