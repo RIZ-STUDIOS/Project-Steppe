@@ -66,7 +66,7 @@ namespace ProjectSteppe.UI
 
         public IEnumerator PlayRespiteFound(float waitTime = 2)
         {
-            contextTMP.text = "<color=#FF8100>RESPITE REKINDLED</color>";
+            contextTMP.text = "<color=#FF8100>RESPITE KINDLED</color>";
 
             StartCoroutine(canvasGroup.FadeIn());
 

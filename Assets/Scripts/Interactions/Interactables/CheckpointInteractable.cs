@@ -13,7 +13,7 @@ namespace ProjectSteppe.Interactions.Interactables
         protected override void OnTriggerEnter(Collider other)
         {
             base.OnTriggerEnter(other);
-            interactText = discovered ? "<sprite=8>Rest" : "<sprite=8>Rekindle";
+            interactText = discovered ? "<sprite=8>Rest" : "<sprite=8>Kindle Respite";
         }
 
         protected override void OnTriggerExit(Collider other)
