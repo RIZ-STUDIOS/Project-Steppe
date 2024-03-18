@@ -8,10 +8,24 @@ namespace ProjectSteppe.Entities
     {
         public ParticleSystem deathFX;
         
+        private Animator animator;
+
+        private void Awake()
+        {
+            animator = GetComponent<Animator>();
+        }
+
         public void OnEntityDeath()
         {
-            StartCoroutine(PlayFX());
+            animator.SetTrigger("Death");
+            //StartCoroutine(PlayFX());
             //Destroy(gameObject);
+        }
+
+        public void OnPostureFull()
+        {
+            animator.SetTrigger("ForceAnimation");
+            animator.SetTrigger("PostureBreak");
         }
 
         private IEnumerator PlayFX()

@@ -13,7 +13,7 @@ namespace ProjectSteppe.Items
         {
             if (charges > 0 || charges == -1) return true;
 
-            else return false;
+            return false;
         }
 
         public virtual void OnUse()
@@ -27,6 +27,11 @@ namespace ProjectSteppe.Items
             }
 
             onUse?.Invoke();
+        }
+
+        public virtual void OnAnimationEnd()
+        {
+
         }
     }
 }

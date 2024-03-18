@@ -69,11 +69,13 @@ namespace ProjectSteppe.Entities
         {
             Health -= amount;
 
-            onHit.Invoke();
-
-            if(Health <= 0)
+            if (Health <= 0)
             {
                 onKill.Invoke();
+            }
+            else
+            {
+                onHit.Invoke();
             }
         }
 
@@ -118,6 +120,18 @@ namespace ProjectSteppe.Entities
         public bool IsInvicible()
         {
             return invicible;
+        }
+
+        [ContextMenu("Kill")]
+        private void Kill()
+        {
+            DamageHealth(maxHealth);
+        }
+
+        [ContextMenu("Kill Balance")]
+        private void KillBalance()
+        {
+            DamageBalance(maxBalance);
         }
     }
 }
