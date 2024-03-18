@@ -51,6 +51,7 @@ namespace ProjectSteppe.Interactions.Interactables
 
         private void CheckpointInteract()
         {
+            player.PlayerEntity.EntityHealth.ResetHealth();
             player.PlayerUI.messagePrompt.ShowMessage("...");
         }
     }
