@@ -8,30 +8,15 @@ namespace ProjectSteppe.Interactions
 {
     public abstract class Interactable : MonoBehaviour
     {
-        [NonSerialized] public string interactText;
+        public abstract string InteractText { get; }
         
         protected PlayerManager player;
 
-        protected virtual void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                player = other.GetComponent<PlayerManager>();
-                player.PlayerInteractor.CurrentInteractable = this;
-            }
-        }
+        public virtual void Interact() { }
 
-        protected virtual void OnTriggerExit(Collider other)
+        public virtual void InteractSetup(PlayerManager player)
         {
-            if (other.CompareTag("Player"))
-            {
-                if (player.PlayerInteractor.CurrentInteractable == this) player.PlayerInteractor.CurrentInteractable = null;
-            }
-        }
-
-        public virtual void Interact()
-        {
-            player.PlayerInteractor.CurrentInteractable = null;
+            this.player = player;
         }
     }
 }

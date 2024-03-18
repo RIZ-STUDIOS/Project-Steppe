@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2823555567780244232}
   - component: {fileID: 2477130934324965770}
   - component: {fileID: 515288206538475107}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,12 +129,12 @@ GameObject:
   - component: {fileID: 267134211933579034}
   - component: {fileID: 1444527678158531159}
   - component: {fileID: 4588052939466077775}
+  - component: {fileID: 3548425570887789689}
   - component: {fileID: 5205556083568872367}
   - component: {fileID: 6647955878291173615}
-  - component: {fileID: 456470996775138533}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Checkpoint
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -206,6 +206,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &3548425570887789689
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6375311581766643285}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &5205556083568872367
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -240,27 +267,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   discoveredMaterial: {fileID: 2100000, guid: ddc367c1f26abe943a770f8e32c1b80a, type: 2}
---- !u!135 &456470996775138533
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6375311581766643285}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 2
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &459382497638615859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -272,6 +278,10 @@ PrefabInstance:
     - target: {fileID: 1884710297602306, guid: 0408eb392f6850340809db1a980a2d30, type: 3}
       propertyPath: m_Name
       value: FX_Embers_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1884710297602306, guid: 0408eb392f6850340809db1a980a2d30, type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4394553583878900, guid: 0408eb392f6850340809db1a980a2d30, type: 3}
       propertyPath: m_LocalScale.x

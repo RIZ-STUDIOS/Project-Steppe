@@ -8,14 +8,10 @@ namespace ProjectSteppe.Interactions.Interactables
     {
         [SerializeField] private string messageText;
 
-        private void Awake()
-        {
-            interactText = "<sprite=8>Read Message";
-        }
+        public override string InteractText => "<sprite=8>Read Message";
 
         public override void Interact()
         {
-            base.Interact();
             player.PlayerUI.messagePrompt.ShowMessage(messageText);
         }
     }

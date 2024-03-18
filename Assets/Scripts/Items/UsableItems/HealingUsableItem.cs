@@ -32,7 +32,7 @@ namespace ProjectSteppe.Items.UsableItems
                 healPerFrame = healAmount / healSpeed * Time.deltaTime;
                 heal += healPerFrame;
 
-                GetComponentInParent<Entity>().EntityHealth.HealHealth(healPerFrame);
+                GetComponentInParent<EntityHealth>().HealHealth(healPerFrame);
 
                 yield return null;
             }

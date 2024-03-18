@@ -10,17 +10,7 @@ namespace ProjectSteppe.Interactions.Interactables
 
         private bool discovered;
 
-        protected override void OnTriggerEnter(Collider other)
-        {
-            base.OnTriggerEnter(other);
-            interactText = discovered ? "<sprite=8>Rest" : "<sprite=8>Kindle Respite";
-        }
-
-        protected override void OnTriggerExit(Collider other)
-        {
-            base.OnTriggerExit(other);
-            player.PlayerInput.OnInteraction.RemoveListener(CheckpointInteract);
-        }
+        public override string InteractText => discovered ? "<sprite=8>Rest" : "<sprite=8>Kindle Respite";
 
         public override void Interact()
         {
@@ -37,10 +27,6 @@ namespace ProjectSteppe.Interactions.Interactables
         {
             discovered = true;
 
-            player.PlayerInput.OnInteraction.RemoveListener(FirstCheckpointInteract);
-
-            player.PlayerUI.interactPrompt.HidePrompt();
-
             player.DisableCapability(PlayerCapability.Move);
             player.DisableCapability(PlayerCapability.Rotate);
             player.DisableCapability(PlayerCapability.Dash);
@@ -56,15 +42,12 @@ namespace ProjectSteppe.Interactions.Interactables
             player.EnableCapability(PlayerCapability.Rotate);
             player.EnableCapability(PlayerCapability.Dash);
 
-            player.PlayerInput.OnInteraction.AddListener(CheckpointInteract);
-            player.PlayerUI.interactPrompt.ShowPrompt("<sprite=8>Rest");
+            player.PlayerInteractor.onInteractionEnded?.Invoke(0);
         }
 
         private void CheckpointInteract()
         {
-            base.Interact();
             player.PlayerUI.messagePrompt.ShowMessage("...");
-            player.PlayerInput.OnInteraction.RemoveListener(CheckpointInteract);
         }
     }
 }

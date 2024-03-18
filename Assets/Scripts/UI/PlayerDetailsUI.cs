@@ -18,12 +18,14 @@ namespace ProjectSteppe.UI
 
         public void ShowPlayerDetails()
         {
-            StartCoroutine(canvasGroup.FadeIn());
+            StartCoroutine(healthUI.FadeIn());
+            StartCoroutine(balanceUI.FadeIn());
         }
 
         public void HidePlayerDetails()
         {
-            StartCoroutine(canvasGroup.FadeOut());
+            StartCoroutine(healthUI.FadeOut());
+            StartCoroutine(balanceUI.FadeOut());
         }
     }
 }
