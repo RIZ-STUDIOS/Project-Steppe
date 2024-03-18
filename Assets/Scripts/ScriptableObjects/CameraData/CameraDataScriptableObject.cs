@@ -55,9 +55,12 @@ namespace ProjectSteppe.ScriptableObjects.CameraData
                 Destroy(comp);
             }
 
-            foreach(var extension in extensions)
+            if (extensions != null)
             {
-                extension.ApplyCameraData(camera);
+                foreach (var extension in extensions)
+                {
+                    extension.ApplyCameraData(camera);
+                }
             }
         }
 

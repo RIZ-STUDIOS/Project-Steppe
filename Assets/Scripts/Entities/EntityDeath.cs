@@ -11,7 +11,7 @@ namespace ProjectSteppe.Entities
         public void OnEntityDeath()
         {
             StartCoroutine(PlayFX());
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
 
         private IEnumerator PlayFX()

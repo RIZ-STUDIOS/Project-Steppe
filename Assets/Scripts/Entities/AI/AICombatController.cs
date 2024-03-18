@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using StarterAssets;
 using ProjectSteppe.Entities.Player;
+using UnityEngine;
 
 namespace ProjectSteppe
 {
@@ -16,6 +13,11 @@ namespace ProjectSteppe
             if (other.CompareTag("Player"))
             {
                 playerTarget = other.transform;
+
+                var playerUI = other.GetComponent<PlayerManager>().PlayerUI;
+
+                playerUI.playerDetails.ShowPlayerDetails();
+                playerUI.bossDetails.ShowBossDetails();
             }
         }
         private void OnTriggerExit(Collider other)
