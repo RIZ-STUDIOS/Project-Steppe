@@ -533,6 +533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startWeapon: {fileID: 8184387287702288938}
+  currentAttack: {fileID: 11400000, guid: cd336ef570eee044aa1bb71562ebb2ac, type: 2}
 --- !u!114 &5604300743600456141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11391,7 +11392,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2914a9ff4f2f8f54ea60ed1eb5b02b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponSo: {fileID: 11400000, guid: 92235b40d904fc147bca6a3be957edf9, type: 2}
   weaponColliders:
   - {fileID: 7296218805138266132}
   startEnabled: 0

@@ -483,6 +483,7 @@ namespace RicTools.Editor.Windows
                 fieldInfo.SetValue(asset, value);
             }
 
+            asset.guid = guid;
             SaveAsset(ref asset);
             asset.guid = guid;
 

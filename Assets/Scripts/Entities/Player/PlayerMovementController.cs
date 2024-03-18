@@ -66,9 +66,12 @@ namespace ProjectSteppe.Entities.Player
 
         [Header("Events")]
         public UnityEvent onJump;
-        public UnityEvent onDash;
+        public UnityEvent onDashStart;
+        public UnityEvent onDashEnd;
+        public UnityEvent onGround;
+        public System.Action<float, float, float, float> onMoveAnimator;
 
-        private float verticalVelocity;
+        public float verticalVelocity;
         private bool usingGravity = true;
 
         private bool grounded;
@@ -80,18 +83,13 @@ namespace ProjectSteppe.Entities.Player
 
         private StarterAssetsInputs _input;
         private CharacterController characterController;
-        private Animator animator;
+        //private Animator animator;
         private PlayerInput playerInput;
         private PlayerManager playerManager;
         private PlayerMovementController playerMovement;
 
         private CinemachineVirtualCamera virtualCamera;
-
-        private int _animIDJump;
-        private int _animIDMotionSpeed;
-        private int _animIDSpeed;
-        private int _animIDVelocityX;
-        private int _animIDVelocityY;
+        
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
         private float _rotationVelocity;
@@ -102,25 +100,18 @@ namespace ProjectSteppe.Entities.Player
 
         private Vector3 moveDirection;
 
+        private bool jumping;
+
         protected override void Awake()
         {
             base.Awake();
             characterController = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
             playerInput = GetComponent<PlayerInput>();
-            animator = GetComponent<Animator>();
+            //animator = GetComponent<Animator>();
             virtualCamera = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
             playerManager = GetComponent<PlayerManager>();
             playerMovement = GetComponent<PlayerMovementController>();
-        }
-
-        private void Start()
-        {
-            _animIDJump = Animator.StringToHash("Jumping");
-            _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
-            _animIDSpeed = Animator.StringToHash("Speed");
-            _animIDVelocityX = Animator.StringToHash("VelocityX");
-            _animIDVelocityY = Animator.StringToHash("VelocityY");
         }
 
         private void Update()
@@ -145,7 +136,7 @@ namespace ProjectSteppe.Entities.Player
                     dashing = true;
                     dashTimer = 0;
                     Entity.EntityHealth.SetInvicible(true);
-
+                    onDashStart.Invoke();
                 }
                 _input.dash = false;
             }
@@ -156,6 +147,7 @@ namespace ProjectSteppe.Entities.Player
                 if(dashTimer >= dashTime)
                 {
                     DisableDashing();
+                    onDashEnd.Invoke();
                 }
             }
             else
@@ -186,8 +178,9 @@ namespace ProjectSteppe.Entities.Player
             {
                 if (!_input.jump)
                 {
-                    usingGravity = true;
-                    animator.SetBool(_animIDJump, false);
+                    //usingGravity = true;
+                    jumping = false;
+                    onGround.Invoke();
                 }
 
                 if(verticalVelocity < 0)
@@ -197,9 +190,9 @@ namespace ProjectSteppe.Entities.Player
 
                 if (_input.jump)
                 {
-                    usingGravity = false;
-                    verticalVelocity = 0;
-                    animator.SetBool(_animIDJump, true);
+                    //usingGravity = true;
+                    verticalVelocity = 8;
+                    jumping = true;
                     onJump.Invoke();
                 }
             }
@@ -292,28 +285,30 @@ namespace ProjectSteppe.Entities.Player
                 targetDirection = Quaternion.Euler(0, targetRotation + Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg, 0) * Vector3.forward;
             }
 
-            characterController.Move(targetDirection.normalized * (speed * Time.deltaTime) + new Vector3(0, usingGravity ? verticalVelocity : 0, 0) * Time.deltaTime);
+            //if (jumping) targetDirection.y = Mathf.Sqrt(5 * 2 * -9.8f);
 
-            animator.SetFloat(_animIDSpeed, animationBlend);
-            animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+            characterController.Move(targetDirection.normalized * (speed * Time.deltaTime) + new Vector3(0, verticalVelocity, 0) * Time.deltaTime);            
 
-            float velY = animationBlend / playerMovement.walkSpeed;
 
-            var cam = playerCamera.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
+            // FOR ANIMATOR //
+            float velX;
+            float velY;
 
-            Debug.Log(cam.Name);
-
-            if (cam.Name == "TargetLockCamera")
+            if (playerManager.PlayerTargetLock.lockOn)
             {
-                animator.SetFloat(_animIDVelocityX, _input.move.x);
-                animator.SetFloat(_animIDVelocityY, _input.move.y);
+                velX = _input.move.x;
+                velY = _input.move.y;
             }
             else
             {
-                animator.SetFloat(_animIDVelocityX, 0);
-                animator.SetFloat(_animIDVelocityY, velY);
-            }            
+                velX = 0;
+                velY = animationBlend / playerMovement.walkSpeed;
+            }
+
+            onMoveAnimator?.Invoke(animationBlend, inputMagnitude, velX, velY);
         }
+
+        
 
         private void CameraRotation()
         {

@@ -26,7 +26,7 @@ namespace ProjectSteppe.Entities.Player
         {
             base.Awake();
             input = GetComponent<StarterAssetsInputs>();
-            animator = GetComponent<Animator>();
+            animator = GetComponentInChildren<Animator>();
             playerManager = GetComponent<PlayerManager>();
         }
 

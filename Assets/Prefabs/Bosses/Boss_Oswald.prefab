@@ -13297,6 +13297,8 @@ MonoBehaviour:
   navmesh: {fileID: 2840605431069378812}
   isMoving: 0
   distanceFromTarget: 0
+  rotationSpeed: 6
+  canRotate: 1
   idle: {fileID: 11400000, guid: c6c146c50b2b7364c89338922e041637, type: 2}
   chase: {fileID: 11400000, guid: b6af32c0b9db8c74aa2e075655988e82, type: 2}
   attack: {fileID: 11400000, guid: 665337f80df27ef428fc6040583328c0, type: 2}
@@ -13362,6 +13364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startWeapon: {fileID: 416636251899258655}
+  currentAttack: {fileID: 11400000, guid: 6c6dcc78e0bbc6146910ad408dbbfdc8, type: 2}
 --- !u!114 &7229880406094835270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13467,7 +13470,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 16
+  m_Radius: 24
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &1140883260880315423
 CapsuleCollider:
@@ -25017,7 +25020,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2914a9ff4f2f8f54ea60ed1eb5b02b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponSo: {fileID: 11400000, guid: 415bf2b99fac7864dbcad0b6ca5527f1, type: 2}
   weaponColliders:
   - {fileID: 6389090734533276624}
   startEnabled: 0

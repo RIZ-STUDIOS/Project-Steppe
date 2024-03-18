@@ -10,7 +10,7 @@ namespace ProjectSteppe
 {
     public class Weapon : MonoBehaviour
     {
-        [SerializeField, FormerlySerializedAs("weapon")] private WeaponScriptableObject weaponSo;
+        //[SerializeField, FormerlySerializedAs("weapon")] private WeaponScriptableObject weaponSo;
         [SerializeField, FormerlySerializedAs("collisions")] private List<Collider> weaponColliders;
 
         [SerializeField, ReadOnly(AvailableMode.Play)]
@@ -26,6 +26,12 @@ namespace ProjectSteppe
         [SerializeField] private Entity hitEntity;
 
         [SerializeField] private float ignoreTimer = 0.5f;
+
+        public System.Action onBlock;
+        public System.Action onParry;
+        public System.Action onBlockEnd;
+
+        private Coroutine ignoreHitCoroutine;
 
         private void Start()
         {
@@ -94,23 +100,28 @@ namespace ProjectSteppe
 
                 if (!hitbox.ParentEntity.EntityBlock.IsPerfectBlock())
                 {
-                    hitbox.ParentEntity.EntityHealth.DamageBalance(weaponSo.postureDamage);
+                    hitbox.ParentEntity.EntityHealth.DamageBalance(parentEntity.EntityAttacking.currentAttack.balanceDamage);
                 }
                 else
                 {
-                    parentEntity.EntityHealth.DamageBalance(hitbox.ParentEntity.EntityAttacking.CurrentWeapon.weaponSo.postureDamage);
+                    parentEntity.EntityHealth.DamageBalance(hitbox.ParentEntity.EntityAttacking.currentAttack.balanceDamage);
+                    hitbox.ParentEntity.EntityAttacking.CurrentWeapon.onParry?.Invoke();
                 }
 
                 hitbox.ParentEntity.EntityBlock.PlayBlockFX();
+
+                hitbox.ParentEntity.EntityAttacking.CurrentWeapon.onBlockEnd?.Invoke();
             }
             else
             {
-                hitbox.ParentEntity.EntityHealth.DamageHealth(weaponSo.damage);
-                hitbox.ParentEntity.EntityHealth.DamageBalance(weaponSo.postureDamage);
+                hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage);
+                hitbox.ParentEntity.EntityHealth.DamageBalance(parentEntity.EntityAttacking.currentAttack.balanceDamage);
             }
 
             hitEntity = hitbox.ParentEntity;
-            StartCoroutine(IgnoreHits());
+
+            if (ignoreHitCoroutine != null) StopCoroutine(ignoreHitCoroutine);
+            ignoreHitCoroutine = StartCoroutine(IgnoreHits());
         }
 
         private IEnumerator IgnoreHits()
