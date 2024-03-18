@@ -76,7 +76,9 @@ namespace ProjectSteppe
                 }
             }
             else
+            {
                 isMoving = false;
+            }
 
             if (playerTarget != null)
             {
