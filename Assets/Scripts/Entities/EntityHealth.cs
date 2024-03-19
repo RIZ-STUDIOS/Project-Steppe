@@ -76,6 +76,7 @@ namespace ProjectSteppe.Entities
             if (Health <= 0)
             {
                 onKill.Invoke();
+                GetComponent<Animator>().SetBool("PostureBreak", false);
             }
             else
             {
