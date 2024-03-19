@@ -21,25 +21,19 @@ public class MainMenu : MonoBehaviour
     private CanvasGroup mainMenu;
     [SerializeField]
     private CanvasGroup generalOptions;
-    [SerializeField]
-    private CanvasGroup tutorial;
 
     [SerializeField]
     private GameObject[] optionTabs;
     private GameObject lastSelectedMenuButton;
 
     private bool optionsOn = false;
-    private bool tutorialOn = false;
     private bool menuOn = true;
 
     private int index;
-
-
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
     }
-
     private void Start()
     {
         index = 0;
@@ -47,7 +41,6 @@ public class MainMenu : MonoBehaviour
         rightBumper = playerInput.actions["RightBumper"];
         leftBumper = playerInput.actions["LeftBumper"];
     }
-
     private void Update()
     {
         if (cancelAction.triggered)
@@ -61,28 +54,40 @@ public class MainMenu : MonoBehaviour
                 optionTabs[index].SetActive(false);
                 index = (index + 1) % optionTabs.Length;
                 optionTabs[index].SetActive(true);
-                SetSelectedButton(optionTabs[index].GetComponentInChildren<Button>().gameObject);
+                if(index == 2)
+                {
+                    SetSelectedButton(optionTabs[index].GetComponentInChildren<Slider>().gameObject);
+                }
+                else
+                {
+                    SetSelectedButton(optionTabs[index].GetComponentInChildren<Button>().gameObject);
+                }
             }
             else if (leftBumper.triggered)
             {
                 optionTabs[index].SetActive(false);
                 index = (index - 1 + optionTabs.Length) % optionTabs.Length;
                 optionTabs[index].SetActive(true);
-                SetSelectedButton(optionTabs[index].GetComponentInChildren<Button>().gameObject);
+                if (index == 2)
+                {
+                    SetSelectedButton(optionTabs[index].GetComponentInChildren<Slider>().gameObject);
+                }
+                else
+                {
+                    SetSelectedButton(optionTabs[index].GetComponentInChildren<Button>().gameObject);
+                }
             }
         }
     }
     public void StartGame()
     {
-        //SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1);
         Debug.Log("Start Game");
     }
     public void Quit()
     {
-        //Application.Quit();
-        Debug.Log("Quit");
+        Application.Quit();
     }
-
     public void OpenOptions()
     {
         ResetOptionsTab();
@@ -93,31 +98,14 @@ public class MainMenu : MonoBehaviour
         optionsOn = true;
         SetSelectedButton(optionTabs[index].GetComponentInChildren<Button>().gameObject);
     }
-
-    public void OpenTutorial()
-    {
-        lastSelectedMenuButton = eventSystem.currentSelectedGameObject;
-        mainMenu.interactable = false;
-        menuOn = false;
-        StartCoroutine(Open(tutorial, true));
-        tutorialOn = true;
-    }
-
     public void BackToMenu()
     {
-        if(!menuOn && tutorialOn)
-        {
-            StartCoroutine(Open(tutorial, false));
-            tutorialOn = false;
-            SetSelectedButton(lastSelectedMenuButton);
-        }
-        else if(!menuOn && optionsOn)
+        if(!menuOn && optionsOn)
         {
             StartCoroutine(Open(generalOptions, false));
             optionsOn = false;
             SetSelectedButton(lastSelectedMenuButton);
         }
-        
         mainMenu.interactable = true;
         menuOn = true;
     }
@@ -142,13 +130,10 @@ public class MainMenu : MonoBehaviour
             group.interactable = false;
         }
     }
-
     private void SetSelectedButton(GameObject gameObject)
     {
-        //EventSystem.current.SetSelectedGameObject(gameObject);
         eventSystem.SetSelectedGameObject(gameObject);
     }
-
     private void ResetOptionsTab()
     {
         optionTabs[index].SetActive(false);

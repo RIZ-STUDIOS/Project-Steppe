@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class ResolutionButton : MonoBehaviour, ISelectHandler, IDeselectHandler
+public class SettingsButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     private GeneralOptions generalOptions;
 
@@ -16,7 +16,9 @@ public class ResolutionButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     private bool isSelected = false;
 
-
+    public delegate void ButtonAction();
+    public ButtonAction onRightAction;
+    public ButtonAction onLeftAction;
     public void OnSelect(BaseEventData baseEventData)
     {
         isSelected = true;
@@ -42,11 +44,11 @@ public class ResolutionButton : MonoBehaviour, ISelectHandler, IDeselectHandler
         {
             if (rightDpad.triggered)
             {
-                generalOptions.ResRight();
+                onRightAction?.Invoke();
             }
             else if (leftDpad.triggered)
             {
-                generalOptions.ResLeft();
+                onLeftAction?.Invoke();
             }
         }
     }
