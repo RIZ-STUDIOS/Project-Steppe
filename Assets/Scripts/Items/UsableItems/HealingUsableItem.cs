@@ -27,7 +27,7 @@ namespace ProjectSteppe.Items.UsableItems
 
             base.OnUse();
             if(!canUse) return;
-            animator.SetTrigger("ForceAnimation");
+            //animator.SetTrigger("ForceAnimation");
             animator.SetTrigger("Heal");
             StartCoroutine(HealEntity());
         }
