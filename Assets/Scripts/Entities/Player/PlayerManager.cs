@@ -24,7 +24,7 @@ namespace ProjectSteppe.Entities.Player
         public PlayerInteractor PlayerInteractor => this.GetComponentIfNull(ref playerInteractor);
         public Entity PlayerEntity => this.GetComponentIfNull(ref playerEntity);
 
-        private PlayerCapability capabilities;
+        private PlayerCapability capabilities = (PlayerCapability)0b11111;
 
         public UnityEvent onCapabilityChange;
 
@@ -57,6 +57,8 @@ namespace ProjectSteppe.Entities.Player
     {
         Move = 1,
         Rotate = 2,
-        Dash = 4
+        Dash = 4,
+        Drink = 8,
+        Sit = 16
     }
 }
