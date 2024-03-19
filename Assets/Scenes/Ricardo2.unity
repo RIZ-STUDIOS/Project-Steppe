@@ -500,6 +500,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3274638324505948733, guid: d74fa84002597b24ebb9cb5829481a8e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4200906387611630642, guid: d74fa84002597b24ebb9cb5829481a8e,
         type: 3}
       propertyPath: entityHealth
@@ -634,6 +639,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094459098607421593, guid: d74fa84002597b24ebb9cb5829481a8e,
+        type: 3}
+      propertyPath: capabilities
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 9130615056039720314, guid: d74fa84002597b24ebb9cb5829481a8e,
         type: 3}
@@ -834,7 +844,7 @@ Transform:
   m_GameObject: {fileID: 1897021445}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.38, z: 17.71}
+  m_LocalPosition: {x: 0, y: 1.83, z: 17.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
