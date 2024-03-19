@@ -166,6 +166,9 @@ MonoBehaviour:
   jumpMoveSpeed: 2
   dashMoveSpeed: 20
   playerCamera: {fileID: 2038668680}
+  RotationSmoothTime: 0.12
+  TopClamp: 70
+  BottomClamp: -30
 --- !u!1001 &772784687
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -460,10 +463,20 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 724dc49a97d0dcd4cbac0efcc7eaf20a, type: 2}
+    - target: {fileID: 398342721691027515, guid: d74fa84002597b24ebb9cb5829481a8e,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 503990972408158375, guid: d74fa84002597b24ebb9cb5829481a8e,
         type: 3}
       propertyPath: m_Name
       value: PlayerZ
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465243806383821097, guid: d74fa84002597b24ebb9cb5829481a8e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1658226867457249460, guid: d74fa84002597b24ebb9cb5829481a8e,
         type: 3}

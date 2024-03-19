@@ -15,7 +15,7 @@ namespace ProjectSteppe.Entities.Player
 
         [System.NonSerialized]
         public Transform lookAtTransform;
-        private PlayerMovementController playerMovement;
+        private NewPlayerMovemenet playerMovement;
         private PlayerManager playerManager;
 
         /*[SerializeField]
@@ -43,7 +43,7 @@ namespace ProjectSteppe.Entities.Player
         private void Awake()
         {
             _input = GetComponent<StarterAssetsInputs>();
-            playerMovement = GetComponent<PlayerMovementController>();
+            playerMovement = GetComponent<NewPlayerMovemenet>();
             playerManager = GetComponent<PlayerManager>();
         }
 

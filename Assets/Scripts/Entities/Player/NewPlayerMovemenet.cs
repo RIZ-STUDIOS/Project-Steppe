@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 namespace ProjectSteppe.Entities.Player
 {
@@ -10,6 +11,9 @@ namespace ProjectSteppe.Entities.Player
     public class NewPlayerMovemenet : EntityBehaviour
     {
         private Vector2 moveVector;
+        private float moveVectorMagnitude;
+
+        private Vector2 lookVector;
 
         [SerializeField]
         private float gravity = -9.8f;
@@ -57,11 +61,27 @@ namespace ProjectSteppe.Entities.Player
         public Camera playerCamera;
 
         private float targetRotation;
+        private float _rotationVelocity;
+
+        [Range(0.0f, 0.3f)]
+        public float RotationSmoothTime = 0.12f;
+
+        private const float _threshold = 0.01f;
+        private PlayerInput playerInput;
+        private float _cinemachineTargetYaw;
+        private float _cinemachineTargetPitch;
+
+        [Tooltip("How far in degrees can you move the camera up")]
+        public float TopClamp = 70.0f;
+
+        [Tooltip("How far in degrees can you move the camera down")]
+        public float BottomClamp = -30.0f;
 
         protected override void Awake()
         {
             base.Awake();
             characterController = GetComponent<CharacterController>();
+            playerInput = GetComponent<PlayerInput>();
             animator = GetComponent<Animator>();
             playerManager = GetComponent<PlayerManager>();
             virtualCamera = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
@@ -72,6 +92,11 @@ namespace ProjectSteppe.Entities.Player
             HandleGravity();
             CheckGrounded();
             HandleMovement();
+        }
+
+        private void LateUpdate()
+        {
+            CameraRotation();
         }
 
         private void HandleGravity()
@@ -131,17 +156,57 @@ namespace ProjectSteppe.Entities.Player
 
             var targetSpeed = false ? dashMoveSpeed : jumping ? jumpMoveSpeed : moveSpeed;
 
-            speed = targetSpeed * moveVector.magnitude;
+            if (!playerManager.HasCapability(PlayerCapability.Move)) targetSpeed = 0;
 
-            targetRotation = playerCamera.transform.eulerAngles.y;
+            speed = targetSpeed * moveVectorMagnitude;
+
+            if(moveVectorMagnitude != 0)
+            {
+                targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(moveVector.x, moveVector.y) * Mathf.Rad2Deg;
+
+                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref _rotationVelocity,
+                        RotationSmoothTime);
+
+                // rotate to face input direction relative to camera position
+                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+            }
 
             targetDirection = Quaternion.Euler(0, targetRotation, 0) * Vector3.forward;
 
             targetDirection = targetDirection.normalized;
             animator.SetFloat("MoveDirectionX", moveVector.x);
             animator.SetFloat("MoveDirectionY", moveVector.y);
-            animator.SetFloat("Speed", moveVector.magnitude);
+            animator.SetFloat("Speed", moveVectorMagnitude);
             characterController.Move(targetDirection * (speed * Time.deltaTime) + new Vector3(0, verticalVelocity, 0) * Time.deltaTime);
+        }
+
+        private void CameraRotation()
+        {
+            if (!virtualCamera.enabled) return;
+            // if there is an input and camera position is not fixed
+            if (lookVector.sqrMagnitude >= _threshold)
+            {
+                //Don't multiply mouse input by Time.deltaTime;
+                float deltaTimeMultiplier = playerInput.currentControlScheme == "KeyboardMouse" ? 1.0f : Time.deltaTime;
+
+                _cinemachineTargetYaw += lookVector.x * deltaTimeMultiplier;
+                _cinemachineTargetPitch += lookVector.y * deltaTimeMultiplier;
+            }
+
+            // clamp our rotations so our values are limited 360 degrees
+            _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
+            _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
+
+            // Cinemachine will follow this target
+            virtualCamera.Follow.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + 0,
+                _cinemachineTargetYaw, 0.0f);
+        }
+
+        private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
+        {
+            if (lfAngle < -360f) lfAngle += 360f;
+            if (lfAngle > 360f) lfAngle -= 360f;
+            return Mathf.Clamp(lfAngle, lfMin, lfMax);
         }
 
         #region INPUT
@@ -152,7 +217,13 @@ namespace ProjectSteppe.Entities.Player
 
         private void OnMove(InputValue value)
         {
-            moveVector = value.Get<Vector2>();
+            moveVector = value.Get<Vector2>().normalized;
+            moveVectorMagnitude = moveVector.magnitude;
+        }
+
+        private void OnLook(InputValue value)
+        {
+            lookVector = value.Get<Vector2>();
         }
         #endregion
     }
