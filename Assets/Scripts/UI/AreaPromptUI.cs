@@ -21,7 +21,7 @@ namespace ProjectSteppe
         {
             areaPromptTMP.text = areaName;
 
-            StartCoroutine(canvasGroup.FadeInThenOut(fadeSpeedMod:0.75f, duration:4));
+            StartCoroutine(canvasGroup.FadeInThenOut(fadeSpeedMod:0.75f, duration:1f));
         }
     }
 }

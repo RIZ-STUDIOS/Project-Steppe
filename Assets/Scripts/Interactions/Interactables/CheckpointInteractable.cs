@@ -31,6 +31,10 @@ namespace ProjectSteppe.Interactions.Interactables
             player.DisableCapability(PlayerCapability.Rotate);
             player.DisableCapability(PlayerCapability.Dash);
 
+            player.PlayerAnimator.SetTrigger("ForceAnimation");
+            player.PlayerAnimator.SetTrigger("ActivateCheckpoint");
+
+            yield return new WaitForSeconds(2.567f);
             
             foreach (var particle in particles)
             {
@@ -53,6 +57,8 @@ namespace ProjectSteppe.Interactions.Interactables
         {
             player.PlayerEntity.EntityHealth.ResetHealth();
             player.PlayerUI.messagePrompt.ShowMessage("...");
+            player.PlayerAnimator.SetTrigger("ForceAnimation");
+            player.PlayerAnimator.SetBool("Sitting", true);
         }
     }
 }

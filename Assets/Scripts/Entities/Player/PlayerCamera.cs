@@ -55,7 +55,7 @@ namespace ProjectSteppe.Entities.Player
             Vector3 pos = startPosition;
             Quaternion rot = startRosition;
             float time = 0;
-            while(pos != endPosition || rot != endRotation)
+            while((pos != endPosition || rot != endRotation) && time < 1)
             {
                 pos = Vector3.Lerp(startPosition, endPosition, time);
                 rot = Quaternion.Lerp(startRosition, endRotation, time);
