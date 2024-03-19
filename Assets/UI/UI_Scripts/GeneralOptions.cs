@@ -41,14 +41,14 @@ public class GeneralOptions : MonoBehaviour
         audioMixer.GetFloat("SFXVol", out vol);
         sfxVolSlider.value = vol;
 
-        masterVolText.text = Mathf.RoundToInt(masterVolSlider.value + 80).ToString();
-        musicVolText.text = Mathf.RoundToInt(musicVolSlider.value + 80).ToString();
-        sfxVolText.text = Mathf.RoundToInt(sfxVolSlider.value + 80).ToString();
+        masterVolText.text = Mathf.RoundToInt(masterVolSlider.value + 80).ToString() + "%";
+        musicVolText.text = Mathf.RoundToInt(musicVolSlider.value + 80).ToString() + "%";
+        sfxVolText.text = Mathf.RoundToInt(sfxVolSlider.value + 80).ToString() + "%";
     }
     #region Resolution
     private void UpdateResolution()
     {
-        resText.text = "< " + resolutions[resolutionIndex].horizontal.ToString() + " x " + resolutions[resolutionIndex].vertical.ToString() + " >";
+        resText.text = resolutions[resolutionIndex].horizontal.ToString() + " x " + resolutions[resolutionIndex].vertical.ToString();
         Screen.SetResolution(resolutions[resolutionIndex].horizontal, resolutions[resolutionIndex].vertical, true);
     }
     public void ResLeft()
@@ -78,19 +78,19 @@ public class GeneralOptions : MonoBehaviour
     #region Audio
     public void SetMasterVolume()
     {
-        masterVolText.text = Mathf.RoundToInt(masterVolSlider.value + 80).ToString();
+        masterVolText.text = Mathf.RoundToInt(masterVolSlider.value + 80).ToString() + "%";
         audioMixer.SetFloat("MasterVol", masterVolSlider.value);
         PlayerPrefs.SetFloat("MasterVol", masterVolSlider.value);
     }
     public void SetMusicVolume()
     {
-        musicVolText.text = Mathf.RoundToInt(musicVolSlider.value + 80).ToString();
+        musicVolText.text = Mathf.RoundToInt(musicVolSlider.value + 80).ToString() + "%";
         audioMixer.SetFloat("MusicVol", musicVolSlider.value);
         PlayerPrefs.SetFloat("MusicVol", musicVolSlider.value);
     }
     public void SetSfxVolume()
     {
-        sfxVolText.text = Mathf.RoundToInt(sfxVolSlider.value + 80).ToString();
+        sfxVolText.text = Mathf.RoundToInt(sfxVolSlider.value + 80).ToString() + "%";
         audioMixer.SetFloat("SFXVol", sfxVolSlider.value);
         PlayerPrefs.SetFloat("SFXVol", sfxVolSlider.value);
     }

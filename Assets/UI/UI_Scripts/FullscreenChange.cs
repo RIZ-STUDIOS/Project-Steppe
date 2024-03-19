@@ -53,11 +53,11 @@ public class FullscreenChange : MonoBehaviour
     {
         if (index == 0)
         {
-            text.text = "< On >";
+            text.text = "On";
         }
         else
         {
-            text.text = "< Off >";
+            text.text = "Off";
         }
     }
 }
