@@ -42,10 +42,22 @@ namespace ProjectSteppe.Entities.Player
         [SerializeField]
         private LayerMask groundLayers;
 
+        [SerializeField]
+        private float moveSpeed = 5;
+
+        [SerializeField]
+        private float jumpMoveSpeed = 2;
+
+        [SerializeField]
+        private float dashMoveSpeed = 20;
+
         private PlayerManager playerManager;
         private float speed;
 
         private CinemachineVirtualCamera virtualCamera;
+        public Camera playerCamera;
+
+        private float targetRotation;
 
         protected override void Awake()
         {
@@ -78,6 +90,7 @@ namespace ProjectSteppe.Entities.Player
                         }
 
                         jumping = true;
+                        animator.ResetTrigger("EndJump");
                         animator.SetTrigger("Jump");
                         verticalVelocity = jumpForce;
                     }
@@ -117,7 +130,19 @@ namespace ProjectSteppe.Entities.Player
         {
             var targetDirection = Vector3.zero;
 
-            characterController.Move(targetDirection.normalized * (speed * Time.deltaTime) + new Vector3(0, verticalVelocity, 0) * Time.deltaTime);
+            var targetSpeed = false ? dashMoveSpeed : jumping ? jumpMoveSpeed : moveSpeed;
+
+            speed = targetSpeed * moveVector.magnitude;
+
+            targetRotation = playerCamera.transform.eulerAngles.y;
+
+            targetDirection = Quaternion.Euler(0, targetRotation, 0) * Vector3.forward;
+
+            targetDirection = targetDirection.normalized;
+            animator.SetFloat("MoveDirectionX", moveVector.x);
+            animator.SetFloat("MoveDirectionY", moveVector.y);
+            animator.SetFloat("Speed", moveVector.magnitude);
+            characterController.Move(targetDirection * (speed * Time.deltaTime) + new Vector3(0, verticalVelocity, 0) * Time.deltaTime);
         }
 
         #region INPUT
