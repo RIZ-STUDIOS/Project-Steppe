@@ -34,9 +34,6 @@ namespace ProjectSteppe
         [Header("Debug")]
         public bool debugEnabled;
 
-        [Header("Target Lock")]
-        public GameObject targetLock;
-
 
         private void Awake()
         {
@@ -45,8 +42,6 @@ namespace ProjectSteppe
             idle = Instantiate(idle);
             chase = Instantiate(chase);
             stance = Instantiate(stance);
-
-            GetComponent<EntityHealth>().onKill.AddListener(() => { Destroy(targetLock); });
         }
 
         private void FixedUpdate()

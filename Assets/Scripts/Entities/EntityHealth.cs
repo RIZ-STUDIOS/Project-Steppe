@@ -51,6 +51,8 @@ namespace ProjectSteppe.Entities
 
         private bool invicible;
 
+        public bool vulnerable;
+
         private void Start()
         {
             Health = maxHealth;
@@ -67,6 +69,8 @@ namespace ProjectSteppe.Entities
 
         public void DamageHealth(float amount)
         {
+            if (vulnerable) amount *= 2;
+
             Health -= amount;
 
             if (Health <= 0)
@@ -86,7 +90,7 @@ namespace ProjectSteppe.Entities
 
         public void ResetBalance()
         {
-            Balance = balance;
+            Balance = 0;
         }
 
         public void DamageBalance(float amount)
@@ -96,7 +100,7 @@ namespace ProjectSteppe.Entities
 
             if(Balance >= maxBalance)
             {
-                onPostureFull.Invoke();
+                onPostureFull?.Invoke();
             }
         }
 
