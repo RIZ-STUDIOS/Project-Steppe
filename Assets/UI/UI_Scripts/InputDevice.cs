@@ -42,11 +42,11 @@ public class InputDevice : MonoBehaviour
     {
         if(index == 0)
         {
-            inputDeviceText.text = "< PS Controller >";
+            inputDeviceText.text = "PS Controller";
         }
         else
         {
-            inputDeviceText.text = "< Xbox Controller >";
+            inputDeviceText.text = "Xbox Controller";
         }
     }
 }
