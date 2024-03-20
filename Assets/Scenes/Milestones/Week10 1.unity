@@ -3242,6 +3242,18 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &430587040 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9094459098607421593, guid: d74fa84002597b24ebb9cb5829481a8e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1908233193}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a71a0b60fdceca4ab443376561465b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &432717091 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 982991835642200325, guid: b7dc9c494382cec4ab851f2c1a3b1ae9,
@@ -11226,7 +11238,7 @@ PrefabInstance:
     - target: {fileID: 4777589370883011570, guid: 760189c7b9a6e664d997b953223e98ad,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 202.92
+      value: 202.513
       objectReference: {fileID: 0}
     - target: {fileID: 4777589370883011570, guid: 760189c7b9a6e664d997b953223e98ad,
         type: 3}
@@ -11268,6 +11280,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7229880406094835270, guid: 760189c7b9a6e664d997b953223e98ad,
+        type: 3}
+      propertyPath: onKill.m_PersistentCalls.m_Calls.Array.data[5].m_Target
+      value: 
+      objectReference: {fileID: 430587040}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
