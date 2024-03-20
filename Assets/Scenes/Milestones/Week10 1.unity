@@ -11222,6 +11222,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 942965604158055973, guid: 760189c7b9a6e664d997b953223e98ad,
         type: 3}
+      propertyPath: playerManager
+      value: 
+      objectReference: {fileID: 430587040}
+    - target: {fileID: 942965604158055973, guid: 760189c7b9a6e664d997b953223e98ad,
+        type: 3}
       propertyPath: OnBossDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2097762732}
