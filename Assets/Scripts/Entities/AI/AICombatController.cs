@@ -38,6 +38,7 @@ namespace ProjectSteppe
         {
             if (other.CompareTag("Player"))
             {
+                Debug.Log("Left!");
                 playerTarget = null;
             }
         }
