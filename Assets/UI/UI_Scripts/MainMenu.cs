@@ -1,3 +1,4 @@
+using ProjectSteppe;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -81,7 +82,8 @@ public class MainMenu : MonoBehaviour
     }
     public void StartGame()
     {
-        SceneManager.LoadScene(1);
+        //SceneManager.LoadScene(1);
+        LoadingManager.LoadScene(1);
         Debug.Log("Start Game");
     }
     public void Quit()

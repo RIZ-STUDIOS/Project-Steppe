@@ -14,14 +14,17 @@ namespace ProjectSteppe.Items.UsableItems
 
         private Animator animator;
 
+        private EntityHealth entityHealth;
+
         private void Awake()
         {
             animator = GetComponentInParent<Animator>();
+            entityHealth = GetComponentInParent<EntityHealth>();
         }
 
         public override void OnUse()
         {
-            if (healing) return;
+            if (healing || entityHealth.Health >= entityHealth.MaxHealth) return;
 
             bool canUse = CanUseQuery();
 
@@ -43,7 +46,7 @@ namespace ProjectSteppe.Items.UsableItems
                 healPerFrame = healAmount / healSpeed * Time.deltaTime;
                 heal += healPerFrame;
 
-                GetComponentInParent<EntityHealth>().HealHealth(healPerFrame);
+                entityHealth.HealHealth(healPerFrame);
 
                 yield return null;
             }

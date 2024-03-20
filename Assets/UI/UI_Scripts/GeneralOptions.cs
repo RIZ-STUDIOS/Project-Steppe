@@ -23,9 +23,26 @@ public class GeneralOptions : MonoBehaviour
     private Slider masterVolSlider, musicVolSlider, sfxVolSlider;
     private void Start()
     {
+        resolutions.Clear();
+        foreach(var res in Screen.resolutions)
+        {
+            resolutions.Add(new ResItem()
+            {
+                horizontal = res.width,
+                vertical = res.height,
+                refreshRate = res.refreshRateRatio
+            });
+        }
         for (int i = 0; i < resolutions.Count; i++)
         {
-            if (Screen.width == resolutions[i].horizontal && Screen.height == resolutions[i].vertical)
+            var res = resolutions[i];
+            var currentRes = new UnityEngine.Resolution()
+            {
+                height = res.vertical,
+                width = res.horizontal,
+                refreshRateRatio = res.refreshRate
+            };
+            if (Screen.currentResolution.Equals(currentRes))
             {
                 resolutionIndex = i;
 
@@ -48,8 +65,9 @@ public class GeneralOptions : MonoBehaviour
     #region Resolution
     private void UpdateResolution()
     {
-        resText.text = resolutions[resolutionIndex].horizontal.ToString() + " x " + resolutions[resolutionIndex].vertical.ToString();
-        Screen.SetResolution(resolutions[resolutionIndex].horizontal, resolutions[resolutionIndex].vertical, true);
+        var currentRes = resolutions[resolutionIndex];
+        resText.text = currentRes.horizontal.ToString() + " x " + currentRes.vertical.ToString() + " " + (currentRes.refreshRate.numerator/(float)currentRes.refreshRate.denominator).ToString("F0") + "hz";
+        Screen.SetResolution(currentRes.horizontal, currentRes.vertical, FullScreenMode.FullScreenWindow, currentRes.refreshRate);
     }
     public void ResLeft()
     {
@@ -73,6 +91,7 @@ public class GeneralOptions : MonoBehaviour
     public class ResItem
     {
         public int horizontal, vertical;
+        public RefreshRate refreshRate;
     }
     #endregion
     #region Audio

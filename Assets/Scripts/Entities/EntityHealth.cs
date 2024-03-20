@@ -24,6 +24,8 @@ namespace ProjectSteppe.Entities
 
         public float MaxBalance => maxBalance;
 
+        public float MaxHealth => maxHealth;
+
         [SerializeField]
         private float timeBeforeBalanceRegeneration = 1.5f;
 

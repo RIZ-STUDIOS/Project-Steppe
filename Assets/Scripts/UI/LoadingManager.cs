@@ -12,14 +12,14 @@ namespace ProjectSteppe
         private static int targetBuildIndex;
 
         [SerializeField]
-        private TextMeshProUGUI loadedText;
+        private CanvasGroup canvasGroup;
 
         private AsyncOperation loadOperation;
 
         public static void LoadScene(int buildIndex)
         {
             targetBuildIndex = buildIndex;
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }
 
         private void Start()
@@ -37,7 +37,7 @@ namespace ProjectSteppe
             while (loadOperation.progress < 0.9f)
                 yield return null;
 
-
+            canvasGroup.alpha = 1;
         }
 
         private void OnSubmit(InputValue inputAction)
