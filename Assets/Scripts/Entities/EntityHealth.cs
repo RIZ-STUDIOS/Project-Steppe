@@ -22,6 +22,8 @@ namespace ProjectSteppe.Entities
         [SerializeField, ReadOnly(AvailableMode.Play), MinValue(1)]
         private float maxBalance = 100;
 
+        public float MaxBalance => maxBalance;
+
         [SerializeField]
         private float timeBeforeBalanceRegeneration = 1.5f;
 
