@@ -383,9 +383,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a71a0b60fdceca4ab443376561465b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossTeleportTransform: {fileID: 0}
   onCapabilityChange:
     m_PersistentCalls:
       m_Calls: []
+  bossDead: 0
 --- !u!114 &1373724819619751150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,7 +530,7 @@ MonoBehaviour:
   jumpForce: 8
   walkSpeed: 4
   speedChangeRate: 10
-  RotationSmoothTime: 0.12
+  RotationSmoothTime: 0.04
   playerCamera: {fileID: 0}
   TopClamp: 70
   BottomClamp: -30
@@ -38160,6 +38162,11 @@ PrefabInstance:
     - target: {fileID: 2021743924715880140, guid: 9635623fbd82ea44da095d83e7fadabb,
         type: 3}
       propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2744609548942096083, guid: 9635623fbd82ea44da095d83e7fadabb,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5645488294638716476, guid: 9635623fbd82ea44da095d83e7fadabb,

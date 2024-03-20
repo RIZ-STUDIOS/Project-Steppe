@@ -128,6 +128,18 @@ namespace ProjectSteppe.Entities
             this.invicible = value;
         }
 
+
+
+        public void MakeVulnerable()
+        {
+            vulnerable = true;
+        }
+
+        public void StopVunerable()
+        {
+            vulnerable = false;
+        }
+
         public bool IsInvicible()
         {
             return invicible;

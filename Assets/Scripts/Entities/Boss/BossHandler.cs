@@ -3,6 +3,7 @@ using ProjectSteppe.Entities.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 
 namespace ProjectSteppe
@@ -24,11 +25,16 @@ namespace ProjectSteppe
 
         public PlayerManager playerManager;
 
+        private NavMeshAgent navMeshAgent;
+
+        private Coroutine staggerCoroutine;
+
         private void Awake()
         {
             animator = GetComponent<Animator>();
             health = GetComponent<EntityHealth>();
             health.onKill.AddListener(OnBossKilled);
+            navMeshAgent = GetComponent<NavMeshAgent>();
         }
 
         private void OnBossKilled()
@@ -47,19 +53,25 @@ namespace ProjectSteppe
 
         public void StaggerTimeout()
         {
-            StartCoroutine(StaggerTimeoutIEnumerator());
+            if(staggerCoroutine != null)
+            {
+                StopCoroutine(staggerCoroutine);
+                staggerCoroutine = null;
+            }
+            staggerCoroutine = StartCoroutine(StaggerTimeoutIEnumerator());
         }
 
         public IEnumerator StaggerTimeoutIEnumerator()
         {
             staggered = true;
-            health.ResetBalance();
-            health.vulnerable = true;            
+            health.vulnerable = true;
+            navMeshAgent.enabled = false;
 
             yield return new WaitForSeconds(3);
 
             health.vulnerable = false;
 
+            navMeshAgent.enabled = true;
             animator.SetBool("PostureBreak", false);
             staggered = false;
         }
@@ -67,11 +79,25 @@ namespace ProjectSteppe
         public void MortalBlow()
         {
             if (!staggered) return;
-            transform.position = playerManager.transform.position + playerManager.transform.forward * 2;
+
+            if(staggerCoroutine != null)
+            {
+                StopCoroutine(staggerCoroutine);
+                staggerCoroutine = null;
+            }
+
+            transform.position = playerManager.transform.position + playerManager.transform.forward * 2.36585f;
             transform.rotation = Quaternion.Euler(0, -playerManager.transform.eulerAngles.y, 0);
 
+            health.ResetBalance();
+            health.vulnerable = false;
+
+            animator.SetBool("PostureBreak", false);
+            staggered = false;
+
             animator.SetTrigger("ForceAnimation");
-            animator.SetTrigger("DeathBlow");
+            if (health.Health > 0)
+                animator.SetTrigger("DeathBlow");
 
             playerManager.PlayerAnimator.SetTrigger("ForceAnimation");
             playerManager.PlayerAnimator.SetTrigger("MortalBlow");

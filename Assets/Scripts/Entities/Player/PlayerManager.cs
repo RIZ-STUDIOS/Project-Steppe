@@ -15,6 +15,7 @@ namespace ProjectSteppe.Entities.Player
         private StarterAssetsInputs playerInput;
         private PlayerInteractor playerInteractor;
         private Entity playerEntity;
+        private PlayerMovementController playerMovementController;
 
         public Transform bossTeleportTransform;
 
@@ -25,6 +26,7 @@ namespace ProjectSteppe.Entities.Player
         public StarterAssetsInputs PlayerInput => this.GetComponentIfNull(ref playerInput);
         public PlayerInteractor PlayerInteractor => this.GetComponentIfNull(ref playerInteractor);
         public Entity PlayerEntity => this.GetComponentIfNull(ref playerEntity);
+        public PlayerMovementController PlayerMovement => this.GetComponentIfNull(ref playerMovementController);
 
         private PlayerCapability capabilities = (PlayerCapability)0b111111;
 

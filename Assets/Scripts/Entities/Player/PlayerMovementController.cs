@@ -103,7 +103,8 @@ namespace ProjectSteppe.Entities.Player
 
         private Vector3 moveDirection;
 
-        private bool jumping;
+        [System.NonSerialized]
+        public bool jumping;
 
         protected override void Awake()
         {

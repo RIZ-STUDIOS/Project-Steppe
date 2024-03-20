@@ -47,7 +47,7 @@ namespace ProjectSteppe.Entities.Player
         {
             if (input.attack)
             {
-                if ((!firstAttack && !canCombo) || blocking || !playerManager.HasCapability(PlayerCapability.Attack))
+                if ((!firstAttack && !canCombo) || blocking || !playerManager.HasCapability(PlayerCapability.Attack) || playerManager.PlayerMovement.jumping)
                 {
                     input.attack = false;
                     return;

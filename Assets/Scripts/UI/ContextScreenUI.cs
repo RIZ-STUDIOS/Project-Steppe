@@ -61,7 +61,7 @@ namespace ProjectSteppe.UI
 
             yield return new WaitForSeconds(waitTime);
 
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
 
         public IEnumerator PlayRespiteFound(float waitTime = 2)

@@ -13215,7 +13215,6 @@ GameObject:
   - component: {fileID: 7556168611865910723}
   - component: {fileID: 7231966528562794890}
   - component: {fileID: 942965604158055973}
-  - component: {fileID: 5231687408067628311}
   m_Layer: 11
   m_Name: Boss_Oswald
   m_TagString: Untagged
@@ -13455,9 +13454,9 @@ MonoBehaviour:
           m_StringArgument: Death
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ProjectSteppe.Entities.Player.PlayerManager, ProjectSteppe
-        m_MethodName: BossDead
+      - m_Target: {fileID: 942965604158055973}
+        m_TargetAssemblyTypeName: ProjectSteppe.BossHandler, ProjectSteppe
+        m_MethodName: MortalBlow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13482,7 +13481,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 5231687408067628311}
+      - m_Target: {fileID: 942965604158055973}
         m_TargetAssemblyTypeName: ProjectSteppe.BossHandler, ProjectSteppe
         m_MethodName: StaggerTimeout
         m_Mode: 1
@@ -13496,7 +13495,19 @@ MonoBehaviour:
         m_CallState: 2
   onHit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 942965604158055973}
+        m_TargetAssemblyTypeName: ProjectSteppe.BossHandler, ProjectSteppe
+        m_MethodName: MortalBlow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   vulnerable: 0
 --- !u!114 &456423417877126069
 MonoBehaviour:
@@ -13589,35 +13600,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   health: {fileID: 0}
---- !u!114 &5231687408067628311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4208630089096047747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04bc6917d8d0e764fb85314f537fe5ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lockTarget: {fileID: 3856018324791029048}
-  OnBossDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ProjectSteppe.UI.ContextScreenUI, ProjectSteppe
-        m_MethodName: TriggerVictory
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  health: {fileID: 0}
+  playerManager: {fileID: 0}
 --- !u!1 &4273324415676213358
 GameObject:
   m_ObjectHideFlags: 0
