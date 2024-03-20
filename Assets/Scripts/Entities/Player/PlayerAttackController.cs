@@ -62,7 +62,7 @@ namespace ProjectSteppe.Entities.Player
                 firstAttack = false;
                 input.attack = false;
                 attacking = true;
-                playerManager.DisableCapability(PlayerCapability.Move);
+                //playerManager.DisableCapability(PlayerCapability.Move);
             }
         }
 

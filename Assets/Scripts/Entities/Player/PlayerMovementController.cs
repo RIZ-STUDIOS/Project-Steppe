@@ -19,6 +19,9 @@ namespace ProjectSteppe.Entities.Player
         [SerializeField]
         private float terminalVelocity = -53f;
 
+        [SerializeField]
+        private float jumpForce = 15;
+
         [Header("Movement")]
 
         [SerializeField]
@@ -176,29 +179,41 @@ namespace ProjectSteppe.Entities.Player
         {
             if (Grounded)
             {
-                if (!_input.jump)
+                if (playerManager.HasCapability(PlayerCapability.Move))
                 {
-                    //usingGravity = true;
-                    jumping = false;
-                    onGround.Invoke();
+                    if (_input.jump)
+                    {
+                        if (jumping)
+                        {
+                            _input.jump = false;
+                            return;
+                        }
+
+                        jumping = true;
+                        onJump.Invoke();
+                        Entity.EntityHealth.SetInvicible(true);
+                        verticalVelocity = jumpForce;
+                    }
+
+                    if (!_input.jump)
+                    {
+                        if (jumping && verticalVelocity < 0)
+                        {
+                            jumping = false;
+                            onGround?.Invoke();
+                            Entity.EntityHealth.SetInvicible(false);
+                        }
+                    }
                 }
 
-                if(verticalVelocity < 0)
+                if (verticalVelocity < 0)
                 {
                     verticalVelocity = -2;
-                }
-
-                if (_input.jump)
-                {
-                    //usingGravity = true;
-                    verticalVelocity = 8;
-                    jumping = true;
-                    onJump.Invoke();
                 }
             }
             else
             {
-                _input.jump = false;
+
             }
 
             if(verticalVelocity > terminalVelocity && usingGravity)

@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 
 namespace ProjectSteppe.Entities.Player
 {
@@ -11,9 +10,12 @@ namespace ProjectSteppe.Entities.Player
     public class NewPlayerMovemenet : EntityBehaviour
     {
         private Vector2 moveVector;
+        private Vector2 dashMoveVector = Vector2.up;
         private float moveVectorMagnitude;
 
         private Vector2 lookVector;
+
+        private bool dashPressed;
 
         [SerializeField]
         private float gravity = -9.8f;
@@ -77,6 +79,18 @@ namespace ProjectSteppe.Entities.Player
         [Tooltip("How far in degrees can you move the camera down")]
         public float BottomClamp = -30.0f;
 
+        private bool dashing;
+
+        [SerializeField]
+        private float dashDuration;
+
+        [SerializeField]
+        private float dashCooldown;
+
+        private float dashTimer;
+
+        private float dashCooldownTimer;
+
         protected override void Awake()
         {
             base.Awake();
@@ -90,6 +104,7 @@ namespace ProjectSteppe.Entities.Player
         private void Update()
         {
             HandleGravity();
+            HandleDash();
             CheckGrounded();
             HandleMovement();
         }
@@ -99,11 +114,41 @@ namespace ProjectSteppe.Entities.Player
             CameraRotation();
         }
 
+        private void HandleDash()
+        {
+            if((dashing && dashPressed) || dashCooldownTimer > 0)
+                dashPressed = false;
+
+            if (dashPressed)
+            {
+                dashing = true;
+            }
+
+            if (dashing)
+            {
+                dashTimer += Time.deltaTime;
+
+                if (dashTimer >= dashDuration)
+                {
+                    dashing = false;
+                    dashTimer = 0;
+                    dashCooldownTimer = dashCooldown;
+                }
+            }
+            else
+            {
+                if (dashCooldownTimer > 0)
+                {
+                    dashCooldownTimer -= Time.deltaTime;
+                }
+            }
+        }
+
         private void HandleGravity()
         {
             if (grounded)
             {
-                if (playerManager.HasCapability(PlayerCapability.Move))
+                if (playerManager.HasCapability(PlayerCapability.Move) && !dashing)
                 {
                     if (jumpPressed)
                     {
@@ -154,18 +199,30 @@ namespace ProjectSteppe.Entities.Player
         {
             var targetDirection = Vector3.zero;
 
-            var targetSpeed = false ? dashMoveSpeed : jumping ? jumpMoveSpeed : moveSpeed;
+            var targetSpeed = dashing ? dashMoveSpeed : jumping ? jumpMoveSpeed : moveSpeed;
 
             if (!playerManager.HasCapability(PlayerCapability.Move)) targetSpeed = 0;
 
-            speed = targetSpeed * moveVectorMagnitude;
+            speed = targetSpeed * (dashing ? 1 : moveVectorMagnitude);
 
-            if(moveVectorMagnitude != 0)
+            if(moveVectorMagnitude != 0 || dashing)
             {
-                targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(moveVector.x, moveVector.y) * Mathf.Rad2Deg;
+                var targetVector = moveVector;
+
+                if (dashing)
+                {
+                    targetVector = dashMoveVector;
+                }
+
+                targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(targetVector.x, targetVector.y) * Mathf.Rad2Deg;
 
                 float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref _rotationVelocity,
                         RotationSmoothTime);
+
+                if (dashing)
+                {
+                    rotation = targetRotation;
+                }
 
                 // rotate to face input direction relative to camera position
                 transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
@@ -176,7 +233,7 @@ namespace ProjectSteppe.Entities.Player
             targetDirection = targetDirection.normalized;
             animator.SetFloat("MoveDirectionX", moveVector.x);
             animator.SetFloat("MoveDirectionY", moveVector.y);
-            animator.SetFloat("Speed", moveVectorMagnitude);
+            animator.SetFloat("Speed", dashing ? 1.5f : moveVectorMagnitude);
             characterController.Move(targetDirection * (speed * Time.deltaTime) + new Vector3(0, verticalVelocity, 0) * Time.deltaTime);
         }
 
@@ -219,11 +276,20 @@ namespace ProjectSteppe.Entities.Player
         {
             moveVector = value.Get<Vector2>().normalized;
             moveVectorMagnitude = moveVector.magnitude;
+            if(moveVectorMagnitude != 0 && !dashing)
+            {
+                dashMoveVector = moveVector;
+            }
         }
 
         private void OnLook(InputValue value)
         {
             lookVector = value.Get<Vector2>();
+        }
+
+        private void OnDash(InputValue value)
+        {
+            dashPressed = value.isPressed;
         }
         #endregion
     }

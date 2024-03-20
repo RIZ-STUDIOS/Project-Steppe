@@ -149,7 +149,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 82559809}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6ab2306d6c236e488e9209059a565e8, type: 3}
   m_Name: 
@@ -169,6 +169,8 @@ MonoBehaviour:
   RotationSmoothTime: 0.12
   TopClamp: 70
   BottomClamp: -30
+  dashDuration: 0.665
+  dashCooldown: 0
 --- !u!1001 &772784687
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -585,6 +587,11 @@ PrefabInstance:
       objectReference: {fileID: 2038668679}
     - target: {fileID: 7383154884052768845, guid: d74fa84002597b24ebb9cb5829481a8e,
         type: 3}
+      propertyPath: jumpForce
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7383154884052768845, guid: d74fa84002597b24ebb9cb5829481a8e,
+        type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 2038668680}
@@ -673,8 +680,7 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7383154884052768845, guid: d74fa84002597b24ebb9cb5829481a8e, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

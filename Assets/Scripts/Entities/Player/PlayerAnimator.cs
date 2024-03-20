@@ -39,6 +39,7 @@ namespace ProjectSteppe.Entities.Player
 
         #region Movement IDs
         private int _animIDJump;
+        private int _animIDEndJump;
         private int _animIDDash;
         private int _animIDMotionSpeed;
         private int _animIDSpeed;
@@ -70,8 +71,9 @@ namespace ProjectSteppe.Entities.Player
 
         private void Start()
         {
-            _animIDJump = Animator.StringToHash("Jumping");
-            _animIDDash = Animator.StringToHash("Dashing");
+            _animIDJump = Animator.StringToHash("Jump");
+            _animIDEndJump = Animator.StringToHash("EndJump");
+            //_animIDDash = Animator.StringToHash("Dashing");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
             _animIDSpeed = Animator.StringToHash("Speed");
             _animIDVelocityX = Animator.StringToHash("VelocityX");
@@ -106,22 +108,23 @@ namespace ProjectSteppe.Entities.Player
 
         private void OnGround()
         {
-            animator.SetBool(_animIDJump, false);
+            animator.SetTrigger(_animIDEndJump);
         }
 
         private void OnJump()
         {
-            animator.SetBool(_animIDJump, true);
+            animator.ResetTrigger(_animIDEndJump);
+            animator.SetTrigger(_animIDJump);
         }
 
         private void OnDashStart()
         {
-            animator.SetBool(_animIDDash, true);
+            //animator.SetBool(_animIDDash, true);
         }
 
         private void OnDashEnd()
         {
-            animator.SetBool(_animIDDash, false);
+            //animator.SetBool(_animIDDash, false);
         }
 
         #endregion Movement
