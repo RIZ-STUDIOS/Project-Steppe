@@ -24,7 +24,7 @@ namespace ProjectSteppe.Entities.Player
         public PlayerInteractor PlayerInteractor => this.GetComponentIfNull(ref playerInteractor);
         public Entity PlayerEntity => this.GetComponentIfNull(ref playerEntity);
 
-        private PlayerCapability capabilities = (PlayerCapability)0b11111;
+        private PlayerCapability capabilities = (PlayerCapability)0b111111;
 
         public UnityEvent onCapabilityChange;
 
@@ -47,7 +47,7 @@ namespace ProjectSteppe.Entities.Player
 
         public void DoHit()
         {
-            PlayerAnimator.SetTrigger("ForcedExit");
+            PlayerAnimator.SetTrigger("ForceAnimation");
             PlayerAnimator.SetTrigger("Hit");
         }
     }
@@ -59,6 +59,7 @@ namespace ProjectSteppe.Entities.Player
         Rotate = 2,
         Dash = 4,
         Drink = 8,
-        Sit = 16
+        Sit = 16,
+        Attack = 32
     }
 }

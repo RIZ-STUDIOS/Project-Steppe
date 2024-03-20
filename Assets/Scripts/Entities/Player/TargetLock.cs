@@ -15,7 +15,7 @@ namespace ProjectSteppe.Entities.Player
 
         [System.NonSerialized]
         public Transform lookAtTransform;
-        private NewPlayerMovemenet playerMovement;
+        private PlayerMovementController playerMovement;
         private PlayerManager playerManager;
 
         /*[SerializeField]
@@ -40,11 +40,18 @@ namespace ProjectSteppe.Entities.Player
 
         public UnityEvent onLockStateChange;
 
+        private bool canLock = true;
+
         private void Awake()
         {
             _input = GetComponent<StarterAssetsInputs>();
-            playerMovement = GetComponent<NewPlayerMovemenet>();
+            playerMovement = GetComponent<PlayerMovementController>();
             playerManager = GetComponent<PlayerManager>();
+            playerManager.PlayerEntity.EntityHealth.onKill.AddListener(() =>
+            {
+                StopLockOn();
+                canLock = false;
+            });
         }
 
         private void Update()
@@ -59,7 +66,7 @@ namespace ProjectSteppe.Entities.Player
                 justLocked = false;
             }
 
-            if(_input.targetLock && !justLocked)
+            if(_input.targetLock && !justLocked && canLock)
             {
                 if (lockOn)
                     StopLockOn();

@@ -30,6 +30,7 @@ namespace ProjectSteppe.Interactions.Interactables
             player.DisableCapability(PlayerCapability.Move);
             player.DisableCapability(PlayerCapability.Rotate);
             player.DisableCapability(PlayerCapability.Dash);
+            player.DisableCapability(PlayerCapability.Attack);
 
             player.PlayerAnimator.SetTrigger("ForceAnimation");
             player.PlayerAnimator.SetTrigger("ActivateCheckpoint");
@@ -49,6 +50,7 @@ namespace ProjectSteppe.Interactions.Interactables
             player.EnableCapability(PlayerCapability.Move);
             player.EnableCapability(PlayerCapability.Rotate);
             player.EnableCapability(PlayerCapability.Dash);
+            player.EnableCapability(PlayerCapability.Attack);
 
             player.PlayerInteractor.onInteractionEnded?.Invoke(0);
         }

@@ -313,6 +313,13 @@ namespace ProjectSteppe.Entities.Player
             {
                 velX = _input.move.x;
                 velY = _input.move.y;
+
+                if (dashing)
+                {
+                    var d = moveDirection.normalized;
+                    velX = d.x > 0 ? 1 : 0;
+                    velY = d.z > 0? 1 : 0;
+                }
             }
             else
             {

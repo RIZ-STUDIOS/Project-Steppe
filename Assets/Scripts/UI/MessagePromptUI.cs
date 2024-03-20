@@ -46,6 +46,7 @@ namespace ProjectSteppe.UI
             StartCoroutine(canvasGroup.FadeOut(true, true));
 
             GetComponentInParent<PlayerManager>().PlayerInput.OnInteraction.RemoveListener(HideMessage);
+            GetComponentInParent<PlayerManager>().PlayerAnimator.SetBool("Sitting", false);
             playerManager.PlayerInteractor.onInteractionEnded?.Invoke(0);
         }
     }

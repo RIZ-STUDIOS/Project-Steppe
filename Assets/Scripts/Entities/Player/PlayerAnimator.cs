@@ -76,8 +76,8 @@ namespace ProjectSteppe.Entities.Player
             //_animIDDash = Animator.StringToHash("Dashing");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
             _animIDSpeed = Animator.StringToHash("Speed");
-            _animIDVelocityX = Animator.StringToHash("VelocityX");
-            _animIDVelocityY = Animator.StringToHash("VelocityY");
+            _animIDVelocityX = Animator.StringToHash("MoveDirectionX");
+            _animIDVelocityY = Animator.StringToHash("MoveDirectionY");
             _animIDPerfectBlock = Animator.StringToHash("PerfectBlock");
             _animIDDeflectIndex = Animator.StringToHash("DeflectIndex");
             _layerIndexBase = animator.GetLayerIndex("Base");

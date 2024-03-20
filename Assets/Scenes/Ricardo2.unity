@@ -124,53 +124,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &82559809 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 503990972408158375, guid: d74fa84002597b24ebb9cb5829481a8e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1700274145}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &82559819 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3495867317921171434, guid: d74fa84002597b24ebb9cb5829481a8e,
     type: 3}
   m_PrefabInstance: {fileID: 1700274145}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 82559809}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7f9d850fb43e9245879746397d684ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &82559831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 82559809}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6ab2306d6c236e488e9209059a565e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gravity: -9.8
-  jumpForce: 10
-  rotationSpeed: 0
-  groundedOffset: -0.14
-  groundedRadius: 0.3
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 16439
-  moveSpeed: 5
-  jumpMoveSpeed: 2
-  dashMoveSpeed: 20
-  playerCamera: {fileID: 2038668680}
-  RotationSmoothTime: 0.12
-  TopClamp: 70
-  BottomClamp: -30
-  dashDuration: 0.665
-  dashCooldown: 0
 --- !u!1001 &772784687
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -683,11 +648,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 503990972408158375, guid: d74fa84002597b24ebb9cb5829481a8e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 82559831}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d74fa84002597b24ebb9cb5829481a8e, type: 3}
 --- !u!4 &1700274146 stripped
 Transform:

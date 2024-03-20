@@ -47,7 +47,7 @@ namespace ProjectSteppe.Entities.Player
         {
             if (input.attack)
             {
-                if ((!firstAttack && !canCombo) || blocking)
+                if ((!firstAttack && !canCombo) || blocking || !playerManager.HasCapability(PlayerCapability.Attack))
                 {
                     input.attack = false;
                     return;
@@ -62,13 +62,19 @@ namespace ProjectSteppe.Entities.Player
                 firstAttack = false;
                 input.attack = false;
                 attacking = true;
-                //playerManager.DisableCapability(PlayerCapability.Move);
+                playerManager.DisableCapability(PlayerCapability.Move);
+            }
+
+            if(attacking && !playerManager.HasCapability(PlayerCapability.Attack))
+            {
+                DisableCombo();
+                RestartAttack();
             }
         }
 
         private void Block()
         {
-            if (input.blocking)
+            if (input.blocking && playerManager.HasCapability(PlayerCapability.Attack))
             {
                 if (attacking)
                 {
@@ -76,7 +82,7 @@ namespace ProjectSteppe.Entities.Player
                     RestartAttack();
                     Entity.EntityAttacking.DisableWeaponCollision();
                     animator.SetTrigger("ForcedBlocking");
-                    animator.SetTrigger("ForcedExit");
+                    animator.SetTrigger("ForceAnimation");
                 }
                 if (!blocking)
                 {
@@ -90,8 +96,8 @@ namespace ProjectSteppe.Entities.Player
                     Entity.EntityBlock.EndBlock();
                 }
             }
-            blocking = input.blocking;
-            animator.SetBool(animIDBlocking, input.blocking);
+            blocking = input.blocking && playerManager.HasCapability(PlayerCapability.Attack);
+            animator.SetBool(animIDBlocking, blocking);
         }
 
         private void EnableCombo()
