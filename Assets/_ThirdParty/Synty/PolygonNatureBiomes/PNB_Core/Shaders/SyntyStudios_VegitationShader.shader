@@ -964,7 +964,7 @@ Shader "SyntyStudios/VegitationShader"
 					half3 mainLightDir = mainLight.direction + inputData.normalWS * normal;
 					half mainVdotL = pow( saturate( dot( inputData.viewDirectionWS, -mainLightDir ) ), scattering );
 					half3 mainTranslucency = mainAtten * ( mainVdotL * direct + inputData.bakedGI * ambient ) * Translucency;
-					color.rgb += BaseColor * mainTranslucency * strength;
+					color.rgb += BaseColor *mainTranslucency* strength;
 
 					#ifdef _ADDITIONAL_LIGHTS
 						int transPixelLightCount = GetAdditionalLightsCount();
@@ -1008,7 +1008,7 @@ Shader "SyntyStudios/VegitationShader"
 					outputDepth = DepthValue;
 				#endif
 
-				return color;
+					return float4(MixFog(BaseColor, IN.fogFactorAndVertexLight.x), 1);
 			}
 
 			ENDHLSL
