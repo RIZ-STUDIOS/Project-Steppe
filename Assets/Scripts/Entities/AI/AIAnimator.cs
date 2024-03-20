@@ -24,8 +24,9 @@ namespace ProjectSteppe
 
         public void PlayTargetAnimation(string animationName)
         {
+            animController.SetInteger("AttackOption", Random.Range(0,4));
+            animController.SetInteger("FinisherOption", Random.Range(0,5));
             animController.SetBool("IsAttacking", true);
-            //animController.Play(animationName, 1);
         }
 
         public void StoppedAttacking()
