@@ -67,7 +67,7 @@ namespace ProjectSteppe
         public void MortalBlow()
         {
             if (!staggered) return;
-            transform.position = playerManager.bossTeleportTransform.position;
+            transform.position = playerManager.transform.position + playerManager.transform.forward * 2;
             transform.rotation = Quaternion.Euler(0, -playerManager.transform.eulerAngles.y, 0);
 
             animator.SetTrigger("ForceAnimation");
