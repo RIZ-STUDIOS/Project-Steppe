@@ -87,7 +87,7 @@ namespace ProjectSteppe
             }
 
             transform.position = playerManager.transform.position + playerManager.transform.forward * 2.36585f;
-            transform.rotation = Quaternion.Euler(0, -playerManager.transform.eulerAngles.y, 0);
+            transform.rotation = Quaternion.Euler(0, 360 - playerManager.transform.eulerAngles.y, 0);
 
             health.ResetBalance();
             health.vulnerable = false;
