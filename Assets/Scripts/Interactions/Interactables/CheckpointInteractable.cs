@@ -6,9 +6,9 @@ namespace ProjectSteppe.Interactions.Interactables
 {
     public class CheckpointInteractable : Interactable
     {
-        [SerializeField] private Material discoveredMaterial;
-
         private bool discovered;
+
+        [SerializeField] private ParticleSystem[] particles;
 
         public override string InteractText => discovered ? "<sprite=8>Rest" : "<sprite=8>Kindle Respite";
 
@@ -31,8 +31,16 @@ namespace ProjectSteppe.Interactions.Interactables
             player.DisableCapability(PlayerCapability.Rotate);
             player.DisableCapability(PlayerCapability.Dash);
 
-            GetComponent<MeshRenderer>().material = discoveredMaterial;
-            GetComponentInChildren<ParticleSystem>().Play();
+            player.PlayerAnimator.SetTrigger("ForceAnimation");
+            player.PlayerAnimator.SetTrigger("ActivateCheckpoint");
+
+            yield return new WaitForSeconds(2.567f);
+            
+            foreach (var particle in particles)
+            {
+                particle.Play();
+            }
+
             GetComponentInChildren<Light>().intensity = 1;
 
             IEnumerator respite = player.PlayerUI.contextScreen.PlayRespiteFound();
@@ -47,7 +55,10 @@ namespace ProjectSteppe.Interactions.Interactables
 
         private void CheckpointInteract()
         {
+            player.PlayerEntity.EntityHealth.ResetHealth();
             player.PlayerUI.messagePrompt.ShowMessage("...");
+            player.PlayerAnimator.SetTrigger("ForceAnimation");
+            player.PlayerAnimator.SetBool("Sitting", true);
         }
     }
 }

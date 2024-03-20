@@ -14,6 +14,7 @@ namespace ProjectSteppe.Entities.Player
         private PlayerUIManager playerUI;
         private StarterAssetsInputs playerInput;
         private PlayerInteractor playerInteractor;
+        private Entity playerEntity;
 
         public TargetLock PlayerTargetLock => this.GetComponentIfNull(ref playerTargetLock);
         public Animator PlayerAnimator => this.GetComponentIfNull(ref playerAnimator);
@@ -21,6 +22,7 @@ namespace ProjectSteppe.Entities.Player
         public PlayerUIManager PlayerUI => this.GetComponentIfNull(ref playerUI);
         public StarterAssetsInputs PlayerInput => this.GetComponentIfNull(ref playerInput);
         public PlayerInteractor PlayerInteractor => this.GetComponentIfNull(ref playerInteractor);
+        public Entity PlayerEntity => this.GetComponentIfNull(ref playerEntity);
 
         private PlayerCapability capabilities = (PlayerCapability)0b11111;
 

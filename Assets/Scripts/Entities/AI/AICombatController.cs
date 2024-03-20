@@ -1,4 +1,6 @@
+using ProjectSteppe.Entities;
 using ProjectSteppe.Entities.Player;
+using System.Collections;
 using UnityEngine;
 
 namespace ProjectSteppe
@@ -7,6 +9,18 @@ namespace ProjectSteppe
     {
         public Transform playerTarget;
         public float currentRecoveryTime = 0f;
+
+        public int playerHits;
+
+        private Coroutine hitCoroutine;
+
+        private AIController controller;
+
+        private void Awake()
+        {
+            controller = GetComponent<AIController>();
+            GetComponent<Entity>().EntityHealth.onHit.AddListener(PlayerHitAssessment);
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -42,6 +56,22 @@ namespace ProjectSteppe
         public void AddRecovery(float time)
         {
             currentRecoveryTime += time;
+        }
+
+        private void PlayerHitAssessment()
+        {
+            playerHits++;
+
+            if (hitCoroutine != null) StopCoroutine(hitCoroutine);
+
+            hitCoroutine = StartCoroutine(PlayerHitTimeout());
+        }
+
+        public IEnumerator PlayerHitTimeout()
+        {
+            yield return new WaitForSeconds(3);
+
+            hitCoroutine = null;
         }
     }
 }

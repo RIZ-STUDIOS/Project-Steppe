@@ -4,6 +4,7 @@ using UnityEngine;
 using StarterAssets;
 using UnityEngine.AI;
 using UnityEngine.InputSystem.XR;
+using ProjectSteppe.Entities;
 
 namespace ProjectSteppe
 {
@@ -76,7 +77,9 @@ namespace ProjectSteppe
                 }
             }
             else
+            {
                 isMoving = false;
+            }
 
             if (playerTarget != null)
             {

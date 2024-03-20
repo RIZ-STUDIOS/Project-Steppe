@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField]
+    private EventSystem eventSystem;
+
     private PlayerInput playerInput;
 
     private InputAction cancelAction;
@@ -16,14 +21,12 @@ public class MainMenu : MonoBehaviour
     private CanvasGroup mainMenu;
     [SerializeField]
     private CanvasGroup generalOptions;
-    [SerializeField]
-    private CanvasGroup tutorial;
 
     [SerializeField]
     private GameObject[] optionTabs;
+    private GameObject lastSelectedMenuButton;
 
     private bool optionsOn = false;
-    private bool tutorialOn = false;
     private bool menuOn = true;
 
     private int index;
@@ -31,7 +34,6 @@ public class MainMenu : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
     }
-
     private void Start()
     {
         index = 0;
@@ -39,7 +41,6 @@ public class MainMenu : MonoBehaviour
         rightBumper = playerInput.actions["RightBumper"];
         leftBumper = playerInput.actions["LeftBumper"];
     }
-
     private void Update()
     {
         if (cancelAction.triggered)
@@ -53,59 +54,59 @@ public class MainMenu : MonoBehaviour
                 optionTabs[index].SetActive(false);
                 index = (index + 1) % optionTabs.Length;
                 optionTabs[index].SetActive(true);
+                if(index == 2)
+                {
+                    SetSelectedButton(optionTabs[index].GetComponentInChildren<Slider>().gameObject);
+                }
+                else
+                {
+                    SetSelectedButton(optionTabs[index].GetComponentInChildren<Button>().gameObject);
+                }
             }
             else if (leftBumper.triggered)
             {
                 optionTabs[index].SetActive(false);
                 index = (index - 1 + optionTabs.Length) % optionTabs.Length;
                 optionTabs[index].SetActive(true);
+                if (index == 2)
+                {
+                    SetSelectedButton(optionTabs[index].GetComponentInChildren<Slider>().gameObject);
+                }
+                else
+                {
+                    SetSelectedButton(optionTabs[index].GetComponentInChildren<Button>().gameObject);
+                }
             }
         }
     }
     public void StartGame()
     {
-        //SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1);
         Debug.Log("Start Game");
     }
     public void Quit()
     {
-        //Application.Quit();
-        Debug.Log("Quit");
+        Application.Quit();
     }
-
     public void OpenOptions()
     {
+        ResetOptionsTab();
+        lastSelectedMenuButton = eventSystem.currentSelectedGameObject;
         mainMenu.interactable = false;
         menuOn = false;
         StartCoroutine(Open(generalOptions, true));
         optionsOn = true;
+        SetSelectedButton(optionTabs[index].GetComponentInChildren<Button>().gameObject);
     }
-
-    public void OpenTutorial()
-    {
-        mainMenu.interactable = false;
-        menuOn = false;
-        StartCoroutine(Open(tutorial, true));
-        tutorialOn = true;
-    }
-
     public void BackToMenu()
     {
-        mainMenu.interactable = true;
-        if(!menuOn && tutorialOn)
+        if(!menuOn && optionsOn)
         {
-            tutorial.alpha = 0;
-            tutorial.interactable = false;
-            StartCoroutine(Open(tutorial, false));
-            tutorialOn = false;
-        }
-        else if(!menuOn && optionsOn)
-        {
-            generalOptions.alpha = 0;
-            generalOptions.interactable = false;
             StartCoroutine(Open(generalOptions, false));
             optionsOn = false;
+            SetSelectedButton(lastSelectedMenuButton);
         }
+        mainMenu.interactable = true;
         menuOn = true;
     }
     public IEnumerator Open(CanvasGroup group, bool par)
@@ -128,5 +129,15 @@ public class MainMenu : MonoBehaviour
             }
             group.interactable = false;
         }
+    }
+    private void SetSelectedButton(GameObject gameObject)
+    {
+        eventSystem.SetSelectedGameObject(gameObject);
+    }
+    private void ResetOptionsTab()
+    {
+        optionTabs[index].SetActive(false);
+        index = 0;
+        optionTabs[index].SetActive(true);
     }
 }

@@ -12,6 +12,7 @@ namespace ProjectSteppe.UI
         public BossDetailsUI bossDetails;
         public InteractPromptUI interactPrompt;
         public MessagePromptUI messagePrompt;
+        public AreaPromptUI areaPrompt;
 
         private void Awake()
         {
@@ -20,6 +21,7 @@ namespace ProjectSteppe.UI
             bossDetails = GetComponentInChildren<BossDetailsUI>();
             interactPrompt = GetComponentInChildren<InteractPromptUI>();
             messagePrompt = GetComponentInChildren<MessagePromptUI>();
+            areaPrompt = GetComponentInChildren<AreaPromptUI>();
         }
     }
 }
