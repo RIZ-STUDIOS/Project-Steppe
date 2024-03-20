@@ -108,5 +108,15 @@ namespace ProjectSteppe
                 Debug.DrawLine(eyeLevel.position, playerTarget.transform.position, Color.blue);
             }
         }
+
+        private void DisableNavMesh()
+        {
+            navmesh.enabled = false;
+        }
+
+        private void EnableNavMesh()
+        {
+            navmesh.enabled = true;
+        }
     }
 }

@@ -32,6 +32,8 @@ namespace ProjectSteppe.Entities.Player
 
         public bool bossDead;
 
+        private CharacterController characterController;
+
         public void BossDead()
         {
             bossDead = true;
@@ -58,6 +60,18 @@ namespace ProjectSteppe.Entities.Player
         {
             PlayerAnimator.SetTrigger("ForceAnimation");
             PlayerAnimator.SetTrigger("Hit");
+        }
+
+        private void DisableCharacterController()
+        {
+            if (!characterController)
+                characterController = GetComponent<CharacterController>();
+            characterController.enabled = false;
+        }
+
+        private void EnableCharacterController()
+        {
+            characterController.enabled = true;
         }
     }
 
