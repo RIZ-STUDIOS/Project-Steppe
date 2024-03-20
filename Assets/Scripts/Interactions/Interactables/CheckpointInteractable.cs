@@ -1,6 +1,7 @@
 using ProjectSteppe.Entities.Player;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ProjectSteppe.Interactions.Interactables
 {
@@ -60,6 +61,7 @@ namespace ProjectSteppe.Interactions.Interactables
 
         private void CheckpointInteract()
         {
+            if (player.bossDead) SceneManager.LoadScene(1);
             player.PlayerEntity.EntityHealth.ResetHealth();
             player.PlayerUI.messagePrompt.ShowMessage("...");
             player.PlayerAnimator.SetTrigger("ForceAnimation");

@@ -28,6 +28,13 @@ namespace ProjectSteppe.Entities.Player
 
         public UnityEvent onCapabilityChange;
 
+        public bool bossDead;
+
+        public void BossDead()
+        {
+            bossDead = true;
+        }
+
         public void EnableCapability(PlayerCapability capability)
         {
             this.capabilities |= capability;
