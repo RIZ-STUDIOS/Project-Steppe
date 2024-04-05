@@ -9,8 +9,10 @@ public class Pause : MonoBehaviour
     private PlayerInput playerInput;
 
     private InputAction pauseAction;
+    [HideInInspector]
+    public InputAction cancelAction;
 
-    private bool paused = false;
+    public bool paused = false;
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -18,12 +20,12 @@ public class Pause : MonoBehaviour
     private void Start()
     {
         pauseAction = playerInput.actions["Pause"];
+        cancelAction = playerInput.actions["Cancel"];
     }
     private void Update()
     {
         CheckPause();
     }
-
     private void CheckPause()
     {
         if (pauseAction.triggered)
