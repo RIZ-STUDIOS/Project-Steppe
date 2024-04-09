@@ -12,6 +12,9 @@ namespace ProjectSteppe.UI
         [SerializeField]
         private Slider slider;
 
+        [SerializeField]
+        private int healthBarIndex;
+
         private void Start()
         {
             entityHealth.onHealthChange.AddListener(OnHealthChange);
@@ -19,7 +22,8 @@ namespace ProjectSteppe.UI
 
         private void OnHealthChange(float health, float maxHealth)
         {
-            slider.value = health/(float)maxHealth;
+            if (healthBarIndex == entityHealth.healthBarIndex)
+                slider.value = health / (float)maxHealth;
         }
     }
 }

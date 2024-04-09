@@ -15,7 +15,8 @@ namespace ProjectSteppe
         [SerializeField]
         private Image[] phaseNodeImages;
 
-        private int currentPhase;
+        [System.NonSerialized]
+        public int currentPhase;
 
         [Header("Targetting")]
         public GameObject lockTarget;
@@ -98,6 +99,11 @@ namespace ProjectSteppe
 
             transform.position = playerManager.transform.position + playerManager.transform.forward * 2.36585f;
             transform.rotation = Quaternion.Euler(0, 360 - playerManager.transform.eulerAngles.y, 0);
+            transform.LookAt(playerManager.transform);
+            var angle = transform.eulerAngles;
+            angle.x = 0;
+            angle.z = 0;
+            transform.eulerAngles = angle;
 
             health.ResetBalance();
             health.vulnerable = false;
@@ -123,6 +129,7 @@ namespace ProjectSteppe
             }
             phaseNodeImages[currentPhase].color = Color.grey;
             currentPhase++;
+            health.healthBarIndex = currentPhase;
             if (currentPhase >= phaseNodeImages.Length)
             {
                 OnBossKilled();
