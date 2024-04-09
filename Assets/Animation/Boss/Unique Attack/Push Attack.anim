@@ -90003,6 +90003,13 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 0.33333334
+    functionName: EnableHyperArmour
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.6666667
     functionName: EnableWeaponCollision
     data: 
@@ -90017,6 +90024,20 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 1.1666666
+    functionName: DisableHyperArmour
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.4666667
+    functionName: EnableHyperArmour
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.6666666
     functionName: EnableWeaponCollision
     data: 
@@ -90026,6 +90047,13 @@ AnimationClip:
     messageOptions: 0
   - time: 1.9
     functionName: DisableWeaponCollision
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.9
+    functionName: DisableHyperArmour
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

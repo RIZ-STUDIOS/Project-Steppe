@@ -8,6 +8,9 @@ namespace ProjectSteppe
     {
         public Animator animController;
 
+        public bool attackCommitted;
+        public bool hyperArmour;
+        
         private BossHandler bossHandler;
 
         private void Start()
@@ -55,6 +58,26 @@ namespace ProjectSteppe
         public void StoppedAttacking()
         {
             animController.SetBool("IsAttacking", false);
+        }
+
+        public void EnableAttackCommitted()
+        {
+            attackCommitted = true;
+        }
+
+        public void DisableAttackCommitted()
+        {
+            attackCommitted = false;
+        }
+
+        public void EnableHyperArmour()
+        {
+            hyperArmour = true;
+        }
+
+        public void DisableHyperArmour()
+        {
+            hyperArmour = false;
         }
     }
 }

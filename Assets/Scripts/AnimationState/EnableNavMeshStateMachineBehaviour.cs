@@ -8,7 +8,9 @@ namespace ProjectSteppe
     {
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.GetComponent<AIController>().navmesh.isStopped = false;
+            AIController controller = animator.GetComponent<AIController>();
+            controller.navmesh.nextPosition = animator.transform.position;
+            controller.navmesh.isStopped = false;
         }
     }
 }
