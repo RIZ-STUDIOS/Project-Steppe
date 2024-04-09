@@ -138,6 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityHealth: {fileID: 0}
   slider: {fileID: 4902021528544753896}
+  healthBarIndex: 0
 --- !u!1 &206091034325981739
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,6 +475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityHealth: {fileID: 0}
   slider: {fileID: 2048359151868353752}
+  healthBarIndex: 1
 --- !u!1 &797021590733737637
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,6 +614,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityHealth: {fileID: 0}
   slider: {fileID: 838394221494530293}
+  healthBarIndex: 0
 --- !u!225 &8944158053487811645
 CanvasGroup:
   m_ObjectHideFlags: 0
