@@ -74,6 +74,11 @@ namespace ProjectSteppe.Entities
             if (Health > maxHealth) Health = maxHealth;
         }
 
+        public void SetHealth(float amount)
+        {
+            Health = amount;
+        }
+
         public void DamageHealth(float amount)
         {
             if (vulnerable) amount *= 2;
@@ -111,6 +116,13 @@ namespace ProjectSteppe.Entities
             {
                 onPostureFull?.Invoke();
             }
+        }
+
+        public void ForceStagger()
+        {
+            Balance = MaxBalance;
+            balanceRegenerationTimer = 0;
+            onPostureFull?.Invoke();
         }
 
         private void Update()
