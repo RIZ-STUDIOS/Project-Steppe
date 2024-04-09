@@ -62,7 +62,7 @@ namespace ProjectSteppe
         private void PlayerHitAssessment()
         {
             playerHits++;
-
+            Debug.Log("Boss hit " + playerHits + " times");
             if (hitCoroutine != null) StopCoroutine(hitCoroutine);
 
             hitCoroutine = StartCoroutine(PlayerHitTimeout());

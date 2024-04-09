@@ -95,7 +95,7 @@ namespace ProjectSteppe
         private void PlayAttack(AIController controller)
         {
             controller.animator.PlayTargetAnimation(currentAttack.attackAnimation);
-            controller.combatController.AddRecovery(currentAttack.attackRecovery);
+            //controller.combatController.AddRecovery(currentAttack.attackRecovery);
         }
 
         protected virtual bool RollForCombo(int chance)
