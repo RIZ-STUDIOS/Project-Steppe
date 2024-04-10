@@ -84,7 +84,7 @@ namespace ProjectSteppe.Entities
 
         public void DamageHealth(float amount)
         {
-            if (vulnerable) amount *= 2;
+            if (vulnerable) amount = Health;
 
             Health -= amount;
 
