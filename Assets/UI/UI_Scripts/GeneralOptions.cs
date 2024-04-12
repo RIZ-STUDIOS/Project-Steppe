@@ -71,6 +71,7 @@ public class GeneralOptions : MonoBehaviour
     }
     public void ResLeft()
     {
+        Debug.Log("S");
         resolutionIndex--;
         if (resolutionIndex < 0)
         {
@@ -80,6 +81,7 @@ public class GeneralOptions : MonoBehaviour
     }
     public void ResRight()
     {
+        Debug.Log("S");
         resolutionIndex++;
         if (resolutionIndex > resolutions.Count - 1)
         {

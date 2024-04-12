@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
-using TMPro;
 
 public class SettingsButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
@@ -19,6 +18,8 @@ public class SettingsButton : MonoBehaviour, ISelectHandler, IDeselectHandler
     public delegate void ButtonAction();
     public ButtonAction onRightAction;
     public ButtonAction onLeftAction;
+
+    private GameObject lastSelected;
     public void OnSelect(BaseEventData baseEventData)
     {
         isSelected = true;
@@ -40,6 +41,15 @@ public class SettingsButton : MonoBehaviour, ISelectHandler, IDeselectHandler
     }
     private void Update()
     {
+        GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
+        if(currentSelected != lastSelected)
+        {
+            if(lastSelected != null)
+            {
+                ExecuteEvents.Execute(lastSelected, new BaseEventData(EventSystem.current), ExecuteEvents.deselectHandler);
+            }
+            lastSelected = currentSelected;
+        }
         if (isSelected)
         {
             if (rightDpad.triggered)
