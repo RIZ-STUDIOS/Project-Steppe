@@ -4034,6 +4034,35 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 580119246}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &604380793 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5255782591761612820, guid: 69d94c968f15b0849b33b06ce81cc968,
+    type: 3}
+  m_PrefabInstance: {fileID: 8185204579665388414}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &604380795 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 5588342779519936234, guid: 69d94c968f15b0849b33b06ce81cc968,
+    type: 3}
+  m_PrefabInstance: {fileID: 8185204579665388414}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &604380798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604380793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2914a9ff4f2f8f54ea60ed1eb5b02b01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponColliders:
+  - {fileID: 604380795}
+  startEnabled: 0
+  hitEntity: {fileID: 0}
+  ignoreTimer: 0.5
 --- !u!1001 &617252977
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53692,6 +53721,11 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 982361074}
+    - target: {fileID: 3704875961503318645, guid: 69d94c968f15b0849b33b06ce81cc968,
+        type: 3}
+      propertyPath: startWeapon
+      value: 
+      objectReference: {fileID: 604380798}
     - target: {fileID: 3816308378098505816, guid: 69d94c968f15b0849b33b06ce81cc968,
         type: 3}
       propertyPath: entityHealth
@@ -53707,6 +53741,11 @@ PrefabInstance:
       propertyPath: entityHealth
       value: 
       objectReference: {fileID: 1403610654}
+    - target: {fileID: 5255782591761612820, guid: 69d94c968f15b0849b33b06ce81cc968,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 5913951745316696082, guid: 69d94c968f15b0849b33b06ce81cc968,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -53742,10 +53781,15 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6068743535383110663, guid: 69d94c968f15b0849b33b06ce81cc968, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5255782591761612820, guid: 69d94c968f15b0849b33b06ce81cc968,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 604380798}
   m_SourcePrefab: {fileID: 100100000, guid: 69d94c968f15b0849b33b06ce81cc968, type: 3}
 --- !u!4 &8224427048346724372 stripped
 Transform:
