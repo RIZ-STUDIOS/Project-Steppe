@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2668049736237573631}
   - component: {fileID: 7129242375617201635}
   - component: {fileID: 562616154923622770}
+  - component: {fileID: 7034991544444893610}
   m_Layer: 5
   m_Name: MainMenuButton
   m_TagString: Untagged
@@ -61,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -70,9 +71,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.8509804, g: 0.8509804, b: 0.8509804, a: 1}
-    m_HighlightedColor: {r: 0.9882353, g: 0.30980393, b: 0.40784314, a: 1}
-    m_PressedColor: {r: 0.9882353, g: 0.30980393, b: 0.40784314, a: 1}
-    m_SelectedColor: {r: 0.9882353, g: 0.30980393, b: 0.40784314, a: 1}
+    m_HighlightedColor: {r: 0.8980392, g: 0.21176471, b: 0.32941177, a: 1}
+    m_PressedColor: {r: 0.8980392, g: 0.21176471, b: 0.32941177, a: 1}
+    m_SelectedColor: {r: 0.8980392, g: 0.21176471, b: 0.32941177, a: 1}
     m_DisabledColor: {r: 0.101960786, g: 0.101960786, b: 0.101960786, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -116,6 +117,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64737c5f77831854fa3cc4d8571093a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &7034991544444893610
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691166663134567349}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: de83b6eb67a431648bf7204eb7e58e8e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1786995887042366957
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +203,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: START
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d486df5020bdf1d4997d6e8bdccde247, type: 2}
   m_sharedMaterial: {fileID: -3521070536601415082, guid: d486df5020bdf1d4997d6e8bdccde247,
