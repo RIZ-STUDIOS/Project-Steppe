@@ -36,10 +36,12 @@ public class Pause : MonoBehaviour
         if (paused)
         {
             pauseMenu.SetActive(true);
+            Time.timeScale = 0;
         }
         else
         {
             pauseMenu.SetActive(false);
+            Time.timeScale = 1;
         }
     }
 }
