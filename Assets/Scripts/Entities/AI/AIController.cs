@@ -111,12 +111,12 @@ namespace ProjectSteppe
 
         private void DisableNavMesh()
         {
-            navmesh.enabled = false;
+            navmesh.isStopped = true;
         }
 
         private void EnableNavMesh()
         {
-            navmesh.enabled = true;
+            navmesh.isStopped = false;
         }
     }
 }

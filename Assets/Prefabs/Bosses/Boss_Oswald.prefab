@@ -13394,9 +13394,9 @@ MonoBehaviour:
   onKill:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2010733094832552563}
+      - m_Target: {fileID: 942965604158055973}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
+        m_MethodName: HandleEntityDeath
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13583,6 +13583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04bc6917d8d0e764fb85314f537fe5ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  phaseNodeImages: []
   lockTarget: {fileID: 3856018324791029048}
   OnBossDeath:
     m_PersistentCalls:

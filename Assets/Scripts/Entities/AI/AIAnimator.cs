@@ -8,6 +8,16 @@ namespace ProjectSteppe
     {
         public Animator animController;
 
+        public bool attackCommitted;
+        public bool hyperArmour;
+        
+        private BossHandler bossHandler;
+
+        private void Start()
+        {
+            bossHandler = GetComponent<BossHandler>();
+        }
+
         public void RotateToTarget(AIController controller)
         {
             if (controller.isMoving)
@@ -24,14 +34,50 @@ namespace ProjectSteppe
 
         public void PlayTargetAnimation(string animationName)
         {
-            animController.SetInteger("AttackOption", Random.Range(0,4));
-            animController.SetInteger("FinisherOption", Random.Range(0,5));
+            int attackOption;
+            int finisherOption;
+
+            if (bossHandler.currentPhase > 0)
+            {
+                attackOption = Random.Range(0, 4);
+                finisherOption = Random.Range(0, 5);
+            }
+            else
+            {
+                attackOption = Random.Range(0, 2);
+
+                if (attackOption == 1) finisherOption = 0;
+                else finisherOption = Random.Range(0, 2);
+            }
+
+            animController.SetInteger("AttackOption", attackOption);
+            animController.SetInteger("FinisherOption", finisherOption);
             animController.SetBool("IsAttacking", true);
         }
 
         public void StoppedAttacking()
         {
             animController.SetBool("IsAttacking", false);
+        }
+
+        public void EnableAttackCommitted()
+        {
+            attackCommitted = true;
+        }
+
+        public void DisableAttackCommitted()
+        {
+            attackCommitted = false;
+        }
+
+        public void EnableHyperArmour()
+        {
+            hyperArmour = true;
+        }
+
+        public void DisableHyperArmour()
+        {
+            hyperArmour = false;
         }
     }
 }

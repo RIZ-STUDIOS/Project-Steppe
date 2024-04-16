@@ -1209,7 +1209,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: NextAttack
+    m_ConditionEvent: Attacking
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 0}
@@ -1360,14 +1360,14 @@ AnimatorStateMachine:
   - {fileID: 4366750446024357452}
   m_EntryTransitions: []
   m_StateMachineTransitions:
+  - first: {fileID: -4914970645159455969}
+    second:
+    - {fileID: -6523272650578260754}
   - first: {fileID: 2892196285543554643}
     second: []
   - first: {fileID: 7342983833498689382}
     second:
     - {fileID: 7998804360164486781}
-  - first: {fileID: -4914970645159455969}
-    second:
-    - {fileID: -6523272650578260754}
   - first: {fileID: 8768451857712532936}
     second:
     - {fileID: 6766571721084060855}
@@ -2008,7 +2008,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: NextAttack
+    m_ConditionEvent: Attacking
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 0}

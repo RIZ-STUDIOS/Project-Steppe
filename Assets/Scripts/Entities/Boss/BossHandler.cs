@@ -5,11 +5,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace ProjectSteppe
 {
     public class BossHandler : MonoBehaviour
     {
+        [Header("Phases")]
+        [SerializeField]
+        private Image[] phaseNodeImages;
+
+        [System.NonSerialized]
+        public int currentPhase;
+
         [Header("Targetting")]
         public GameObject lockTarget;
 
@@ -29,12 +37,14 @@ namespace ProjectSteppe
 
         private Coroutine staggerCoroutine;
 
+        private AIController controller;
+
         private void Awake()
         {
             animator = GetComponent<Animator>();
             health = GetComponent<EntityHealth>();
-            health.onKill.AddListener(OnBossKilled);
             navMeshAgent = GetComponent<NavMeshAgent>();
+            controller = GetComponent<AIController>();
         }
 
         private void OnBossKilled()
@@ -84,10 +94,16 @@ namespace ProjectSteppe
             {
                 StopCoroutine(staggerCoroutine);
                 staggerCoroutine = null;
+                navMeshAgent.enabled = true;
             }
 
             transform.position = playerManager.transform.position + playerManager.transform.forward * 2.36585f;
             transform.rotation = Quaternion.Euler(0, 360 - playerManager.transform.eulerAngles.y, 0);
+            transform.LookAt(playerManager.transform);
+            var angle = transform.eulerAngles;
+            angle.x = 0;
+            angle.z = 0;
+            transform.eulerAngles = angle;
 
             health.ResetBalance();
             health.vulnerable = false;
@@ -96,11 +112,50 @@ namespace ProjectSteppe
             staggered = false;
 
             animator.SetTrigger("ForceAnimation");
-            if (health.Health > 0)
+            if (currentPhase < phaseNodeImages.Length)
                 animator.SetTrigger("DeathBlow");
 
             playerManager.PlayerAnimator.SetTrigger("ForceAnimation");
             playerManager.PlayerAnimator.SetTrigger("MortalBlow");
+        }
+
+        public void HandleEntityDeath()
+        {
+            if (!staggered)
+            {
+                health.SetHealth(1);
+                health.ForceStagger();
+                return;
+            }
+            phaseNodeImages[currentPhase].color = Color.grey;
+            currentPhase++;
+            health.healthBarIndex = currentPhase;
+            if (currentPhase >= phaseNodeImages.Length)
+            {
+                OnBossKilled();
+                animator.SetTrigger("ForceAnimation");
+                animator.SetTrigger("Death");
+                controller.enabled = false;
+                health.ResetBalance();
+                health.SetInvicible(true);
+                MortalBlow();
+                playerManager.BossDead();
+            }
+            else
+            {
+                controller.enabled = false;
+                health.ResetBalance();
+                health.SetInvicible(true);
+                MortalBlow();
+                health.ResetHealth();
+            }
+        }
+
+        // Animation
+        private void OnDeathBlowEnd()
+        {
+            controller.enabled = true;
+            health.SetInvicible(false);
         }
     }
 }

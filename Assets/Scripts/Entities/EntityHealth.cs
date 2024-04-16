@@ -40,6 +40,9 @@ namespace ProjectSteppe.Entities
 
         private float startBalanceHealthRatio;
 
+        [System.NonSerialized]
+        public int healthBarIndex;
+
         public float Health { get { return health; } private set { health = value; onHealthChange.Invoke(health, maxHealth); } }
         public float Balance { get {  return balance; } private set { balance = value; if (balance < 0) balance = 0; if (balance > maxBalance) balance = maxBalance; onBalanceChange.Invoke(balance, maxBalance); } }
 
@@ -74,16 +77,21 @@ namespace ProjectSteppe.Entities
             if (Health > maxHealth) Health = maxHealth;
         }
 
+        public void SetHealth(float amount)
+        {
+            Health = amount;
+        }
+
         public void DamageHealth(float amount)
         {
-            if (vulnerable) amount *= 2;
+            if (vulnerable) amount = Health;
 
             Health -= amount;
 
             if (Health <= 0)
             {
                 onKill.Invoke();
-                animator.SetBool("PostureBreak", false);
+                //animator.SetBool("PostureBreak", false);
             }
             else
             {
@@ -111,6 +119,13 @@ namespace ProjectSteppe.Entities
             {
                 onPostureFull?.Invoke();
             }
+        }
+
+        public void ForceStagger()
+        {
+            Balance = MaxBalance;
+            balanceRegenerationTimer = 0;
+            onPostureFull?.Invoke();
         }
 
         private void Update()
