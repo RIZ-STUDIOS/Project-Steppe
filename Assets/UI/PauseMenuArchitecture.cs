@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PauseMenuArchitecture : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class PauseMenuArchitecture : MonoBehaviour
             invGroup.alpha = 0;
             isInvOpen = false;
             isPauseOpen = true;
+            EventSystem.current.SetSelectedGameObject(pauseGroup.GetComponentInChildren<Button>().gameObject);
         }
         else if(pause.cancelAction.triggered && isPauseOpen)
         {
@@ -39,6 +41,7 @@ public class PauseMenuArchitecture : MonoBehaviour
         invGroup.alpha = 1;
         isInvOpen = true;
         isPauseOpen = false;
+        EventSystem.current.SetSelectedGameObject(invGroup.GetComponentInChildren<Button>().gameObject);
     }
     public void Quit()
     {
