@@ -12516,6 +12516,7 @@ GameObject:
   - component: {fileID: 8095354861854534370}
   - component: {fileID: 3654769798709271084}
   - component: {fileID: 1215240353022385002}
+  - component: {fileID: 247752105038845862}
   m_Layer: 8
   m_Name: PlayerZ Week 12
   m_TagString: Player
@@ -12777,7 +12778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 232680dc0bd518b46b0ca2cbcba4b9ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startWeapon: {fileID: 6068743535383110663}
+  startWeapon: {fileID: 658638129353627611}
   currentAttack: {fileID: 11400000, guid: cd336ef570eee044aa1bb71562ebb2ac, type: 2}
 --- !u!114 &983263563340590556
 MonoBehaviour:
@@ -13105,6 +13106,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &247752105038845862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2282056347538574736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43953537e34b7e149b5e0dcc77ea9dd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 11400000, guid: 43ff8c6154a09474f92f1f23c06f2620, type: 2}
+  - {fileID: 11400000, guid: 8abd03ee16d37884e999d26b071de9ba, type: 2}
+  - {fileID: 11400000, guid: 41347f19da6157e4cac91dc2b8863f8e, type: 2}
 --- !u!1 &2337580417071194269
 GameObject:
   m_ObjectHideFlags: 0
@@ -30366,7 +30383,8 @@ GameObject:
   - component: {fileID: 3764161421574732013}
   - component: {fileID: 5374598248671743268}
   - component: {fileID: 5588342779519936234}
-  m_Layer: 0
+  - component: {fileID: 658638129353627611}
+  m_Layer: 13
   m_Name: Scimitar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30460,6 +30478,23 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6416504350192665122, guid: cd84fdb498473854691b519316be7796, type: 3}
+--- !u!114 &658638129353627611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5255782591761612820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2914a9ff4f2f8f54ea60ed1eb5b02b01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponColliders:
+  - {fileID: 5588342779519936234}
+  startEnabled: 0
+  hitEntity: {fileID: 0}
+  ignoreTimer: 0.5
 --- !u!1 &5350344351957745386
 GameObject:
   m_ObjectHideFlags: 0
@@ -35836,7 +35871,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2667240278289415806}
-  - component: {fileID: 6068743535383110663}
   m_Layer: 0
   m_Name: Scimitar joint
   m_TagString: Untagged
@@ -35862,23 +35896,6 @@ Transform:
   - {fileID: 7112687146569446561}
   m_Father: {fileID: 8952139087662678701}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6068743535383110663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5978559201942269553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2914a9ff4f2f8f54ea60ed1eb5b02b01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponColliders:
-  - {fileID: 5588342779519936234}
-  startEnabled: 0
-  hitEntity: {fileID: 0}
-  ignoreTimer: 0.5
 --- !u!1 &6000333131401775124
 GameObject:
   m_ObjectHideFlags: 0
