@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using ProjectSteppe.Items;
 using TMPro;
+using ProjectSteppe.Entities.Player;
+
 public class Pause : MonoBehaviour
 {
     public InventoryItemScriptableObject so;
@@ -16,12 +18,17 @@ public class Pause : MonoBehaviour
 
     public bool paused = false;
 
+    public GameObject itemButtonPosition;
+
     public GameObject itemButton;
     public RectTransform[] spawnPos;
     private int currentSpawnIndex = 0;
+
+    private PlayerManager player;
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        player = GetComponent<PlayerManager>();
     }
     private void Start()
     {
@@ -37,8 +44,17 @@ public class Pause : MonoBehaviour
         if (pauseAction.triggered)
         {
             paused = !paused;
-            Instantiate(itemButton, spawnPos[currentSpawnIndex]);
-            currentSpawnIndex++;
+            //while (itemButtonPosition.transform.childCount > 0) Destroy(itemButtonPosition.transform.GetChild(0).gameObject);
+            for (int i = 0; i < player.PlayerInventory.items.Count; i++)
+            {
+                var item = player.PlayerInventory.items[i];
+                var button = Instantiate(itemButton).GetComponent<InventoryButton>();
+                button.titleText.text = item.title;
+                button.typeText.text = item.itemType.ToString();
+                button.bodyText.text = item.description;
+                button.icon.sprite = item.icon;
+                button.transform.parent = itemButtonPosition.transform;
+            }
         }
 
         if (paused)
