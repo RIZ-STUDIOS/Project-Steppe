@@ -25,6 +25,7 @@ public class PauseMenuArchitecture : MonoBehaviour
         {
             invGroup.alpha = 0;
             isInvOpen = false;
+            pauseGroup.interactable = true;
             EventSystem.current.SetSelectedGameObject(pauseGroup.GetComponentInChildren<Button>().gameObject);
         }
         else if(pause.cancelAction.triggered && !isInvOpen)
@@ -34,6 +35,7 @@ public class PauseMenuArchitecture : MonoBehaviour
     }
     public void Inventory()
     {
+        pauseGroup.interactable = false;
         invGroup.alpha = 1;
         isInvOpen = true;
         EventSystem.current.SetSelectedGameObject(invGroup.GetComponentInChildren<Button>().gameObject);
