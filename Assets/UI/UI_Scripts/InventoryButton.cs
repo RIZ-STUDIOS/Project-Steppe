@@ -10,9 +10,9 @@ public class InventoryButton : MonoBehaviour, ISelectHandler
 {
     public InventoryItemScriptableObject inventoryItemScriptableObject;
 
-    public TMP_Text titleText;
-    public TMP_Text typeText;
-    public TMP_Text bodyText;
+    public TextMeshProUGUI titleText;
+    public TextMeshProUGUI typeText;
+    public TextMeshProUGUI bodyText;
     public Image icon;
 
     private TMP_Text buttonText;
