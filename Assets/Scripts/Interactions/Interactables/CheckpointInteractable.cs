@@ -8,24 +8,26 @@ namespace ProjectSteppe.Interactions.Interactables
     public class CheckpointInteractable : Interactable
     {
         public bool startDiscovered;
-        private bool discovered;
 
         [SerializeField] private ParticleSystem[] particles;
 
-        public override string InteractText => discovered ? "<sprite=8>Rest" : "<sprite=8>Kindle Respite";
+        public override string InteractText => Interacted ? "<sprite=8>Rest" : "<sprite=8>Kindle Respite";
+
+        public override bool OneTime => false;
+        public override bool Interacted { get; protected set; }
 
         private void Awake()
         {
             if (startDiscovered)
             {
-                discovered = true;
+                Interacted = true;
                 ActivateCheckpoint();
             }
         }
 
         public override void Interact()
         {
-            if (!discovered) FirstCheckpointInteract();
+            if (!Interacted) FirstCheckpointInteract();
             else CheckpointInteract();
         }
 
@@ -36,7 +38,7 @@ namespace ProjectSteppe.Interactions.Interactables
 
         private IEnumerator OnCheckpointFirstInteract()
         {
-            discovered = true;
+            Interacted = true;
 
             player.DisableCapability(PlayerCapability.Move);
             player.DisableCapability(PlayerCapability.Rotate);

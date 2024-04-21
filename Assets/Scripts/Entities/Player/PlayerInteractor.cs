@@ -1,4 +1,5 @@
 using ProjectSteppe.Interactions;
+using ProjectSteppe.Interactions.Interactables;
 using ProjectSteppe.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -64,6 +65,8 @@ namespace ProjectSteppe.Entities.Player
                 if (displayingMessage) return;
                 
                 var interactable = other.GetComponent<Interactable>();
+
+                if (interactable.OneTime && interactable.Interacted) return;
 
                 if (interactable != CurrentInteractable) CurrentInteractable = interactable;
             }

@@ -80,7 +80,7 @@ public class Pause : MonoBehaviour
         }
         else
         {
-            pauseMenu.InstantHide(true, true);
+            OnCancel();
         }
     }
 
@@ -88,5 +88,13 @@ public class Pause : MonoBehaviour
     {
         paused = false;
         pauseMenu.InstantHide(true, true);
+        StartCoroutine(ReEnableControls());
+    }
+
+    private IEnumerator ReEnableControls()
+    {
+        yield return new WaitForEndOfFrame();
+        player.EnableCapability(PlayerCapability.Dash);
+        player.EnableCapability(PlayerCapability.Drink);
     }
 }

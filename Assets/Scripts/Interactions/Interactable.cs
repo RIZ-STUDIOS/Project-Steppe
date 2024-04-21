@@ -12,6 +12,10 @@ namespace ProjectSteppe.Interactions
         
         protected PlayerManager player;
 
+        public abstract bool OneTime { get; }
+
+        public abstract bool Interacted { get; protected set; }
+
         public virtual void Interact() { }
 
         public virtual void InteractSetup(PlayerManager player)

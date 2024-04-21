@@ -10,13 +10,14 @@ namespace ProjectSteppe.Interactions.Interactables
     {
         public override string InteractText => "<sprite=8>Pick up";
 
+        public override bool OneTime => true;
+        public override bool Interacted { get; protected set; }
+
         public InventoryItemScriptableObject item;
 
         public int quantity;
 
         private ParticleSystem interactFX;
-
-        private bool interacted;
 
         private void Awake()
         {
@@ -25,11 +26,11 @@ namespace ProjectSteppe.Interactions.Interactables
 
         public override void Interact()
         {
-            if (!interacted)
+            if (!Interacted)
             {
                 player.PlayerInventory.items.Add(item);
                 interactFX.Stop();
-                interacted = true;
+                Interacted = true;
 
                 player.PlayerUI.messagePrompt.ShowMessage($"x{quantity} {item.title}");
             }
