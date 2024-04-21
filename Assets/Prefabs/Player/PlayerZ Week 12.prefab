@@ -13048,26 +13048,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dbdb5139b62e984ab98a0ce986310a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  so: {fileID: 11400000, guid: d4233a696a1724642b3d4bfb1198a5f4, type: 2}
-  pauseMenu: {fileID: 525081579385531366}
-  cancelAction:
-    m_Name: 
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 4bee63fb-4735-4615-b25b-9add75813e6a
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
+  canvas: {fileID: 525081579385531366}
+  pauseMenu: {fileID: 6400500259734426981}
+  invMenu: {fileID: 2074825579758823317}
   paused: 0
   itemButtonPosition: {fileID: 7081240506297054415}
   itemButton: {fileID: 1887094934468200121, guid: ddf8986b3b535e144bf491203c9071b3,
     type: 3}
-  spawnPos:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   title: {fileID: 5767400749670687519}
   itemType: {fileID: 5024426211934670988}
   description: {fileID: 8590688702206538820}
@@ -38158,8 +38145,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2230803558328626466}
-        m_TargetAssemblyTypeName: PauseMenuArchitecture, Assembly-CSharp
+      - m_Target: {fileID: 3595112259853887986}
+        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
         m_MethodName: Inventory
         m_Mode: 1
         m_Arguments:
@@ -45220,7 +45207,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4345264482062714727}
-  - component: {fileID: 2230803558328626466}
   - component: {fileID: 525081579385531366}
   m_Layer: 5
   m_Name: Pause
@@ -45251,20 +45237,6 @@ RectTransform:
   m_AnchoredPosition: {x: 960.3058, y: 540}
   m_SizeDelta: {x: 1920.6113, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2230803558328626466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8610317871972041671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 335105f4551c33b439d99042d7c5ae9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  invGroup: {fileID: 2074825579758823317}
-  pauseGroup: {fileID: 6400500259734426981}
 --- !u!225 &525081579385531366
 CanvasGroup:
   m_ObjectHideFlags: 0
