@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using ProjectSteppe.Items;
+using UnityEngine.EventSystems;
 using TMPro;
 using ProjectSteppe.Entities.Player;
 using UnityEngine.UI;
@@ -10,21 +10,16 @@ using ProjectSteppe.ZedExtensions;
 
 public class Pause : MonoBehaviour
 {
-    public InventoryItemScriptableObject so;
+    public CanvasGroup canvas;
     public CanvasGroup pauseMenu;
-    private PlayerInput playerInput;
-
-    private InputAction pauseAction;
-    [HideInInspector]
-    public InputAction cancelAction;
+    public CanvasGroup invMenu;
 
     public bool paused;
+    private bool isInvOpen;
 
     public GameObject itemButtonPosition;
 
     public GameObject itemButton;
-    public RectTransform[] spawnPos;
-    private int currentSpawnIndex = 0;
 
     private PlayerManager player;
 
@@ -35,16 +30,8 @@ public class Pause : MonoBehaviour
 
     private void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
         player = GetComponent<PlayerManager>();
     }
-
-    private void Start()
-    {
-        pauseAction = playerInput.actions["Pause"];
-        cancelAction = playerInput.actions["Cancel"];;
-    }
-
     private void OnPause()
     {
         paused = !paused;
@@ -54,7 +41,7 @@ public class Pause : MonoBehaviour
             player.DisableCapability(PlayerCapability.Dash);
             player.DisableCapability(PlayerCapability.Drink);
 
-            pauseMenu.InstantShow(true, true);
+            canvas.InstantShow(true, true);
 
             List<Transform> kiddos = new();
             foreach (Transform child in itemButtonPosition.transform)
@@ -78,15 +65,44 @@ public class Pause : MonoBehaviour
                 button.transform.SetParent(itemButtonPosition.transform);
             }
         }
-        else
+        else if(!paused && !isInvOpen)
         {
-            pauseMenu.InstantHide(true, true);
+            canvas.InstantHide(true, true);
         }
     }
 
     private void OnCancel()
     {
-        paused = false;
-        pauseMenu.InstantHide(true, true);
+        if (isInvOpen)
+        {
+            isInvOpen = false;
+            invMenu.alpha = 0;
+            invMenu.interactable = false;
+            invMenu.blocksRaycasts = false;
+            pauseMenu.interactable = true;
+            pauseMenu.blocksRaycasts = true;
+            EventSystem.current.SetSelectedGameObject(pauseMenu.GetComponentInChildren<Button>().gameObject);
+        }
+        else
+        {
+            paused = false;
+            canvas.InstantHide(true, true);
+        }
+    }
+
+    public void Inventory()
+    {
+        isInvOpen = true;
+        invMenu.alpha = 1;
+        invMenu.interactable = true;
+        invMenu.blocksRaycasts = true;
+        pauseMenu.interactable = false;
+        pauseMenu.blocksRaycasts = false;
+        EventSystem.current.SetSelectedGameObject(invMenu.GetComponentInChildren<Button>().gameObject);
+    }
+
+    public void Quit()
+    {
+
     }
 }
