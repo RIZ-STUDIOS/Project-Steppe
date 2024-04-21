@@ -7,24 +7,18 @@ using TMPro;
 using ProjectSteppe.Entities.Player;
 using UnityEngine.UI;
 using ProjectSteppe.ZedExtensions;
+using UnityEngine.EventSystems;
 
 public class Pause : MonoBehaviour
 {
-    public InventoryItemScriptableObject so;
     public CanvasGroup pauseMenu;
-    private PlayerInput playerInput;
-
-    private InputAction pauseAction;
-    [HideInInspector]
-    public InputAction cancelAction;
+    public CanvasGroup inventoryMenu;
 
     public bool paused;
 
-    public GameObject itemButtonPosition;
-
-    public GameObject itemButton;
-    public RectTransform[] spawnPos;
-    private int currentSpawnIndex = 0;
+    public GameObject buttonPrefab;
+    public GameObject invButtonGOB;
+    public GameObject pauseButtonsGOB;
 
     private PlayerManager player;
 
@@ -33,16 +27,44 @@ public class Pause : MonoBehaviour
     public TextMeshProUGUI description;
     public Image itemIcon;
 
+    private bool inventoryOpen;
+
     private void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
         player = GetComponent<PlayerManager>();
     }
 
-    private void Start()
+    public void OpenInventory()
     {
-        pauseAction = playerInput.actions["Pause"];
-        cancelAction = playerInput.actions["Cancel"];;
+        pauseMenu.InstantHide(true, true);
+
+        List<Transform> kiddos = new();
+        foreach (Transform child in invButtonGOB.transform)
+        {
+            kiddos.Add(child);
+        }
+
+        foreach (var kid in kiddos)
+        {
+            Destroy(kid.gameObject);
+        }
+
+        for (int i = 0; i < player.PlayerInventory.items.Count; i++)
+        {
+            var button = Instantiate(buttonPrefab).GetComponent<InventoryButton>();
+            button.inventoryItemScriptableObject = player.PlayerInventory.items[i]; ;
+            button.titleText = title;
+            button.typeText = itemType;
+            button.bodyText = description;
+            button.icon = itemIcon;
+            button.transform.SetParent(invButtonGOB.transform);
+        }
+
+        inventoryOpen = true;
+
+        inventoryMenu.InstantShow(true, true);
+        
+        EventSystem.current.SetSelectedGameObject(invButtonGOB.transform.GetChild(0).gameObject);
     }
 
     private void OnPause()
@@ -55,28 +77,6 @@ public class Pause : MonoBehaviour
             player.DisableCapability(PlayerCapability.Drink);
 
             pauseMenu.InstantShow(true, true);
-
-            List<Transform> kiddos = new();
-            foreach (Transform child in itemButtonPosition.transform)
-            {
-                kiddos.Add(child);
-            }
-
-            foreach (var kid in kiddos)
-            {
-                Destroy(kid.gameObject);
-            }
-
-            for (int i = 0; i < player.PlayerInventory.items.Count; i++)
-            {
-                var button = Instantiate(itemButton).GetComponent<InventoryButton>();
-                button.inventoryItemScriptableObject = player.PlayerInventory.items[i]; ;
-                button.titleText = title;
-                button.typeText = itemType;
-                button.bodyText = description;
-                button.icon = itemIcon;
-                button.transform.SetParent(itemButtonPosition.transform);
-            }
         }
         else
         {
@@ -86,9 +86,24 @@ public class Pause : MonoBehaviour
 
     private void OnCancel()
     {
-        paused = false;
-        pauseMenu.InstantHide(true, true);
-        StartCoroutine(ReEnableControls());
+        if (paused)
+        {
+            if (inventoryOpen)
+            {
+                inventoryMenu.InstantHide(true, true);
+                inventoryOpen = false;
+
+                pauseMenu.InstantShow(true, true);
+
+                EventSystem.current.SetSelectedGameObject(pauseButtonsGOB.transform.GetChild(0).gameObject);
+            }
+            else
+            {
+                paused = false;
+                pauseMenu.InstantHide(true, true);
+                StartCoroutine(ReEnableControls());
+            }
+        }
     }
 
     private IEnumerator ReEnableControls()

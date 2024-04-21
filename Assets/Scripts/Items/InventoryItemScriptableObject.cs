@@ -21,6 +21,6 @@ namespace ProjectSteppe.Items
         Weapon,
         Armour,
         Consumable,
-        Note
+        Misc
     }
 }

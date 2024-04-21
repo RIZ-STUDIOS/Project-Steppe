@@ -13048,13 +13048,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dbdb5139b62e984ab98a0ce986310a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 525081579385531366}
-  pauseMenu: {fileID: 6400500259734426981}
-  invMenu: {fileID: 2074825579758823317}
+  pauseMenu: {fileID: 525081579385531366}
+  inventoryMenu: {fileID: 2074825579758823317}
   paused: 0
-  itemButtonPosition: {fileID: 7081240506297054415}
-  itemButton: {fileID: 1887094934468200121, guid: ddf8986b3b535e144bf491203c9071b3,
+  buttonPrefab: {fileID: 1887094934468200121, guid: ddf8986b3b535e144bf491203c9071b3,
     type: 3}
+  invButtonGOB: {fileID: 7081240506297054415}
+  pauseButtonsGOB: {fileID: 1110273593039585816}
   title: {fileID: 5767400749670687519}
   itemType: {fileID: 5024426211934670988}
   description: {fileID: 8590688702206538820}
@@ -24961,8 +24961,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3400126464580720301}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.00003729302}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24973,12 +24973,12 @@ RectTransform:
   - {fileID: 589497033569448940}
   - {fileID: 2314575804934021521}
   - {fileID: 3636469052500827656}
-  m_Father: {fileID: 4345264482062714727}
+  m_Father: {fileID: 2035450714542097029}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.07519531, y: 0}
+  m_SizeDelta: {x: 0.14978027, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &2074825579758823317
 CanvasGroup:
@@ -38147,7 +38147,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3595112259853887986}
         m_TargetAssemblyTypeName: Pause, Assembly-CSharp
-        m_MethodName: Inventory
+        m_MethodName: OpenInventory
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -38929,6 +38929,7 @@ RectTransform:
   - {fileID: 4250146265610934770}
   - {fileID: 2862918213741030746}
   - {fileID: 4345264482062714727}
+  - {fileID: 6365822954179049888}
   m_Father: {fileID: 913231873559065012}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -45229,7 +45230,6 @@ RectTransform:
   m_Children:
   - {fileID: 7993698377739565938}
   - {fileID: 4916987656242633930}
-  - {fileID: 6365822954179049888}
   m_Father: {fileID: 2035450714542097029}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
