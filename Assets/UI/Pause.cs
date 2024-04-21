@@ -51,6 +51,9 @@ public class Pause : MonoBehaviour
 
         if (paused)
         {
+            player.DisableCapability(PlayerCapability.Dash);
+            player.DisableCapability(PlayerCapability.Drink);
+
             pauseMenu.InstantShow(true, true);
 
             List<Transform> kiddos = new();

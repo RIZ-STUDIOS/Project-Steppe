@@ -82,11 +82,14 @@ namespace ProjectSteppe
 
         private void OnTriggerEnter(Collider other)
         {
+            var destructible = other.GetComponent<DestructibleProp>();
+            if (destructible) destructible.ToppleProp(parentEntity.transform.forward);
+
             var hitbox = other.GetComponent<HitBox>();
             if (!hitbox) return;
             if (!hitbox.IsValidHit(parentEntity)) return;
             if (hitbox.ParentEntity == hitEntity) return;
-
+            
             Debug.Log("Hit " + other.name);
 
             float hitAngle = Vector3.Angle(hitbox.ParentEntity.transform.forward, parentEntity.transform.forward);
