@@ -8,10 +8,7 @@ namespace ProjectSteppe.UI
 {
     public class MessagePromptUI : MonoBehaviour
     {
-        /// <summary>
-        /// bool: true if showing, false if hiding prompt.
-        /// </summary>
-        public System.Action<bool> onMessagePromptChange;
+        public bool isShowing;
 
         private PlayerManager playerManager;
         private CanvasGroup canvasGroup;
@@ -28,17 +25,17 @@ namespace ProjectSteppe.UI
 
         public void ShowMessage(string message)
         {
+            isShowing = true;
+
             messageTMP.text = message;
             StartCoroutine(canvasGroup.FadeIn(true, true));
 
             playerManager.PlayerInput.OnInteraction.AddListener(HideMessage);
-
-            onMessagePromptChange?.Invoke(true);
         }
 
         public void HideMessage()
         {
-            onMessagePromptChange.Invoke(false);
+            isShowing = false;
 
             canvasGroup.InstantHide(true, true);
             //StartCoroutine(canvasGroup.FadeOut(true, true, fadeSpeedMod: 6));

@@ -33,12 +33,7 @@ namespace ProjectSteppe.Entities.Player
 
         [SerializeField] private float interactRadius = 2;
 
-        private bool displayingMessage;
-
-        private void OnMessagePromptChange(bool isShowing)
-        {
-            displayingMessage = isShowing;
-        }
+        private bool displayingMessage => playerManager.PlayerUI.messagePrompt.isShowing;
 
         private void Awake()
         {
@@ -46,8 +41,6 @@ namespace ProjectSteppe.Entities.Player
 
             onCurrentInteractableChange += playerManager.PlayerUI.interactPrompt.ShowPrompt;
             onInteractionEnded += LookForInteractable;
-
-            playerManager.PlayerUI.messagePrompt.onMessagePromptChange += OnMessagePromptChange;
         }
 
         private void OnInteract()

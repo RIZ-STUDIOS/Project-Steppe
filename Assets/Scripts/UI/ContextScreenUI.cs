@@ -1,3 +1,4 @@
+using ProjectSteppe.Managers;
 using ProjectSteppe.ZedExtensions;
 using System.Collections;
 using TMPro;
@@ -65,7 +66,7 @@ namespace ProjectSteppe.UI
 
             yield return new WaitForSeconds(waitTime);
 
-            SceneManager.LoadScene(1);
+            GameManager.Instance.RespawnCharacter();
         }
 
         public IEnumerator PlayRespiteFound(float waitTime = 2)
