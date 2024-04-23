@@ -575,6 +575,12 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 633179304}
+    - target: {fileID: 3704875961503318645, guid: 69d94c968f15b0849b33b06ce81cc968,
+        type: 3}
+      propertyPath: currentAttack
+      value: 
+      objectReference: {fileID: 11400000, guid: cd336ef570eee044aa1bb71562ebb2ac,
+        type: 2}
     - target: {fileID: 3793405948792583533, guid: 69d94c968f15b0849b33b06ce81cc968,
         type: 3}
       propertyPath: capabilities
@@ -26981,6 +26987,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CollisionDetection
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7229880406094835270, guid: 760189c7b9a6e664d997b953223e98ad,
+        type: 3}
+      propertyPath: balanceRegenerationRate
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 7229880406094835270, guid: 760189c7b9a6e664d997b953223e98ad,
+        type: 3}
+      propertyPath: timeBeforeBalanceRegeneration
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7229880406094835270, guid: 760189c7b9a6e664d997b953223e98ad,
         type: 3}

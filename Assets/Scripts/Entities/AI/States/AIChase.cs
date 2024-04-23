@@ -20,6 +20,8 @@ namespace ProjectSteppe
                 return SwitchState(controller, controller.idle);
             }
 
+            if (!controller.navmesh) return(controller.idle);
+
             if (controller.navmesh.isStopped)
             {
                 controller.navmesh.isStopped = false;
