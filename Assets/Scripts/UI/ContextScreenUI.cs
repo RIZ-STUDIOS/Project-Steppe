@@ -9,6 +9,7 @@ namespace ProjectSteppe.UI
 {
     public class ContextScreenUI : MonoBehaviour
     {
+        private PlayerUIManager uiManager;
         private CanvasGroup canvasGroup;
 
         [SerializeField] private TextMeshProUGUI contextTMP;
@@ -16,6 +17,7 @@ namespace ProjectSteppe.UI
 
         private void Awake()
         {
+            uiManager = GetComponentInParent<PlayerUIManager>();
             canvasGroup = GetComponent<CanvasGroup>();
         }
 
@@ -37,6 +39,9 @@ namespace ProjectSteppe.UI
         public IEnumerator PlayVictory(float waitTime = 2)
         {
             yield return new WaitForSeconds(waitTime);
+
+            uiManager.playerDetails.HidePlayerDetails();
+            uiManager.bossDetails.HideBossDetails();
 
             contextTMP.text = "FOE SLAIN";
 

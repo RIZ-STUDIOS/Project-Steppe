@@ -13318,6 +13318,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animController: {fileID: 2010733094832552563}
+  attackCommitted: 0
+  hyperArmour: 0
 --- !u!195 &2840605431069378812
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -13382,8 +13384,8 @@ MonoBehaviour:
   balance: 0
   maxHealth: 100
   maxBalance: 100
-  timeBeforeBalanceRegeneration: 1.5
-  balanceRegenerationRate: 0.05
+  timeBeforeBalanceRegeneration: 3
+  balanceRegenerationRate: 0.02
   balanceHealthRegenerationRatio: 0.5
   onHealthChange:
     m_PersistentCalls:
@@ -13395,9 +13397,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 942965604158055973}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_TargetAssemblyTypeName: ProjectSteppe.BossHandler, ProjectSteppe
         m_MethodName: HandleEntityDeath
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -13405,66 +13407,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: ForceAnimation
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2010733094832552563}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Death
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7802443448005072130}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Death
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7229880406094835270}
-        m_TargetAssemblyTypeName: ProjectSteppe.Entities.EntityHealth, ProjectSteppe
-        m_MethodName: ResetBalance
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Death
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7229880406094835270}
-        m_TargetAssemblyTypeName: ProjectSteppe.Entities.EntityHealth, ProjectSteppe
-        m_MethodName: SetInvicible
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Death
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 942965604158055973}
-        m_TargetAssemblyTypeName: ProjectSteppe.BossHandler, ProjectSteppe
-        m_MethodName: MortalBlow
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Death
-          m_BoolArgument: 1
         m_CallState: 2
   onPostureFull:
     m_PersistentCalls:
@@ -13583,7 +13525,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04bc6917d8d0e764fb85314f537fe5ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phaseNodeImages: []
+  phaseNodeImages:
+  - {fileID: 0}
+  - {fileID: 0}
   lockTarget: {fileID: 3856018324791029048}
   OnBossDeath:
     m_PersistentCalls:
@@ -13600,7 +13544,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  health: {fileID: 0}
+  health: {fileID: 7229880406094835270}
   playerManager: {fileID: 0}
 --- !u!1 &4273324415676213358
 GameObject:
@@ -19627,7 +19571,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!136 &1649054270284870320
 CapsuleCollider:
   m_ObjectHideFlags: 0

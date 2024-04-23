@@ -13022,6 +13022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3956537321d02b945aa8d028902394e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respondToData: 1
   move: {x: 0, y: 0}
   look: {x: 0, y: 0}
   jump: 0
@@ -13562,8 +13563,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+      - m_Target: {fileID: 3595112259853887986}
+        m_TargetAssemblyTypeName: Pause, ProjectSteppe.UI
         m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
@@ -36677,7 +36678,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!1 &5836024617582841581
 GameObject:
   m_ObjectHideFlags: 0
