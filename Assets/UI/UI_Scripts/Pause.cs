@@ -46,9 +46,9 @@ public class Pause : MonoBehaviour
     {
         pauseMenu.InstantHide(true, true);
 
-        if (invButtonGOB.transform.childCount == 0)
+        if (invButtonGOB.transform.childCount != player.PlayerInventory.items.Count)
         {
-            for (int i = 0; i < player.PlayerInventory.items.Count; i++)
+            for (int i = invButtonGOB.transform.childCount; i < player.PlayerInventory.items.Count; i++)
             {
                 var button = Instantiate(buttonPrefab).GetComponent<InventoryButton>();
                 button.inventoryItemScriptableObject = player.PlayerInventory.items[i]; ;
