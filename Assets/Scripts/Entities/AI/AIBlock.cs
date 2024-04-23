@@ -7,12 +7,12 @@ namespace ProjectSteppe
     {
         private EntityHealth health;
         private AIAnimator animator;
-        private AIAttackStatus attackStatus;
+        //private AIAttackStatus attackStatus;
         private Entity entity;
 
         private void Awake()
         {
-            attackStatus = GetComponent<AIAttackStatus>();
+            //attackStatus = GetComponent<AIAttackStatus>();
             animator = GetComponent<AIAnimator>();
             health = GetComponent<EntityHealth>();
             entity = GetComponent<Entity>();
