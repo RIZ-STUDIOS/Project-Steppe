@@ -15,6 +15,8 @@ namespace ProjectSteppe.UI
         private Button button;
         private TextMeshProUGUI messageTMP;
 
+        private Coroutine displayCoroutine;
+
         private void Awake()
         {
             playerManager = GetComponentInParent<PlayerManager>();
@@ -28,7 +30,7 @@ namespace ProjectSteppe.UI
             isShowing = true;
 
             messageTMP.text = message;
-            StartCoroutine(canvasGroup.FadeIn(true, true));
+            displayCoroutine = StartCoroutine(canvasGroup.FadeIn(true, true));
 
             playerManager.PlayerInput.OnInteraction.AddListener(HideMessage);
         }
@@ -36,6 +38,8 @@ namespace ProjectSteppe.UI
         public void HideMessage()
         {
             isShowing = false;
+
+            if (displayCoroutine != null) StopCoroutine(displayCoroutine);
 
             canvasGroup.InstantHide(true, true);
             //StartCoroutine(canvasGroup.FadeOut(true, true, fadeSpeedMod: 6));

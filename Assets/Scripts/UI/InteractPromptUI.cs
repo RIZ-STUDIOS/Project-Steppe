@@ -9,6 +9,8 @@ namespace ProjectSteppe.UI
         private CanvasGroup canvasGroup;
         private TextMeshProUGUI interactTMP;
 
+        private Coroutine displayCoroutine;
+
         private void Awake()
         {
             canvasGroup = GetComponent<CanvasGroup>();
@@ -18,11 +20,12 @@ namespace ProjectSteppe.UI
         public void ShowPrompt(string message)
         {
             interactTMP.text = message;
-            StartCoroutine(canvasGroup.FadeIn());
+            displayCoroutine = StartCoroutine(canvasGroup.FadeIn());
         }
 
         public void HidePrompt()
         {
+            if (displayCoroutine != null) StopCoroutine(displayCoroutine);
             canvasGroup.InstantHide();
             //StartCoroutine(canvasGroup.FadeOut(fadeSpeedMod: 6));
         }

@@ -17,6 +17,7 @@ namespace ProjectSteppe.Entities.Player
                 _currentInteractable = value;
                 if (_currentInteractable != null)
                 {
+                    if (searchCoroutine != null) StopCoroutine(searchCoroutine);
                     CurrentInteractable.InteractSetup(playerManager);
                     onCurrentInteractableChange?.Invoke(value.InteractText);
                 }
@@ -32,6 +33,8 @@ namespace ProjectSteppe.Entities.Player
         public System.Action<float> onInteractionEnded;
 
         [SerializeField] private float interactRadius = 2;
+
+        private Coroutine searchCoroutine;
 
         private bool displayingMessage => playerManager.PlayerUI.messagePrompt.isShowing;
 
@@ -79,7 +82,7 @@ namespace ProjectSteppe.Entities.Player
 
         public void LookForInteractable(float seconds)
         {
-            StartCoroutine(LookForInteractableIEnumerator(seconds));
+            searchCoroutine = StartCoroutine(LookForInteractableIEnumerator(seconds));
         }
 
         public IEnumerator LookForInteractableIEnumerator(float seconds = 0.25f)
