@@ -1,6 +1,7 @@
 using ProjectSteppe.Entities.Player;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace ProjectSteppe.Interactions.Interactables
@@ -15,6 +16,8 @@ namespace ProjectSteppe.Interactions.Interactables
 
         public override bool OneTime => false;
         public override bool Interacted { get; protected set; }
+
+        public UnityEvent OnCheckpointFirstInteraction;
 
         private void Awake()
         {
@@ -33,6 +36,7 @@ namespace ProjectSteppe.Interactions.Interactables
 
         private void FirstCheckpointInteract()
         {
+            OnCheckpointFirstInteraction.Invoke();
             StartCoroutine(OnCheckpointFirstInteract());
         }
 

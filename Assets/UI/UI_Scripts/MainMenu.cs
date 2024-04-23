@@ -1,4 +1,5 @@
 using ProjectSteppe;
+using ProjectSteppe.Managers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -82,8 +83,7 @@ public class MainMenu : MonoBehaviour
     }
     public void StartGame()
     {
-        //SceneManager.LoadScene(1);
-        LoadingManager.LoadScene(1);
+        GameManager.Instance.RespawnCharacter();
         Debug.Log("Start Game");
     }
     public void Quit()

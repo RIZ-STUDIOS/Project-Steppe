@@ -43,7 +43,7 @@ namespace ProjectSteppe.UI
         {
             onMessagePromptChange.Invoke(false);
 
-            StartCoroutine(canvasGroup.FadeOut(true, true));
+            StartCoroutine(canvasGroup.FadeOut(true, true, fadeSpeedMod: 6));
 
             GetComponentInParent<PlayerManager>().PlayerInput.OnInteraction.RemoveListener(HideMessage);
             GetComponentInParent<PlayerManager>().PlayerAnimator.SetBool("Sitting", false);
