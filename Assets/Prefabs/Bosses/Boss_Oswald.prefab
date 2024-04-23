@@ -13215,6 +13215,7 @@ GameObject:
   - component: {fileID: 7556168611865910723}
   - component: {fileID: 7231966528562794890}
   - component: {fileID: 942965604158055973}
+  - component: {fileID: 1516366723575846871}
   m_Layer: 11
   m_Name: Boss_Oswald
   m_TagString: Untagged
@@ -13546,6 +13547,29 @@ MonoBehaviour:
         m_CallState: 2
   health: {fileID: 7229880406094835270}
   playerManager: {fileID: 0}
+--- !u!136 &1516366723575846871
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4208630089096047747}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.75
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &4273324415676213358
 GameObject:
   m_ObjectHideFlags: 0
@@ -19519,8 +19543,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6245711186125161259}
-  - component: {fileID: 6633475430368608016}
-  - component: {fileID: 1649054270284870320}
   m_Layer: 11
   m_Name: Knight Boss Rigged
   m_TagString: Untagged
@@ -19545,56 +19567,6 @@ Transform:
   - {fileID: 3751517678753634201}
   m_Father: {fileID: 4777589370883011570}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &6633475430368608016
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5924964724084533844}
-  serializedVersion: 4
-  m_Mass: 100
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 2
---- !u!136 &1649054270284870320
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5924964724084533844}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.75
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &5950599670223255835
 GameObject:
   m_ObjectHideFlags: 0
