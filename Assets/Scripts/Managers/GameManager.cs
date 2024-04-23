@@ -1,16 +1,41 @@
 using RicTools.Managers;
+using System.Collections.Generic;
+using TMPro;
+using Unity.Plastic.Antlr3.Runtime.Debug;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
+using UnityEngine.SceneManagement;
+using UnityEngine.TextCore.Text;
 
 namespace ProjectSteppe.Managers
 {
     public class GameManager : GenericManager<GameManager>
     {
+        [SerializeField]
+        TMP_FontAsset font;
+
+        [SerializeField]
+        TMP_SpriteAsset ps5;
+
+        [SerializeField]
+        TMP_SpriteAsset xbox;
+
+        [SerializeField]
+        TMP_SpriteAsset kbm;
+
+        TextMeshProUGUI[] sceneTMPs;
+
         public bool hasSecondCheckpoint;
 
-        private void Awake()
+        protected override void Awake()
         {
-            InputSystem.onDeviceChange += OnDeviceChange;
+            base.Awake();
+            InputUser.onChange += OnDeviceChange;
+            SceneManager.sceneLoaded += GetTMPUGUIs;
+
+            GetTMPUGUIs(default, 0);
+            OnDeviceChange(default, 0, InputSystem.devices[0]);
         }
 
         public void RespawnCharacter()
@@ -24,9 +49,41 @@ namespace ProjectSteppe.Managers
             hasSecondCheckpoint = true;
         }
 
-        private void OnDeviceChange(InputDevice device, InputDeviceChange deviceChange)
+        private void GetTMPUGUIs(Scene newScene, LoadSceneMode mode)
         {
-            Debug.Log(deviceChange.ToString());
+            sceneTMPs = GameObject.FindObjectsByType<TextMeshProUGUI>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        }
+
+        private void OnDeviceChange(InputUser user, InputUserChange userChange, InputDevice device)
+        {
+            if (device != null)
+            {
+                TMP_SpriteAsset spriteAsset = kbm;
+
+                Debug.Log(device.description.interfaceName);
+                switch (device.description.interfaceName)
+                {
+                    case "HID":
+                        spriteAsset = ps5;
+
+                        break;
+
+                    case "XInput":
+                        spriteAsset = xbox;
+
+                        break;
+
+                    default:
+                        spriteAsset = kbm;
+
+                        break;
+                }
+
+                foreach (var tmp in sceneTMPs)
+                {
+                    tmp.spriteAsset = spriteAsset;
+                }
+            }
         }
     }
 }

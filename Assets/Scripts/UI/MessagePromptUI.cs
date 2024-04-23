@@ -45,7 +45,8 @@ namespace ProjectSteppe.UI
 
             GetComponentInParent<PlayerManager>().PlayerInput.OnInteraction.RemoveListener(HideMessage);
             GetComponentInParent<PlayerManager>().PlayerAnimator.SetBool("Sitting", false);
-            playerManager.PlayerInteractor.onInteractionEnded?.Invoke(0);
+
+            playerManager.PlayerInteractor.onInteractionEnded?.Invoke(.25f);
         }
     }
 }

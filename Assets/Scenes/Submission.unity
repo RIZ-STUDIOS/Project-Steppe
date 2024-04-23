@@ -465,6 +465,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 297956798286117167, guid: 69d94c968f15b0849b33b06ce81cc968,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 757605240391287620, guid: 69d94c968f15b0849b33b06ce81cc968,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -50
+      objectReference: {fileID: 0}
     - target: {fileID: 913231873559065012, guid: 69d94c968f15b0849b33b06ce81cc968,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2259,7 +2269,7 @@ PrefabInstance:
     - target: {fileID: 7986122170214395251, guid: c377eb580d5a6a749bf6ff0649ec8a51,
         type: 3}
       propertyPath: messageText
-      value: <sprite=15> Use Item (Heal)
+      value: <sprite=7> Use Item (Heal)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7826,7 +7836,7 @@ PrefabInstance:
     - target: {fileID: 7971746492944688669, guid: c377eb580d5a6a749bf6ff0649ec8a51,
         type: 3}
       propertyPath: m_Name
-      value: HealthMessage (2)
+      value: SidePathMessage
       objectReference: {fileID: 0}
     - target: {fileID: 7986122170214395251, guid: c377eb580d5a6a749bf6ff0649ec8a51,
         type: 3}
@@ -8026,12 +8036,12 @@ PrefabInstance:
     - target: {fileID: 7971746492944688669, guid: c377eb580d5a6a749bf6ff0649ec8a51,
         type: 3}
       propertyPath: m_Name
-      value: AttackMessage (1)
+      value: MoveMessage
       objectReference: {fileID: 0}
     - target: {fileID: 7986122170214395251, guid: c377eb580d5a6a749bf6ff0649ec8a51,
         type: 3}
       propertyPath: messageText
-      value: <sprite=14> Move
+      value: <sprite=0> Move
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11769,7 +11779,7 @@ PrefabInstance:
     - target: {fileID: 7986122170214395251, guid: c377eb580d5a6a749bf6ff0649ec8a51,
         type: 3}
       propertyPath: messageText
-      value: <sprite=0> (Tap) Parry (as attack lands)
+      value: <sprite=5> (Tap) Parry (as attack lands)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19491,7 +19501,7 @@ PrefabInstance:
     - target: {fileID: 7986122170214395251, guid: c377eb580d5a6a749bf6ff0649ec8a51,
         type: 3}
       propertyPath: messageText
-      value: <sprite=6> Jump
+      value: <sprite=2> Jump
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25531,12 +25541,12 @@ PrefabInstance:
     - target: {fileID: 7971746492944688669, guid: c377eb580d5a6a749bf6ff0649ec8a51,
         type: 3}
       propertyPath: m_Name
-      value: HealthMessage (3)
+      value: BoostJumpMessage
       objectReference: {fileID: 0}
     - target: {fileID: 7986122170214395251, guid: c377eb580d5a6a749bf6ff0649ec8a51,
         type: 3}
       propertyPath: messageText
-      value: <sprite=6> + <sprite=5> Boost Jump
+      value: <sprite=2> + <sprite=3> Boost Jump
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27893,7 +27903,7 @@ PrefabInstance:
     - target: {fileID: 7986122170214395251, guid: c377eb580d5a6a749bf6ff0649ec8a51,
         type: 3}
       propertyPath: messageText
-      value: <sprite=0> (Hold) Block
+      value: <sprite=5> (Hold) Block
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -32179,7 +32189,7 @@ PrefabInstance:
     - target: {fileID: 7971746492944688669, guid: c377eb580d5a6a749bf6ff0649ec8a51,
         type: 3}
       propertyPath: m_Name
-      value: HealthMessage (1)
+      value: BalanceMessage
       objectReference: {fileID: 0}
     - target: {fileID: 7986122170214395251, guid: c377eb580d5a6a749bf6ff0649ec8a51,
         type: 3}
@@ -33534,6 +33544,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657323f6ec29db344b3d9dc9ff894198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  font: {fileID: 11400000, guid: d486df5020bdf1d4997d6e8bdccde247, type: 2}
+  ps5: {fileID: 11400000, guid: 44a21995f9e822a49ad374784f039468, type: 2}
+  xbox: {fileID: 11400000, guid: 2d16853f239df7d4bbefaa179b589d48, type: 2}
+  kbm: {fileID: 11400000, guid: d78287b0baa664b40aa1e3d67e888384, type: 2}
   hasSecondCheckpoint: 0
 --- !u!1001 &2029313512
 PrefabInstance:
@@ -34124,7 +34138,7 @@ PrefabInstance:
     - target: {fileID: 7986122170214395251, guid: c377eb580d5a6a749bf6ff0649ec8a51,
         type: 3}
       propertyPath: messageText
-      value: <sprite=5> Dodge
+      value: <sprite=3> Dodge
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -34820,12 +34834,12 @@ PrefabInstance:
     - target: {fileID: 7971746492944688669, guid: c377eb580d5a6a749bf6ff0649ec8a51,
         type: 3}
       propertyPath: m_Name
-      value: AttackMessage (2)
+      value: LookMessage
       objectReference: {fileID: 0}
     - target: {fileID: 7986122170214395251, guid: c377eb580d5a6a749bf6ff0649ec8a51,
         type: 3}
       propertyPath: messageText
-      value: <sprite=20> Look
+      value: <sprite=1> Look
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -73204,7 +73218,7 @@ PrefabInstance:
     - target: {fileID: 7986122170214395251, guid: c377eb580d5a6a749bf6ff0649ec8a51,
         type: 3}
       propertyPath: messageText
-      value: <sprite=2> Attack
+      value: <sprite=4> Attack
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

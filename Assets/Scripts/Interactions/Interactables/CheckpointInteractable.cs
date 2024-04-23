@@ -64,7 +64,7 @@ namespace ProjectSteppe.Interactions.Interactables
             player.EnableCapability(PlayerCapability.Dash);
             player.EnableCapability(PlayerCapability.Attack);
 
-            player.PlayerInteractor.onInteractionEnded?.Invoke(0);
+            player.PlayerInteractor.onInteractionEnded?.Invoke(.25f);
         }
 
         private void CheckpointInteract()

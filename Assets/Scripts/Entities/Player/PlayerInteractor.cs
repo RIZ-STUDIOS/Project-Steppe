@@ -20,7 +20,11 @@ namespace ProjectSteppe.Entities.Player
                     CurrentInteractable.InteractSetup(playerManager);
                     onCurrentInteractableChange?.Invoke(value.InteractText);
                 }
-                else playerManager.PlayerUI.interactPrompt.HidePrompt();
+                else
+                {
+                    playerManager.PlayerUI.interactPrompt.HidePrompt();
+                    Debug.Log("ERRRR");
+                }
             }
         }
 
@@ -85,7 +89,7 @@ namespace ProjectSteppe.Entities.Player
             StartCoroutine(LookForInteractableIEnumerator(seconds));
         }
 
-        public IEnumerator LookForInteractableIEnumerator(float seconds = 0)
+        public IEnumerator LookForInteractableIEnumerator(float seconds = 0.25f)
         {
             yield return new WaitForSeconds(seconds);
 
