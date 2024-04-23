@@ -25,7 +25,8 @@ namespace ProjectSteppe.UI
 
         public void HidePrompt()
         {
-            StartCoroutine(canvasGroup.FadeOut(fadeSpeedMod: 6));
+            canvasGroup.InstantHide();
+            //StartCoroutine(canvasGroup.FadeOut(fadeSpeedMod: 6));
         }
     }
 }
