@@ -8,6 +8,8 @@ using ProjectSteppe.Entities.Player;
 using UnityEngine.UI;
 using ProjectSteppe.ZedExtensions;
 using UnityEngine.EventSystems;
+using StarterAssets;
+using ProjectSteppe;
 
 public class Pause : MonoBehaviour
 {
@@ -29,35 +31,33 @@ public class Pause : MonoBehaviour
 
     private bool inventoryOpen;
 
+    private StarterAssetsInputs input;
+
+    private PlayerInput playerInput;
+
     private void Awake()
     {
         player = GetComponent<PlayerManager>();
+        input = GetComponent<StarterAssetsInputs>();
+        playerInput = GetComponent<PlayerInput>();
     }
 
     public void OpenInventory()
     {
         pauseMenu.InstantHide(true, true);
 
-        List<Transform> kiddos = new();
-        foreach (Transform child in invButtonGOB.transform)
+        if (invButtonGOB.transform.childCount == 0)
         {
-            kiddos.Add(child);
-        }
-
-        foreach (var kid in kiddos)
-        {
-            Destroy(kid.gameObject);
-        }
-
-        for (int i = 0; i < player.PlayerInventory.items.Count; i++)
-        {
-            var button = Instantiate(buttonPrefab).GetComponent<InventoryButton>();
-            button.inventoryItemScriptableObject = player.PlayerInventory.items[i]; ;
-            button.titleText = title;
-            button.typeText = itemType;
-            button.bodyText = description;
-            button.icon = itemIcon;
-            button.transform.SetParent(invButtonGOB.transform);
+            for (int i = 0; i < player.PlayerInventory.items.Count; i++)
+            {
+                var button = Instantiate(buttonPrefab).GetComponent<InventoryButton>();
+                button.inventoryItemScriptableObject = player.PlayerInventory.items[i]; ;
+                button.titleText = title;
+                button.typeText = itemType;
+                button.bodyText = description;
+                button.icon = itemIcon;
+                button.transform.SetParent(invButtonGOB.transform);
+            }
         }
 
         inventoryOpen = true;
@@ -67,19 +67,28 @@ public class Pause : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(invButtonGOB.transform.GetChild(0).gameObject);
     }
 
+    public void Quit()
+    {
+        Time.timeScale = 1;
+        LoadingManager.LoadScene(0);
+    }
+
     private void OnPause()
     {
         paused = !paused;
 
         if (paused)
         {
-            player.DisableCapability(PlayerCapability.Dash);
-            player.DisableCapability(PlayerCapability.Drink);
+            playerInput.SwitchCurrentActionMap("UI");
+            Time.timeScale = 0;
+            input.ResetInputs();
+            input.respondToData = false;
 
             pauseMenu.InstantShow(true, true);
         }
         else
         {
+            paused = true;
             OnCancel();
         }
     }
@@ -99,7 +108,9 @@ public class Pause : MonoBehaviour
             }
             else
             {
+                playerInput.SwitchCurrentActionMap("Player");
                 paused = false;
+                Time.timeScale = 1;
                 pauseMenu.InstantHide(true, true);
                 StartCoroutine(ReEnableControls());
             }
@@ -109,7 +120,8 @@ public class Pause : MonoBehaviour
     private IEnumerator ReEnableControls()
     {
         yield return new WaitForEndOfFrame();
-        player.EnableCapability(PlayerCapability.Dash);
-        player.EnableCapability(PlayerCapability.Drink);
+        input.respondToData = true;
+        //player.EnableCapability(PlayerCapability.Dash);
+        //player.EnableCapability(PlayerCapability.Drink);
     }
 }

@@ -88,7 +88,7 @@ namespace ProjectSteppe.Entities.Player
 
             playerMovement.onMoveAnimator += OnMoveInput;
             playerMovement.onGround.AddListener(OnGround);
-            playerMovement.onJump.AddListener(OnJump);
+            playerMovement.onJump.AddListener(OnJumpEvent);
             playerMovement.onDashStart.AddListener(OnDashStart);
             playerMovement.onDashEnd.AddListener(OnDashEnd);
             playerWeapon.onParry += OnParry;
@@ -111,7 +111,7 @@ namespace ProjectSteppe.Entities.Player
             animator.SetTrigger(_animIDEndJump);
         }
 
-        private void OnJump()
+        private void OnJumpEvent()
         {
             animator.ResetTrigger(_animIDEndJump);
             animator.SetTrigger(_animIDJump);
