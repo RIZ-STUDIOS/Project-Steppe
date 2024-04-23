@@ -1,15 +1,17 @@
 using RicTools.Managers;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
+using UnityEngine.InputSystem;
 
 namespace ProjectSteppe.Managers
 {
     public class GameManager : GenericManager<GameManager>
     {
         public bool hasSecondCheckpoint;
+
+        private void Awake()
+        {
+            InputSystem.onDeviceChange += OnDeviceChange;
+        }
 
         public void RespawnCharacter()
         {
@@ -20,6 +22,11 @@ namespace ProjectSteppe.Managers
         public void HasSecondCheckpoint()
         {
             hasSecondCheckpoint = true;
+        }
+
+        private void OnDeviceChange(InputDevice device, InputDeviceChange deviceChange)
+        {
+            Debug.Log(deviceChange.ToString());
         }
     }
 }

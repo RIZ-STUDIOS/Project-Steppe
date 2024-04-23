@@ -1,10 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace ProjectSteppe
 {
@@ -51,7 +47,7 @@ namespace ProjectSteppe
             float alpha = 1;
             overlayImage.alpha = alpha;
 
-            while(alpha > 0)
+            while (alpha > 0)
             {
                 alpha -= Time.deltaTime * 2;
                 overlayImage.alpha = alpha;
@@ -135,7 +131,7 @@ namespace ProjectSteppe
             start.alpha = alpha;
             end.alpha = 1 - alpha;
 
-            while(alpha > 0)
+            while (alpha > 0)
             {
                 alpha -= Time.deltaTime * speed;
                 start.alpha = alpha;

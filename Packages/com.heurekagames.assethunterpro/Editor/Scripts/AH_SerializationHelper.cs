@@ -61,7 +61,7 @@ namespace HeurekaGames.AssetHunterPRO
                 rowDataTemp[1] = item.relativePath;
                 rowDataTemp[2] = item.fileSize.ToString();
                 rowDataTemp[3] = item.usedInBuild.ToString();
-                rowDataTemp[4] = (item.scenesReferencingAsset != null)?string.Join(",", item.scenesReferencingAsset):"";
+                rowDataTemp[4] = (item.scenesReferencingAsset != null) ? string.Join(",", item.scenesReferencingAsset) : "";
                 rowData.Add(rowDataTemp);
             }
 

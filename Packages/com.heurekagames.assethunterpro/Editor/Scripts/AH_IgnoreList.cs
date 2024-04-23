@@ -1,9 +1,8 @@
-﻿using System;
+﻿using HeurekaGames.Utils;
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using HeurekaGames;
-using HeurekaGames.Utils;
 
 namespace HeurekaGames.AssetHunterPRO
 {
@@ -82,7 +81,7 @@ namespace HeurekaGames.AssetHunterPRO
         }
 
         public void Save()
-        {          
+        {
             string newJsonString = JsonUtility.ToJson(CombinedIgnored);
             string oldJsonString = EditorPrefs.GetString(playerPrefKey);
 

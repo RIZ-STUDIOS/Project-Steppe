@@ -1,9 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
-using TMPro;
 
 public class GeneralOptions : MonoBehaviour
 {
@@ -24,7 +23,7 @@ public class GeneralOptions : MonoBehaviour
     private void Start()
     {
         resolutions.Clear();
-        foreach(var res in Screen.resolutions)
+        foreach (var res in Screen.resolutions)
         {
             resolutions.Add(new ResItem()
             {
@@ -66,7 +65,7 @@ public class GeneralOptions : MonoBehaviour
     private void UpdateResolution()
     {
         var currentRes = resolutions[resolutionIndex];
-        resText.text = currentRes.horizontal.ToString() + " x " + currentRes.vertical.ToString() + " " + (currentRes.refreshRate.numerator/(float)currentRes.refreshRate.denominator).ToString("F0") + "hz";
+        resText.text = currentRes.horizontal.ToString() + " x " + currentRes.vertical.ToString() + " " + (currentRes.refreshRate.numerator / (float)currentRes.refreshRate.denominator).ToString("F0") + "hz";
         Screen.SetResolution(currentRes.horizontal, currentRes.vertical, FullScreenMode.FullScreenWindow, currentRes.refreshRate);
     }
     public void ResLeft()

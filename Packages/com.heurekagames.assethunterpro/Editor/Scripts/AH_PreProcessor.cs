@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -39,9 +38,9 @@ public class AH_PreProcessor : MonoBehaviour
                 UnityEditor.Build.NamedBuildTarget.FromBuildTargetGroup(EditorUserBuildSettings.selectedBuildTargetGroup),
                 string.Join(";", allDefines.ToArray()));
 #else
-                    PlayerSettings.SetScriptingDefineSymbolsForGroup(
-                EditorUserBuildSettings.selectedBuildTargetGroup,
-                string.Join(";", allDefines.ToArray()));
+            PlayerSettings.SetScriptingDefineSymbolsForGroup(
+        EditorUserBuildSettings.selectedBuildTargetGroup,
+        string.Join(";", allDefines.ToArray()));
 #endif
         }
     }

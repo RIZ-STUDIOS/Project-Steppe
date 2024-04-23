@@ -1,11 +1,8 @@
-using ProjectSteppe;
 using ProjectSteppe.Managers;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
@@ -56,7 +53,7 @@ public class MainMenu : MonoBehaviour
                 optionTabs[index].SetActive(false);
                 index = (index + 1) % optionTabs.Length;
                 optionTabs[index].SetActive(true);
-                if(index == 2)
+                if (index == 2)
                 {
                     SetSelectedButton(optionTabs[index].GetComponentInChildren<Slider>().gameObject);
                 }
@@ -102,7 +99,7 @@ public class MainMenu : MonoBehaviour
     }
     public void BackToMenu()
     {
-        if(!menuOn && optionsOn)
+        if (!menuOn && optionsOn)
         {
             StartCoroutine(Open(generalOptions, false));
             optionsOn = false;

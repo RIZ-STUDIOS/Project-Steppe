@@ -35,7 +35,7 @@ namespace HeurekaGames.Utils
                 additionHeaderContent?.Invoke();
             }
 
-            if(additionHeaderContent==null)
+            if (additionHeaderContent == null)
                 GUILayout.FlexibleSpace();
 
             EditorGUILayout.EndHorizontal();

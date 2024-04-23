@@ -1,7 +1,6 @@
-﻿using System;
+﻿using HeurekaGames.Utils;
 using UnityEditor;
 using UnityEngine;
-using HeurekaGames.Utils;
 
 namespace HeurekaGames.AssetHunterPRO
 {
@@ -33,7 +32,7 @@ namespace HeurekaGames.AssetHunterPRO
             public static readonly string ReferenceGraph = "referenceGraph";
             public static readonly string LoadLog = "loadLog";
             public static readonly string Duplicate = "duplicate";
-            public static readonly string Settings ="settings";
+            public static readonly string Settings = "settings";
             public static readonly string Report = "report";
             public static readonly string Merge = "merge";
             public static readonly string Achievement = "achievement";

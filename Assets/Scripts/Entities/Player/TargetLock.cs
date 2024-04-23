@@ -1,11 +1,7 @@
-using Cinemachine;
 using ProjectSteppe.Utilities;
 using StarterAssets;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem.HID;
 
 namespace ProjectSteppe.Entities.Player
 {
@@ -56,17 +52,17 @@ namespace ProjectSteppe.Entities.Player
 
         private void Update()
         {
-            if(_input.targetLock && justLocked)
+            if (_input.targetLock && justLocked)
             {
                 _input.targetLock = false;
             }
 
-            if(!_input.targetLock && justLocked)
+            if (!_input.targetLock && justLocked)
             {
                 justLocked = false;
             }
 
-            if(_input.targetLock && !justLocked && canLock)
+            if (_input.targetLock && !justLocked && canLock)
             {
                 if (lockOn)
                     StopLockOn();
@@ -82,7 +78,7 @@ namespace ProjectSteppe.Entities.Player
                 transform.rotation = Quaternion.Euler(0, d.y, 0);
             }
 
-            if(lockOn && !lookAtTransform)
+            if (lockOn && !lookAtTransform)
             {
                 StopLockOn();
             }

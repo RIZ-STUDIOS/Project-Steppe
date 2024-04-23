@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace ProjectSteppe
 {
@@ -12,17 +10,17 @@ namespace ProjectSteppe
         public override AIState Tick(AIController controller)
         {
             // Assess self
-            
 
 
-            
+
+
             // Assess distance
-                // > If the target is in range, continue
+            // > If the target is in range, continue
 
 
 
             // Assess hits against me
-                // > If 
+            // > If 
 
             // 
 

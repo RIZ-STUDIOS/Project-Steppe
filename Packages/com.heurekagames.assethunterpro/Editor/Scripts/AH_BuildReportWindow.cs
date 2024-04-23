@@ -3,7 +3,6 @@
 
 using HeurekaGames.Utils;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -39,8 +38,8 @@ namespace HeurekaGames.AssetHunterPRO
             AH_Window.GetBuildInfoManager();
 
             bool alreadyExist = (m_window != null);
-            if(!alreadyExist)
-            { 
+            if (!alreadyExist)
+            {
                 m_window = GetWindow<AH_BuildReportWindow>("AH Report", true, typeof(AH_Window));
                 m_window.titleContent.image = AH_EditorData.Icons.Report;
 

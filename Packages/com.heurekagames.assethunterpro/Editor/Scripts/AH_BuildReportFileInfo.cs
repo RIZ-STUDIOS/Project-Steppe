@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-//Only avaliable in 2018
+﻿//Only avaliable in 2018
 #if UNITY_2018_1_OR_NEWER
 using UnityEditor.Build.Reporting;
 

@@ -257,7 +257,7 @@ namespace StarterAssets
             {
                 dashTimer -= Time.deltaTime;
 
-                if(dashTimer <= 0)
+                if (dashTimer <= 0)
                 {
                     dashing = false;
                     dashCooldownTimer = dashCooldownTime;
@@ -265,7 +265,7 @@ namespace StarterAssets
                 }
             }
 
-            if(!dashing && dashCooldownTimer > 0)
+            if (!dashing && dashCooldownTimer > 0)
             {
                 dashCooldownTimer -= Time.deltaTime;
             }
@@ -314,7 +314,7 @@ namespace StarterAssets
                 {
                     _targetRotation = transform.eulerAngles.y;
                 }
-                if(dashing && _input.move != Vector2.zero && !strafe)
+                if (dashing && _input.move != Vector2.zero && !strafe)
                 {
                     _targetRotation = _mainCamera.transform.eulerAngles.y + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
                 }

@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using StarterAssets;
 using UnityEngine.AI;
-using UnityEngine.InputSystem.XR;
-using ProjectSteppe.Entities;
 
 namespace ProjectSteppe
 {
@@ -17,7 +12,7 @@ namespace ProjectSteppe
 
         public Transform eyeLevel;
         public Transform playerTarget;
-        
+
         [Header("Movement")]
         public NavMeshAgent navmesh;
         public bool isMoving;

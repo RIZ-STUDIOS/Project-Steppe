@@ -1,10 +1,9 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System.Collections;
-using System.Collections.Generic;
+﻿using HeurekaGames.Utils;
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using HeurekaGames.Utils;
+using UnityEditor;
+using UnityEngine;
 
 namespace HeurekaGames.AssetHunterPRO
 {

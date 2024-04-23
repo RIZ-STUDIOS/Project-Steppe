@@ -65,7 +65,7 @@ namespace ProjectSteppe.Entities.Player
                 playerManager.DisableCapability(PlayerCapability.Move);
             }
 
-            if(attacking && !playerManager.HasCapability(PlayerCapability.Attack))
+            if (attacking && !playerManager.HasCapability(PlayerCapability.Attack))
             {
                 DisableCombo();
                 RestartAttack();

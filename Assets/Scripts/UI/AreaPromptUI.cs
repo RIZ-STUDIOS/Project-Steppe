@@ -1,6 +1,4 @@
 using ProjectSteppe.ZedExtensions;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -21,7 +19,7 @@ namespace ProjectSteppe
         {
             areaPromptTMP.text = areaName;
 
-            StartCoroutine(canvasGroup.FadeInThenOut(fadeSpeedMod:0.75f, duration:1f));
+            StartCoroutine(canvasGroup.FadeInThenOut(fadeSpeedMod: 0.75f, duration: 1f));
         }
     }
 }

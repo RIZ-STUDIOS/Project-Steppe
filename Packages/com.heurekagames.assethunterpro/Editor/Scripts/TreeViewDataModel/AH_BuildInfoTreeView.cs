@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using System.IO;
 
 namespace HeurekaGames.AssetHunterPRO.BaseTreeviewImpl.AssetTreeView
 {
@@ -44,7 +44,7 @@ namespace HeurekaGames.AssetHunterPRO.BaseTreeviewImpl.AssetTreeView
             id++;
 
             //This is done because I cant find all assets in toplevel folders through the Unity API (Remove whem the API allows it)
-            int folderCount = System.IO.Directory.GetDirectories(Application.dataPath,"*",SearchOption.AllDirectories).Count();
+            int folderCount = System.IO.Directory.GetDirectories(Application.dataPath, "*", SearchOption.AllDirectories).Count();
             int foldersProcessed = 0;
 
             bool populatedSuccesfully = AddFilesRecursively(Application.dataPath, chosenBuildInfo, depth, ref id, folderCount, ref foldersProcessed);

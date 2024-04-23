@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectSteppe
@@ -10,7 +8,7 @@ namespace ProjectSteppe
 
         public bool attackCommitted;
         public bool hyperArmour;
-        
+
         private BossHandler bossHandler;
 
         private void Start()

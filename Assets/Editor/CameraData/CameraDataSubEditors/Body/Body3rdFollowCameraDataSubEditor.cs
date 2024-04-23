@@ -1,9 +1,5 @@
 using ProjectSteppe.ScriptableObjects.CameraData.BodyCameraData;
 using RicTools.Editor.Utilities;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.UIElements;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -33,7 +29,7 @@ namespace ProjectSteppe.Editor.CameraDataSubEditors
 
             asset.damping = damping;
             asset.shoulderOffset = shoulderOffset;
-            asset.verticalArmLength=verticalArmLength;
+            asset.verticalArmLength = verticalArmLength;
             asset.cameraSide = cameraSide;
             asset.cameraDistance = cameraDistance;
             asset.cameraCollisionFilter = cameraCollisionFilter;
@@ -71,7 +67,7 @@ namespace ProjectSteppe.Editor.CameraDataSubEditors
                     if (value.y < 0)
                         value.y = 0;
 
-                    if(value.z < 0)
+                    if (value.z < 0)
                         value.z = 0;
 
                     shoulderOffset.Value = value;

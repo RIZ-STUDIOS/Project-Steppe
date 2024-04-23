@@ -1,11 +1,11 @@
-﻿using System;
+﻿using HeurekaGames.AssetHunterPRO.BaseTreeviewImpl.DependencyGraph;
+using HeurekaGames.Utils;
+using System;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
-using UnityEngine;
-using HeurekaGames.AssetHunterPRO.BaseTreeviewImpl.DependencyGraph;
 using UnityEditorInternal;
-using HeurekaGames.Utils;
+using UnityEngine;
 
 namespace HeurekaGames.AssetHunterPRO
 {
@@ -97,7 +97,7 @@ namespace HeurekaGames.AssetHunterPRO
             var frame = new Rect(r);
             frame.x += frame.width;
 
-            if (seeRefsFromInProject && dependencyGraphManager!=null && dependencyGraphManager.GetReferencesFrom().ContainsKey(guid))
+            if (seeRefsFromInProject && dependencyGraphManager != null && dependencyGraphManager.GetReferencesFrom().ContainsKey(guid))
             {
                 frame.x += -12;
                 frame.width += 10f;

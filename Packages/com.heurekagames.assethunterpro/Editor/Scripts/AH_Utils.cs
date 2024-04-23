@@ -197,7 +197,7 @@ namespace HeurekaGames.AssetHunterPRO
 #else
             Texture2D[] unknownTargetGroupIcons = PlayerSettings.GetIconsForTargetGroup(BuildTargetGroup.Unknown);
 #endif
-            
+
 
             PlayerSettings.SplashScreenLogo[] splashLogos = PlayerSettings.SplashScreen.logos;
 
@@ -321,7 +321,7 @@ namespace HeurekaGames.AssetHunterPRO
 
                             foreach (var item in exceptionScales)
                             {
-                                scaleListString += item.ToString() + (exceptionScales.ElementAt(exceptionScales.Count - 1) == item ? "":", ");
+                                scaleListString += item.ToString() + (exceptionScales.ElementAt(exceptionScales.Count - 1) == item ? "" : ", ");
                             }
 
                             Debug.Log("GetVisualAssetsImage method missing support for WSA image scale: " + scaleListString);

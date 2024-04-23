@@ -58,7 +58,7 @@ namespace HeurekaGames.AssetHunterPRO
         [SerializeField] private List<string> _duplicateDictKeys = new List<string>();
         [SerializeField] private List<DuplicateAssetData> _duplicateDictValues = new List<DuplicateAssetData>();
 
-        public Dictionary<string, DuplicateAssetData> Entries { get {return duplicateDict; } }
+        public Dictionary<string, DuplicateAssetData> Entries { get { return duplicateDict; } }
         #endregion
 
         internal bool HasDuplicates()
@@ -80,7 +80,7 @@ namespace HeurekaGames.AssetHunterPRO
 
         public void OnAfterDeserialize()
         {
-           duplicateDict = new Dictionary<string, DuplicateAssetData>();
+            duplicateDict = new Dictionary<string, DuplicateAssetData>();
             for (int i = 0; i != Math.Min(_duplicateDictKeys.Count, _duplicateDictValues.Count); i++)
                 duplicateDict.Add(_duplicateDictKeys[i], new DuplicateAssetData(_duplicateDictValues[i].Guids));
         }
@@ -135,22 +135,22 @@ namespace HeurekaGames.AssetHunterPRO
                                     using (StreamReader sr = new StreamReader(stream))
                                     {
                                         //bool foundFileName = false;
-                                            lineCounter = 0;
+                                        lineCounter = 0;
                                         while (!sr.EndOfStream)
                                         {
                                             lineCounter++;
                                             if (lineCounter >= maxReadCount)
                                                 appendString += sr.ReadToEnd();
                                             else
-                                            { 
+                                            {
                                                 line = sr.ReadLine();
                                                 foundName = line.Contains(LoadedObj.name);
 
                                                 if (!foundName)//we want to ignore the m_name property, since that modifies the hashvalue
                                                     appendString += line;
                                                 else
-                                                { 
-                                                    appendString += sr.ReadToEnd();                                          
+                                                {
+                                                    appendString += sr.ReadToEnd();
                                                 }
                                             }
                                         }

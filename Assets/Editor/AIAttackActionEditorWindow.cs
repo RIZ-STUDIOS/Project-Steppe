@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using RicTools;
 using RicTools.Editor.Windows;
 using UnityEditor;
 
@@ -10,7 +6,7 @@ namespace ProjectSteppe.Editor
     public class AIAttackActionEditorWindow : GenericEditorWindow<AIAttackActionScriptableObject>
     {
         [MenuItem("Window/RicTools Windows/AIAttackAction")]
-    	public static AIAttackActionEditorWindow ShowWindow()
+        public static AIAttackActionEditorWindow ShowWindow()
         {
             return GetWindow<AIAttackActionEditorWindow>("AIAttackAction");
         }
@@ -22,12 +18,12 @@ namespace ProjectSteppe.Editor
 
         protected override void LoadAsset(AIAttackActionScriptableObject asset, bool isNull)
         {
-        
+
         }
 
         protected override void SaveAsset(ref AIAttackActionScriptableObject asset)
         {
-        
+
         }
     }
 }

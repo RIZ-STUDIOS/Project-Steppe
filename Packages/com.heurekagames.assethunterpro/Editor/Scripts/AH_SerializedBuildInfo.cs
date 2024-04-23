@@ -67,7 +67,7 @@ namespace HeurekaGames.AssetHunterPRO
             //Change pats to project relative
             for (int i = 0; i < folders.Count(); i++)
             {
-                var relativePath = 
+                var relativePath =
                 folders[i] = FileUtil.GetProjectRelativePath(folders[i]);
             }
 
@@ -160,8 +160,8 @@ namespace HeurekaGames.AssetHunterPRO
         }
 #endif
 
-                //Stores in XML friendly format and saves
-                internal void FinalizeReport(BuildTarget target)
+        //Stores in XML friendly format and saves
+        internal void FinalizeReport(BuildTarget target)
         {
             addBuildtargetAssets(target);
             FinalizeReport();

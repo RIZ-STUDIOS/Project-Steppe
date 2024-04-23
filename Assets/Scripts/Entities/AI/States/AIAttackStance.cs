@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace ProjectSteppe
 {
@@ -30,7 +28,7 @@ namespace ProjectSteppe
 
             var playerDirection = controller.playerTarget.transform.position - controller.transform.position;
             controller.transform.forward = Vector3.Lerp(controller.transform.forward, playerDirection, controller.rotationSpeed * Time.fixedDeltaTime).normalized;
-            
+
             if (!hasValidAttack || hasValidAttack && controller.combatController.currentRecoveryTime < 0)
             {
                 if (controller.debugEnabled)
@@ -80,7 +78,7 @@ namespace ProjectSteppe
             {
                 processed = attack.weight;
 
-                if(randomWeightValue <= processed)
+                if (randomWeightValue <= processed)
                 {
                     currentAttack = attack;
                     previousAttack = currentAttack;

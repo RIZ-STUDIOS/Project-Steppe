@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -25,7 +24,7 @@ namespace HeurekaGames.Utils
             public static Texture Pick = EditorGUIUtility.IconContent("pick").image;
             public static Texture Clear = EditorGUIUtility.IconContent(Heureka_Utils.IsUnityVersionGreaterThan(2020) ? "clear" : "Toolbar Minus").image;
             public static Texture Previous = EditorGUIUtility.IconContent("tab_prev").image;
-            public static Texture Next= EditorGUIUtility.IconContent("tab_next").image;
+            public static Texture Next = EditorGUIUtility.IconContent("tab_next").image;
         }
 
         public static class IconNames

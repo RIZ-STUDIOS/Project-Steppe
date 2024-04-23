@@ -1,7 +1,6 @@
 using ProjectSteppe.Entities;
 using ProjectSteppe.Entities.Player;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -63,7 +62,7 @@ namespace ProjectSteppe
 
         public void StaggerTimeout()
         {
-            if(staggerCoroutine != null)
+            if (staggerCoroutine != null)
             {
                 StopCoroutine(staggerCoroutine);
                 staggerCoroutine = null;
@@ -90,7 +89,7 @@ namespace ProjectSteppe
         {
             if (!staggered) return;
 
-            if(staggerCoroutine != null)
+            if (staggerCoroutine != null)
             {
                 StopCoroutine(staggerCoroutine);
                 staggerCoroutine = null;

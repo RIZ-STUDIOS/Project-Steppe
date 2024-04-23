@@ -22,8 +22,8 @@ namespace ProjectSteppe.UI
 
         private void OnBalanceChange(float balance, float maxBalance)
         {
-            sliderL.value = balance/(float)maxBalance;
-            sliderR.value = balance/(float)maxBalance;
+            sliderL.value = balance / (float)maxBalance;
+            sliderR.value = balance / (float)maxBalance;
         }
     }
 }

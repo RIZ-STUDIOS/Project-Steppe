@@ -1,15 +1,11 @@
-using ProjectSteppe.ScriptableObjects.CameraData;
 using ProjectSteppe.ScriptableObjects.CameraData.AimCameraData;
 using ProjectSteppe.ScriptableObjects.CameraData.BodyCameraData;
 using ProjectSteppe.ScriptableObjects.CameraData.ExtensionCameraData;
 using RicTools.Editor.UIElements;
 using RicTools.Editor.Utilities;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static ProjectSteppe.Editor.CameraDataEditorWindow;
 
 namespace ProjectSteppe.Editor.CameraDataSubEditors
 {
@@ -42,7 +38,7 @@ namespace ProjectSteppe.Editor.CameraDataSubEditors
 
         public void CheckVisibility(int index)
         {
-            if(IsSelectedEditor(index))
+            if (IsSelectedEditor(index))
             {
                 Show();
             }

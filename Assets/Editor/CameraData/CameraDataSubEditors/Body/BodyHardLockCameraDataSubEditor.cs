@@ -1,8 +1,5 @@
 using ProjectSteppe.ScriptableObjects.CameraData.BodyCameraData;
 using RicTools.Editor.Utilities;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -37,7 +34,7 @@ namespace ProjectSteppe.Editor.CameraDataSubEditors
         protected override void LoadData(bool isNull, BaseBodyCameraDataScriptableObject asset)
         {
             var aim = asset as BodyHardLockCameraDataScriptableObject;
-            if(isNull)
+            if (isNull)
             {
                 damping.Reset();
             }

@@ -1,9 +1,6 @@
 using Cinemachine;
 using ProjectSteppe.ScriptableObjects.CameraData.AimCameraData;
 using RicTools.Editor.Utilities;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 

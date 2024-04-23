@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using RicTools;
-using RicTools.Editor.Windows;
-using UnityEditor;
-using ProjectSteppe.ScriptableObjects.CameraData;
-using RicTools.Editor.Utilities;
 using Cinemachine;
-using UnityEngine.UIElements;
-using ProjectSteppe.ScriptableObjects.CameraData.BodyCameraData;
-using ProjectSteppe.ScriptableObjects.CameraData.AimCameraData;
 using ProjectSteppe.Editor.CameraDataSubEditors;
-using System;
-using Cinemachine.Utility;
+using ProjectSteppe.ScriptableObjects.CameraData;
+using ProjectSteppe.ScriptableObjects.CameraData.AimCameraData;
+using ProjectSteppe.ScriptableObjects.CameraData.BodyCameraData;
+using RicTools.Editor.Utilities;
+using RicTools.Editor.Windows;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace ProjectSteppe.Editor
 {
@@ -39,7 +35,7 @@ namespace ProjectSteppe.Editor
         private List<ExtensionCameraDataSubEditor> extensionSubEditors = new List<ExtensionCameraDataSubEditor>();
 
         [MenuItem("Window/RicTools Windows/Camera Data Editor")]
-    	public static CameraDataEditorWindow ShowWindow()
+        public static CameraDataEditorWindow ShowWindow()
         {
             return GetWindow<CameraDataEditorWindow>("Camera Data Editor");
         }
@@ -218,7 +214,7 @@ namespace ProjectSteppe.Editor
 
         private void AddNewExtension(ExtensionDataType extensionDataType)
         {
-            foreach(var subEditor in extensionSubEditors)
+            foreach (var subEditor in extensionSubEditors)
             {
                 if (subEditor.IsSelectedEditor((int)extensionDataType))
                 {
@@ -245,7 +241,7 @@ namespace ProjectSteppe.Editor
 
         protected override void LoadAsset(CameraDataScriptableObject asset, bool isNull)
         {
-            foreach(var subEditor in extensionSubEditors)
+            foreach (var subEditor in extensionSubEditors)
             {
                 subEditor.Hide();
             }
@@ -277,7 +273,7 @@ namespace ProjectSteppe.Editor
                     subEditor.Load(true, null);
                 }
 
-                foreach(var subEditor in extensionSubEditors)
+                foreach (var subEditor in extensionSubEditors)
                 {
                     subEditor.Load(true, null);
                 }
@@ -344,9 +340,9 @@ namespace ProjectSteppe.Editor
                         aimSubEditor.Load(true, null);
                 }
 
-                foreach(var subEditor in extensionSubEditors)
+                foreach (var subEditor in extensionSubEditors)
                 {
-                    foreach(var d in asset.extensions)
+                    foreach (var d in asset.extensions)
                     {
                         if (subEditor.IsSameType(d.GetType()))
                         {

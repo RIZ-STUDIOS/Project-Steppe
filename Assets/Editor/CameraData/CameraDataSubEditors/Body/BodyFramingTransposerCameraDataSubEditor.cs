@@ -1,8 +1,5 @@
 using ProjectSteppe.ScriptableObjects.CameraData.BodyCameraData;
 using RicTools.Editor.Utilities;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -187,7 +184,7 @@ namespace ProjectSteppe.Editor.CameraDataSubEditors
 
                 element.RegisterValueChangedCallback(callback =>
                 {
-                    if(deadZoneDepth.Value < 0)
+                    if (deadZoneDepth.Value < 0)
                         deadZoneDepth.Value = 0;
 
                     element.value = deadZoneDepth.Value;
@@ -238,7 +235,7 @@ namespace ProjectSteppe.Editor.CameraDataSubEditors
         protected override void LoadData(bool isNull, BaseBodyCameraDataScriptableObject asset)
         {
             var body = asset as BodyFramingTransposerCameraDataScriptableObject;
-            if(isNull)
+            if (isNull)
             {
                 trackedObjectOffset.Reset();
                 lookaheadTime.Reset();
@@ -271,10 +268,10 @@ namespace ProjectSteppe.Editor.CameraDataSubEditors
                 lookaheadTime.Value = body.lookaheadTime;
                 lookaheadSmoothing.Value = body.lookaheadSmoothing;
                 lookaheadIgnoreY.Value = body.lookaheadIgnoreY;
-                
-                xDamping.Value= body.xDamping;
-                yDamping.Value= body.yDamping;
-                zDamping.Value= body.zDamping;
+
+                xDamping.Value = body.xDamping;
+                yDamping.Value = body.yDamping;
+                zDamping.Value = body.zDamping;
                 targetMovementOnly.Value = body.targetMovementOnly;
 
                 screenX.Value = body.screenX;

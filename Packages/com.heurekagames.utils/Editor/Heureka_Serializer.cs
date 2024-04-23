@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using PackageInfo = UnityEditor.PackageManager.PackageInfo;
-using UnityEditor;
 
 namespace HeurekaGames.Utils
 {

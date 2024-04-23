@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectSteppe.Items
@@ -11,7 +9,7 @@ namespace ProjectSteppe.Items
         public InvetoryItemType itemType;
         public string title;
 
-        [TextArea(3,6)]
+        [TextArea(3, 6)]
         public string description;
     }
 

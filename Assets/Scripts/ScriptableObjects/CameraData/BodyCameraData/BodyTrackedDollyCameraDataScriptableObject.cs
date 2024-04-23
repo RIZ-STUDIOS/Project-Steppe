@@ -1,6 +1,4 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectSteppe.ScriptableObjects.CameraData.BodyCameraData
@@ -39,18 +37,18 @@ namespace ProjectSteppe.ScriptableObjects.CameraData.BodyCameraData
             comp.m_PositionUnits = positionUnits;
 
             comp.m_PathOffset = pathOffset;
-            comp.m_XDamping= xDamping;
-            comp.m_YDamping= yDamping;
-            comp.m_ZDamping= zDamping;
+            comp.m_XDamping = xDamping;
+            comp.m_YDamping = yDamping;
+            comp.m_ZDamping = zDamping;
 
             comp.m_CameraUp = cameraUp;
 
-            if(cameraUp != CinemachineTrackedDolly.CameraUpMode.Default)
+            if (cameraUp != CinemachineTrackedDolly.CameraUpMode.Default)
             {
                 comp.m_PitchDamping = pitchDamping;
                 comp.m_YawDamping = yawDamping;
 
-                if(cameraUp == CinemachineTrackedDolly.CameraUpMode.Path || cameraUp == CinemachineTrackedDolly.CameraUpMode.FollowTarget)
+                if (cameraUp == CinemachineTrackedDolly.CameraUpMode.Path || cameraUp == CinemachineTrackedDolly.CameraUpMode.FollowTarget)
                 {
                     comp.m_RollDamping = rollDamping;
                 }

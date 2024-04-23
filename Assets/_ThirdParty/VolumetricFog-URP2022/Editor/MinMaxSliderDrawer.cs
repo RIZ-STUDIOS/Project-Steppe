@@ -1,7 +1,7 @@
 // https://frarees.github.io/default-gist-license
 
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 namespace Andicraft.VolumetricFog
 {

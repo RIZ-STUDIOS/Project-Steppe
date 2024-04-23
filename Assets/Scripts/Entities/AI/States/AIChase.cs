@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,7 +18,7 @@ namespace ProjectSteppe
                 return SwitchState(controller, controller.idle);
             }
 
-            if (!controller.navmesh) return(controller.idle);
+            if (!controller.navmesh) return (controller.idle);
 
             if (controller.navmesh.isStopped)
             {

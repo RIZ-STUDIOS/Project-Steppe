@@ -2,7 +2,6 @@ using ProjectSteppe.UI;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 
 namespace ProjectSteppe.Entities.Player
 {

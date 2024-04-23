@@ -1,8 +1,5 @@
 using ProjectSteppe.Interactions;
-using ProjectSteppe.Interactions.Interactables;
-using ProjectSteppe.UI;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectSteppe.Entities.Player
@@ -63,7 +60,7 @@ namespace ProjectSteppe.Entities.Player
             if (other.CompareTag("Interactable"))
             {
                 if (displayingMessage) return;
-                
+
                 var interactable = other.GetComponent<Interactable>();
 
                 if (interactable.OneTime && interactable.Interacted) return;

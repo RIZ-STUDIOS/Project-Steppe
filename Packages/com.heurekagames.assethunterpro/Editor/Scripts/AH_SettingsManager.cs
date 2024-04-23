@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -43,7 +42,7 @@ namespace HeurekaGames.AssetHunterPRO
         private readonly static string PrefsAutoOpenLog = "AH.AutoOpenLog" + ProjectPostFix;
         private readonly static string PrefsAutoRefreshLog = "AH.AutoRefreshLog" + ProjectPostFix;
         private readonly static string PrefsEstimateAssetSize = "AH.PrefsEstimateAssetSize" + ProjectPostFix;
-        
+
         private readonly static string PrefsHideButtonText = "AH.HideButtonText" + ProjectPostFix;
         private readonly static string PrefsHideNewsButton = "AH.HideNewsButton" + ProjectPostFix;
         private readonly static string PrefsIgnoreScriptFiles = "AH.IgnoreScriptfiles" + ProjectPostFix;
@@ -139,7 +138,7 @@ namespace HeurekaGames.AssetHunterPRO
             get { return ((!EditorPrefs.HasKey(PrefsEstimateAssetSize) && InitialValueEstimateAssetSize) || AH_Utils.IntToBool(EditorPrefs.GetInt(PrefsEstimateAssetSize))); }
             internal set { EditorPrefs.SetInt(PrefsEstimateAssetSize, AH_Utils.BoolToInt(value)); }
         }
-        
+
         [SerializeField]
         public bool HideButtonText
         {

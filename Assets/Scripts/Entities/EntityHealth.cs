@@ -1,6 +1,4 @@
 using RicTools.Attributes;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -44,7 +42,7 @@ namespace ProjectSteppe.Entities
         public int healthBarIndex;
 
         public float Health { get { return health; } private set { health = value; onHealthChange.Invoke(health, maxHealth); } }
-        public float Balance { get {  return balance; } private set { balance = value; if (balance < 0) balance = 0; if (balance > maxBalance) balance = maxBalance; onBalanceChange.Invoke(balance, maxBalance); } }
+        public float Balance { get { return balance; } private set { balance = value; if (balance < 0) balance = 0; if (balance > maxBalance) balance = maxBalance; onBalanceChange.Invoke(balance, maxBalance); } }
 
         [Header("Unity Events")]
         public UnityEvent<float, float> onHealthChange;
@@ -115,7 +113,7 @@ namespace ProjectSteppe.Entities
             balanceRegenerationTimer = 0;
             Balance += amount;
 
-            if(prevBalance < maxBalance && Balance >= maxBalance)
+            if (prevBalance < maxBalance && Balance >= maxBalance)
             {
                 onPostureFull?.Invoke();
             }
@@ -130,10 +128,10 @@ namespace ProjectSteppe.Entities
 
         private void Update()
         {
-            if(Balance > 0)
+            if (Balance > 0)
             {
                 balanceRegenerationTimer += Time.deltaTime;
-                if(balanceRegenerationTimer >= timeBeforeBalanceRegeneration)
+                if (balanceRegenerationTimer >= timeBeforeBalanceRegeneration)
                 {
                     Balance -= maxBalance * balanceRegenerationRate * Time.deltaTime;
                 }

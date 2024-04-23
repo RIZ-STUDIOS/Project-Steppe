@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace HeurekaGames.AssetHunterPRO
-    {
+{
     public static class AH_UIUtilities
     {
         public static bool DrawSelectionButton(GUIContent content)

@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using RicTools;
-using RicTools.ScriptableObjects;
-using RicTools.EditorAttributes;
 using Cinemachine;
-using ProjectSteppe.ScriptableObjects.CameraData.BodyCameraData;
 using ProjectSteppe.ScriptableObjects.CameraData.AimCameraData;
+using ProjectSteppe.ScriptableObjects.CameraData.BodyCameraData;
 using ProjectSteppe.ScriptableObjects.CameraData.ExtensionCameraData;
+using RicTools.EditorAttributes;
+using RicTools.ScriptableObjects;
 
 namespace ProjectSteppe.ScriptableObjects.CameraData
 {
@@ -50,7 +46,7 @@ namespace ProjectSteppe.ScriptableObjects.CameraData
                 aimCameraData.ApplyCameraData(camera);
             }
 
-            foreach(var comp in camera.GetComponents<CinemachineExtension>())
+            foreach (var comp in camera.GetComponents<CinemachineExtension>())
             {
                 Destroy(comp);
             }

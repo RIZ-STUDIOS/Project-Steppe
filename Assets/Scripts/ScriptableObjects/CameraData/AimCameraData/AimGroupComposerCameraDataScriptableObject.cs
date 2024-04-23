@@ -1,6 +1,4 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectSteppe.ScriptableObjects.CameraData.AimCameraData
@@ -83,7 +81,7 @@ namespace ProjectSteppe.ScriptableObjects.CameraData.AimCameraData
                 comp.m_MinimumDistance = minimumDistance;
             }
 
-            if(adjustmentMode == CinemachineGroupComposer.AdjustmentMode.ZoomOnly || adjustmentMode == CinemachineGroupComposer.AdjustmentMode.DollyThenZoom)
+            if (adjustmentMode == CinemachineGroupComposer.AdjustmentMode.ZoomOnly || adjustmentMode == CinemachineGroupComposer.AdjustmentMode.DollyThenZoom)
             {
                 comp.m_MinimumFOV = minimumFov;
                 comp.m_MaximumFOV = maximumFov;

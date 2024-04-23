@@ -1,6 +1,4 @@
 using ProjectSteppe.Entities.Player;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectSteppe
@@ -20,7 +18,7 @@ namespace ProjectSteppe
                     other.GetComponent<PlayerManager>().PlayerUI.areaPrompt.DisplayArea(areaName);
                     entered = true;
                 }
-                
+
             }
         }
     }

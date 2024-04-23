@@ -1,6 +1,4 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -116,7 +114,7 @@ namespace ProjectSteppe.Entities.Player
 
         private void HandleDash()
         {
-            if((dashing && dashPressed) || dashCooldownTimer > 0)
+            if ((dashing && dashPressed) || dashCooldownTimer > 0)
                 dashPressed = false;
 
             if (dashPressed)
@@ -205,7 +203,7 @@ namespace ProjectSteppe.Entities.Player
 
             speed = targetSpeed * (dashing ? 1 : moveVectorMagnitude);
 
-            if(moveVectorMagnitude != 0 || dashing)
+            if (moveVectorMagnitude != 0 || dashing)
             {
                 var targetVector = moveVector;
 
@@ -276,7 +274,7 @@ namespace ProjectSteppe.Entities.Player
         {
             moveVector = value.Get<Vector2>().normalized;
             moveVectorMagnitude = moveVector.magnitude;
-            if(moveVectorMagnitude != 0 && !dashing)
+            if (moveVectorMagnitude != 0 && !dashing)
             {
                 dashMoveVector = moveVector;
             }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectSteppe
@@ -12,7 +10,7 @@ namespace ProjectSteppe
             if (controller.distanceFromTarget > controller.navmesh.stoppingDistance)
             {
                 return SwitchState(controller, controller.chase);
-            }            
+            }
 
             return SwitchState(controller, controller.stance);
         }

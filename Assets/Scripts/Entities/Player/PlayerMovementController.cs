@@ -1,11 +1,8 @@
 using Cinemachine;
 using StarterAssets;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
 
 namespace ProjectSteppe.Entities.Player
 {
@@ -92,7 +89,7 @@ namespace ProjectSteppe.Entities.Player
         private PlayerMovementController playerMovement;
 
         private CinemachineVirtualCamera virtualCamera;
-        
+
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
         private float _rotationVelocity;
@@ -148,7 +145,7 @@ namespace ProjectSteppe.Entities.Player
             if (dashing)
             {
                 dashTimer += Time.deltaTime;
-                if(dashTimer >= dashTime)
+                if (dashTimer >= dashTime)
                 {
                     DisableDashing();
                     onDashEnd.Invoke();
@@ -156,8 +153,8 @@ namespace ProjectSteppe.Entities.Player
             }
             else
             {
-                if(dashCooldownTimer > 0)
-                dashCooldownTimer -= Time.deltaTime;
+                if (dashCooldownTimer > 0)
+                    dashCooldownTimer -= Time.deltaTime;
             }
         }
 
@@ -217,7 +214,7 @@ namespace ProjectSteppe.Entities.Player
 
             }
 
-            if(verticalVelocity > terminalVelocity && usingGravity)
+            if (verticalVelocity > terminalVelocity && usingGravity)
             {
                 verticalVelocity += playerGravity * Time.deltaTime;
             }
@@ -235,7 +232,7 @@ namespace ProjectSteppe.Entities.Player
         {
             float targetSpeed = dashing ? dashSpeed : walkSpeed;
 
-            if(!dashing && (_input.move == Vector2.zero || !playerManager.HasCapability(PlayerCapability.Move))) targetSpeed = 0;
+            if (!dashing && (_input.move == Vector2.zero || !playerManager.HasCapability(PlayerCapability.Move))) targetSpeed = 0;
 
             float currentHorizontalSpeed = new Vector3(characterController.velocity.x, 0.0f, characterController.velocity.z).magnitude;
 
@@ -264,7 +261,7 @@ namespace ProjectSteppe.Entities.Player
 
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
-            if((_input.move != Vector2.zero || dashing) && playerManager.HasCapability(PlayerCapability.Rotate))
+            if ((_input.move != Vector2.zero || dashing) && playerManager.HasCapability(PlayerCapability.Rotate))
             {
                 if (playerManager.PlayerTargetLock.lockOn)
                 {
@@ -279,7 +276,7 @@ namespace ProjectSteppe.Entities.Player
                     else
                     {
                     }
-                this.moveDirection = inputDirection;
+                    this.moveDirection = inputDirection;
                 }
 
                 float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref _rotationVelocity,
@@ -296,14 +293,14 @@ namespace ProjectSteppe.Entities.Player
             {
                 targetDirection = Quaternion.Euler(0, targetRotation + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg, 0) * Vector3.forward;
             }
-            else if(playerManager.PlayerTargetLock.lockOn && dashing)
+            else if (playerManager.PlayerTargetLock.lockOn && dashing)
             {
                 targetDirection = Quaternion.Euler(0, targetRotation + Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg, 0) * Vector3.forward;
             }
 
             //if (jumping) targetDirection.y = Mathf.Sqrt(5 * 2 * -9.8f);
 
-            characterController.Move(targetDirection.normalized * (speed * Time.deltaTime) + new Vector3(0, verticalVelocity, 0) * Time.deltaTime);            
+            characterController.Move(targetDirection.normalized * (speed * Time.deltaTime) + new Vector3(0, verticalVelocity, 0) * Time.deltaTime);
 
 
             // FOR ANIMATOR //
@@ -319,7 +316,7 @@ namespace ProjectSteppe.Entities.Player
                 {
                     var d = moveDirection.normalized;
                     velX = d.x > 0 ? 1 : 0;
-                    velY = d.z > 0? 1 : 0;
+                    velY = d.z > 0 ? 1 : 0;
                 }
             }
             else
@@ -331,7 +328,7 @@ namespace ProjectSteppe.Entities.Player
             onMoveAnimator?.Invoke(animationBlend, inputMagnitude, velX, velY);
         }
 
-        
+
 
         private void CameraRotation()
         {

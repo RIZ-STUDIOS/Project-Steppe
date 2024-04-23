@@ -1,6 +1,5 @@
 using ProjectSteppe.Entities;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectSteppe.Items.UsableItems
@@ -29,7 +28,7 @@ namespace ProjectSteppe.Items.UsableItems
             bool canUse = CanUseQuery();
 
             base.OnUse();
-            if(!canUse) return;
+            if (!canUse) return;
             //animator.SetTrigger("ForceAnimation");
             animator.SetTrigger("Heal");
             StartCoroutine(HealEntity());

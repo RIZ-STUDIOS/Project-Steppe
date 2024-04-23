@@ -175,7 +175,7 @@ namespace HeurekaGames.AssetHunterPRO.BaseTreeviewImpl.AssetTreeView
         void GetAllChildren(TreeViewItem root, ref List<TreeViewItem<AH_TreeviewElement>> children)
         {
             if (root != null && root.hasChildren && root.children != null)
-            { 
+            {
                 foreach (var child in root.children)
                 {
                     children.AddRange(root.children.Cast<TreeViewItem<AH_TreeviewElement>>());
@@ -235,7 +235,7 @@ namespace HeurekaGames.AssetHunterPRO.BaseTreeviewImpl.AssetTreeView
                     if (item == null)
                         continue;
 
-                    EditorUtility.DisplayProgressBar($"Getting asset sizes", $"{ counter} / {typeCount} : {item.data.Name} : {item.data.AssetSizeStringRepresentation}", (float)counter / (float)typeCount);
+                    EditorUtility.DisplayProgressBar($"Getting asset sizes", $"{counter} / {typeCount} : {item.data.Name} : {item.data.AssetSizeStringRepresentation}", (float)counter / (float)typeCount);
                 }
                 EditorUtility.ClearProgressBar();
             }
@@ -427,8 +427,8 @@ namespace HeurekaGames.AssetHunterPRO.BaseTreeviewImpl.AssetTreeView
 
 
                         if (element.IsFolder && column == MyColumns.FileSize/*&& !IsExpanded(element.id)*/)
-                        {                           
-                            value = "{"+AH_Utils.BytesToString(element.GetFileSizeRecursively(((AH_MultiColumnHeader)multiColumnHeader).ShowMode))+"}";
+                        {
+                            value = "{" + AH_Utils.BytesToString(element.GetFileSizeRecursively(((AH_MultiColumnHeader)multiColumnHeader).ShowMode)) + "}";
                             DefaultGUI.Label(cellRect, value, args.selected, args.focused);
                         }
                         else

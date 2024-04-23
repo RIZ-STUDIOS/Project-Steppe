@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectSteppe.Entities
@@ -51,7 +49,7 @@ namespace ProjectSteppe.Entities
 
         private void Update()
         {
-            if(blocking)
+            if (blocking)
             {
                 blockTime += Time.deltaTime;
             }

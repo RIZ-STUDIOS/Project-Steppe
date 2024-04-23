@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectSteppe.Entities
@@ -7,7 +6,7 @@ namespace ProjectSteppe.Entities
     public class EntityDeath : MonoBehaviour
     {
         public ParticleSystem deathFX;
-        
+
         private Animator animator;
 
         private void Awake()

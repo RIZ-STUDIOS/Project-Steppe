@@ -1,6 +1,4 @@
 using ProjectSteppe.ScriptableObjects;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectSteppe.Entities
@@ -35,14 +33,14 @@ namespace ProjectSteppe.Entities
 
         public void EnableWeaponCollision()
         {
-            if(!currentWeapon) return;
+            if (!currentWeapon) return;
 
             currentWeapon.EnableColliders();
         }
 
         public void DisableWeaponCollision()
         {
-            if(!currentWeapon) return;
+            if (!currentWeapon) return;
 
             currentWeapon.DisableColliders();
         }

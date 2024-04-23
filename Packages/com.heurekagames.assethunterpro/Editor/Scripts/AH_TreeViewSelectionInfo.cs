@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using HeurekaGames.AssetHunterPRO.BaseTreeviewImpl.AssetTreeView;
+using System;
 using System.Collections.Generic;
-using HeurekaGames.AssetHunterPRO.BaseTreeviewImpl.AssetTreeView;
-using UnityEngine;
-using UnityEditor;
-using System.Linq;
-using HeurekaGames.AssetHunterPRO.BaseTreeviewImpl;
 using System.IO;
+using System.Linq;
+using UnityEditor;
+using UnityEngine;
 
 namespace HeurekaGames.AssetHunterPRO
 {
@@ -149,7 +147,7 @@ namespace HeurekaGames.AssetHunterPRO
                     {
                         FileInfo fi = new FileInfo(other.RelativePath);
 
-                        if (!dirInfo.GetFiles(fi.Name, SearchOption.AllDirectories).Any(x=>x.FullName == fi.FullName))
+                        if (!dirInfo.GetFiles(fi.Name, SearchOption.AllDirectories).Any(x => x.FullName == fi.FullName))
                             continue;
                     }
 
@@ -245,7 +243,7 @@ namespace HeurekaGames.AssetHunterPRO
             else if (bDraw)
                 content = EditorGUIUtility.IconContent("Folder Icon");
 
-            GUILayout.Label(content,GUILayout.Width(Height), GUILayout.Height(Height));
+            GUILayout.Label(content, GUILayout.Width(Height), GUILayout.Height(Height));
         }
 
         private void deleteUnusedAssets()
@@ -321,7 +319,7 @@ namespace HeurekaGames.AssetHunterPRO
         private void deleteMultipleAssets(List<string> affectedAssets)
         {
 #if UNITY_2020_1_OR_NEWER
-            EditorUtility.DisplayProgressBar("Deleting unused assets", $"Deleting {affectedAssets.Count()} unused assets",.5f);
+            EditorUtility.DisplayProgressBar("Deleting unused assets", $"Deleting {affectedAssets.Count()} unused assets", .5f);
             List<string> failedPaths = new List<string>();
             AssetDatabase.DeleteAssets(affectedAssets.ToArray(), failedPaths);
             EditorUtility.ClearProgressBar();

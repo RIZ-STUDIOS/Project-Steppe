@@ -1,5 +1,4 @@
 using ProjectSteppe.Entities;
-using ProjectSteppe.ScriptableObjects;
 using RicTools.Attributes;
 using System.Collections;
 using System.Collections.Generic;
@@ -89,7 +88,7 @@ namespace ProjectSteppe
             if (!hitbox) return;
             if (!hitbox.IsValidHit(parentEntity)) return;
             if (hitbox.ParentEntity == hitEntity) return;
-            
+
             Debug.Log("Hit " + other.name);
 
             float hitAngle = Vector3.Angle(hitbox.ParentEntity.transform.forward, parentEntity.transform.forward);

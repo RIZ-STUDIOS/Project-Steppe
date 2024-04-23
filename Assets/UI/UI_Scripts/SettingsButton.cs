@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class SettingsButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
@@ -42,9 +40,9 @@ public class SettingsButton : MonoBehaviour, ISelectHandler, IDeselectHandler
     private void Update()
     {
         GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
-        if(currentSelected != lastSelected)
+        if (currentSelected != lastSelected)
         {
-            if(lastSelected != null)
+            if (lastSelected != null)
             {
                 ExecuteEvents.Execute(lastSelected, new BaseEventData(EventSystem.current), ExecuteEvents.deselectHandler);
             }

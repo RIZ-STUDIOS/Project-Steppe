@@ -1,11 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.IO;
-using System.Reflection;
-using System;
+using UnityEditor;
+using UnityEngine;
 
 namespace HeurekaGames.Utils
 {
@@ -76,7 +72,7 @@ namespace HeurekaGames.Utils
             foreach (var item in readmeManager.sections)
             {
                 //If we dont have this asset identifier in list already
-                if (!listUniqueEntries.Any(val=>val.AssetIdentifier == item.AssetIdentifier))
+                if (!listUniqueEntries.Any(val => val.AssetIdentifier == item.AssetIdentifier))
                     listUniqueEntries.Add(item);
                 //If it IS in list already find the one that is NOT a promo, and put that in list
                 else
@@ -87,7 +83,7 @@ namespace HeurekaGames.Utils
                     else
                     {
                         //Remove the promo from list and insert the new one with similar identifier (Which should be a readme)
-                        listUniqueEntries.Remove(listUniqueEntries.Find(val=>val.AssetIdentifier == item.AssetIdentifier));
+                        listUniqueEntries.Remove(listUniqueEntries.Find(val => val.AssetIdentifier == item.AssetIdentifier));
                         listUniqueEntries.Add(item);
                     }
                 }
@@ -181,12 +177,12 @@ namespace HeurekaGames.Utils
                                 {
                                     GUILayout.Label(versionedSection.VersionData[i].VersionNum.GetVersionString(), HeadingStyle);
 
-                                    EditorGUI.indentLevel+=2;
+                                    EditorGUI.indentLevel += 2;
                                     foreach (var versionChange in versionedSection.VersionData[i].VersionChanges)
                                     {
                                         EditorGUILayout.LabelField("- " + versionChange, BodyStyle);
                                     }
-                                    EditorGUI.indentLevel-=2;
+                                    EditorGUI.indentLevel -= 2;
                                 }
                                 EditorGUI.indentLevel--;
                                 GUILayout.Space(4);

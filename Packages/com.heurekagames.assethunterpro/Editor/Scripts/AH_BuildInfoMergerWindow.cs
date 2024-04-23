@@ -1,10 +1,8 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System.Collections;
+﻿using HeurekaGames.Utils;
 using System.Collections.Generic;
-using System;
 using System.Linq;
-using HeurekaGames.Utils;
+using UnityEditor;
+using UnityEngine;
 
 namespace HeurekaGames.AssetHunterPRO
 {
@@ -32,10 +30,10 @@ namespace HeurekaGames.AssetHunterPRO
             buildInfoFiles = new List<BuildInfoSelection>();
 
             System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(buildInfoFolder);
-            foreach (var item in directoryInfo.GetFiles("*." + AH_SerializationHelper.BuildInfoExtension).OrderByDescending(val=>val.LastWriteTime))
+            foreach (var item in directoryInfo.GetFiles("*." + AH_SerializationHelper.BuildInfoExtension).OrderByDescending(val => val.LastWriteTime))
             {
                 buildInfoFiles.Add(new BuildInfoSelection(item));
-            } 
+            }
         }
 
         private void OnGUI()
@@ -69,11 +67,11 @@ namespace HeurekaGames.AssetHunterPRO
             }
 
             EditorGUILayout.Space();
-            EditorGUI.BeginDisabledGroup(buildInfoFiles.Count(val=>val.Selected==true) < 2);
+            EditorGUI.BeginDisabledGroup(buildInfoFiles.Count(val => val.Selected == true) < 2);
             if (GUILayout.Button("Merge Selected", GUILayout.ExpandWidth(false)))
             {
                 AH_SerializedBuildInfo merged = new AH_SerializedBuildInfo();
-                foreach (var item in buildInfoFiles.FindAll(val=>val.Selected))
+                foreach (var item in buildInfoFiles.FindAll(val => val.Selected))
                 {
                     merged.MergeWith(item.BuildInfoFile.FullName);
                 }

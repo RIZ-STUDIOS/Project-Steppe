@@ -1,7 +1,6 @@
 ﻿using HeurekaGames.Utils;
 using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Profiling;
 
@@ -47,10 +46,10 @@ namespace HeurekaGames.AssetHunterPRO.BaseTreeviewImpl.AssetTreeView
         {
             get
             {
-                if(!string.IsNullOrEmpty(relativePath))
+                if (!string.IsNullOrEmpty(relativePath))
                     return relativePath;
                 else
-                   return relativePath = UnityEditor.AssetDatabase.GUIDToAssetPath(GUID);
+                    return relativePath = UnityEditor.AssetDatabase.GUIDToAssetPath(GUID);
             }
         }
 
@@ -75,7 +74,7 @@ namespace HeurekaGames.AssetHunterPRO.BaseTreeviewImpl.AssetTreeView
         {
             get
             {
-                if(String.IsNullOrEmpty(assetTypeSerialized) && assetType!=null)
+                if (String.IsNullOrEmpty(assetTypeSerialized) && assetType != null)
                     assetTypeSerialized = Heureka_Serializer.SerializeType(assetType);
                 return assetTypeSerialized;
             }
@@ -85,7 +84,7 @@ namespace HeurekaGames.AssetHunterPRO.BaseTreeviewImpl.AssetTreeView
         {
             get
             {
-                if(UsedInBuild && assetSize == 0)
+                if (UsedInBuild && assetSize == 0)
                 {
                     UnityEngine.Object asset = UnityEditor.AssetDatabase.LoadMainAssetAtPath(RelativePath);
                     //#if UNITY_2017_1_OR_NEWER
@@ -128,9 +127,9 @@ namespace HeurekaGames.AssetHunterPRO.BaseTreeviewImpl.AssetTreeView
         public string FileSizeStringRepresentation
         {
             get
-            { 
+            {
                 return AH_Utils.GetSizeAsString(fileSize);
-            }       
+            }
         }
 
         public List<string> ScenesReferencingAsset

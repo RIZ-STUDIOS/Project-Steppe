@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.InputSystem;
-using ProjectSteppe.Items;
-using TMPro;
-using ProjectSteppe.Entities.Player;
-using UnityEngine.UI;
-using ProjectSteppe.ZedExtensions;
-using UnityEngine.EventSystems;
-using StarterAssets;
 using ProjectSteppe;
+using ProjectSteppe.Entities.Player;
+using ProjectSteppe.ZedExtensions;
+using StarterAssets;
+using System.Collections;
+using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Pause : MonoBehaviour
 {
@@ -63,7 +61,7 @@ public class Pause : MonoBehaviour
         inventoryOpen = true;
 
         inventoryMenu.InstantShow(true, true);
-        
+
         EventSystem.current.SetSelectedGameObject(invButtonGOB.transform.GetChild(0).gameObject);
     }
 

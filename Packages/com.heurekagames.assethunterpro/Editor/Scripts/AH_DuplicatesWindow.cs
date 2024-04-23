@@ -1,11 +1,9 @@
 ﻿
 using HeurekaGames.Utils;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
-using UnityEditorInternal;
 using UnityEngine;
 
 namespace HeurekaGames.AssetHunterPRO
@@ -71,12 +69,12 @@ namespace HeurekaGames.AssetHunterPRO
                 else
                 {
                     if (!duplicateDataManager.HasDuplicates())
-                    { 
+                    {
                         Heureka_WindowStyler.DrawCenteredMessage(window, AH_EditorData.Icons.DuplicateIconWhite, 240f, 110f, "Hurray" + Environment.NewLine + "No duplicates assets" + Environment.NewLine + "in project :)");
                         GUILayout.FlexibleSpace();
                     }
                     else
-                     doBody();
+                        doBody();
                 }
             }
             doFooter();
@@ -136,7 +134,7 @@ namespace HeurekaGames.AssetHunterPRO
         }
         private void doBody()
         {
-            if(duplicateDataManager.RequiresScrollviewRebuild)
+            if (duplicateDataManager.RequiresScrollviewRebuild)
                 scrollviewPositionList = new List<float>();
 
             using (EditorGUILayout.ScrollViewScope scrollview = new EditorGUILayout.ScrollViewScope(scrollPosition))
@@ -147,7 +145,7 @@ namespace HeurekaGames.AssetHunterPRO
                 if (Event.current.type == EventType.Layout)
                 {
                     scrollStartIndex = scrollviewPositionList.FindLastIndex(x => x < scrollPosition.y);
-                        if (scrollStartIndex == -1) scrollStartIndex = 0;
+                    if (scrollStartIndex == -1) scrollStartIndex = 0;
 
                     float scrollMaxY = scrollPosition.y + scrollArea.height;
                     scrollEndIndex = scrollviewPositionList.FindLastIndex(x => x <= scrollMaxY) + 1; //Add one since we want to make sure the entire height of the guielement is shown
@@ -156,7 +154,7 @@ namespace HeurekaGames.AssetHunterPRO
                 }
 
                 //Insert empty space in the BEGINNING of scrollview
-                if (scrollStartIndex >= 0 && scrollviewPositionList.Count>0)
+                if (scrollStartIndex >= 0 && scrollviewPositionList.Count > 0)
                     GUILayout.Space(scrollviewPositionList[scrollStartIndex]);
 
                 int counter = -1;
@@ -170,7 +168,7 @@ namespace HeurekaGames.AssetHunterPRO
                     else if (counter > scrollEndIndex)
                     {
                         break;
-                    }            
+                    }
 
                     using (var hScope = new EditorGUILayout.HorizontalScope("box"))
                     {
@@ -213,7 +211,7 @@ namespace HeurekaGames.AssetHunterPRO
 
                 //Insert empty space at the END of scrollview
                 if (scrollEndIndex < scrollviewPositionList.Count - 1)
-                    GUILayout.Space(scrollviewPositionList.Last() - scrollviewPositionList[scrollEndIndex]); 
+                    GUILayout.Space(scrollviewPositionList.Last() - scrollviewPositionList[scrollEndIndex]);
             }
             if (Event.current.type == EventType.Repaint)
                 scrollArea = GUILayoutUtility.GetLastRect();

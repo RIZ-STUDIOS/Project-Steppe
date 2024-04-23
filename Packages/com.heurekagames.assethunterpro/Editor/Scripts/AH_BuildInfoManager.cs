@@ -36,12 +36,13 @@ namespace HeurekaGames.AssetHunterPRO
             }
         }
 
-        public bool ProjectDirty { 
+        public bool ProjectDirty
+        {
             get => projectDirty;
             set
-            { 
+            {
                 projectDirty = value;
-            } 
+            }
         }
 
         public void OnEnable()
@@ -96,7 +97,7 @@ namespace HeurekaGames.AssetHunterPRO
                 if (OnBuildInfoSelectionChanged != null)
                     OnBuildInfoSelectionChanged();
             }
-            else if(!projectIsClean)
+            else if (!projectIsClean)
             {
                 EditorUtility.DisplayDialog(
                     "JSON Parse error",

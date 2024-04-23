@@ -1,15 +1,14 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System;
-using UnityEditor.IMGUI.Controls;
+﻿using HeurekaGames.AssetHunterPRO.BaseTreeviewImpl;
 using HeurekaGames.AssetHunterPRO.BaseTreeviewImpl.AssetTreeView;
-using HeurekaGames.AssetHunterPRO.BaseTreeviewImpl;
-using System.Collections.Generic;
 using HeurekaGames.Utils;
+using System;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.IMGUI.Controls;
+using UnityEngine;
 
 //Only avaliable in 2018
 #if UNITY_2018_1_OR_NEWER
-using UnityEditor.Build.Reporting;
 #endif
 
 namespace HeurekaGames.AssetHunterPRO
@@ -23,7 +22,7 @@ namespace HeurekaGames.AssetHunterPRO
         [NonSerialized] bool m_Initialized;
         [SerializeField] TreeViewState m_TreeViewState; // Serialized in the window layout file so it survives assembly reloading
         [SerializeField] MultiColumnHeaderState m_MultiColumnHeaderState;
-        
+
         SearchField m_SearchField;
         private AH_TreeViewWithTreeModel m_TreeView;
 
@@ -35,7 +34,7 @@ namespace HeurekaGames.AssetHunterPRO
         [SerializeField] GUIContent guiContentSettings;
         [SerializeField] GUIContent guiContentGenerateReferenceGraph;
         [SerializeField] GUIContent guiContentDuplicates;
-        
+
         //Only avaliable in 2018
 #if UNITY_2018_1_OR_NEWER
         [SerializeField] GUIContent guiContentBuildReport;
@@ -82,7 +81,7 @@ namespace HeurekaGames.AssetHunterPRO
 
             return m_window;
         }
-        
+
         internal static AH_BuildInfoManager GetBuildInfoManager()
         {
             if (!m_window)
@@ -101,7 +100,7 @@ namespace HeurekaGames.AssetHunterPRO
         {
             AH_SerializationHelper.NewBuildInfoCreated -= onBuildInfoCreated;
         }
-        
+
         void OnInspectorUpdate()
         {
             if (!m_window)
@@ -152,8 +151,8 @@ namespace HeurekaGames.AssetHunterPRO
             if (AH_SettingsManager.Instance.AutoRefreshLog)
                 RefreshBuildLog();
             else
-            { 
-                 if (EditorUtility.DisplayDialog("Refresh Asset Hunter Log", "Do you want to refresh the loaded log", "Yes", "No"))
+            {
+                if (EditorUtility.DisplayDialog("Refresh Asset Hunter Log", "Do you want to refresh the loaded log", "Yes", "No"))
                 {
                     RefreshBuildLog();
                 }
@@ -417,8 +416,8 @@ namespace HeurekaGames.AssetHunterPRO
                 GUIContent exportContent = new GUIContent("Export list", "Export all the assets in the list above to a json file");
                 if (GUILayout.Button(exportContent, style))
                 {
-                    var buildInfo = buildInfoManager.GetSelectedBuildDate() + 
-                        "_" + buildInfoManager.GetSelectedBuildTarget()+
+                    var buildInfo = buildInfoManager.GetSelectedBuildDate() +
+                        "_" + buildInfoManager.GetSelectedBuildTarget() +
                         "_" + ((AH_MultiColumnHeader)m_TreeView.multiColumnHeader).ShowMode;
 
                     GenericMenu menu = new GenericMenu();
@@ -459,7 +458,7 @@ namespace HeurekaGames.AssetHunterPRO
 
             return GUILayout.Button(btnContent, buttonStyle, GUILayout.MaxHeight(btnSize));
         }
-        
+
         private bool doSelectionButton(GUIContent content)
         {
             GUIContent btnContent = new GUIContent(content);

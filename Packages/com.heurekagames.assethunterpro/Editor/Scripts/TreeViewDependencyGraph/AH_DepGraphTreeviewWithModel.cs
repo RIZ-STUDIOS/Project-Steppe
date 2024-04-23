@@ -95,11 +95,11 @@ namespace HeurekaGames.AssetHunterPRO.BaseTreeviewImpl.DependencyGraph
             base.DoubleClickedItem(id);
 
             var clickedObject = getObjectFromID(id);
-            Selection.activeObject = clickedObject;           
+            Selection.activeObject = clickedObject;
         }
 
         private UnityEngine.Object getObjectFromID(int id)
-        {          
+        {
             var refGraphElement = FindItem(id, rootItem) as TreeViewItem<AH_DepGraphElement>;
             return AssetDatabase.LoadMainAssetAtPath(refGraphElement.data.RelativePath);
         }
@@ -224,13 +224,13 @@ namespace HeurekaGames.AssetHunterPRO.BaseTreeviewImpl.DependencyGraph
                         DefaultGUI.Label(nameRect, item.data.AssetName, args.selected, args.focused);
                     }
                     break;
-                /*case MyColumns.Path:
-                    {
-                        Rect nameRect = cellRect;
-                        nameRect.x += GetContentIndent(item);
-                        DefaultGUI.Label(nameRect, item.data.RelativePath, args.selected, args.focused);
-                    }
-                    break;*/
+                    /*case MyColumns.Path:
+                        {
+                            Rect nameRect = cellRect;
+                            nameRect.x += GetContentIndent(item);
+                            DefaultGUI.Label(nameRect, item.data.RelativePath, args.selected, args.focused);
+                        }
+                        break;*/
             }
         }
 
