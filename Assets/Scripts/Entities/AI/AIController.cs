@@ -32,7 +32,7 @@ namespace ProjectSteppe
 
         private void Awake()
         {
-            combatController = GetComponent<AICombatController>();
+            combatController = GetComponentInChildren<AICombatController>();
             animator = GetComponent<AIAnimator>();
             idle = Instantiate(idle);
             chase = Instantiate(chase);

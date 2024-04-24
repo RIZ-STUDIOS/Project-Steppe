@@ -38,7 +38,7 @@ namespace ProjectSteppe
                 entity.EntityHealth.HealHealth(damage);
             }
 
-            var ai = GetComponent<AICombatController>().currentRecoveryTime = 0f;
+            var ai = GetComponentInChildren<AICombatController>().currentRecoveryTime = 0f;
         }
     }
 }

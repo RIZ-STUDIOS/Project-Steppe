@@ -18,8 +18,8 @@ namespace ProjectSteppe
 
         private void Awake()
         {
-            controller = GetComponent<AIController>();
-            GetComponent<Entity>().EntityHealth.onHit.AddListener(PlayerHitAssessment);
+            controller = GetComponentInParent<AIController>();
+            GetComponentInParent<Entity>().EntityHealth.onHit.AddListener(PlayerHitAssessment);
         }
 
         private void OnTriggerEnter(Collider other)
