@@ -103,6 +103,8 @@ namespace ProjectSteppe.Entities.Player
         [System.NonSerialized]
         public bool jumping;
 
+        public UnityEvent onFootstep;
+
         protected override void Awake()
         {
             base.Awake();
@@ -128,6 +130,11 @@ namespace ProjectSteppe.Entities.Player
         private void LateUpdate()
         {
             CameraRotation();
+        }
+
+        public void OnFootstep()
+        {
+            onFootstep.Invoke();
         }
 
         private void CheckDash()
