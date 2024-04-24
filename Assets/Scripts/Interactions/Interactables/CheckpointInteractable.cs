@@ -11,6 +11,7 @@ namespace ProjectSteppe.Interactions.Interactables
         public bool startDiscovered;
 
         [SerializeField] private ParticleSystem[] particles;
+        [SerializeField] private AudioSource initialBlastSound;
 
         public override string InteractText => Interacted ? "<sprite=8>Rest" : "<sprite=8>Kindle Respite";
 
@@ -18,6 +19,7 @@ namespace ProjectSteppe.Interactions.Interactables
         public override bool Interacted { get; protected set; }
 
         public UnityEvent OnCheckpointFirstInteraction;
+        public UnityEvent OnCheckpointActivate;
 
         private void Awake()
         {
@@ -87,6 +89,8 @@ namespace ProjectSteppe.Interactions.Interactables
 
             light.colorTemperature = 3000;
             light.intensity = 1;
+
+            OnCheckpointActivate.Invoke();
         }
     }
 }

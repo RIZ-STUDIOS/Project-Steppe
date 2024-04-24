@@ -1,5 +1,6 @@
 using ProjectSteppe.Items;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace ProjectSteppe.Interactions.Interactables
 {
@@ -16,6 +17,8 @@ namespace ProjectSteppe.Interactions.Interactables
 
         private ParticleSystem interactFX;
 
+        public UnityEvent OnPickUp;
+
         private void Awake()
         {
             interactFX = GetComponentInChildren<ParticleSystem>();
@@ -30,6 +33,8 @@ namespace ProjectSteppe.Interactions.Interactables
                 Interacted = true;
 
                 player.PlayerUI.messagePrompt.ShowMessage($"x{quantity} {item.title}");
+
+                OnPickUp.Invoke();
             }
         }
     }

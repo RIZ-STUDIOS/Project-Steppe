@@ -1,3 +1,4 @@
+using ProjectSteppe.Audio;
 using UnityEngine;
 
 namespace ProjectSteppe
@@ -10,6 +11,8 @@ namespace ProjectSteppe
             rb.isKinematic = false;
 
             rb.AddForce(force, ForceMode.Impulse);
+
+            GetComponent<SoundPlayer>().PlayRandomSound();
         }
     }
 }

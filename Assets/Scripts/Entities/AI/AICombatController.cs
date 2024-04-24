@@ -16,6 +16,10 @@ namespace ProjectSteppe
 
         private AIController controller;
 
+        private bool bossMusicStarted;
+
+        public AudioSource bossMusic;
+
         private void Awake()
         {
             controller = GetComponentInParent<AIController>();
@@ -32,11 +36,17 @@ namespace ProjectSteppe
 
                 playerUI.playerDetails.ShowPlayerDetails();
                 playerUI.bossDetails.ShowBossDetails();
+
+                if (!bossMusicStarted)
+                {
+                    bossMusicStarted = true;
+                    bossMusic.Play();
+                }
             }
         }
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("Player") && other.GetComponent<PlayerManager>())
             {
                 Debug.Log("Left!");
                 playerTarget = null;
@@ -47,10 +57,11 @@ namespace ProjectSteppe
         {
             if (currentRecoveryTime > 0)
             {
-                if (!controller.isMoving)
+                /*if (!controller.isMoving)
                 {
                     currentRecoveryTime -= Time.fixedDeltaTime;
-                }
+                }*/
+                currentRecoveryTime -= Time.fixedDeltaTime;
             }
         }
 

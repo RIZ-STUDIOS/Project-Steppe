@@ -1,5 +1,6 @@
 using ProjectSteppe.ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace ProjectSteppe.Entities
 {
@@ -13,6 +14,8 @@ namespace ProjectSteppe.Entities
         public Weapon CurrentWeapon => currentWeapon;
 
         public AttackScriptableObject currentAttack;
+
+        public UnityEvent OnAttack;
 
         private void Start()
         {
@@ -36,6 +39,8 @@ namespace ProjectSteppe.Entities
             if (!currentWeapon) return;
 
             currentWeapon.EnableColliders();
+
+            OnAttack.Invoke();
         }
 
         public void DisableWeaponCollision()

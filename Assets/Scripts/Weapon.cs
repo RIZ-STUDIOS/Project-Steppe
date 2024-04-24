@@ -103,11 +103,13 @@ namespace ProjectSteppe
                 if (!hitbox.ParentEntity.EntityBlock.IsPerfectBlock())
                 {
                     hitbox.ParentEntity.EntityHealth.DamageBalance(parentEntity.EntityAttacking.currentAttack.balanceDamage);
+                    hitbox.ParentEntity.EntityBlock.OnBlockAttack.Invoke();
                 }
                 else
                 {
                     parentEntity.EntityHealth.DamageBalance(hitbox.ParentEntity.EntityAttacking.currentAttack.balanceDamage);
                     hitbox.ParentEntity.EntityAttacking.CurrentWeapon.onParry?.Invoke();
+                    hitbox.ParentEntity.EntityBlock.OnParryAttack.Invoke();
                 }
 
                 hitbox.ParentEntity.EntityBlock.PlayBlockFX();

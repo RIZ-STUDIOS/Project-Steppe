@@ -92,8 +92,8 @@ namespace ProjectSteppe.Entities.Player
             playerMovement.onDashStart.AddListener(OnDashStart);
             playerMovement.onDashEnd.AddListener(OnDashEnd);
             playerWeapon.onParry += OnParry;
-            playerBlock.onBlockStart += OnBlockStart;
-            playerBlock.onBlockEnd += OnBlockEnd;
+            playerBlock.OnBlockStart.AddListener(OnBlockStart);
+            playerBlock.OnBlockEnd.AddListener(OnBlockEnd);
         }
 
         #region Movement

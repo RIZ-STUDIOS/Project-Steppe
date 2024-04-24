@@ -38,12 +38,28 @@ namespace ProjectSteppe
 
         private AIController controller;
 
+        public UnityEvent OnFootstep;
+        public UnityEvent OnMortalBlow;
+
+        public float volumeReduceMod = 1;
+        public AudioSource bossMusic;
+
         private void Awake()
         {
             animator = GetComponent<Animator>();
             health = GetComponent<EntityHealth>();
             navMeshAgent = GetComponent<NavMeshAgent>();
             controller = GetComponent<AIController>();
+        }
+
+        public void OnMortalSteppe()
+        {
+            OnMortalBlow.Invoke();
+        }
+
+        public void OnFootsteppe()
+        {
+            OnFootstep.Invoke();
         }
 
         private void OnBossKilled()
@@ -55,9 +71,22 @@ namespace ProjectSteppe
         {
             Destroy(lockTarget);
 
+            StartCoroutine(ReduceBossMusic());
+
             yield return new WaitForSeconds(4);
 
             OnBossDeath.Invoke();
+        }
+
+        private IEnumerator ReduceBossMusic()
+        {
+            while (bossMusic.volume > 0)
+            {
+                bossMusic.volume -= Time.deltaTime * volumeReduceMod;
+                yield return null;
+            }
+
+            bossMusic.volume = 0;
         }
 
         public void StaggerTimeout()

@@ -15,6 +15,9 @@ namespace ProjectSteppe.UI
         [SerializeField] private TextMeshProUGUI contextTMP;
         [SerializeField] private CanvasGroup blackFadeCG;
 
+        public AudioSource victoryImpact;
+        public AudioSource defeatImpact;
+
         private void Awake()
         {
             uiManager = GetComponentInParent<PlayerUIManager>();
@@ -47,6 +50,8 @@ namespace ProjectSteppe.UI
 
             StartCoroutine(canvasGroup.FadeIn());
 
+            victoryImpact.Play();
+
             yield return new WaitForSeconds(waitTime * 2);
 
             StartCoroutine(canvasGroup.FadeOut());
@@ -59,6 +64,8 @@ namespace ProjectSteppe.UI
             contextTMP.text = "<color=red>YOU DIED</color>";
 
             StartCoroutine(canvasGroup.FadeIn());
+
+            defeatImpact.Play();
 
             yield return new WaitForSeconds(waitTime * 2);
 

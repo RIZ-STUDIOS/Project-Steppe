@@ -77,6 +77,8 @@ public class Pause : MonoBehaviour
 
         if (paused)
         {
+            EventSystem.current.SetSelectedGameObject(pauseButtonsGOB.transform.GetChild(0).gameObject);
+
             playerInput.SwitchCurrentActionMap("UI");
             Time.timeScale = 0;
             input.ResetInputs();

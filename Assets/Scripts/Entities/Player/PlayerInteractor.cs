@@ -46,7 +46,7 @@ namespace ProjectSteppe.Entities.Player
             onInteractionEnded += LookForInteractable;
         }
 
-        private void OnInteract()
+        public void OnInteract()
         {
             if (CurrentInteractable != null)
             {

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace ProjectSteppe.Entities
 {
@@ -24,14 +25,17 @@ namespace ProjectSteppe.Entities
 
         public bool IsBlocking => blocking;
 
-        public System.Action onBlockStart;
-        public System.Action onBlockEnd;
+        public UnityEvent OnBlockStart;
+        public UnityEvent OnBlockEnd;
+
+        public UnityEvent OnBlockAttack;
+        public UnityEvent OnParryAttack;
 
         [ContextMenu("Start Block")]
         public void StartBlock()
         {
             blocking = true;
-            onBlockStart?.Invoke();
+            OnBlockStart?.Invoke();
         }
 
         public void EndBlock()
@@ -39,7 +43,7 @@ namespace ProjectSteppe.Entities
             blocking = false;
             Debug.Log($"Blocked for {blockTime} seconds");
             blockTime = 0;
-            onBlockEnd?.Invoke();
+            OnBlockEnd?.Invoke();
         }
 
         public bool IsPerfectBlock()

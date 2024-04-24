@@ -1,12 +1,9 @@
 using RicTools.Managers;
-using System.Collections.Generic;
 using TMPro;
-using Unity.Plastic.Antlr3.Runtime.Debug;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 using UnityEngine.SceneManagement;
-using UnityEngine.TextCore.Text;
 
 namespace ProjectSteppe.Managers
 {
@@ -36,6 +33,9 @@ namespace ProjectSteppe.Managers
 
             GetTMPUGUIs(default, 0);
             OnDeviceChange(default, 0, InputSystem.devices[0]);
+
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         public void RespawnCharacter()
