@@ -186,7 +186,7 @@ namespace ProjectSteppe.Entities.Player
         {
             if (Grounded)
             {
-                if (playerManager.HasCapability(PlayerCapability.Move))
+                if (playerManager.HasCapability(PlayerCapability.Move) && false)
                 {
                     if (_input.jump)
                     {
