@@ -85,6 +85,25 @@ namespace RicTools.Editor.Utilities
             return textField;
         }
 
+        public static TagField AddTagField(this VisualElement root, EditorContainer<string> data, string text = "Tag", System.Action<string> onSelectionChange = null)
+        {
+            var tagField = new TagField()
+            {
+                value = data.Value,
+                label = text,
+            };
+
+            tagField.RegisterValueChangedCallback(callback =>
+            {
+                data.Value = callback.newValue;
+                onSelectionChange?.Invoke(callback.previousValue);
+            });
+
+            root.Add(tagField);
+
+            return tagField;
+        }
+
         public static ColorField AddColorField(this VisualElement root, EditorContainer<Color> data, string text = "Color", bool showAlpha = true, bool hdr = false, System.Action onSelectionChange = null)
         {
             var colorField = new ColorField()
@@ -300,6 +319,25 @@ namespace RicTools.Editor.Utilities
             root.Add(field);
 
             return field;
+        }
+
+        public static LayerMaskField AddLayerMask(this VisualElement root, EditorContainer<LayerMask> data, string text = "Layer Mask", System.Action onSelectionChange = null)
+        {
+            var layerMask = new LayerMaskField()
+            {
+                value = data.Value,
+                label = text
+            };
+
+            layerMask.RegisterValueChangedCallback(callback =>
+            {
+                data.Value = callback.newValue;
+                onSelectionChange?.Invoke();
+            });
+
+            root.Add(layerMask);
+
+            return layerMask;
         }
 
         public static CurveField AddCurveField(this VisualElement root, EditorContainer<AnimationCurve> data, string text = "Curve", System.Action onSelectionChange = null)

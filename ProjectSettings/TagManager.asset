@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - CinemachineTarget
+  - PlayerCamera
+  - TargetLockCamera
+  - Invisible
+  - Interactable
+  - Destructible
   layers:
   - Default
   - TransparentFX
@@ -15,18 +20,18 @@ TagManager:
   - 
   - 
   - Player
+  - TargetLockCollision
+  - EntityCollision
+  - Enemy
+  - Camera
+  - DamageCollider
+  - Environment
+  - Invisible
+  - PlayerOnly
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Interactable
   - 
   - 
   - 

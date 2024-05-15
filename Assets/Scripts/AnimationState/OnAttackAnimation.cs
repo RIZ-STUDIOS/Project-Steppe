@@ -1,3 +1,4 @@
+using ProjectSteppe.Entities.Player;
 using StarterAssets;
 using UnityEngine;
 
@@ -27,6 +28,12 @@ public class OnAttackAnimation : StateMachineBehaviour
     {
         var thirdPersonController = animator.GetComponent<ThirdPersonController>();
         thirdPersonController.canMove = true;
+        thirdPersonController.canRotate = true;
+        thirdPersonController.RotationSmoothTime = 0.12f;
+        {
+            var playerAttack = animator.GetComponent<PlayerAttackController>();
+            //playerAttack.DisableWeapon();
+        }
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

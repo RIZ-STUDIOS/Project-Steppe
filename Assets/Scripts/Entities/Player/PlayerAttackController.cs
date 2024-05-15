@@ -1,69 +1,128 @@
 using StarterAssets;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace ProjectSteppe.Entities.Player
 {
-    [RequireComponent(typeof(Entity))]
-    public class PlayerAttackController : MonoBehaviour
+    public class PlayerAttackController : EntityBehaviour
     {
-        private ThirdPersonController thirdPersonController;
-        private StarterAssetsInputs _input;
-        private int _animIDAttacking;
-        private Animator _animator;
+        private bool firstAttack = true;
+        private bool canCombo;
 
-        private Entity entity;
+        private StarterAssetsInputs input;
+        private Animator animator;
+        private PlayerManager playerManager;
 
-        private void Awake()
+        private int animIDAttacking;
+        private int animIDNextAttack;
+        private int animIDBlocking;
+
+        private bool attacking;
+        private bool blocking;
+
+        public UnityEvent onAttack;
+
+        protected override void Awake()
         {
-            entity = GetComponent<Entity>();
-            thirdPersonController = GetComponent<ThirdPersonController>();
+            base.Awake();
+            input = GetComponent<StarterAssetsInputs>();
+            animator = GetComponentInChildren<Animator>();
+            playerManager = GetComponent<PlayerManager>();
         }
 
         private void Start()
         {
-            _input = GetComponent<StarterAssetsInputs>();
-
-            _animator = GetComponent<Animator>();
-            _animIDAttacking = Animator.StringToHash("Attacking");
+            animIDAttacking = Animator.StringToHash("Attacking");
+            animIDNextAttack = Animator.StringToHash("NextAttack");
+            animIDBlocking = Animator.StringToHash("Blocking");
         }
 
         private void Update()
         {
             Attack();
+            Block();
         }
 
         private void Attack()
         {
-            if (!thirdPersonController.Grounded)
+            if (input.attack)
             {
-                if (_input.attack) _input.attack = false;
+                if ((!firstAttack && !canCombo) || blocking || !playerManager.HasCapability(PlayerCapability.Attack) || playerManager.PlayerMovement.jumping)
+                {
+                    input.attack = false;
+                    return;
+                }
+                //Debug.Log("Attacking");
+                if (canCombo)
+                {
+                    animator.SetBool(animIDNextAttack, true);
+                }
+                onAttack.Invoke();
+                animator.SetBool(animIDAttacking, true);
+                firstAttack = false;
+                input.attack = false;
+                attacking = true;
+                playerManager.DisableCapability(PlayerCapability.Move);
             }
 
-            if (_input.attack && thirdPersonController.canMove)
+            if (attacking && !playerManager.HasCapability(PlayerCapability.Attack))
             {
-                _animator.SetBool(_animIDAttacking, true);
-                thirdPersonController.canMove = false;
-            }
-            else if (_input.attack)
-            {
-                _input.attack = false;
+                DisableCombo();
+                RestartAttack();
             }
         }
 
-        // Called in Attack animation
-        private void EnableWeapon()
+        private void Block()
         {
-            if (!entity.CurrentWeapon) return;
-
-            entity.CurrentWeapon.EnableColliders();
+            if (input.blocking && playerManager.HasCapability(PlayerCapability.Attack))
+            {
+                if (attacking)
+                {
+                    canCombo = false;
+                    RestartAttack();
+                    Entity.EntityAttacking.DisableWeaponCollision();
+                    animator.SetTrigger("ForcedBlocking");
+                    animator.SetTrigger("ForceAnimation");
+                }
+                if (!blocking)
+                {
+                    Entity.EntityBlock.StartBlock();
+                }
+            }
+            else
+            {
+                if (blocking)
+                {
+                    Entity.EntityBlock.EndBlock();
+                }
+            }
+            blocking = input.blocking && playerManager.HasCapability(PlayerCapability.Attack);
+            animator.SetBool(animIDBlocking, blocking);
         }
 
-        // Called in Attack animation
-        private void DisableWeapon()
+        private void EnableCombo()
         {
-            if (!entity.CurrentWeapon) return;
+            //Debug.Log("Combo enabled");
+            canCombo = true;
+        }
 
-            entity.CurrentWeapon.DisableColliders();
+        private void DisableCombo()
+        {
+            //Debug.Log("Combo disabled");
+            canCombo = false;
+            animator.SetBool(animIDAttacking, false);
+        }
+
+        public void RestartAttack()
+        {
+            if (canCombo) return;
+            //Debug.Log("Resetting attack");
+            firstAttack = true;
+            animator.SetBool(animIDAttacking, false);
+            animator.SetBool(animIDNextAttack, false);
+            attacking = false;
+            playerManager.EnableCapability(PlayerCapability.Move);
+            playerManager.EnableCapability(PlayerCapability.Rotate);
         }
     }
 }
