@@ -32808,12 +32808,17 @@ PrefabInstance:
     - target: {fileID: 942965604158055973, guid: 760189c7b9a6e664d997b953223e98ad,
         type: 3}
       propertyPath: OnBossDeath.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 942965604158055973, guid: 760189c7b9a6e664d997b953223e98ad,
         type: 3}
       propertyPath: OnMortalBlow.m_PersistentCalls.m_Calls.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 942965604158055973, guid: 760189c7b9a6e664d997b953223e98ad,
+        type: 3}
+      propertyPath: OnBossDeath.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 942965604158055973, guid: 760189c7b9a6e664d997b953223e98ad,
         type: 3}
@@ -32839,6 +32844,11 @@ PrefabInstance:
         type: 3}
       propertyPath: OnMortalBlow.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: PlayRandomSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 942965604158055973, guid: 760189c7b9a6e664d997b953223e98ad,
+        type: 3}
+      propertyPath: OnBossDeath.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: UnityEngine.Collider, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 942965604158055973, guid: 760189c7b9a6e664d997b953223e98ad,
         type: 3}
