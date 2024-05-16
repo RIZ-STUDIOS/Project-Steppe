@@ -12,6 +12,9 @@ namespace ProjectSteppe.UI.Menus
         [SerializeField]
         private float fadeOutSpeed = 5;
 
+        [SerializeField]
+        private SettingsSubMenu[] subMenus;
+
         [ContextMenu("Go Back")]
         private void D()
         {
@@ -21,6 +24,7 @@ namespace ProjectSteppe.UI.Menus
         protected override void ShowMenu()
         {
             ShowMenuCoroutine(fadeInSpeed);
+            subMenus[0].Show();
         }
 
         protected override void HideMenu()
