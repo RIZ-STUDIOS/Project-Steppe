@@ -186,7 +186,7 @@ namespace ProjectSteppe.Entities.Player
         {
             if (Grounded)
             {
-                if (playerManager.HasCapability(PlayerCapability.Move))
+                if (playerManager.HasCapability(PlayerCapability.Move) && false)
                 {
                     if (_input.jump)
                     {
@@ -309,7 +309,7 @@ namespace ProjectSteppe.Entities.Player
 
             //if (jumping) targetDirection.y = Mathf.Sqrt(5 * 2 * -9.8f);
 
-            characterController.Move(targetDirection.normalized * (speed * Time.deltaTime) + new Vector3(0, verticalVelocity, 0) * Time.deltaTime);
+            characterController.Move((targetDirection.normalized * (speed * Time.deltaTime)) + new Vector3(0, verticalVelocity, 0) * Time.deltaTime);
 
 
             // FOR ANIMATOR //
