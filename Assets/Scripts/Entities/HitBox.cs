@@ -11,6 +11,7 @@ namespace ProjectSteppe
 
         private void Awake()
         {
+            gameObject.layer = 17;
             parentEntity = GetComponentInParent<Entity>();
             if (parentEntity == null)
             {
