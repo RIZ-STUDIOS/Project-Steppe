@@ -19,6 +19,7 @@ namespace ProjectSteppe.UI.Menus
         {
             base.Awake();
             SetMenu(this);
+            ShowCurrentMenu();
         }
 
         protected override void HideMenu()
@@ -30,15 +31,16 @@ namespace ProjectSteppe.UI.Menus
 
         protected override void ShowMenu()
         {
-            if(lastSelectedMenuButton)
-            eventSystem.SetSelectedGameObject(lastSelectedMenuButton);
+            if (lastSelectedMenuButton)
+                eventSystem.SetSelectedGameObject(lastSelectedMenuButton);
             canvasGroup.blocksRaycasts = true;
         }
 
         public void QuitGame()
         {
-            //if (Application.isEditor) return;
+            if (Application.isEditor) return;
             eventSystem.enabled = false;
+            playerInput.enabled = false;
             StartCoroutine(QuitGameIEnumerator());
         }
 
@@ -49,7 +51,6 @@ namespace ProjectSteppe.UI.Menus
             Application.Quit();
         }
 
-        [ContextMenu("Change to settings menu")]
         public void ShowSettings()
         {
             SetMenu(settingsMenu);

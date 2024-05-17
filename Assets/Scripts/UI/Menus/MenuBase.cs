@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace ProjectSteppe.UI.Menus
 {
     [RequireComponent(typeof(CanvasGroup))]
+    [RequireComponent(typeof(PlayerInput))]
     public abstract class MenuBase : MonoBehaviour
     {
         public static MenuBase CurrentMenu;
@@ -15,6 +17,7 @@ namespace ProjectSteppe.UI.Menus
         private Coroutine showHideCoroutine;
 
         protected EventSystem eventSystem;
+        protected PlayerInput playerInput;
 
         public static void SetMenu(MenuBase menu)
         {
@@ -22,6 +25,7 @@ namespace ProjectSteppe.UI.Menus
             CurrentMenu = menu;
             if (prevMenu)
             {
+                prevMenu.playerInput.enabled = false;
                 prevMenu.HideMenu();
             }
 
@@ -30,12 +34,15 @@ namespace ProjectSteppe.UI.Menus
 
         protected static void ShowCurrentMenu()
         {
+            CurrentMenu.playerInput.enabled = true;
             CurrentMenu.ShowMenu();
         }
 
         protected virtual void Awake()
         {
             canvasGroup = GetComponent<CanvasGroup>();
+            playerInput = GetComponent<PlayerInput>();
+            playerInput.enabled = false;
         }
 
         private void Start()

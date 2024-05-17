@@ -19,6 +19,10 @@ namespace ProjectSteppe.UI.Menus
         private void Awake()
         {
             canvasGroup = GetComponent<CanvasGroup>();
+        }
+
+        private void Start()
+        {
             Hide();
         }
 
