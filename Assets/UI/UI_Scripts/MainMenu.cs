@@ -1,4 +1,5 @@
 using ProjectSteppe.Managers;
+using ProjectSteppe.ZedExtensions;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -29,6 +30,11 @@ public class MainMenu : MonoBehaviour
     private bool menuOn = true;
 
     private int index;
+
+    [SerializeField]
+    private CanvasGroup progressSpriteCG;
+    private Coroutine progressCoroutine;
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -83,6 +89,24 @@ public class MainMenu : MonoBehaviour
         GameManager.Instance.RespawnCharacter();
         Debug.Log("Start Game");
     }
+
+    public void ResetProgress()
+    {
+        SaveManager.ResetSave();
+        if (progressCoroutine != null) StopCoroutine(progressCoroutine);
+        progressCoroutine = StartCoroutine(ProgressResetNotification());
+    }
+
+    private IEnumerator ProgressResetNotification()
+    {
+        progressSpriteCG.alpha = 1;
+        while (progressSpriteCG.alpha > 0)
+        {
+            progressSpriteCG.alpha -= Time.deltaTime;
+            yield return null;
+        }
+    }
+
     public void Quit()
     {
         Application.Quit();

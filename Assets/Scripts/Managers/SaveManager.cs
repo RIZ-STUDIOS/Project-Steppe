@@ -37,5 +37,11 @@ namespace ProjectSteppe.Managers
 
             return true;
         }
+
+        public static void ResetSave()
+        {
+            File.Delete(SavePath + "/Save.json");
+            InitSave();
+        }
     }
 }
