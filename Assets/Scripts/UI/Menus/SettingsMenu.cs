@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace ProjectSteppe.UI.Menus
 {
@@ -15,21 +16,42 @@ namespace ProjectSteppe.UI.Menus
         [SerializeField]
         private SettingsSubMenu[] subMenus;
 
-        [ContextMenu("Go Back")]
-        private void D()
-        {
-            SetMenu(previousMenu);
-        }
+        private int subMenuIndex = 0;
 
         protected override void ShowMenu()
         {
             ShowMenuCoroutine(fadeInSpeed);
-            subMenus[0].Show();
+            subMenuIndex = 0;
+            subMenus[subMenuIndex].Show();
         }
 
         protected override void HideMenu()
         {
             HideMenuCoroutine(fadeOutSpeed);
+        }
+
+        private void OnCancel(InputValue value)
+        {
+            if (value.Get<float>() == 0) return;
+            SetMenu(previousMenu);
+        }
+
+        private void OnRightBumper(InputValue value)
+        {
+            if (value.Get<float>() == 0) return;
+            if ((subMenuIndex + 1) >= subMenus.Length) return;
+
+            subMenus[subMenuIndex++].Hide();
+            subMenus[subMenuIndex].Show();
+        }
+
+        private void OnLeftBumper(InputValue value)
+        {
+            if (value.Get<float>() == 0) return;
+            if ((subMenuIndex - 1) < 0) return;
+
+            subMenus[subMenuIndex--].Hide();
+            subMenus[subMenuIndex].Show();
         }
     }
 }

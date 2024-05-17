@@ -1200,6 +1200,7 @@ GameObject:
   - component: {fileID: 469195802}
   - component: {fileID: 469195803}
   - component: {fileID: 469195804}
+  - component: {fileID: 469195805}
   m_Layer: 5
   m_Name: MainMenuGroup
   m_TagString: Untagged
@@ -1256,6 +1257,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingsMenu: {fileID: 1203311111}
   quitCanvasGroup: {fileID: 1389388095}
+--- !u!114 &469195805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469195801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 27853d667c8f0054ebe619ceb915908f,
+    type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 533173223}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: UI
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &499014105
 GameObject:
   m_ObjectHideFlags: 0
@@ -1457,7 +1489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6977e9f64ec264b4a89276096b1950cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultObjectSelect: {fileID: 1478396018}
+  defaultObjectSelect: {fileID: 1795276296}
   tab: {fileID: 1660282722}
 --- !u!225 &509885236
 CanvasGroup:
@@ -4927,6 +4959,7 @@ GameObject:
   - component: {fileID: 1203311109}
   - component: {fileID: 1203311110}
   - component: {fileID: 1203311111}
+  - component: {fileID: 1203311112}
   m_Layer: 5
   m_Name: GeneralOptions
   m_TagString: Untagged
@@ -5018,6 +5051,39 @@ MonoBehaviour:
   fadeOutSpeed: 1.5
   subMenus:
   - {fileID: 1286941791}
+  - {fileID: 1144513791}
+  - {fileID: 509885235}
+--- !u!114 &1203311112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203311107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 27853d667c8f0054ebe619ceb915908f,
+    type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 533173223}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: UI
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1285000723
 GameObject:
   m_ObjectHideFlags: 0
@@ -6939,12 +7005,6 @@ PrefabInstance:
       addedObject: {fileID: 1059994689}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 934964500b3a8384487632648e728a76, type: 3}
---- !u!1 &1478396018 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1234537341643708300, guid: 934964500b3a8384487632648e728a76,
-    type: 3}
-  m_PrefabInstance: {fileID: 1478396017}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1484932268
 GameObject:
   m_ObjectHideFlags: 0
@@ -7748,13 +7808,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1793107790}
   m_CullTransparentMesh: 1
+--- !u!1 &1795276296 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4179062167338539563, guid: 934964500b3a8384487632648e728a76,
+    type: 3}
+  m_PrefabInstance: {fileID: 1478396017}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1828344720 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3758196551632483063, guid: 934964500b3a8384487632648e728a76,
     type: 3}
   m_PrefabInstance: {fileID: 1478396017}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1795276296}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
