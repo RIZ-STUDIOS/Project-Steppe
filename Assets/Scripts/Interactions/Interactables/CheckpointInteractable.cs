@@ -16,7 +16,7 @@ namespace ProjectSteppe.Interactions.Interactables
         public bool StartDiscovered
         {
             get { return _startDiscovered; }
-            set { _startDiscovered = value; DiscoveredQuery(); }
+            set { _startDiscovered = value; }
         }
 
         [SerializeField] private ParticleSystem[] particles;
@@ -31,6 +31,8 @@ namespace ProjectSteppe.Interactions.Interactables
         public UnityEvent OnCheckpointFirstInteraction;
 
         public int levelIndex;
+
+        public Transform spawnPoint;
 
         public void DiscoveredQuery()
         {

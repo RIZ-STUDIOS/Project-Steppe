@@ -24,7 +24,6 @@ namespace ProjectSteppe.Entities.Player
                 else
                 {
                     playerManager.PlayerUI.interactPrompt.HidePrompt();
-                    Debug.Log("ERRRR");
                 }
             }
         }

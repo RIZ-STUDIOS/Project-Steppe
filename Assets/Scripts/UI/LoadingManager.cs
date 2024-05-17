@@ -32,7 +32,7 @@ namespace ProjectSteppe
         public static void LoadScene(int buildIndex)
         {
             targetBuildIndex = buildIndex;
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(0);
         }
 
         private void Start()

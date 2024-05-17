@@ -8,6 +8,6 @@ namespace ProjectSteppe
     {
         public int currentSceneIndex;
         public int currentCheckpointIndex;
-        public Dictionary<string,bool> level1Checkpoints = new();
+        public Dictionary<string,bool> checkpointStates = new();
     }
 }

@@ -30,6 +30,8 @@ namespace ProjectSteppe.Managers
         protected override void Awake()
         {
             base.Awake();
+            if (!SaveManager.InitSave()) SaveManager.LoadGame();
+
             InputUser.onChange += OnDeviceChange;
             SceneManager.sceneLoaded += GetTMPUGUIs;
 
@@ -40,8 +42,6 @@ namespace ProjectSteppe.Managers
 
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-
-            if (!SaveManager.InitSave()) SaveManager.LoadGame();
         }
 
         public void RespawnCharacter()
@@ -60,7 +60,7 @@ namespace ProjectSteppe.Managers
             {
                 TMP_SpriteAsset spriteAsset = kbm;
 
-                Debug.Log(device.description.interfaceName);
+                //Debug.Log(device.description.interfaceName);
                 switch (device.description.interfaceName)
                 {
                     case "HID":

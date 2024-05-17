@@ -68,7 +68,7 @@ public class Pause : MonoBehaviour
     public void Quit()
     {
         Time.timeScale = 1;
-        LoadingManager.LoadScene(0);
+        LoadingManager.LoadScene(1);
     }
 
     private void OnPause()
