@@ -7104,6 +7104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1775550656}
   - component: {fileID: 1775550655}
+  - component: {fileID: 1775550657}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -7127,7 +7128,7 @@ MonoBehaviour:
   ps5: {fileID: 11400000, guid: 44a21995f9e822a49ad374784f039468, type: 2}
   xbox: {fileID: 11400000, guid: 2d16853f239df7d4bbefaa179b589d48, type: 2}
   kbm: {fileID: 11400000, guid: d78287b0baa664b40aa1e3d67e888384, type: 2}
-  hasSecondCheckpoint: 0
+  defaultGameSceneIndex: 1
 --- !u!4 &1775550656
 Transform:
   m_ObjectHideFlags: 0
@@ -7143,6 +7144,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1775550657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775550654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675972e9a0573474899ce33dc773eb8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1789457348
 GameObject:
   m_ObjectHideFlags: 0

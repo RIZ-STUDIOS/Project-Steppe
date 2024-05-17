@@ -1,4 +1,5 @@
 using ProjectSteppe.Entities.Player;
+using ProjectSteppe.Managers;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,7 +9,14 @@ namespace ProjectSteppe.Interactions.Interactables
 {
     public class CheckpointInteractable : Interactable
     {
-        public bool startDiscovered;
+        public string id;
+
+        private bool _startDiscovered;
+        public bool StartDiscovered
+        {
+            get { return _startDiscovered; }
+            set { _startDiscovered = value; DiscoveredQuery(); }
+        }
 
         [SerializeField] private ParticleSystem[] particles;
         [SerializeField] private AudioSource initialBlastSound;
@@ -18,12 +26,14 @@ namespace ProjectSteppe.Interactions.Interactables
         public override bool OneTime => false;
         public override bool Interacted { get; protected set; }
 
+        public UnityEvent<CheckpointInteractable> OnCheckpointActivate;
         public UnityEvent OnCheckpointFirstInteraction;
-        public UnityEvent OnCheckpointActivate;
 
-        private void Awake()
+        public int levelIndex;
+
+        private void DiscoveredQuery()
         {
-            if (startDiscovered)
+            if (StartDiscovered)
             {
                 Interacted = true;
                 ActivateCheckpoint();
@@ -34,6 +44,8 @@ namespace ProjectSteppe.Interactions.Interactables
         {
             if (!Interacted) FirstCheckpointInteract();
             else CheckpointInteract();
+
+            OnCheckpointActivate.Invoke(this);
         }
 
         private void FirstCheckpointInteract()
@@ -89,8 +101,6 @@ namespace ProjectSteppe.Interactions.Interactables
 
             light.colorTemperature = 3000;
             light.intensity = 1;
-
-            OnCheckpointActivate.Invoke();
         }
     }
 }

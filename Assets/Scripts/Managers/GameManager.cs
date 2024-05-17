@@ -10,20 +10,22 @@ namespace ProjectSteppe.Managers
     public class GameManager : GenericManager<GameManager>
     {
         [SerializeField]
-        TMP_FontAsset font;
+        private TMP_FontAsset font;
 
         [SerializeField]
-        TMP_SpriteAsset ps5;
+        private TMP_SpriteAsset ps5;
 
         [SerializeField]
-        TMP_SpriteAsset xbox;
+        private TMP_SpriteAsset xbox;
 
         [SerializeField]
-        TMP_SpriteAsset kbm;
+        private TMP_SpriteAsset kbm;
 
         TextMeshProUGUI[] sceneTMPs;
 
-        public bool hasSecondCheckpoint;
+        public int defaultGameSceneIndex;
+
+        protected override bool DontDestroyManagerOnLoad => true;
 
         protected override void Awake()
         {
@@ -36,22 +38,18 @@ namespace ProjectSteppe.Managers
 
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+
+            if (!SaveManager.Instance.InitSave()) SaveManager.Instance.LoadGame();
         }
 
         public void RespawnCharacter()
         {
-            if (!hasSecondCheckpoint) LoadingManager.LoadScene(1);
-            else LoadingManager.LoadScene(3);
-        }
-
-        public void HasSecondCheckpoint()
-        {
-            hasSecondCheckpoint = true;
+            LoadingManager.LoadScene(SaveManager.Instance.CurrentSave.currentSceneIndex);
         }
 
         private void GetTMPUGUIs(Scene newScene, LoadSceneMode mode)
         {
-            sceneTMPs = GameObject.FindObjectsByType<TextMeshProUGUI>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            sceneTMPs = FindObjectsByType<TextMeshProUGUI>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         }
 
         private void OnDeviceChange(InputUser user, InputUserChange userChange, InputDevice device)
