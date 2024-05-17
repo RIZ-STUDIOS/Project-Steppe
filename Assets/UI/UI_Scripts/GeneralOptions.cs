@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class GeneralOptions : MonoBehaviour
 {
     [Header("Resolution Settings")]
-    [SerializeField]
     private List<ResItem> resolutions = new List<ResItem>();
     [SerializeField]
     private TMP_Text resText;
