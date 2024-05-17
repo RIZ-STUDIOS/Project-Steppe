@@ -27,6 +27,7 @@ namespace ProjectSteppe.UI.Menus
 
         protected override void HideMenu()
         {
+            subMenus[subMenuIndex].Hide();
             HideMenuCoroutine(fadeOutSpeed);
         }
 
