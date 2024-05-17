@@ -49,17 +49,28 @@ public class GeneralOptions : MonoBehaviour
             }
         }
 
-        float vol = 0f;
-        audioMixer.GetFloat("MasterVol", out vol);
-        masterVolSlider.value = vol;
-        audioMixer.GetFloat("MusicVol", out vol);
-        musicVolSlider.value = vol;
-        audioMixer.GetFloat("SFXVol", out vol);
-        sfxVolSlider.value = vol;
+        /*float vol = 0f;
+        if (!audioMixer.GetFloat("MasterVol", out vol))
+            vol = 0;
+        masterVolSlider.value = Mathf.Pow(10, vol/20f);
+        if (!audioMixer.GetFloat("MusicVol", out vol))
+            vol = 0;
+        musicVolSlider.value = Mathf.Pow(10, vol / 20f);
+        if (!audioMixer.GetFloat("SFXVol", out vol))
+            vol = 0;
+        sfxVolSlider.value = Mathf.Pow(10, vol/20f);
 
-        masterVolText.text = Mathf.RoundToInt(masterVolSlider.value + 80).ToString() + "%";
-        musicVolText.text = Mathf.RoundToInt(musicVolSlider.value + 80).ToString() + "%";
-        sfxVolText.text = Mathf.RoundToInt(sfxVolSlider.value + 80).ToString() + "%";
+        masterVolText.text = Mathf.RoundToInt(masterVolSlider.value * 100).ToString() + "%";
+        musicVolText.text = Mathf.RoundToInt(musicVolSlider.value * 100).ToString() + "%";
+        sfxVolText.text = Mathf.RoundToInt(sfxVolSlider.value * 100).ToString() + "%";*/
+
+        masterVolSlider.value = PlayerPrefs.GetFloat("MasterVol", 1);
+        musicVolSlider.value = PlayerPrefs.GetFloat("MusicVol", 1);
+        sfxVolSlider.value = PlayerPrefs.GetFloat("SFXVol", 1);
+
+        SetMasterVolume();
+        SetMusicVolume();
+        SetSfxVolume();
     }
     #region Resolution
     private void UpdateResolution()
@@ -98,20 +109,29 @@ public class GeneralOptions : MonoBehaviour
     #region Audio
     public void SetMasterVolume()
     {
-        masterVolText.text = Mathf.RoundToInt(masterVolSlider.value + 80).ToString() + "%";
-        audioMixer.SetFloat("MasterVol", masterVolSlider.value);
+        masterVolText.text = Mathf.RoundToInt(masterVolSlider.value * 100).ToString() + "%";
+        if (masterVolSlider.value <= 0)
+            audioMixer.SetFloat("MasterVol", -80);
+        else
+            audioMixer.SetFloat("MasterVol", Mathf.Log10(masterVolSlider.value) * 20);
         PlayerPrefs.SetFloat("MasterVol", masterVolSlider.value);
     }
     public void SetMusicVolume()
     {
-        musicVolText.text = Mathf.RoundToInt(musicVolSlider.value + 80).ToString() + "%";
-        audioMixer.SetFloat("MusicVol", musicVolSlider.value);
+        musicVolText.text = Mathf.RoundToInt(musicVolSlider.value * 100).ToString() + "%";
+        if (musicVolSlider.value <= 0)
+            audioMixer.SetFloat("MusicVol", -80);
+        else
+            audioMixer.SetFloat("MusicVol", Mathf.Log10(musicVolSlider.value) * 20);
         PlayerPrefs.SetFloat("MusicVol", musicVolSlider.value);
     }
     public void SetSfxVolume()
     {
-        sfxVolText.text = Mathf.RoundToInt(sfxVolSlider.value + 80).ToString() + "%";
-        audioMixer.SetFloat("SFXVol", sfxVolSlider.value);
+        sfxVolText.text = Mathf.RoundToInt(sfxVolSlider.value * 100).ToString() + "%";
+        if (sfxVolSlider.value <= 0)
+            audioMixer.SetFloat("SFXVol", -80);
+        else
+            audioMixer.SetFloat("SFXVol", Mathf.Log10(sfxVolSlider.value) * 20);
         PlayerPrefs.SetFloat("SFXVol", sfxVolSlider.value);
     }
     #endregion
