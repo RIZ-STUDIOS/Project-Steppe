@@ -36,15 +36,17 @@ namespace ProjectSteppe.Managers
             GetTMPUGUIs(default, 0);
             OnDeviceChange(default, 0, InputSystem.devices[0]);
 
+            SceneManager.sceneLoaded += OnSceneLoaded;
+
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
 
-            if (!SaveManager.Instance.InitSave()) SaveManager.Instance.LoadGame();
+            if (!SaveManager.InitSave()) SaveManager.LoadGame();
         }
 
         public void RespawnCharacter()
         {
-            LoadingManager.LoadScene(SaveManager.Instance.CurrentSave.currentSceneIndex);
+            LoadingManager.LoadScene(SaveManager.CurrentSave.currentSceneIndex);
         }
 
         private void GetTMPUGUIs(Scene newScene, LoadSceneMode mode)
@@ -82,6 +84,12 @@ namespace ProjectSteppe.Managers
                     tmp.spriteAsset = spriteAsset;
                 }
             }
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            GetTMPUGUIs(default, 0);
+            OnDeviceChange(default, 0, InputSystem.devices[0]);
         }
     }
 }

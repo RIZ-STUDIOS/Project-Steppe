@@ -279,11 +279,11 @@
                 },
                 {
                     "name": "",
-                    "id": "bf4fd7e4-0416-48ef-990a-dec746318c39",
+                    "id": "4cd07b57-b931-4eef-afe6-c672560c4e4e",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "",
                     "action": "Submit",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -301,8 +301,8 @@
                 },
                 {
                     "name": "",
-                    "id": "464d2129-eaf1-49c4-bcfa-d453d90248c4",
-                    "path": "<Keyboard>/backspace",
+                    "id": "3ee8fb5d-dfba-459f-960e-c13ae30a6408",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -312,11 +312,11 @@
                 },
                 {
                     "name": "",
-                    "id": "3ee8fb5d-dfba-459f-960e-c13ae30a6408",
-                    "path": "<Keyboard>/escape",
+                    "id": "13aede1c-7fae-4a4a-bb2e-6bb62c888133",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "",
                     "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -400,11 +400,22 @@
                 },
                 {
                     "name": "",
-                    "id": "ec412696-edf2-4c6a-a85d-5116d7880ee9",
-                    "path": "<Keyboard>/e",
+                    "id": "33263157-2bfe-416a-aeaa-06224e05ab8a",
+                    "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "",
+                    "action": "SettingsRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d40485ba-07fc-4ddc-b2c9-a8658715b422",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "SettingsRight",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -433,11 +444,22 @@
                 },
                 {
                     "name": "",
-                    "id": "54f93924-01a4-43fe-8960-d87da2e7707c",
-                    "path": "<Keyboard>/q",
+                    "id": "2cc92cf2-c1b4-4f9a-9082-7244c1c5481f",
+                    "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "",
+                    "action": "SettingsLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b38a833a-0f75-4e6d-a3e9-2401bd66ae2b",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "SettingsLeft",
                     "isComposite": false,
                     "isPartOfComposite": false

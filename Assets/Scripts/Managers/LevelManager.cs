@@ -27,24 +27,31 @@ namespace ProjectSteppe.Managers
                 checkpoint.levelIndex = i;
                 checkpoint.OnCheckpointActivate.AddListener(SaveCheckpoint);
 
-                if (checkpoint.StartDiscovered && !SaveManager.Instance.CurrentSave.level1Checkpoints.ContainsKey(checkpoint.id))
+                if (!SaveManager.CurrentSave.level1Checkpoints.ContainsKey(checkpoint.id))
                 {
-                    SaveManager.Instance.CurrentSave.level1Checkpoints.Add(checkpoint.id, checkpoint.StartDiscovered);
-                    SaveManager.Instance.SaveGame();
-                    continue;
+                    SaveManager.CurrentSave.level1Checkpoints.Add(checkpoint.id, checkpoint.StartDiscovered);
+                }
+
+                if (!SaveManager.CurrentSave.level1Checkpoints[checkpoint.id] && checkpoint.StartDiscovered)
+                {
+                    SaveManager.CurrentSave.level1Checkpoints[checkpoint.id] = true;
+                    checkpoint.StartDiscovered = SaveManager.CurrentSave.level1Checkpoints[checkpoint.id];
+                    checkpoint.DiscoveredQuery();
                 }
             }
+
+            SaveManager.SaveGame();
         }
 
         private void SaveCheckpoint(CheckpointInteractable checkpoint)
         {
-            SaveManager.Instance.CurrentSave.currentSceneIndex = LevelIndex;
-            SaveManager.Instance.CurrentSave.currentCheckpointIndex = checkpoint.levelIndex;
+            SaveManager.CurrentSave.currentSceneIndex = LevelIndex;
+            SaveManager.CurrentSave.currentCheckpointIndex = checkpoint.levelIndex;
 
-            if (!SaveManager.Instance.CurrentSave.level1Checkpoints.ContainsKey(checkpoint.id))
-                SaveManager.Instance.CurrentSave.level1Checkpoints.Add(checkpoint.id, checkpoint.StartDiscovered);
+            if (!SaveManager.CurrentSave.level1Checkpoints.ContainsKey(checkpoint.id))
+                SaveManager.CurrentSave.level1Checkpoints.Add(checkpoint.id, checkpoint.StartDiscovered);
 
-            SaveManager.Instance.SaveGame();
+            SaveManager.SaveGame();
         }
     }
 }

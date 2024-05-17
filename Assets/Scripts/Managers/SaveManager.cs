@@ -1,33 +1,29 @@
-using RicTools.Managers;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using Unity.Plastic.Newtonsoft.Json;
 using UnityEngine;
 
 namespace ProjectSteppe.Managers
 {
-    public class SaveManager : GenericManager<SaveManager>
+    public static class SaveManager
     {
-        protected override bool DontDestroyManagerOnLoad => true;
 
-        private string SavePath => Application.persistentDataPath + "/Saves";
+        private static string SavePath => Application.persistentDataPath + "/Saves";
 
-        public SaveData CurrentSave { get; private set; }
+        public static SaveData CurrentSave { get; private set; }
 
-        public void SaveGame()
+        public static void SaveGame()
         {
-            string save = JsonUtility.ToJson(CurrentSave);
+            string save = JsonConvert.SerializeObject(CurrentSave);
             File.WriteAllText(SavePath + "/Save.json", save);
         }
 
-        public void LoadGame()
+        public static void LoadGame()
         {
             string readStr = File.ReadAllText(SavePath + "/Save.json");
-            CurrentSave = JsonUtility.FromJson<SaveData>(readStr);
+            CurrentSave = JsonConvert.DeserializeObject<SaveData>(readStr);
         }
 
-        public bool InitSave()
+        public static bool InitSave()
         {
             if (File.Exists(SavePath + "/Save.json")) return false;
 
@@ -36,7 +32,7 @@ namespace ProjectSteppe.Managers
 
             Directory.CreateDirectory(SavePath);
 
-            string save = JsonUtility.ToJson(CurrentSave);
+            string save = JsonConvert.SerializeObject(CurrentSave);
             File.WriteAllText(SavePath + "/Save.json", save);
 
             return true;

@@ -11,6 +11,7 @@ namespace ProjectSteppe.Interactions.Interactables
     {
         public string id;
 
+        [SerializeField]
         private bool _startDiscovered;
         public bool StartDiscovered
         {
@@ -31,7 +32,7 @@ namespace ProjectSteppe.Interactions.Interactables
 
         public int levelIndex;
 
-        private void DiscoveredQuery()
+        public void DiscoveredQuery()
         {
             if (StartDiscovered)
             {
