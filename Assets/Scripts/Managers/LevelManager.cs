@@ -15,7 +15,7 @@ namespace ProjectSteppe.Managers
         public int LevelIndex { get; private set; } = -1;
 
         [SerializeField]
-        private GameObject player;
+        private PlayerManager player;
 
         protected override void Awake()
         {
@@ -49,11 +49,15 @@ namespace ProjectSteppe.Managers
 
             Debug.Log($"Pos: {spawnPos} | Rot: {spawnRot}");
 
+            player.GetComponent<CharacterController>().enabled = false;
+
             player.transform.SetPositionAndRotation
                 (
                     spawnPos,
                     spawnRot
                 );
+
+            player.GetComponent<CharacterController>().enabled = true;
         }
 
         private void InitCheckpoints()
