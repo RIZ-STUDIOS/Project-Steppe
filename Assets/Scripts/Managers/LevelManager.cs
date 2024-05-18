@@ -15,7 +15,7 @@ namespace ProjectSteppe.Managers
         public int LevelIndex { get; private set; } = -1;
 
         [SerializeField]
-        private PlayerManager player;
+        private GameObject player;
 
         protected override void Awake()
         {
@@ -36,13 +36,22 @@ namespace ProjectSteppe.Managers
                 SaveHandler.CurrentSave.currentCheckpointIndex = 0;
             }
 
+            SaveHandler.SaveGame();
+        }
+
+        private void Start()
+        {
+            checkpoints[SaveHandler.CurrentSave.currentCheckpointIndex].spawnPoint.transform.GetPositionAndRotation(out var spawnPos, out var spawnRot);
+            spawnRot.x = 0;
+            spawnRot.z = 0;
+
+            Debug.Log($"Pos: {spawnPos} | Rot: {spawnRot}");
+
             player.transform.SetPositionAndRotation
                 (
-                    checkpoints[SaveHandler.CurrentSave.currentCheckpointIndex].spawnPoint.transform.position,
-                    checkpoints[SaveHandler.CurrentSave.currentCheckpointIndex].spawnPoint.transform.rotation
+                    spawnPos,
+                    spawnRot
                 );
-
-            SaveHandler.SaveGame();
         }
 
         private void InitCheckpoints()

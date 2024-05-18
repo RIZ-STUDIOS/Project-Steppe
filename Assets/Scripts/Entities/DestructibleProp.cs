@@ -13,6 +13,8 @@ namespace ProjectSteppe
             rb.AddForce(force, ForceMode.Impulse);
 
             GetComponent<SoundPlayer>().PlayRandomSound();
+
+            Destroy(gameObject, 3);
         }
     }
 }
