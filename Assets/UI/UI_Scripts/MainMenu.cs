@@ -1,5 +1,5 @@
 using ProjectSteppe.Managers;
-using ProjectSteppe.ZedExtensions;
+using ProjectSteppe.Saving;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -92,7 +92,7 @@ public class MainMenu : MonoBehaviour
 
     public void ResetProgress()
     {
-        SaveManager.ResetSave();
+        SaveHandler.ResetSave();
         if (progressCoroutine != null) StopCoroutine(progressCoroutine);
         progressCoroutine = StartCoroutine(ProgressResetNotification());
     }

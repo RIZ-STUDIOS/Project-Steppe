@@ -1,6 +1,6 @@
 using ProjectSteppe.Entities.Player;
 using ProjectSteppe.Interactions.Interactables;
-using ProjectSteppe.Managers;
+using ProjectSteppe.Saving;
 using RicTools.Managers;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,20 +29,20 @@ namespace ProjectSteppe.Managers
             InitCheckpoints();
 
             if (
-                SaveManager.CurrentSave.currentCheckpointIndex >= checkpoints.Length ||
-                SaveManager.CurrentSave.currentCheckpointIndex < 0
+                SaveHandler.CurrentSave.currentCheckpointIndex >= checkpoints.Length ||
+                SaveHandler.CurrentSave.currentCheckpointIndex < 0
                )
             {
-                SaveManager.CurrentSave.currentCheckpointIndex = 0;
+                SaveHandler.CurrentSave.currentCheckpointIndex = 0;
             }
 
             player.transform.SetPositionAndRotation
                 (
-                    checkpoints[SaveManager.CurrentSave.currentCheckpointIndex].spawnPoint.transform.position,
-                    checkpoints[SaveManager.CurrentSave.currentCheckpointIndex].spawnPoint.transform.rotation
+                    checkpoints[SaveHandler.CurrentSave.currentCheckpointIndex].spawnPoint.transform.position,
+                    checkpoints[SaveHandler.CurrentSave.currentCheckpointIndex].spawnPoint.transform.rotation
                 );
 
-            SaveManager.SaveGame();
+            SaveHandler.SaveGame();
         }
 
         private void InitCheckpoints()
@@ -53,17 +53,17 @@ namespace ProjectSteppe.Managers
                 checkpoint.levelIndex = i;
                 checkpoint.OnCheckpointActivate.AddListener(SaveActivatedCheckpoint);
 
-                if (!SaveManager.CurrentSave.checkpointStates.ContainsKey(checkpoint.id))
+                if (!SaveHandler.CurrentSave.checkpointStates.ContainsKey(checkpoint.id))
                 {
-                    SaveManager.CurrentSave.checkpointStates.Add(checkpoint.id, checkpoint.StartDiscovered);
+                    SaveHandler.CurrentSave.checkpointStates.Add(checkpoint.id, checkpoint.StartDiscovered);
                 }
 
-                if (!SaveManager.CurrentSave.checkpointStates[checkpoint.id] && checkpoint.StartDiscovered)
+                if (!SaveHandler.CurrentSave.checkpointStates[checkpoint.id] && checkpoint.StartDiscovered)
                 {
-                    SaveManager.CurrentSave.checkpointStates[checkpoint.id] = true;
+                    SaveHandler.CurrentSave.checkpointStates[checkpoint.id] = true;
                 }
 
-                checkpoint.StartDiscovered = SaveManager.CurrentSave.checkpointStates[checkpoint.id];
+                checkpoint.StartDiscovered = SaveHandler.CurrentSave.checkpointStates[checkpoint.id];
 
                 checkpoint.DiscoveredQuery();
             }
@@ -71,11 +71,11 @@ namespace ProjectSteppe.Managers
 
         private void SaveActivatedCheckpoint(CheckpointInteractable checkpoint)
         {
-            SaveManager.CurrentSave.currentSceneIndex = LevelIndex;
-            SaveManager.CurrentSave.currentCheckpointIndex = checkpoint.levelIndex;
-            SaveManager.CurrentSave.checkpointStates[checkpoint.id] = true;
+            SaveHandler.CurrentSave.currentSceneIndex = LevelIndex;
+            SaveHandler.CurrentSave.currentCheckpointIndex = checkpoint.levelIndex;
+            SaveHandler.CurrentSave.checkpointStates[checkpoint.id] = true;
 
-            SaveManager.SaveGame();
+            SaveHandler.SaveGame();
         }
     }
 }

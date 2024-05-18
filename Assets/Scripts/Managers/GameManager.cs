@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 using UnityEngine.SceneManagement;
+using ProjectSteppe.Saving;
 
 namespace ProjectSteppe.Managers
 {
@@ -30,7 +31,7 @@ namespace ProjectSteppe.Managers
         protected override void Awake()
         {
             base.Awake();
-            if (!SaveManager.InitSave()) SaveManager.LoadGame();
+            if (!SaveHandler.InitSave()) SaveHandler.LoadGame();
 
             InputUser.onChange += OnDeviceChange;
             SceneManager.sceneLoaded += GetTMPUGUIs;
@@ -46,7 +47,7 @@ namespace ProjectSteppe.Managers
 
         public void RespawnCharacter()
         {
-            LoadingManager.LoadScene(SaveManager.CurrentSave.currentSceneIndex);
+            LoadingManager.LoadScene(SaveHandler.CurrentSave.currentSceneIndex);
         }
 
         private void GetTMPUGUIs(Scene newScene, LoadSceneMode mode)

@@ -1,12 +1,12 @@
+using ProjectSteppe.Managers;
 using System.IO;
 using Unity.Plastic.Newtonsoft.Json;
 using UnityEngine;
 
-namespace ProjectSteppe.Managers
+namespace ProjectSteppe.Saving
 {
-    public static class SaveManager
+    public static class SaveHandler
     {
-
         private static string SavePath => Application.persistentDataPath + "/Saves";
 
         public static SaveData CurrentSave { get; private set; }
