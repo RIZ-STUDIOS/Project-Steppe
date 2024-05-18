@@ -21,7 +21,7 @@ namespace ProjectSteppe.Managers
         {
             base.Awake();
 
-            if (LevelIndex == -1 || LevelIndex != SceneManager.GetActiveScene().buildIndex)
+            if (LevelIndex < 0 || LevelIndex != SceneManager.GetActiveScene().buildIndex)
             {
                 LevelIndex = SceneManager.GetActiveScene().buildIndex;
             }
@@ -37,9 +37,11 @@ namespace ProjectSteppe.Managers
             }
 
             SaveHandler.SaveGame();
+
+            SetPlayerSpawnLocation();
         }
 
-        private void Start()
+        private void SetPlayerSpawnLocation()
         {
             checkpoints[SaveHandler.CurrentSave.currentCheckpointIndex].spawnPoint.transform.GetPositionAndRotation(out var spawnPos, out var spawnRot);
             spawnRot.x = 0;
