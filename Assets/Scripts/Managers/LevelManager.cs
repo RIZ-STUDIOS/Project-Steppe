@@ -2,7 +2,6 @@ using ProjectSteppe.Entities.Player;
 using ProjectSteppe.Interactions.Interactables;
 using ProjectSteppe.Saving;
 using RicTools.Managers;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
