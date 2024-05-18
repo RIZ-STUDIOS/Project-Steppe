@@ -1,5 +1,4 @@
 using ProjectSteppe.Entities.Player;
-using ProjectSteppe.Managers;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -25,7 +24,7 @@ namespace ProjectSteppe.Interactions.Interactables
         public override string InteractText => Interacted ? "<sprite=8>Rest" : "<sprite=8>Kindle Respite";
 
         public override bool OneTime => false;
-        public override bool Interacted { get; protected set; }
+        public override bool Interacted { get; set; }
 
         public UnityEvent<CheckpointInteractable> OnCheckpointActivate;
         public UnityEvent OnCheckpointFirstInteraction;

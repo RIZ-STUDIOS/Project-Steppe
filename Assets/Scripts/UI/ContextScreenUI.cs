@@ -3,7 +3,6 @@ using ProjectSteppe.ZedExtensions;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace ProjectSteppe.UI
 {

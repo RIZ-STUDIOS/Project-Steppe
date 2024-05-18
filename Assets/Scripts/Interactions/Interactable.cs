@@ -11,7 +11,7 @@ namespace ProjectSteppe.Interactions
 
         public abstract bool OneTime { get; }
 
-        public abstract bool Interacted { get; protected set; }
+        public abstract bool Interacted { get; set; }
 
         public virtual void Interact() { }
 

@@ -6,10 +6,25 @@ namespace ProjectSteppe.Interactions.Interactables
 {
     public class InventoryInteractable : Interactable
     {
+        public string id;
+
         public override string InteractText => "<sprite=8>Pick up";
 
         public override bool OneTime => true;
-        public override bool Interacted { get; protected set; }
+
+        private bool _interacted;
+        public override bool Interacted
+        {
+            get { return _interacted; }
+            set
+            {
+                _interacted = value;
+                if (_interacted)
+                {
+                    interactFX.Stop();
+                }
+            }
+        }
 
         public InventoryItemScriptableObject item;
 
@@ -17,7 +32,7 @@ namespace ProjectSteppe.Interactions.Interactables
 
         private ParticleSystem interactFX;
 
-        public UnityEvent OnPickUp;
+        public UnityEvent<InventoryInteractable> OnPickUp;
 
         private void Awake()
         {
@@ -34,7 +49,7 @@ namespace ProjectSteppe.Interactions.Interactables
 
                 player.PlayerUI.messagePrompt.ShowMessage($"x{quantity} {item.title}");
 
-                OnPickUp.Invoke();
+                OnPickUp.Invoke(this);
             }
         }
     }

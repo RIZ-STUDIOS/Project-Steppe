@@ -1,13 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-namespace ProjectSteppe
+namespace ProjectSteppe.Saving
 {
     public class SaveData
     {
         public int currentSceneIndex;
         public int currentCheckpointIndex;
-        public Dictionary<string,bool> checkpointStates = new();
+        public Dictionary<string, bool> checkpointStates = new();
+        public Dictionary<string, bool> itemStates = new();
     }
 }

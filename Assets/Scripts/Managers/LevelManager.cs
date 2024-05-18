@@ -11,6 +11,7 @@ namespace ProjectSteppe.Managers
     public class LevelManager : GenericManager<LevelManager>
     {
         public CheckpointInteractable[] checkpoints;
+        public InventoryInteractable[] items;
 
         public int LevelIndex { get; private set; } = -1;
 
@@ -26,6 +27,7 @@ namespace ProjectSteppe.Managers
                 LevelIndex = SceneManager.GetActiveScene().buildIndex;
             }
 
+            InitItems();
             InitCheckpoints();
 
             if (
@@ -82,6 +84,32 @@ namespace ProjectSteppe.Managers
 
                 checkpoint.DiscoveredQuery();
             }
+        }
+
+        private void InitItems()
+        {
+            for (int i = 0; i < items.Length; i++)
+            {
+                var item = items[i];
+                item.OnPickUp.AddListener(SavePickedUpInventory);
+
+                if (!SaveHandler.CurrentSave.itemStates.ContainsKey(item.id))
+                {
+                    SaveHandler.CurrentSave.itemStates.Add(item.id, item.Interacted);
+                }
+
+                if (!SaveHandler.CurrentSave.itemStates[item.id] && item.Interacted)
+                {
+                    SaveHandler.CurrentSave.itemStates[item.id] = true;
+                }
+
+                item.Interacted = SaveHandler.CurrentSave.itemStates[item.id];
+            }
+        }
+
+        private void SavePickedUpInventory(InventoryInteractable item)
+        {
+            SaveHandler.CurrentSave.itemStates[item.id] = item.Interacted;
         }
 
         private void SaveActivatedCheckpoint(CheckpointInteractable checkpoint)
