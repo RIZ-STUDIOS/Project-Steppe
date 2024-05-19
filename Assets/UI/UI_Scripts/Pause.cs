@@ -65,10 +65,10 @@ public class Pause : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(invButtonGOB.transform.GetChild(0).gameObject);
     }
 
-    public void Quit()
+    public void QuitToMainMenu()
     {
         Time.timeScale = 1;
-        LoadingManager.LoadScene(1);
+        LoadingManager.LoadScene(SceneConstants.MAIN_MENU_INDEX);
     }
 
     private void OnPause()

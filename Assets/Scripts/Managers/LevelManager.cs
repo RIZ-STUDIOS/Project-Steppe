@@ -92,23 +92,25 @@ namespace ProjectSteppe.Managers
                 var item = items[i];
                 item.OnPickUp.AddListener(SavePickedUpInventory);
 
-                if (!SaveHandler.CurrentSave.itemStates.ContainsKey(item.id))
+                if (!SaveHandler.CurrentSave.pickupItemStates.ContainsKey(item.itemSO.title))
                 {
-                    SaveHandler.CurrentSave.itemStates.Add(item.id, item.Interacted);
+                    SaveHandler.CurrentSave.pickupItemStates.Add(item.itemSO.title, item.Interacted);
                 }
 
-                if (!SaveHandler.CurrentSave.itemStates[item.id] && item.Interacted)
+                if (!SaveHandler.CurrentSave.pickupItemStates[item.itemSO.title] && item.Interacted)
                 {
-                    SaveHandler.CurrentSave.itemStates[item.id] = true;
+                    SaveHandler.CurrentSave.pickupItemStates[item.itemSO.title] = true;
                 }
 
-                item.Interacted = SaveHandler.CurrentSave.itemStates[item.id];
+                item.Interacted = SaveHandler.CurrentSave.pickupItemStates[item.itemSO.title];
             }
         }
 
         private void SavePickedUpInventory(InventoryInteractable item)
         {
-            SaveHandler.CurrentSave.itemStates[item.id] = item.Interacted;
+            SaveHandler.CurrentSave.pickupItemStates[item.itemSO.title] = item.Interacted;
+            SaveHandler.CurrentSave.playerInventoryIDs.Add(item.itemSO.title);
+            SaveHandler.SaveGame();
         }
 
         private void SaveActivatedCheckpoint(CheckpointInteractable checkpoint)

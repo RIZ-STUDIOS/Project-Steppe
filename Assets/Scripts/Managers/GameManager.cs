@@ -24,9 +24,11 @@ namespace ProjectSteppe.Managers
 
         TextMeshProUGUI[] sceneTMPs;
 
-        public int defaultGameSceneIndex;
+        public int defaultGameSceneIndex = SceneConstants.LEVEL_1_INDEX;
 
         protected override bool DontDestroyManagerOnLoad => true;
+
+        public AvailableInventoryItemsScriptableObject availableItems;
 
         protected override void Awake()
         {
@@ -57,9 +59,10 @@ namespace ProjectSteppe.Managers
 
         private void OnDeviceChange(InputUser user, InputUserChange userChange, InputDevice device)
         {
-            if (device != null)
+            Debug.Log(userChange);
+            if (device != null && userChange == InputUserChange.DevicePaired)
             {
-                TMP_SpriteAsset spriteAsset = kbm;
+                TMP_SpriteAsset spriteAsset;
 
                 //Debug.Log(device.description.interfaceName);
                 switch (device.description.interfaceName)

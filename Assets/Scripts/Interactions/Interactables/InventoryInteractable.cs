@@ -6,9 +6,7 @@ namespace ProjectSteppe.Interactions.Interactables
 {
     public class InventoryInteractable : Interactable
     {
-        public string id;
-
-        public override string InteractText => "<sprite=8>Pick up";
+        public override string InteractText => "<sprite=8> Pick up";
 
         public override bool OneTime => true;
 
@@ -21,12 +19,12 @@ namespace ProjectSteppe.Interactions.Interactables
                 _interacted = value;
                 if (_interacted)
                 {
-                    interactFX.Stop();
+                    interactFX.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
                 }
             }
         }
 
-        public InventoryItemScriptableObject item;
+        public InventoryItemScriptableObject itemSO;
 
         public int quantity;
 
@@ -43,11 +41,10 @@ namespace ProjectSteppe.Interactions.Interactables
         {
             if (!Interacted)
             {
-                player.PlayerInventory.items.Add(item);
-                interactFX.Stop();
+                player.PlayerInventory.items.Add(itemSO);
                 Interacted = true;
 
-                player.PlayerUI.messagePrompt.ShowMessage($"x{quantity} {item.title}");
+                player.PlayerUI.messagePrompt.ShowMessage($"x{quantity} {itemSO.title}");
 
                 OnPickUp.Invoke(this);
             }

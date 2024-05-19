@@ -1,6 +1,6 @@
 using ProjectSteppe.Managers;
 using System.IO;
-using Unity.Plastic.Newtonsoft.Json;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace ProjectSteppe.Saving

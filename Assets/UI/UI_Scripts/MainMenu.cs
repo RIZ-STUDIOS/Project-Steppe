@@ -11,7 +11,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private EventSystem eventSystem;
 
-    private PlayerInput playerInput;
+    //private PlayerInput playerInput;
 
     private InputAction cancelAction;
     private InputAction rightBumper;
@@ -37,16 +37,17 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
+        //playerInput = GetComponent<PlayerInput>();
     }
     private void Start()
     {
         index = 0;
-        cancelAction = playerInput.actions["Cancel"];
+        /*cancelAction = playerInput.actions["Cancel"];
         rightBumper = playerInput.actions["RightBumper"];
-        leftBumper = playerInput.actions["LeftBumper"];
+        leftBumper = playerInput.actions["LeftBumper"];*/
     }
-    private void Update()
+
+    /*private void Update()
     {
         if (cancelAction.triggered)
         {
@@ -83,7 +84,8 @@ public class MainMenu : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
+
     public void StartGame()
     {
         GameManager.Instance.RespawnCharacter();

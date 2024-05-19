@@ -7,6 +7,7 @@ namespace ProjectSteppe.Saving
         public int currentSceneIndex;
         public int currentCheckpointIndex;
         public Dictionary<string, bool> checkpointStates = new();
-        public Dictionary<string, bool> itemStates = new();
+        public Dictionary<string, bool> pickupItemStates = new();
+        public List<string> playerInventoryIDs = new();
     }
 }
