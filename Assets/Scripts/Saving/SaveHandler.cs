@@ -13,7 +13,7 @@ namespace ProjectSteppe.Saving
 
         public static void SaveGame()
         {
-            string save = JsonConvert.SerializeObject(CurrentSave);
+            string save = JsonConvert.SerializeObject(CurrentSave, Formatting.Indented);
             File.WriteAllText(SavePath + "/Save.json", save);
         }
 
@@ -32,7 +32,7 @@ namespace ProjectSteppe.Saving
 
             Directory.CreateDirectory(SavePath);
 
-            string save = JsonConvert.SerializeObject(CurrentSave);
+            string save = JsonConvert.SerializeObject(CurrentSave, Formatting.Indented);
             File.WriteAllText(SavePath + "/Save.json", save);
 
             return true;
