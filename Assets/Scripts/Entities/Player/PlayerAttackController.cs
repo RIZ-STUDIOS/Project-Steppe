@@ -62,6 +62,8 @@ namespace ProjectSteppe.Entities.Player
                 firstAttack = false;
                 input.attack = false;
                 attacking = true;
+                transform.forward = GetComponent<PlayerManager>().PlayerCamera.mainCameraTransform.forward;
+                transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
                 playerManager.DisableCapability(PlayerCapability.Move);
             }
 
