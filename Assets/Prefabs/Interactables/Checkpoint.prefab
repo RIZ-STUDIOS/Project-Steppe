@@ -412,53 +412,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf355df63ce35b44969b7ef63c742ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startDiscovered: 1
+  id: 
+  _startDiscovered: 0
   particles:
   - {fileID: 333559245340085783}
   - {fileID: 4316072232061124931}
   initialBlastSound: {fileID: 4232677044113449669}
-  OnCheckpointFirstInteraction:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ProjectSteppe.Managers.GameManager, ProjectSteppe
-        m_MethodName: HasSecondCheckpoint
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  checkpointLoop: {fileID: 1145121387578832562}
   OnCheckpointActivate:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+  OnCheckpointFirstInteraction:
+    m_PersistentCalls:
+      m_Calls: []
+  levelIndex: 0
+  spawnPoint: {fileID: 6130797340773118291}
 --- !u!1 &8284457680699987612
 GameObject:
   m_ObjectHideFlags: 0

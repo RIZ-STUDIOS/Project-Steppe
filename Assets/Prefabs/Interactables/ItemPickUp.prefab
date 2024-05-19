@@ -47,8 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eba518bf42a145b48a8df788d7975d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  itemSO: {fileID: 0}
   quantity: 0
+  OnPickUp:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &8861449767857229271
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1079,7 +1082,7 @@ ParticleSystem:
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 1
+          value: 0.5
           inSlope: 0
           outSlope: 0
           tangentMode: 0

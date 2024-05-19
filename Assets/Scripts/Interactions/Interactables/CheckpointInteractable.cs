@@ -20,6 +20,7 @@ namespace ProjectSteppe.Interactions.Interactables
 
         [SerializeField] private ParticleSystem[] particles;
         [SerializeField] private AudioSource initialBlastSound;
+        [SerializeField] private AudioSource checkpointLoop;
 
         public override string InteractText => Interacted ? "<sprite=8>Rest" : "<sprite=8>Kindle Respite";
 
@@ -39,6 +40,7 @@ namespace ProjectSteppe.Interactions.Interactables
             {
                 Interacted = true;
                 ActivateCheckpoint();
+                ActivateCheckpointEffects();
             }
         }
 
@@ -52,7 +54,6 @@ namespace ProjectSteppe.Interactions.Interactables
 
         private void FirstCheckpointInteract()
         {
-            OnCheckpointFirstInteraction.Invoke();
             StartCoroutine(OnCheckpointFirstInteract());
         }
 
@@ -71,6 +72,7 @@ namespace ProjectSteppe.Interactions.Interactables
             yield return new WaitForSeconds(2.567f);
 
             ActivateCheckpoint();
+            OnCheckpointFirstInteraction.Invoke();
 
             IEnumerator respite = player.PlayerUI.contextScreen.PlayRespiteFound();
             yield return respite;
@@ -85,7 +87,7 @@ namespace ProjectSteppe.Interactions.Interactables
 
         private void CheckpointInteract()
         {
-            if (player.bossDead) SceneManager.LoadScene(1);
+            if (player.bossDead) SceneManager.LoadScene(SceneConstants.LEVEL_1_INDEX);
             player.PlayerEntity.EntityHealth.ResetHealth();
             player.PlayerUI.messagePrompt.ShowMessage("...");
             player.PlayerAnimator.SetTrigger("ForceAnimation");
@@ -93,6 +95,11 @@ namespace ProjectSteppe.Interactions.Interactables
         }
 
         private void ActivateCheckpoint()
+        {
+            OnCheckpointActivate.Invoke(this);
+        }
+
+        private void ActivateCheckpointEffects()
         {
             foreach (var particle in particles)
             {
@@ -103,6 +110,9 @@ namespace ProjectSteppe.Interactions.Interactables
 
             light.colorTemperature = 3000;
             light.intensity = 1;
+
+            initialBlastSound.Play();
+            checkpointLoop.Play();
         }
     }
 }
