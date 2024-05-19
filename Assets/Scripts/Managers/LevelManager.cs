@@ -48,8 +48,6 @@ namespace ProjectSteppe.Managers
             spawnRot.x = 0;
             spawnRot.z = 0;
 
-            Debug.Log($"Pos: {spawnPos} | Rot: {spawnRot}");
-
             player.GetComponent<CharacterController>().enabled = false;
 
             player.transform.SetPositionAndRotation
