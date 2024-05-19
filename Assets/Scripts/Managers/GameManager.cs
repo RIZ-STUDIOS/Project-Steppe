@@ -59,6 +59,8 @@ namespace ProjectSteppe.Managers
 
         private void OnDeviceChange(InputUser user, InputUserChange userChange, InputDevice device)
         {
+            if (device == null) return;
+
             if (userChange == InputUserChange.DevicePaired || userChange == InputUserChange.Added)
             {
                 TMP_SpriteAsset spriteAsset;
