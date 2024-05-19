@@ -59,12 +59,9 @@ namespace ProjectSteppe.Managers
 
         private void OnDeviceChange(InputUser user, InputUserChange userChange, InputDevice device)
         {
-            Debug.Log(userChange);
-            if (device != null && userChange == InputUserChange.DevicePaired)
+            if (userChange == InputUserChange.DevicePaired || userChange == InputUserChange.Added)
             {
                 TMP_SpriteAsset spriteAsset;
-
-                //Debug.Log(device.description.interfaceName);
                 switch (device.description.interfaceName)
                 {
                     case "HID":
