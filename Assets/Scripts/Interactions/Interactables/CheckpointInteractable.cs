@@ -39,7 +39,6 @@ namespace ProjectSteppe.Interactions.Interactables
             if (StartDiscovered)
             {
                 Interacted = true;
-                ActivateCheckpoint();
                 ActivateCheckpointEffects();
             }
         }
@@ -48,8 +47,6 @@ namespace ProjectSteppe.Interactions.Interactables
         {
             if (!Interacted) FirstCheckpointInteract();
             else CheckpointInteract();
-
-            OnCheckpointActivate.Invoke(this);
         }
 
         private void FirstCheckpointInteract()
@@ -71,8 +68,8 @@ namespace ProjectSteppe.Interactions.Interactables
 
             yield return new WaitForSeconds(2.567f);
 
-            ActivateCheckpoint();
-            OnCheckpointFirstInteraction.Invoke();
+            OnCheckpointActivate.Invoke(this);
+            ActivateCheckpointEffects();
 
             IEnumerator respite = player.PlayerUI.contextScreen.PlayRespiteFound();
             yield return respite;
@@ -92,11 +89,6 @@ namespace ProjectSteppe.Interactions.Interactables
             player.PlayerUI.messagePrompt.ShowMessage("...");
             player.PlayerAnimator.SetTrigger("ForceAnimation");
             player.PlayerAnimator.SetBool("Sitting", true);
-        }
-
-        private void ActivateCheckpoint()
-        {
-            OnCheckpointActivate.Invoke(this);
         }
 
         private void ActivateCheckpointEffects()
