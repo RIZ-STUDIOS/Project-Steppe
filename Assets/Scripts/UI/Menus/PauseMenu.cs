@@ -31,5 +31,11 @@ namespace ProjectSteppe.UI.Menus
         {
             SetMenu(inventoryMenu);
         }
+
+        public void QuitToMainMenu()
+        {
+            Time.timeScale = 1;
+            LoadingManager.LoadScene(SceneConstants.MAIN_MENU_INDEX);
+        }
     }
 }

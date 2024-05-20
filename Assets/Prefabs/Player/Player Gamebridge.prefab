@@ -15389,9 +15389,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3595112259853887986}
-        m_TargetAssemblyTypeName: Pause, ProjectSteppe.UI
-        m_MethodName: Quit
+      - m_Target: {fileID: 8646431079153882592}
+        m_TargetAssemblyTypeName: ProjectSteppe.UI.Menus.PauseMenu, ProjectSteppe.UI
+        m_MethodName: QuitToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -43937,8 +43937,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3595112259853887986}
-        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+      - m_Target: {fileID: 8646431079153882592}
+        m_TargetAssemblyTypeName: ProjectSteppe.UI.Menus.PauseMenu, ProjectSteppe
         m_MethodName: OpenInventory
         m_Mode: 1
         m_Arguments:
