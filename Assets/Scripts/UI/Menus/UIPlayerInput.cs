@@ -6,16 +6,13 @@ using UnityEngine.InputSystem;
 
 namespace ProjectSteppe.UI
 {
-    public class UIPlayerInput : GenericManager<UIPlayerInput>
+    public class UIPlayerInput : SingletonGenericManager<UIPlayerInput>
     {
-        protected override bool DontDestroyManagerOnLoad => true;
 
         public PlayerUIActions playerInput;
 
-        protected override void Awake()
+        protected override void OnCreation()
         {
-            base.Awake();
-
             playerInput = new PlayerUIActions();
             playerInput.Enable();
         }

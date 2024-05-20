@@ -17,8 +17,7 @@ namespace ProjectSteppe.UI.Menus
         protected override void Start()
         {
             base.Start();
-            SetMenu(this);
-            ShowCurrentMenu();
+            SetMenu(this, true);
         }
 
         protected override void HideMenu()

@@ -18,7 +18,7 @@ namespace ProjectSteppe.UI.Menus
 
         protected UIPlayerInput playerInput;
 
-        public static void SetMenu(MenuBase menu)
+        public static void SetMenu(MenuBase menu, bool forceShow = false)
         {
             var prevMenu = CurrentMenu;
             CurrentMenu = menu;
@@ -28,11 +28,17 @@ namespace ProjectSteppe.UI.Menus
                 prevMenu.HideMenu();
             }
 
-            menu.previousMenu = prevMenu;
+            if (menu)
+            {
+                menu.previousMenu = prevMenu;
+                if (forceShow)
+                    ShowCurrentMenu();
+            }
         }
 
         protected static void ShowCurrentMenu()
         {
+            if (!CurrentMenu) return;
             CurrentMenu.SubscribeInputEvents();
             CurrentMenu.ShowMenu();
         }

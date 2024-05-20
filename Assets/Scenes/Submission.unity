@@ -1354,6 +1354,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.22277947
       objectReference: {fileID: 0}
+    - target: {fileID: 2074825579758823317, guid: 69d94c968f15b0849b33b06ce81cc968,
+        type: 3}
+      propertyPath: m_BlocksRaycasts
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2108682033136360638, guid: 69d94c968f15b0849b33b06ce81cc968,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1684,6 +1689,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.0039327582
+      objectReference: {fileID: 0}
+    - target: {fileID: 3595112259853887986, guid: 69d94c968f15b0849b33b06ce81cc968,
+        type: 3}
+      propertyPath: pauseMenu
+      value: 
+      objectReference: {fileID: 1579076734}
+    - target: {fileID: 3595112259853887986, guid: 69d94c968f15b0849b33b06ce81cc968,
+        type: 3}
+      propertyPath: pauseMenuCanvasGroup
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3648462743309470730, guid: 69d94c968f15b0849b33b06ce81cc968,
         type: 3}
@@ -2245,6 +2260,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6632309282808944741, guid: 69d94c968f15b0849b33b06ce81cc968,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1579076734}
+    - target: {fileID: 6632309282808944741, guid: 69d94c968f15b0849b33b06ce81cc968,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenInventory
+      objectReference: {fileID: 0}
+    - target: {fileID: 6632309282808944741, guid: 69d94c968f15b0849b33b06ce81cc968,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ProjectSteppe.UI.Menus.PauseMenu, ProjectSteppe
       objectReference: {fileID: 0}
     - target: {fileID: 6643516976008985376, guid: 69d94c968f15b0849b33b06ce81cc968,
         type: 3}
@@ -2831,11 +2861,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8610317871972041671, guid: 69d94c968f15b0849b33b06ce81cc968,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1579076735}
-    - targetCorrespondingSourceObject: {fileID: 8610317871972041671, guid: 69d94c968f15b0849b33b06ce81cc968,
+      addedObject: {fileID: 1579076734}
+    - targetCorrespondingSourceObject: {fileID: 3400126464580720301, guid: 69d94c968f15b0849b33b06ce81cc968,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1579076734}
+      addedObject: {fileID: 1566180509}
   m_SourcePrefab: {fileID: 100100000, guid: 69d94c968f15b0849b33b06ce81cc968, type: 3}
 --- !u!114 &29683912 stripped
 MonoBehaviour:
@@ -20554,6 +20584,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1606488111}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1006070636 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6696633484380395326, guid: 69d94c968f15b0849b33b06ce81cc968,
+    type: 3}
+  m_PrefabInstance: {fileID: 29683911}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1008281235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20876,14 +20912,14 @@ MonoBehaviour:
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: 4419d82f33d36e848b3ed5af4c8da37e,
+  m_ActionsAsset: {fileID: -944628639613478452, guid: 27853d667c8f0054ebe619ceb915908f,
     type: 3}
   m_PointAction: {fileID: 0}
-  m_MoveAction: {fileID: -354004252536271349, guid: 4419d82f33d36e848b3ed5af4c8da37e,
+  m_MoveAction: {fileID: -5900589865507276177, guid: 27853d667c8f0054ebe619ceb915908f,
     type: 3}
-  m_SubmitAction: {fileID: -6613323342865355819, guid: 4419d82f33d36e848b3ed5af4c8da37e,
+  m_SubmitAction: {fileID: -282653588896233596, guid: 27853d667c8f0054ebe619ceb915908f,
     type: 3}
-  m_CancelAction: {fileID: -1967631576421560919, guid: 4419d82f33d36e848b3ed5af4c8da37e,
+  m_CancelAction: {fileID: 9216818511280952333, guid: 27853d667c8f0054ebe619ceb915908f,
     type: 3}
   m_LeftClickAction: {fileID: 0}
   m_MiddleClickAction: {fileID: 0}
@@ -31406,6 +31442,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 170191889}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1566180506 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3400126464580720301, guid: 69d94c968f15b0849b33b06ce81cc968,
+    type: 3}
+  m_PrefabInstance: {fileID: 29683911}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1566180509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566180506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26f0d546e53b3f740bdb34d444343067, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1570070523 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 131778, guid: 74231780cc79e3a45a60bfadd89b76d5,
@@ -31741,37 +31795,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d23e07fd5c2303b4d87fde29ad894df7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1579076735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1579076731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 27853d667c8f0054ebe619ceb915908f,
-    type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: UI
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  defaultSelectable: {fileID: 1006070636}
+  inventoryMenu: {fileID: 0}
 --- !u!1 &1579534407
 GameObject:
   m_ObjectHideFlags: 0
