@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace ProjectSteppe.UI.Menus
+namespace ProjectSteppe.UI
 {
     public class UIPlayerInput : GenericManager<UIPlayerInput>
     {

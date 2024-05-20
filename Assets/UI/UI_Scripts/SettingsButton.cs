@@ -1,7 +1,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using ProjectSteppe.UI;
 
+[RequireComponent(typeof(SettingsSwitch))]
 public class SettingsButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     private GeneralOptions generalOptions;
@@ -14,8 +16,18 @@ public class SettingsButton : MonoBehaviour, ISelectHandler, IDeselectHandler
     private bool isSelected = false;
 
     public delegate void ButtonAction();
-    public ButtonAction onRightAction;
-    public ButtonAction onLeftAction;
+    public System.Action onRightAction { get { return SettingsSwitch.onRightAction; } set { SettingsSwitch.onRightAction = value; } }
+    public System.Action onLeftAction { get { return SettingsSwitch.onLeftAction; } set { SettingsSwitch.onLeftAction = value; } }
+
+    private SettingsSwitch settingsSwitch;
+    private SettingsSwitch SettingsSwitch
+    {
+        get
+        {
+            if(!settingsSwitch) settingsSwitch = GetComponent<SettingsSwitch>();
+            return settingsSwitch;
+        }
+    }
 
     private GameObject lastSelected;
     public void OnSelect(BaseEventData baseEventData)
@@ -37,7 +49,7 @@ public class SettingsButton : MonoBehaviour, ISelectHandler, IDeselectHandler
         rightDpad = playerInput.actions["SettingsRight"];
         leftDpad = playerInput.actions["SettingsLeft"];
     }
-    private void Update()
+    /*private void Update()
     {
         GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
         if (currentSelected != lastSelected)
@@ -59,5 +71,5 @@ public class SettingsButton : MonoBehaviour, ISelectHandler, IDeselectHandler
                 onLeftAction?.Invoke();
             }
         }
-    }
+    }*/
 }
