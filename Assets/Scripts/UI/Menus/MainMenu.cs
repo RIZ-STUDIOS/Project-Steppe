@@ -14,9 +14,9 @@ namespace ProjectSteppe.UI.Menus
         [SerializeField]
         private CanvasGroup quitCanvasGroup;
 
-        protected override void Awake()
+        protected override void Start()
         {
-            base.Awake();
+            base.Start();
             SetMenu(this);
             ShowCurrentMenu();
         }

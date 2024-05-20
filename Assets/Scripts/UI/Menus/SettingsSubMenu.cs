@@ -14,9 +14,12 @@ namespace ProjectSteppe.UI.Menus
 
         private CanvasGroup canvasGroup;
 
+        private UISettingsButton[] buttons;
+
         private void Awake()
         {
             canvasGroup = GetComponent<CanvasGroup>();
+            buttons = GetComponentsInChildren<UISettingsButton>();
         }
 
         private void Start()
