@@ -64,8 +64,11 @@ namespace ProjectSteppe
 
             while (loadOperation.progress < 0.9f)
                 yield return null;
-
+            
+            // Skip fake loading time
+#if !UNITY_EDITOR
             yield return new WaitForSeconds(3f);
+#endif
 
             alpha = 0;
             overlayImage.alpha = alpha;
