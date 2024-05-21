@@ -46,8 +46,8 @@ public class SettingsButton : MonoBehaviour, ISelectHandler, IDeselectHandler
     private void Start()
     {
         generalOptions = GetComponentInParent<GeneralOptions>();
-        rightDpad = playerInput.actions["SettingsRight"];
-        leftDpad = playerInput.actions["SettingsLeft"];
+        //rightDpad = playerInput.actions["SettingsRight"];
+        //leftDpad = playerInput.actions["SettingsLeft"];
     }
     /*private void Update()
     {

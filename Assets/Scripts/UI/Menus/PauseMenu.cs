@@ -21,10 +21,27 @@ namespace ProjectSteppe.UI.Menus
         [SerializeField]
         private InventoryMenu inventoryMenu;
 
+        [SerializeField]
+        private SettingsMenu settingsMenu;
+
+        private GameObject lastSelectedGameObject;
+
         protected override void ShowMenu()
         {
             base.ShowMenu();
-            EventSystem.current.SetSelectedGameObject(defaultSelectable);
+            if (lastSelectedGameObject)
+                EventSystem.current.SetSelectedGameObject(lastSelectedGameObject);
+            else
+                EventSystem.current.SetSelectedGameObject(defaultSelectable);
+        }
+
+        protected override void HideMenu()
+        {
+            if (CurrentMenu == settingsMenu)
+                lastSelectedGameObject = EventSystem.current.currentSelectedGameObject;
+            else
+                lastSelectedGameObject = null;
+            base.HideMenu();
         }
 
         public void OpenInventory()
@@ -36,6 +53,11 @@ namespace ProjectSteppe.UI.Menus
         {
             Time.timeScale = 1;
             LoadingManager.LoadScene(SceneConstants.MAIN_MENU_INDEX);
+        }
+
+        public void ShowSettings()
+        {
+            SetMenu(settingsMenu);
         }
     }
 }
