@@ -12,12 +12,18 @@ namespace ProjectSteppe.UI.Menus
         private float fadeOutSpeed = 5;
 
         [SerializeField]
+        private bool instant;
+
+        [SerializeField]
         private SettingsSubMenu[] subMenus;
 
         private int subMenuIndex = 0;
 
         protected override void ShowMenu()
         {
+            if (instant)
+                base.ShowMenu();
+            else
             ShowMenuCoroutine(fadeInSpeed);
             subMenuIndex = 0;
             subMenus[subMenuIndex].Show();
@@ -26,27 +32,30 @@ namespace ProjectSteppe.UI.Menus
         protected override void HideMenu()
         {
             subMenus[subMenuIndex].Hide();
+            if (instant)
+                base.HideMenu();
+            else
             HideMenuCoroutine(fadeOutSpeed);
         }
 
-        private void OnCancel(InputValue value)
+        protected override void OnCancelPerformed(InputAction.CallbackContext callbackContext)
         {
-            if (value.Get<float>() == 0) return;
+            if (callbackContext.ReadValue<float>() == 0) return;
             SetMenu(previousMenu);
         }
 
-        private void OnRightBumper(InputValue value)
+        protected override void OnRightBumperPerformed(InputAction.CallbackContext callbackContext)
         {
-            if (value.Get<float>() == 0) return;
+            if (callbackContext.ReadValue<float>() == 0) return;
             if ((subMenuIndex + 1) >= subMenus.Length) return;
 
             subMenus[subMenuIndex++].Hide();
             subMenus[subMenuIndex].Show();
         }
 
-        private void OnLeftBumper(InputValue value)
+        protected override void OnLeftBumperPerformed(InputAction.CallbackContext callbackContext)
         {
-            if (value.Get<float>() == 0) return;
+            if (callbackContext.ReadValue<float>() == 0) return;
             if ((subMenuIndex - 1) < 0) return;
 
             subMenus[subMenuIndex--].Hide();

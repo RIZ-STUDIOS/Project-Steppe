@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 namespace ProjectSteppe.UI.Menus
 {
     [RequireComponent(typeof(CanvasGroup))]
-    [RequireComponent(typeof(PlayerInput))]
     public abstract class MenuBase : MonoBehaviour
     {
         public static MenuBase CurrentMenu;
@@ -16,37 +15,43 @@ namespace ProjectSteppe.UI.Menus
         private Coroutine showHideCoroutine;
 
         protected EventSystem eventSystem;
-        protected PlayerInput playerInput;
 
-        public static void SetMenu(MenuBase menu)
+        protected UIPlayerInput playerInput;
+
+        public static void SetMenu(MenuBase menu, bool forceShow = false)
         {
             var prevMenu = CurrentMenu;
             CurrentMenu = menu;
             if (prevMenu)
             {
-                prevMenu.playerInput.enabled = false;
+                prevMenu.UnsubscribeInputEvents();
                 prevMenu.HideMenu();
             }
 
-            menu.previousMenu = prevMenu;
+            if (menu)
+            {
+                menu.previousMenu = prevMenu;
+                if (forceShow)
+                    ShowCurrentMenu();
+            }
         }
 
         protected static void ShowCurrentMenu()
         {
-            CurrentMenu.playerInput.enabled = true;
+            if (!CurrentMenu) return;
+            CurrentMenu.SubscribeInputEvents();
             CurrentMenu.ShowMenu();
         }
 
         protected virtual void Awake()
         {
             canvasGroup = GetComponent<CanvasGroup>();
-            playerInput = GetComponent<PlayerInput>();
-            playerInput.enabled = false;
         }
 
-        private void Start()
+        protected virtual void Start()
         {
             eventSystem = EventSystem.current;
+            playerInput = UIPlayerInput.Instance;
         }
 
         protected virtual void HideMenu()
@@ -92,7 +97,7 @@ namespace ProjectSteppe.UI.Menus
 
         protected IEnumerator FadeInCanvas(float speed)
         {
-            float alpha = 0;
+            float alpha = canvasGroup.alpha;
             while (alpha < 1)
             {
                 alpha += Time.deltaTime * speed;
@@ -106,7 +111,7 @@ namespace ProjectSteppe.UI.Menus
 
         protected IEnumerator FadeOutCanvas(float speed)
         {
-            float alpha = 1;
+            float alpha = canvasGroup.alpha;
             while (alpha > 0)
             {
                 alpha -= Time.deltaTime * speed;
@@ -116,6 +121,86 @@ namespace ProjectSteppe.UI.Menus
             alpha = 0;
             canvasGroup.alpha = alpha;
             canvasGroup.blocksRaycasts = false;
+        }
+
+        private void UnsubscribeInputEvents()
+        {
+            playerInput.playerInput.UI.Cancel.started -= OnCancelStarted;
+            playerInput.playerInput.UI.Cancel.performed -= OnCancelPerformed;
+            playerInput.playerInput.UI.Cancel.canceled -= OnCancelCanceled;
+
+            playerInput.playerInput.UI.RightBumper.started -= OnRightBumperStarted;
+            playerInput.playerInput.UI.RightBumper.performed -= OnRightBumperPerformed;
+            playerInput.playerInput.UI.RightBumper.canceled -= OnRightBumperCanceled;
+
+            playerInput.playerInput.UI.LeftBumper.started -= OnLeftBumperStarted;
+            playerInput.playerInput.UI.LeftBumper.performed -= OnLeftBumperPerformed;
+            playerInput.playerInput.UI.LeftBumper.canceled -= OnLeftBumperCanceled;
+        }
+
+        private void SubscribeInputEvents()
+        {
+            playerInput.playerInput.UI.Cancel.started += OnCancelStarted;
+            playerInput.playerInput.UI.Cancel.performed += OnCancelPerformed;
+            playerInput.playerInput.UI.Cancel.canceled += OnCancelCanceled;
+
+            playerInput.playerInput.UI.RightBumper.started += OnRightBumperStarted;
+            playerInput.playerInput.UI.RightBumper.performed += OnRightBumperPerformed;
+            playerInput.playerInput.UI.RightBumper.canceled += OnRightBumperCanceled;
+
+            playerInput.playerInput.UI.LeftBumper.started += OnLeftBumperStarted;
+            playerInput.playerInput.UI.LeftBumper.performed += OnLeftBumperPerformed;
+            playerInput.playerInput.UI.LeftBumper.canceled += OnLeftBumperCanceled;
+        }
+
+        private void OnDestroy()
+        {
+            UnsubscribeInputEvents();
+        }
+
+        protected virtual void OnCancelStarted(InputAction.CallbackContext callbackContext)
+        {
+
+        }
+
+        protected virtual void OnCancelPerformed(InputAction.CallbackContext callbackContext)
+        {
+
+        }
+
+        protected virtual void OnCancelCanceled(InputAction.CallbackContext callbackContext)
+        {
+
+        }
+
+        protected virtual void OnRightBumperStarted(InputAction.CallbackContext callbackContext)
+        {
+
+        }
+
+        protected virtual void OnRightBumperPerformed(InputAction.CallbackContext callbackContext)
+        {
+
+        }
+
+        protected virtual void OnRightBumperCanceled(InputAction.CallbackContext callbackContext)
+        {
+
+        }
+
+        protected virtual void OnLeftBumperStarted(InputAction.CallbackContext callbackContext)
+        {
+
+        }
+
+        protected virtual void OnLeftBumperPerformed(InputAction.CallbackContext callbackContext)
+        {
+
+        }
+
+        protected virtual void OnLeftBumperCanceled(InputAction.CallbackContext callbackContext)
+        {
+
         }
     }
 }

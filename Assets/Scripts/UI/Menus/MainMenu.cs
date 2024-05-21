@@ -1,3 +1,4 @@
+using ProjectSteppe.Saving;
 using ProjectSteppe.ZedExtensions;
 using System.Collections;
 using UnityEngine;
@@ -14,11 +15,14 @@ namespace ProjectSteppe.UI.Menus
         [SerializeField]
         private CanvasGroup quitCanvasGroup;
 
-        protected override void Awake()
+        [SerializeField]
+        private CanvasGroup progressSpriteCG;
+        private Coroutine progressCoroutine;
+
+        protected override void Start()
         {
-            base.Awake();
-            SetMenu(this);
-            ShowCurrentMenu();
+            base.Start();
+            SetMenu(this, true);
         }
 
         protected override void HideMenu()
@@ -41,6 +45,23 @@ namespace ProjectSteppe.UI.Menus
             eventSystem.enabled = false;
             playerInput.enabled = false;
             StartCoroutine(QuitGameIEnumerator());
+        }
+
+        public void ResetProgress()
+        {
+            SaveHandler.ResetSave();
+            if (progressCoroutine != null) StopCoroutine(progressCoroutine);
+            progressCoroutine = StartCoroutine(ProgressResetNotification());
+        }
+
+        private IEnumerator ProgressResetNotification()
+        {
+            progressSpriteCG.alpha = 1;
+            while (progressSpriteCG.alpha > 0)
+            {
+                progressSpriteCG.alpha -= Time.deltaTime;
+                yield return null;
+            }
         }
 
         private IEnumerator QuitGameIEnumerator()

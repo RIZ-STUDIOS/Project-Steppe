@@ -10,7 +10,7 @@ namespace ProjectSteppe.Entities.Player
     {
         public List<InventoryItemScriptableObject> items = new List<InventoryItemScriptableObject>();
 
-        private void Awake()
+        private void Start()
         {
             List<InventoryItemScriptableObject> savedItems = new();
 

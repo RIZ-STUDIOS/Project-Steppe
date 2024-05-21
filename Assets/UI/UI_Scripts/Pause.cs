@@ -1,5 +1,6 @@
 using ProjectSteppe;
 using ProjectSteppe.Entities.Player;
+using ProjectSteppe.UI.Menus;
 using ProjectSteppe.ZedExtensions;
 using StarterAssets;
 using System.Collections;
@@ -7,11 +8,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Pause : MonoBehaviour
 {
-    public CanvasGroup pauseMenu;
+    public CanvasGroup pauseMenuCanvasGroup;
     public CanvasGroup inventoryMenu;
 
     public bool paused;
@@ -33,6 +35,9 @@ public class Pause : MonoBehaviour
 
     private PlayerInput playerInput;
 
+    [SerializeField]
+    private PauseMenu pauseMenu;
+
     private void Awake()
     {
         player = GetComponent<PlayerManager>();
@@ -42,7 +47,7 @@ public class Pause : MonoBehaviour
 
     public void OpenInventory()
     {
-        pauseMenu.InstantHide(true, true);
+        /*pauseMenuCanvasGroup.InstantHide(true, true);
 
         if (invButtonGOB.transform.childCount != player.PlayerInventory.items.Count)
         {
@@ -62,7 +67,7 @@ public class Pause : MonoBehaviour
 
         inventoryMenu.InstantShow(true, true);
 
-        EventSystem.current.SetSelectedGameObject(invButtonGOB.transform.GetChild(0).gameObject);
+        EventSystem.current.SetSelectedGameObject(invButtonGOB.transform.GetChild(0).gameObject);*/
     }
 
     public void QuitToMainMenu()
@@ -71,7 +76,28 @@ public class Pause : MonoBehaviour
         LoadingManager.LoadScene(SceneConstants.MAIN_MENU_INDEX);
     }
 
-    private void OnPause()
+    private void OnPause(InputValue inputValue)
+    {
+        if (inputValue.Get<float>() == 0) return;
+
+        if (paused)
+        {
+            Time.timeScale = 1;
+            MenuBase.SetMenu(null);
+            StartCoroutine(ReEnableControls());
+        }
+        else
+        {
+            Time.timeScale = 0;
+            input.ResetInputs();
+            input.respondToData = false;
+            MenuBase.SetMenu(pauseMenu, true);
+        }
+
+        paused = !paused;
+    }
+
+    /*private void OnPause()
     {
         paused = !paused;
 
@@ -115,7 +141,7 @@ public class Pause : MonoBehaviour
                 StartCoroutine(ReEnableControls());
             }
         }
-    }
+    }*/
 
     private IEnumerator ReEnableControls()
     {
