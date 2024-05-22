@@ -6,8 +6,14 @@ namespace ProjectSteppe
     public class Area : MonoBehaviour
     {
         [SerializeField] private string areaName;
+        [SerializeField] private AudioSource enteredCue;
 
         private bool entered;
+
+        private void Awake()
+        {
+            enteredCue = GetComponent<AudioSource>();
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -17,6 +23,7 @@ namespace ProjectSteppe
                 {
                     other.GetComponent<PlayerManager>().PlayerUI.areaPrompt.DisplayArea(areaName);
                     entered = true;
+                    enteredCue.Play();
                 }
 
             }

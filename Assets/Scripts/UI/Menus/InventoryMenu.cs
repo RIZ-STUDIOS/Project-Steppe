@@ -1,7 +1,4 @@
-using Codice.Client.BaseCommands.Merge.Xml;
-using GluonGui.WorkspaceWindow.Views.WorkspaceExplorer;
 using ProjectSteppe.Entities.Player;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -58,7 +55,7 @@ namespace ProjectSteppe.UI.Menus
                     inventoryButton.icon = itemIcon;
                     var button = inventoryButton.GetComponent<Button>();
                     buttons.Add(button);
-                    
+
                     inventoryButton.transform.SetParent(invButtonGOB.transform);
                 }
             }
