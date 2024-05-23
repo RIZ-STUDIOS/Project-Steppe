@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: aef26c79a8210254f9b1e18502ed1be2
+guid: 1537630d78ad06e45b5c1a138ee26749
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -19,9 +19,12 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
       copied configuration does not match position in animation file:\n\t'L_pink1'
-      : position error = 1.098111 mm\n"
+      : position error = 1.098268 mm\n"
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'Kick' has import animation warnings that might
+      lower retargeting quality:\nNote: Activate translation DOF on avatar to improve
+      retargeting quality.\n\t'L_middle1' has translation animation that will be
+      discarded.\n\t'L_point1' has translation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -35,11 +38,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: 2 Lights Attacks
-      takeName: 2 Lights Attacks
-      internalID: 5484916770142948553
+      name: Kick
+      takeName: Kick
+      internalID: 1419879912259550416
       firstFrame: 0
-      lastFrame: 70
+      lastFrame: 35
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
