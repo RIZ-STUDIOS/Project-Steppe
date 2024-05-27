@@ -299,6 +299,17 @@ namespace ProjectSteppe.Entities.Player
                     transform.rotation = Quaternion.Euler(0.0f, targetRotation, 0.0f);
                 else
                     transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+            }else if(!playerManager.HasCapability(PlayerCapability.Rotate) && dashing)
+            {
+                if (playerManager.PlayerTargetLock.lockOn)
+                {
+                    if (dashing)
+                    {
+                        targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
+                    }
+                    else
+                        targetRotation = playerCamera.transform.eulerAngles.y;
+                }
             }
 
 
