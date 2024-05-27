@@ -6,7 +6,7 @@ namespace ProjectSteppe
     {
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.GetComponent<AIController>().canRotate = true;
+            //animator.GetComponent<AIController>().canRotate = true;
         }
     }
 }
