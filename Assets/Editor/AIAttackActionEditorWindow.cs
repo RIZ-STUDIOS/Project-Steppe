@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace ProjectSteppe.Editor
 {
-    public class AIAttackActionEditorWindow : GenericEditorWindow<AIAttackActionScriptableObject>
+    /*public class AIAttackActionEditorWindow : GenericEditorWindow<AIAttackActionScriptableObject>
     {
         [MenuItem("Window/RicTools Windows/AIAttackAction")]
         public static AIAttackActionEditorWindow ShowWindow()
@@ -25,5 +25,5 @@ namespace ProjectSteppe.Editor
         {
 
         }
-    }
+    }*/
 }

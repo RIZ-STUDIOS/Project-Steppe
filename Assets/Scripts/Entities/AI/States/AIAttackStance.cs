@@ -84,7 +84,7 @@ namespace ProjectSteppe
                     previousAttack = currentAttack;
                     hasValidAttack = true;
                     if (controller.debugEnabled)
-                        Debug.Log("Selected attack " + currentAttack.attackAnimation);
+                        Debug.Log("Selected attack " + currentAttack.attackAnimName);
                     PlayAttack(controller);
                 }
             }
@@ -92,7 +92,7 @@ namespace ProjectSteppe
 
         private void PlayAttack(AIController controller)
         {
-            controller.animator.PlayTargetAnimation(currentAttack.attackAnimation);
+            controller.animator.PlayTargetAnimation(currentAttack.attackAnimName);
             //controller.combatController.AddRecovery(currentAttack.attackRecovery);
         }
 
