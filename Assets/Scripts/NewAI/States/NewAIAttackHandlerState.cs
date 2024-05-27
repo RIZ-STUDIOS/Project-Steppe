@@ -18,9 +18,6 @@ namespace ProjectSteppe.AI.States
 
         private NewAIAttackState currentAttack;
 
-        [System.NonSerialized]
-        public List<string> unusuableStates = new List<string>();
-
         public override void Execute()
         {
             if (!controller.targetTransform)
@@ -52,7 +49,7 @@ namespace ProjectSteppe.AI.States
                     if (attack.UseAttack())
                     {
                         currentAttack = attack;
-                        controller.SetPathTo(controller.targetTransform);
+                        controller.SetPathToTarget();
                         attack.Execute();
                         controller.NavMeshAgent.ResetPath();
                         return;

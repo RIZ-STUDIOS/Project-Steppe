@@ -28,7 +28,7 @@ namespace ProjectSteppe.AI.States
                 return;
             }
 
-            controller.SetPathTo(controller.targetTransform);
+            controller.SetPathToTarget();
         }
     }
 }

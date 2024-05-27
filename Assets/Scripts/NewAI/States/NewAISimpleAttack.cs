@@ -13,18 +13,10 @@ namespace ProjectSteppe.AI.States
         [SerializeField]
         private float attackDuration;
 
-        [SerializeField]
-        private string comboName;
-
         private Coroutine attackCoroutine;
-
-        [SerializeField]
-        private bool removeCombo;
 
         public override void Execute()
         {
-            if(!string.IsNullOrEmpty(comboName))
-            attackHandler.unusuableStates.Add(comboName);
             controller.NavMeshAgent.isStopped = true;
             controller.animator.SetTrigger("ForceAnimation");
             controller.animator.SetTrigger(animatorVariable);
@@ -37,13 +29,11 @@ namespace ProjectSteppe.AI.States
             attackFinished = true;
             controller.NavMeshAgent.nextPosition = controller.transform.position;
             controller.NavMeshAgent.isStopped = false;
-            if (!string.IsNullOrEmpty(comboName) && removeCombo)
-                attackHandler.unusuableStates.Remove(comboName);
         }
 
         public override bool UseAttack()
         {
-            return string.IsNullOrEmpty(comboName) || !attackHandler.unusuableStates.Contains(comboName);
+            return true;
         }
 
         public override void OnForceExit()
@@ -53,8 +43,6 @@ namespace ProjectSteppe.AI.States
                 controller.StopCoroutine(attackCoroutine);
                 controller.NavMeshAgent.nextPosition = controller.transform.position;
                 controller.NavMeshAgent.isStopped = false;
-                if (!string.IsNullOrEmpty(comboName) && removeCombo)
-                    attackHandler.unusuableStates.Remove(comboName);
             }
         }
     }

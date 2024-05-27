@@ -53,8 +53,6 @@ namespace ProjectSteppe.AI
 
         public void SwitchAIState(NewAIState newState)
         {
-            if (previousAiState)
-                Destroy(previousAiState);
             if (currentAiState)
                 currentAiState.OnExit();
             previousAiState = currentAiState;
@@ -82,6 +80,12 @@ namespace ProjectSteppe.AI
             var path = new NavMeshPath();
             navMeshAgent.CalculatePath(position, path);
             navMeshAgent.SetPath(path);
+        }
+
+        public void SetPathToTarget()
+        {
+            if (!targetTransform) return;
+            SetPathTo(targetTransform);
         }
     }
 }

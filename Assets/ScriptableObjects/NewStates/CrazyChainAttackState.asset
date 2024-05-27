@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3cbfde7de9ffa04eb45738fa6c05fd1, type: 3}
-  m_Name: SimpleChainAttackState
+  m_Name: CrazyChainAttackState
   m_EditorClassIdentifier: 
   animationDatas:
-  - triggerName: SimpleAttackFirst
+  - triggerName: CrazyComboFirst
     animationLength: 0.967
-  - triggerName: SimpleAttackSecond
+  - triggerName: CrazyComboSecond
     animationLength: 0.833
-  - triggerName: SimpleAttackThird
-    animationLength: 1.9
+  - triggerName: CrazyComboThird
+    animationLength: 6.233

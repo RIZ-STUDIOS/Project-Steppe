@@ -21,11 +21,9 @@ namespace ProjectSteppe.AI.States
         private IEnumerator AttackCoroutine()
         {
             controller.animator.SetTrigger("ForceAnimation");
-            float animationLength = 0;
             foreach (var animationData in animationDatas)
             {
                 controller.animator.SetTrigger(animationData.triggerName);
-                animationLength = animationData.animationLength;
             }
             foreach(var animationData in animationDatas)
             {
@@ -36,7 +34,6 @@ namespace ProjectSteppe.AI.States
                 rot.z = 0;
                 controller.transform.eulerAngles = rot;
             }
-                //yield return new WaitForSeconds(animationLength);
             controller.NavMeshAgent.nextPosition = controller.transform.position;
             controller.NavMeshAgent.isStopped = false;
             FinishAttack();

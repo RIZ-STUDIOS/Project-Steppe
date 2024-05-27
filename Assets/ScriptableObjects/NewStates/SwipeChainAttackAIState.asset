@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cad76706306e4fe4ab76a51f3edc7215, type: 3}
-  m_Name: FiratAttackAIState
+  m_Script: {fileID: 11500000, guid: c3cbfde7de9ffa04eb45738fa6c05fd1, type: 3}
+  m_Name: SwipeChainAttackAIState
   m_EditorClassIdentifier: 
-  animatorVariable: FirstAttack
-  attackDuration: 0.967
-  comboName: Simple Attack
-  removeCombo: 0
+  animationDatas:
+  - triggerName: SecondChargeFirst
+    animationLength: 0.833
+  - triggerName: SecondChargeSecond
+    animationLength: 2.133
