@@ -86,7 +86,6 @@ namespace ProjectSteppe.Entities.Player
         //private Animator animator;
         private PlayerInput playerInput;
         private PlayerManager playerManager;
-        private PlayerMovementController playerMovement;
 
         private CinemachineVirtualCamera virtualCamera;
 
@@ -114,7 +113,6 @@ namespace ProjectSteppe.Entities.Player
             //animator = GetComponent<Animator>();
             virtualCamera = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
             playerManager = GetComponent<PlayerManager>();
-            playerMovement = GetComponent<PlayerMovementController>();
 
             _cinemachineTargetYaw = transform.eulerAngles.y;
         }
@@ -274,7 +272,12 @@ namespace ProjectSteppe.Entities.Player
             {
                 if (playerManager.PlayerTargetLock.lockOn)
                 {
-                    targetRotation = playerCamera.transform.eulerAngles.y;
+                    if (dashing)
+                    {
+                        targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
+                    }
+                    else
+                        targetRotation = playerCamera.transform.eulerAngles.y;
                 }
                 if (!dashing)
                 {
@@ -292,7 +295,10 @@ namespace ProjectSteppe.Entities.Player
                         RotationSmoothTime);
 
                 // rotate to face input direction relative to camera position
-                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                if (playerManager.PlayerTargetLock.lockOn && dashing)
+                    transform.rotation = Quaternion.Euler(0.0f, targetRotation, 0.0f);
+                else
+                    transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
             }
 
 
@@ -304,7 +310,7 @@ namespace ProjectSteppe.Entities.Player
             }
             else if (playerManager.PlayerTargetLock.lockOn && dashing)
             {
-                targetDirection = Quaternion.Euler(0, targetRotation + Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg, 0) * Vector3.forward;
+                targetDirection = Quaternion.Euler(0, targetRotation, 0) * Vector3.forward;
             }
 
             //if (jumping) targetDirection.y = Mathf.Sqrt(5 * 2 * -9.8f);
@@ -331,7 +337,7 @@ namespace ProjectSteppe.Entities.Player
             else
             {
                 velX = 0;
-                velY = animationBlend / playerMovement.walkSpeed;
+                velY = animationBlend / walkSpeed;
             }
 
             onMoveAnimator?.Invoke(animationBlend, inputMagnitude, velX, velY);

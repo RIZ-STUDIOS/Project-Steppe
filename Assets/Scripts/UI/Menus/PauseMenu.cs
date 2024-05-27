@@ -41,6 +41,7 @@ namespace ProjectSteppe.UI.Menus
                 lastSelectedGameObject = EventSystem.current.currentSelectedGameObject;
             else
                 lastSelectedGameObject = null;
+            EventSystem.current.SetSelectedGameObject(null);
             base.HideMenu();
         }
 

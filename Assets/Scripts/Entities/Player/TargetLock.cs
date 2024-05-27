@@ -2,6 +2,7 @@ using ProjectSteppe.Utilities;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace ProjectSteppe.Entities.Player
 {
@@ -29,7 +30,11 @@ namespace ProjectSteppe.Entities.Player
         private float maxConeRadius;
 
         [SerializeField]
-        private float maxConeLength;
+        [FormerlySerializedAs("maxConeLength")]
+        private float lockOnDistance;
+
+        [SerializeField]
+        private float lockOffDistance;
 
         [SerializeField]
         private float coneAngle;
@@ -75,11 +80,16 @@ namespace ProjectSteppe.Entities.Player
             {
                 StopLockOn();
             }
+
+            if(lookAtTransform && Vector3.Distance(transform.position, lookAtTransform.position) > lockOnDistance)
+            {
+                StopLockOn();
+            }
         }
 
         private void StartLockOn()
         {
-            var hits = ConeCastExtension.ConeCastAll(playerMovement.playerCamera.transform.position, maxConeRadius, playerMovement.playerCamera.transform.forward, maxConeLength, coneAngle, targetLockLayer);
+            var hits = ConeCastExtension.ConeCastAll(playerMovement.playerCamera.transform.position, maxConeRadius, playerMovement.playerCamera.transform.forward, lockOnDistance, coneAngle, targetLockLayer);
             int index = -1;
             float angle = float.MaxValue;
             for (int i = 0; i < hits.Length; i++)

@@ -119,6 +119,8 @@ namespace ProjectSteppe.Entities.Player
 
         private void OnDashStart()
         {
+            animator.SetTrigger("ForceAnimation");
+            animator.SetTrigger("Roll");
             //animator.SetBool(_animIDDash, true);
         }
 

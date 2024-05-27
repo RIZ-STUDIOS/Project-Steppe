@@ -14824,8 +14824,8 @@ MonoBehaviour:
   groundLayers:
     serializedVersion: 2
     m_Bits: 16385
-  dashSpeed: 10
-  dashTime: 0.5
+  dashSpeed: 5
+  dashTime: 0.9
   dashCooldown: 0.5
   onJump:
     m_PersistentCalls:
@@ -15150,7 +15150,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   maxConeRadius: 5
-  maxConeLength: 50
+  lockOnDistance: 50
+  lockOffDistance: 60
   coneAngle: 90
   onLockStateChange:
     m_PersistentCalls:
