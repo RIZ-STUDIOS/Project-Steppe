@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace ProjectSteppe.Entities
 {
-    [RequireComponent(typeof(Entity))]
     [AddComponentMenu("")]
     public class EntityBehaviour : MonoBehaviour
     {

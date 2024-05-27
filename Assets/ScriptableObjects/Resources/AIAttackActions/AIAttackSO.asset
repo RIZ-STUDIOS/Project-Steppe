@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c7bceedd527fbf448a17f1e89e5cf66, type: 3}
-  m_Name: 6dc3026163aabfe4a86d6a992a07adbb
+  m_Name: AIAttackSO
   m_EditorClassIdentifier: 
   setForDeletion: 0
-  guid: 6dc3026163aabfe4a86d6a992a07adbb
-  nameOfAttackSO: comboOne
-  attackAnimation: Combo1
+  guid: 
+  nameOfAttackSO: 
+  attackAnimation: 
   comboAction: {fileID: 0}
   canThisAnimationCombo: 0
   weight: 50
-  attackRecovery: 2
-  minDistanceToTarget: -1
-  maxDistanceToTarget: 3
+  attackRecovery: 1.5
+  minDistanceToTarget: 0
+  maxDistanceToTarget: 5
