@@ -46,7 +46,7 @@ namespace ProjectSteppe.ScriptableObjects.CameraData
                 aimCameraData.ApplyCameraData(camera);
             }
 
-            foreach (var comp in camera.GetComponents<CinemachineExtension>())
+            /*foreach (var comp in camera.GetComponents<CinemachineExtension>())
             {
                 Destroy(comp);
             }
@@ -57,7 +57,7 @@ namespace ProjectSteppe.ScriptableObjects.CameraData
                 {
                     extension.ApplyCameraData(camera);
                 }
-            }
+            }*/
         }
 
         private void DeleteComponentInCamera(CinemachineCore.Stage stage, CinemachineVirtualCamera camera)
