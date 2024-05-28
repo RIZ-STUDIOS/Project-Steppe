@@ -13,6 +13,11 @@ namespace ProjectSteppe.AI
 
         public AudioSource bossMusic;
 
+        private Coroutine hitCoroutine;
+
+        [SerializeField]
+        private float timeToResetHitCounter;
+
         private void Awake()
         {
             controller = GetComponentInParent<NewAIController>();
@@ -49,6 +54,17 @@ namespace ProjectSteppe.AI
         {
             controller.IncrementPlayerHits();
             Debug.Log("Boss hit " + controller.PlayerHits + " times");
+            if(hitCoroutine != null)
+            {
+                StopCoroutine(hitCoroutine);
+                hitCoroutine = null;
+            }
+        }
+
+        private IEnumerator PlayerHitCoroutine()
+        {
+            yield return new WaitForSeconds(timeToResetHitCounter);
+            controller.ResetPlayerHits();
         }
     }
 }

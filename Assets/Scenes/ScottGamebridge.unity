@@ -8665,6 +8665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossMusic: {fileID: 536884123}
+  timeToResetHitCounter: 0
 --- !u!4 &401474494 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3247474872940375630, guid: faa232351140d09468c55b9d5a0ec242,
@@ -10544,9 +10545,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAiState: {fileID: 11400000, guid: 39e95ca34dec704478c50a635a9e883c, type: 2}
-  targetTransform: {fileID: 1233160323}
-  distanceToTargetToAttack: 5
-  distanceToTargetToChase: 10
+  distanceToTargetToAttack: 2
+  distanceToTargetToChase: 4
   RotationSmoothTime: 0.12
 --- !u!1001 &537883588
 PrefabInstance:
