@@ -30,7 +30,7 @@ namespace ProjectSteppe.AI.States
             controller.NavMeshAgent.isStopped = false;
         }
 
-        public override bool UseAttack()
+        public override bool CanUseAttack()
         {
             return true;
         }

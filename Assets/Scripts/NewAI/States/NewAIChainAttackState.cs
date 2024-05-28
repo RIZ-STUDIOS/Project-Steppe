@@ -39,7 +39,7 @@ namespace ProjectSteppe.AI.States
             FinishAttack();
         }
 
-        public override bool UseAttack()
+        public override bool CanUseAttack()
         {
             return true;
         }

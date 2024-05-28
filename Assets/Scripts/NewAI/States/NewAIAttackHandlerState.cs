@@ -60,13 +60,17 @@ namespace ProjectSteppe.AI.States
                     var attack = Instantiate(attackStates[i]);
                     attack.attackHandler = this;
                     attack.controller = controller;
-                    if (attack.UseAttack())
+                    if (attack.CanUseAttack())
                     {
                         if (!attack.attackScriptableObject)
                             attack.attackScriptableObject = defaultAttackScriptableObject;
                         currentAttack = attack;
                         controller.SetPathToTarget();
                         controller.GetComponent<EntityAttacking>().currentAttack = attack.attackScriptableObject;
+                        if (controller.animator.GetBool("ForceExit"))
+                        {
+                            controller.animator.ResetTrigger("ForceExit");
+                        }
                         attack.Execute();
                         controller.NavMeshAgent.ResetPath();
                         return;

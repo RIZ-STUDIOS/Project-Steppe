@@ -59,6 +59,7 @@ namespace ProjectSteppe.AI
                 StopCoroutine(hitCoroutine);
                 hitCoroutine = null;
             }
+            hitCoroutine = StartCoroutine(PlayerHitCoroutine());
         }
 
         private IEnumerator PlayerHitCoroutine()

@@ -20,7 +20,7 @@ namespace ProjectSteppe.AI.States
 
         public abstract void Execute();
 
-        public abstract bool UseAttack();
+        public abstract bool CanUseAttack();
 
         public void FinishAttack()
         {
@@ -30,16 +30,6 @@ namespace ProjectSteppe.AI.States
         public virtual void OnForceExit()
         {
             controller.animator.SetTrigger("ForceExit");
-            //controller.StartCoroutine(CheckTriggerCoroutine());
-        }
-
-        private IEnumerator CheckTriggerCoroutine()
-        {
-            yield return null;
-            if (controller.animator.GetBool("ForceExit"))
-            {
-                controller.animator.ResetTrigger("ForceExit");
-            }
         }
     }
 }

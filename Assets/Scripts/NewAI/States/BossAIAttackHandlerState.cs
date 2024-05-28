@@ -81,6 +81,10 @@ namespace ProjectSteppe.AI.States
                         currentAttack.attackScriptableObject = defaultAttackScriptableObject;
                     currentAttack.attackHandler = this;
                     currentAttack.controller = controller;
+                    if (controller.animator.GetBool("ForceExit"))
+                    {
+                        controller.animator.ResetTrigger("ForceExit");
+                    }
                     controller.GetComponent<EntityAttacking>().currentAttack = currentAttack.attackScriptableObject;
                     currentAttack.Execute();
                 }
