@@ -1,3 +1,4 @@
+using ProjectSteppe.AI;
 using ProjectSteppe.Entities;
 using ProjectSteppe.Entities.Player;
 using System.Collections;
@@ -36,7 +37,7 @@ namespace ProjectSteppe
 
         private Coroutine staggerCoroutine;
 
-        private AIController controller;
+        private MonoBehaviour controller;
 
         public UnityEvent OnFootstep;
         public UnityEvent OnMortalBlow;
@@ -50,6 +51,8 @@ namespace ProjectSteppe
             health = GetComponent<EntityHealth>();
             navMeshAgent = GetComponent<NavMeshAgent>();
             controller = GetComponent<AIController>();
+            if(!controller)
+                controller = GetComponent<NewAIController>();
         }
 
         public void OnMortalSteppe()
@@ -103,6 +106,8 @@ namespace ProjectSteppe
         {
             staggered = true;
             health.vulnerable = true;
+            if (controller)
+                controller.enabled = false;
             navMeshAgent.enabled = false;
 
             yield return new WaitForSeconds(3);
@@ -110,6 +115,8 @@ namespace ProjectSteppe
             health.vulnerable = false;
 
             navMeshAgent.enabled = true;
+            if(controller)
+                controller.enabled = true;
             animator.SetBool("PostureBreak", false);
             staggered = false;
         }
