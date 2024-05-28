@@ -16,7 +16,7 @@ namespace ProjectSteppe.AI.States
         [SerializeField]
         private NewAIAttackState[] attackStates;
 
-        private NewAIAttackState currentAttack;
+        protected NewAIAttackState currentAttack;
 
         public override void Execute()
         {
@@ -34,6 +34,11 @@ namespace ProjectSteppe.AI.States
                 return;
             }
 
+            ChooseAttack();
+        }
+
+        protected virtual void ChooseAttack()
+        {
             if (currentAttack && currentAttack.attackFinished)
             {
                 currentAttack = null;
@@ -41,7 +46,7 @@ namespace ProjectSteppe.AI.States
 
             if (!currentAttack)
             {
-                for(int i = 0; i < attackStates.Length; i++)
+                for (int i = 0; i < attackStates.Length; i++)
                 {
                     var attack = Instantiate(attackStates[i]);
                     attack.attackHandler = this;
@@ -64,6 +69,11 @@ namespace ProjectSteppe.AI.States
             {
                 currentAttack.OnForceExit();
             }
+        }
+
+        protected AttackState GetCopyState<AttackState>(AttackState state) where AttackState : NewAIAttackState
+        {
+            return Instantiate(state);
         }
     }
 }
