@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ProjectSteppe.AI.States
 {
@@ -8,26 +9,19 @@ namespace ProjectSteppe.AI.States
     public class NewAISimpleAttack : NewAIAttackState
     {
         [SerializeField]
-        private string animatorVariable;
+        [FormerlySerializedAs("animatorVariable")]
+        private string triggerName;
 
         [SerializeField]
         private float attackDuration;
 
-        [SerializeField]
-        private string comboName;
-
         private Coroutine attackCoroutine;
-
-        [SerializeField]
-        private bool removeCombo;
 
         public override void Execute()
         {
-            if(!string.IsNullOrEmpty(comboName))
-            attackHandler.unusuableStates.Add(comboName);
             controller.NavMeshAgent.isStopped = true;
             controller.animator.SetTrigger("ForceAnimation");
-            controller.animator.SetTrigger(animatorVariable);
+            controller.animator.SetTrigger(triggerName);
             attackCoroutine = controller.StartCoroutine(AttackDurationCoroutine());
         }
 
@@ -37,24 +31,21 @@ namespace ProjectSteppe.AI.States
             attackFinished = true;
             controller.NavMeshAgent.nextPosition = controller.transform.position;
             controller.NavMeshAgent.isStopped = false;
-            if (!string.IsNullOrEmpty(comboName) && removeCombo)
-                attackHandler.unusuableStates.Remove(comboName);
         }
 
-        public override bool UseAttack()
+        public override bool CanUseAttack()
         {
-            return string.IsNullOrEmpty(comboName) || !attackHandler.unusuableStates.Contains(comboName);
+            return true;
         }
 
         public override void OnForceExit()
         {
+            base.OnForceExit();
             if (attackCoroutine != null)
             {
                 controller.StopCoroutine(attackCoroutine);
                 controller.NavMeshAgent.nextPosition = controller.transform.position;
                 controller.NavMeshAgent.isStopped = false;
-                if (!string.IsNullOrEmpty(comboName) && removeCombo)
-                    attackHandler.unusuableStates.Remove(comboName);
             }
         }
     }

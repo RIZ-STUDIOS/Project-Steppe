@@ -9,6 +9,11 @@ namespace ProjectSteppe.AI
         [System.NonSerialized]
         public NewAIController controller;
 
+        public virtual void OnEnter()
+        {
+
+        }
+
         public abstract void Execute();
 
         public virtual void OnExit()

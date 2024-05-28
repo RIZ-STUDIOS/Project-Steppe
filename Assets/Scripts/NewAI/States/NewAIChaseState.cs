@@ -14,6 +14,11 @@ namespace ProjectSteppe.AI.States
         [SerializeField]
         private NewAIState attackHandlerState;
 
+        public override void OnEnter()
+        {
+            controller.animator.SetBool("Chase", true);
+        }
+
         public override void Execute()
         {
             if (!controller.targetTransform)
@@ -28,7 +33,12 @@ namespace ProjectSteppe.AI.States
                 return;
             }
 
-            controller.SetPathTo(controller.targetTransform);
+            controller.SetPathToTarget();
+        }
+
+        public override void OnExit()
+        {
+            controller.animator.SetBool("Chase", false);
         }
     }
 }

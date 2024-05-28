@@ -145,6 +145,7 @@ namespace ProjectSteppe.Entities.Player
                     dashTimer = 0;
                     Entity.EntityHealth.SetInvicible(true);
                     onDashStart.Invoke();
+                    Entity.EntityAttacking.DisableWeaponCollision();
                 }
                 _input.dash = false;
             }

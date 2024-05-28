@@ -8512,6 +8512,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 388678387}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &395188179 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1602695492576460006, guid: 760189c7b9a6e664d997b953223e98ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 536884121}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &395188182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395188179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95b287ccf945cdc42b64457480bfcaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossMusic: {fileID: 536884123}
+  timeToResetHitCounter: 0
 --- !u!4 &401474494 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3247474872940375630, guid: faa232351140d09468c55b9d5a0ec242,
@@ -10341,6 +10361,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7802443448005072130, guid: 760189c7b9a6e664d997b953223e98ad, type: 3}
+    - {fileID: 6412897198257238899, guid: 760189c7b9a6e664d997b953223e98ad, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -10348,6 +10369,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 536884125}
+    - targetCorrespondingSourceObject: {fileID: 1602695492576460006, guid: 760189c7b9a6e664d997b953223e98ad,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 395188182}
   m_SourcePrefab: {fileID: 100100000, guid: 760189c7b9a6e664d997b953223e98ad, type: 3}
 --- !u!1 &536884122 stripped
 GameObject:
@@ -10386,9 +10411,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAiState: {fileID: 11400000, guid: 39e95ca34dec704478c50a635a9e883c, type: 2}
-  targetTransform: {fileID: 0}
-  distanceToTargetToAttack: 5
-  distanceToTargetToChase: 10
+  distanceToTargetToAttack: 2
+  distanceToTargetToChase: 4
+  RotationSmoothTime: 0.12
 --- !u!1001 &537883588
 PrefabInstance:
   m_ObjectHideFlags: 0

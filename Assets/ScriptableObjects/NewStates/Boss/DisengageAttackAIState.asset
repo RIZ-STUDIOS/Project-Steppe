@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 772f833aea55d734eb05fef8a3855e91, type: 3}
-  m_Name: ThirdAttackAIState
+  m_Script: {fileID: 11500000, guid: cad76706306e4fe4ab76a51f3edc7215, type: 3}
+  m_Name: DisengageAttackAIState
   m_EditorClassIdentifier: 
-  animatorVariable: ThirdAttack
-  attackDuration: 1.9
-  comboName: Simple Attack
-  removeCombo: 1
+  animatorVariable: Disengage
+  attackDuration: 1.933
+  comboName: 
+  removeCombo: 0

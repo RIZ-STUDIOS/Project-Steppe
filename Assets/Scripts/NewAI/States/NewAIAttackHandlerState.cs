@@ -1,3 +1,5 @@
+using ProjectSteppe.Entities;
+using ProjectSteppe.ScriptableObjects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,10 +18,14 @@ namespace ProjectSteppe.AI.States
         [SerializeField]
         private NewAIAttackState[] attackStates;
 
-        private NewAIAttackState currentAttack;
+        protected NewAIAttackState currentAttack;
 
-        [System.NonSerialized]
-        public List<string> unusuableStates = new List<string>();
+        protected AttackScriptableObject defaultAttackScriptableObject;
+
+        public override void OnEnter()
+        {
+            defaultAttackScriptableObject = controller.GetComponent<EntityAttacking>().currentAttack;
+        }
 
         public override void Execute()
         {
@@ -37,6 +43,11 @@ namespace ProjectSteppe.AI.States
                 return;
             }
 
+            ChooseAttack();
+        }
+
+        protected virtual void ChooseAttack()
+        {
             if (currentAttack && currentAttack.attackFinished)
             {
                 currentAttack = null;
@@ -44,15 +55,22 @@ namespace ProjectSteppe.AI.States
 
             if (!currentAttack)
             {
-                for(int i = 0; i < attackStates.Length; i++)
+                for (int i = 0; i < attackStates.Length; i++)
                 {
                     var attack = Instantiate(attackStates[i]);
                     attack.attackHandler = this;
                     attack.controller = controller;
-                    if (attack.UseAttack())
+                    if (attack.CanUseAttack())
                     {
+                        if (!attack.attackScriptableObject)
+                            attack.attackScriptableObject = defaultAttackScriptableObject;
                         currentAttack = attack;
-                        controller.SetPathTo(controller.targetTransform);
+                        controller.SetPathToTarget();
+                        controller.GetComponent<EntityAttacking>().currentAttack = attack.attackScriptableObject;
+                        if (controller.animator.GetBool("ForceExit"))
+                        {
+                            controller.animator.ResetTrigger("ForceExit");
+                        }
                         attack.Execute();
                         controller.NavMeshAgent.ResetPath();
                         return;
@@ -63,10 +81,15 @@ namespace ProjectSteppe.AI.States
 
         public override void OnExit()
         {
-            if (currentAttack)
+            if (currentAttack && !currentAttack.attackFinished)
             {
                 currentAttack.OnForceExit();
             }
+        }
+
+        protected AttackState GetCopyState<AttackState>(AttackState state) where AttackState : NewAIAttackState
+        {
+            return Instantiate(state);
         }
     }
 }

@@ -21,34 +21,32 @@ namespace ProjectSteppe.AI.States
         private IEnumerator AttackCoroutine()
         {
             controller.animator.SetTrigger("ForceAnimation");
-            float animationLength = 0;
             foreach (var animationData in animationDatas)
             {
+                if(!string.IsNullOrEmpty(animationData.triggerName))
                 controller.animator.SetTrigger(animationData.triggerName);
-                animationLength = animationData.animationLength;
             }
             foreach(var animationData in animationDatas)
             {
                 yield return new WaitForSeconds(animationData.animationLength);
-                controller.transform.LookAt(controller.targetTransform);
-                var rot = controller.transform.eulerAngles;
-                rot.x = 0;
-                rot.z = 0;
-                controller.transform.eulerAngles = rot;
+                if (animationData.canRotateAfter)
+                {
+                    controller.RotateTowards(controller.targetTransform);
+                }
             }
-                //yield return new WaitForSeconds(animationLength);
             controller.NavMeshAgent.nextPosition = controller.transform.position;
             controller.NavMeshAgent.isStopped = false;
             FinishAttack();
         }
 
-        public override bool UseAttack()
+        public override bool CanUseAttack()
         {
             return true;
         }
 
         public override void OnForceExit()
         {
+            base.OnForceExit();
             if (attackCoroutine != null)
             {
                 controller.StopCoroutine(attackCoroutine);
@@ -63,6 +61,7 @@ namespace ProjectSteppe.AI.States
         {
             public string triggerName;
             public float animationLength;
+            public bool canRotateAfter;
         }
     }
 }

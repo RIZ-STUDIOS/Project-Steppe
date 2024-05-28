@@ -1,3 +1,4 @@
+using ProjectSteppe.ScriptableObjects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,9 +16,11 @@ namespace ProjectSteppe.AI.States
         [System.NonSerialized]
         public bool attackFinished;
 
+        public AttackScriptableObject attackScriptableObject;
+
         public abstract void Execute();
 
-        public abstract bool UseAttack();
+        public abstract bool CanUseAttack();
 
         public void FinishAttack()
         {
@@ -26,7 +29,7 @@ namespace ProjectSteppe.AI.States
 
         public virtual void OnForceExit()
         {
-
+            controller.animator.SetTrigger("ForceExit");
         }
     }
 }

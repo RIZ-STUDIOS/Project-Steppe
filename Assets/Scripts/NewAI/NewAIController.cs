@@ -22,9 +22,6 @@ namespace ProjectSteppe.AI
         private NewAIState currentAiState;
 
         [System.NonSerialized]
-        public NewAIState previousAiState;
-
-        //[System.NonSerialized]
         public Transform targetTransform;
 
         public float distanceToTargetToAttack;
@@ -32,6 +29,14 @@ namespace ProjectSteppe.AI
 
         [System.NonSerialized]
         public Animator animator;
+
+        [Range(0.0f, 0.3f)]
+        public float RotationSmoothTime = 0.12f;
+
+        private float targetRotation;
+        private float _rotationVelocity;
+
+        private bool rotateTowardsTarget;
 
         private void Awake()
         {
@@ -53,23 +58,31 @@ namespace ProjectSteppe.AI
 
         public void SwitchAIState(NewAIState newState)
         {
-            if (previousAiState)
-                Destroy(previousAiState);
             if (currentAiState)
                 currentAiState.OnExit();
-            previousAiState = currentAiState;
             if (newState)
                 currentAiState = Instantiate(newState);
             else
                 currentAiState = null;
             if (currentAiState)
+            {
                 currentAiState.controller = this;
+                currentAiState.OnEnter();
+            }
         }
 
         private void FixedUpdate()
         {
             if (!currentAiState) return;
             currentAiState.Execute();
+        }
+
+        private void Update()
+        {
+            if (rotateTowardsTarget && targetTransform)
+            {
+                RotateTowards(targetTransform);
+            }
         }
 
         public void SetPathTo(Transform target)
@@ -82,6 +95,37 @@ namespace ProjectSteppe.AI
             var path = new NavMeshPath();
             navMeshAgent.CalculatePath(position, path);
             navMeshAgent.SetPath(path);
+        }
+
+        public void SetPathToTarget()
+        {
+            if (!targetTransform) return;
+            SetPathTo(targetTransform);
+        }
+
+        public void RotateTowards(Transform transform)
+        {
+            RotateTowards(transform.position);
+        }
+
+        public void RotateTowards(Vector3 position)
+        {
+            var rot = Quaternion.LookRotation(position - transform.position).eulerAngles;
+            targetRotation = rot.y;
+
+            float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref _rotationVelocity,
+                        RotationSmoothTime);
+            transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+        }
+
+        public void EnableRotationTowardsTarget()
+        {
+            rotateTowardsTarget = true;
+        }
+
+        public void DisableRotationTowardsTarget()
+        {
+            rotateTowardsTarget = false;
         }
     }
 }
