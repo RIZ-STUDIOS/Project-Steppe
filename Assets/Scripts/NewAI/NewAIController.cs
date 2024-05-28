@@ -21,9 +21,6 @@ namespace ProjectSteppe.AI
         [SerializeField]
         private NewAIState currentAiState;
 
-        [System.NonSerialized]
-        public NewAIState previousAiState;
-
         //[System.NonSerialized]
         public Transform targetTransform;
 
@@ -55,13 +52,15 @@ namespace ProjectSteppe.AI
         {
             if (currentAiState)
                 currentAiState.OnExit();
-            previousAiState = currentAiState;
             if (newState)
                 currentAiState = Instantiate(newState);
             else
                 currentAiState = null;
             if (currentAiState)
+            {
                 currentAiState.controller = this;
+                currentAiState.OnEnter();
+            }
         }
 
         private void FixedUpdate()
