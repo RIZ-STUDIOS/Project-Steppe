@@ -171,7 +171,7 @@ AnimatorStateMachine:
     m_Position: {x: -110, y: 180, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: 4836490349254023848}
-    m_Position: {x: -80, y: 300, z: 0}
+    m_Position: {x: -110, y: 260, z: 0}
   m_AnyStateTransitions:
   - {fileID: -773957122489608024}
   m_EntryTransitions: []
@@ -1676,37 +1676,13 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: SimpleAttackSecond
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: SimpleAttackThird
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: FirstChargeFirst
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: FirstChargeSecond
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: SecondChargeFirst
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: SecondChargeSecond
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -1719,18 +1695,6 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: CrazyComboFirst
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: CrazyComboSecond
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: CrazyComboThird
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -2711,9 +2675,6 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 7870864074823300410}
-    second:
-    - {fileID: -6888931369113017328}
   - first: {fileID: 8436174592318561066}
     second:
     - {fileID: 3203060771746371719}
@@ -2726,6 +2687,9 @@ AnimatorStateMachine:
   - first: {fileID: 5089025591404511472}
     second:
     - {fileID: 8236361242816466971}
+  - first: {fileID: 7870864074823300410}
+    second:
+    - {fileID: -6888931369113017328}
   m_StateMachineBehaviours:
   - {fileID: 6602312619707370286}
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
@@ -3274,7 +3238,7 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New StateMachine
+  m_Name: Push Back Disengage
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -3662036872794281760}

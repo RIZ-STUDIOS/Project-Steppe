@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3cbfde7de9ffa04eb45738fa6c05fd1, type: 3}
   m_Name: CrazyChainAttackState
   m_EditorClassIdentifier: 
+  attackScriptableObject: {fileID: 0}
   animationDatas:
   - triggerName: CrazyComboFirst
     animationLength: 0.967
     canRotateAfter: 1
-  - triggerName: CrazyComboSecond
+  - triggerName: 
     animationLength: 0.833
     canRotateAfter: 1
-  - triggerName: CrazyComboThird
+  - triggerName: 
     animationLength: 6.233
     canRotateAfter: 1

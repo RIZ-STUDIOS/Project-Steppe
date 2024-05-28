@@ -10,15 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3cbfde7de9ffa04eb45738fa6c05fd1, type: 3}
-  m_Name: SimpleChainAttackState
+  m_Name: ChargeChainAttackAIState
   m_EditorClassIdentifier: 
+  attackScriptableObject: {fileID: 0}
   animationDatas:
-  - triggerName: SimpleAttackFirst
+  - triggerName: FirstChargeFirst
     animationLength: 0.967
     canRotateAfter: 1
-  - triggerName: SimpleAttackSecond
-    animationLength: 0.833
-    canRotateAfter: 1
-  - triggerName: SimpleAttackThird
-    animationLength: 1.9
+  - triggerName: 
+    animationLength: 2.167
     canRotateAfter: 1

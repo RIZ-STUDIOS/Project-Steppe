@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ProjectSteppe.AI.States
 {
@@ -8,7 +9,8 @@ namespace ProjectSteppe.AI.States
     public class NewAISimpleAttack : NewAIAttackState
     {
         [SerializeField]
-        private string animatorVariable;
+        [FormerlySerializedAs("animatorVariable")]
+        private string triggerName;
 
         [SerializeField]
         private float attackDuration;
@@ -19,7 +21,7 @@ namespace ProjectSteppe.AI.States
         {
             controller.NavMeshAgent.isStopped = true;
             controller.animator.SetTrigger("ForceAnimation");
-            controller.animator.SetTrigger(animatorVariable);
+            controller.animator.SetTrigger(triggerName);
             attackCoroutine = controller.StartCoroutine(AttackDurationCoroutine());
         }
 
@@ -38,6 +40,7 @@ namespace ProjectSteppe.AI.States
 
         public override void OnForceExit()
         {
+            base.OnForceExit();
             if (attackCoroutine != null)
             {
                 controller.StopCoroutine(attackCoroutine);

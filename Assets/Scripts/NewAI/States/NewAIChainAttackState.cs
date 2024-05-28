@@ -31,11 +31,7 @@ namespace ProjectSteppe.AI.States
                 yield return new WaitForSeconds(animationData.animationLength);
                 if (animationData.canRotateAfter)
                 {
-                    controller.transform.LookAt(controller.targetTransform);
-                    var rot = controller.transform.eulerAngles;
-                    rot.x = 0;
-                    rot.z = 0;
-                    controller.transform.eulerAngles = rot;
+                    controller.RotateTowards(controller.targetTransform);
                 }
             }
             controller.NavMeshAgent.nextPosition = controller.transform.position;
@@ -50,6 +46,7 @@ namespace ProjectSteppe.AI.States
 
         public override void OnForceExit()
         {
+            base.OnForceExit();
             if (attackCoroutine != null)
             {
                 controller.StopCoroutine(attackCoroutine);

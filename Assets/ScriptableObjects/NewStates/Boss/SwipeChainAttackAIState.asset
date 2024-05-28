@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3cbfde7de9ffa04eb45738fa6c05fd1, type: 3}
-  m_Name: ChargeChainAttackAIState
+  m_Name: SwipeChainAttackAIState
   m_EditorClassIdentifier: 
+  attackScriptableObject: {fileID: 0}
   animationDatas:
-  - triggerName: FirstChargeFirst
-    animationLength: 0.967
+  - triggerName: SecondChargeFirst
+    animationLength: 0.833
     canRotateAfter: 1
-  - triggerName: FirstChargeSecond
-    animationLength: 2.167
+  - triggerName: 
+    animationLength: 2.133
     canRotateAfter: 1

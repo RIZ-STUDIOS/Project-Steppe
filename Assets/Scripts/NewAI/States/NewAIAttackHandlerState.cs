@@ -1,3 +1,5 @@
+using ProjectSteppe.Entities;
+using ProjectSteppe.ScriptableObjects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +19,13 @@ namespace ProjectSteppe.AI.States
         private NewAIAttackState[] attackStates;
 
         protected NewAIAttackState currentAttack;
+
+        protected AttackScriptableObject defaultAttackScriptableObject;
+
+        public override void OnEnter()
+        {
+            defaultAttackScriptableObject = controller.GetComponent<EntityAttacking>().currentAttack;
+        }
 
         public override void Execute()
         {
@@ -53,8 +62,11 @@ namespace ProjectSteppe.AI.States
                     attack.controller = controller;
                     if (attack.UseAttack())
                     {
+                        if (!attack.attackScriptableObject)
+                            attack.attackScriptableObject = defaultAttackScriptableObject;
                         currentAttack = attack;
                         controller.SetPathToTarget();
+                        controller.GetComponent<EntityAttacking>().currentAttack = attack.attackScriptableObject;
                         attack.Execute();
                         controller.NavMeshAgent.ResetPath();
                         return;
@@ -65,7 +77,7 @@ namespace ProjectSteppe.AI.States
 
         public override void OnExit()
         {
-            if (currentAttack)
+            if (currentAttack && !currentAttack.attackFinished)
             {
                 currentAttack.OnForceExit();
             }

@@ -21,7 +21,7 @@ namespace ProjectSteppe.AI
         [SerializeField]
         private NewAIState currentAiState;
 
-        //[System.NonSerialized]
+        [System.NonSerialized]
         public Transform targetTransform;
 
         public float distanceToTargetToAttack;
@@ -29,6 +29,14 @@ namespace ProjectSteppe.AI
 
         [System.NonSerialized]
         public Animator animator;
+
+        [Range(0.0f, 0.3f)]
+        public float RotationSmoothTime = 0.12f;
+
+        private float targetRotation;
+        private float _rotationVelocity;
+
+        private bool rotateTowardsTarget;
 
         private void Awake()
         {
@@ -69,6 +77,14 @@ namespace ProjectSteppe.AI
             currentAiState.Execute();
         }
 
+        private void Update()
+        {
+            if (rotateTowardsTarget && targetTransform)
+            {
+                RotateTowards(targetTransform);
+            }
+        }
+
         public void SetPathTo(Transform target)
         {
             SetPathTo(target.position);
@@ -85,6 +101,31 @@ namespace ProjectSteppe.AI
         {
             if (!targetTransform) return;
             SetPathTo(targetTransform);
+        }
+
+        public void RotateTowards(Transform transform)
+        {
+            RotateTowards(transform.position);
+        }
+
+        public void RotateTowards(Vector3 position)
+        {
+            var rot = Quaternion.LookRotation(position - transform.position).eulerAngles;
+            targetRotation = rot.y;
+
+            float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref _rotationVelocity,
+                        RotationSmoothTime);
+            transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+        }
+
+        public void EnableRotationTowardsTarget()
+        {
+            rotateTowardsTarget = true;
+        }
+
+        public void DisableRotationTowardsTarget()
+        {
+            rotateTowardsTarget = false;
         }
     }
 }

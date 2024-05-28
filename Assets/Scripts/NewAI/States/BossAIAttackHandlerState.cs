@@ -1,6 +1,8 @@
+using ProjectSteppe.Entities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static PlasticPipe.Server.MonitorStats;
 
 namespace ProjectSteppe.AI.States
 {
@@ -75,8 +77,11 @@ namespace ProjectSteppe.AI.States
 
                 if (currentAttack)
                 {
+                    if (!currentAttack.attackScriptableObject)
+                        currentAttack.attackScriptableObject = defaultAttackScriptableObject;
                     currentAttack.attackHandler = this;
                     currentAttack.controller = controller;
+                    controller.GetComponent<EntityAttacking>().currentAttack = currentAttack.attackScriptableObject;
                     currentAttack.Execute();
                 }
             }

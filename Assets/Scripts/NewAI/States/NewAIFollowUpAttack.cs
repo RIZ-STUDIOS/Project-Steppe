@@ -37,6 +37,7 @@ namespace ProjectSteppe.AI.States
 
         public override void OnForceExit()
         {
+            base.OnForceExit();
             if (attackCoroutine != null)
             {
                 controller.StopCoroutine(attackCoroutine);

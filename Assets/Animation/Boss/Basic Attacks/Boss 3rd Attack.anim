@@ -62291,7 +62291,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.33333334
-    functionName: DisableAIRotation
+    functionName: DisableRotationTowardsTarget
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -62333,7 +62333,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.9
-    functionName: EnableAIRotation
+    functionName: EnableRotationTowardsTarget
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
