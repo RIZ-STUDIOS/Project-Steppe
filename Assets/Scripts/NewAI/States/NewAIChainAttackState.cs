@@ -23,16 +23,20 @@ namespace ProjectSteppe.AI.States
             controller.animator.SetTrigger("ForceAnimation");
             foreach (var animationData in animationDatas)
             {
+                if(!string.IsNullOrEmpty(animationData.triggerName))
                 controller.animator.SetTrigger(animationData.triggerName);
             }
             foreach(var animationData in animationDatas)
             {
                 yield return new WaitForSeconds(animationData.animationLength);
-                controller.transform.LookAt(controller.targetTransform);
-                var rot = controller.transform.eulerAngles;
-                rot.x = 0;
-                rot.z = 0;
-                controller.transform.eulerAngles = rot;
+                if (animationData.canRotateAfter)
+                {
+                    controller.transform.LookAt(controller.targetTransform);
+                    var rot = controller.transform.eulerAngles;
+                    rot.x = 0;
+                    rot.z = 0;
+                    controller.transform.eulerAngles = rot;
+                }
             }
             controller.NavMeshAgent.nextPosition = controller.transform.position;
             controller.NavMeshAgent.isStopped = false;
@@ -60,6 +64,7 @@ namespace ProjectSteppe.AI.States
         {
             public string triggerName;
             public float animationLength;
+            public bool canRotateAfter;
         }
     }
 }

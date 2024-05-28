@@ -25,6 +25,12 @@ namespace ProjectSteppe.AI.States
         [SerializeField]
         private NewAIAttackState crazyComboAttackState;
 
+        [SerializeField]
+        private NewAIAttackState pushBackAttackState;
+
+        [SerializeField]
+        private NewAIAttackState pushBackDisengageAttackState;
+
         protected override void ChooseAttack()
         {
             if (currentAttack && currentAttack.attackFinished)
@@ -37,7 +43,8 @@ namespace ProjectSteppe.AI.States
                 if (true)
                 {
                     currentAttack = GetCopyState(simpleAttackState);
-                }else if (true)
+                }
+                else if (true)
                 {
                     currentAttack = GetCopyState(chargeAttackState);
                 }
@@ -56,6 +63,14 @@ namespace ProjectSteppe.AI.States
                 else if (true)
                 {
                     currentAttack = GetCopyState(crazyComboAttackState);
+                }
+                else if (true)
+                {
+                    currentAttack = GetCopyState(pushBackAttackState);
+                }
+                else if (true)
+                {
+                    currentAttack = GetCopyState(pushBackDisengageAttackState);
                 }
 
                 if (currentAttack)
