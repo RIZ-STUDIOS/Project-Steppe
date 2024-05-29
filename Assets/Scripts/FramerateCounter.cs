@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.LowLevel;
 
 namespace ProjectSteppe
 {
-    public class FramerateShower : MonoBehaviour
+    public class FramerateCounter : MonoBehaviour
     {
         TextMeshProUGUI tmp;
         float refreshTime = 0.5f;
@@ -25,7 +26,7 @@ namespace ProjectSteppe
             else
             {
                 currenTick = 0;
-                tmp.text = (1.0f / Time.unscaledDeltaTime).ToString();
+                tmp.text = ((int)(1 / Time.smoothDeltaTime)).ToString();
             }
         }
     }

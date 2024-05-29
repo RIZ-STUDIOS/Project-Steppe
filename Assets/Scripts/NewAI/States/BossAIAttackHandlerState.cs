@@ -2,7 +2,6 @@ using ProjectSteppe.Entities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static PlasticPipe.Server.MonitorStats;
 
 namespace ProjectSteppe.AI.States
 {
