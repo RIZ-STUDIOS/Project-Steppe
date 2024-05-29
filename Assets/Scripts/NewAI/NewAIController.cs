@@ -1,3 +1,4 @@
+using ProjectSteppe.Entities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,6 +39,16 @@ namespace ProjectSteppe.AI
 
         private bool rotateTowardsTarget;
 
+        [System.NonSerialized]
+        public bool playerAttacking;
+
+        private bool committedToAttack;
+
+        public bool CommittedToAttack => committedToAttack;
+
+        private Entity aiEntity;
+        public Entity AIEntity => this.GetComponentIfNull(ref aiEntity);
+
         private void Awake()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
@@ -75,6 +86,10 @@ namespace ProjectSteppe.AI
         {
             if (!currentAiState) return;
             currentAiState.Execute();
+            if (playerAttacking)
+            {
+                playerAttacking = false;
+            }
         }
 
         private void Update()
@@ -126,6 +141,16 @@ namespace ProjectSteppe.AI
         public void DisableRotationTowardsTarget()
         {
             rotateTowardsTarget = false;
+        }
+
+        public void CommitToAttack()
+        {
+            committedToAttack = true;
+        }
+
+        public void UncommitToAttack()
+        {
+            committedToAttack = false;
         }
     }
 }

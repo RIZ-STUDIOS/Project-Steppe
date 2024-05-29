@@ -2,7 +2,6 @@ using ProjectSteppe.Entities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static PlasticPipe.Server.MonitorStats;
 
 namespace ProjectSteppe.AI.States
 {
@@ -33,6 +32,9 @@ namespace ProjectSteppe.AI.States
         [SerializeField]
         private NewAIAttackState pushBackDisengageAttackState;
 
+        [SerializeField]
+        private NewBlockAIAttack blockState;
+
         protected override void ChooseAttack()
         {
             if (currentAttack && currentAttack.attackFinished)
@@ -40,36 +42,53 @@ namespace ProjectSteppe.AI.States
                 currentAttack = null;
             }
 
+            // Block
+            if(!blocking && controller.playerAttacking && !controller.CommittedToAttack /* potentially add some random value to make boss easier */)
+            {
+                OnExit();
+
+                currentAttack = GetCopyState(blockState);
+                ExecuteAttack();
+            }
+
             if (!currentAttack)
             {
+                // 1 -> 2 -> 3
                 if (true)
                 {
                     currentAttack = GetCopyState(simpleAttackState);
                 }
+                // 1 -> Charge
                 else if (true)
                 {
                     currentAttack = GetCopyState(chargeAttackState);
                 }
+                // 2 -> Swipe
                 else if (true)
                 {
                     currentAttack = GetCopyState(swipeAttackState);
                 }
+                // Move back
                 else if (true)
                 {
                     currentAttack = GetCopyState(disengageState);
                 }
+                // Crazy Mode
                 else if (true)
                 {
                     currentAttack = GetCopyState(crazyModeAttackState);
                 }
+                // 1 -> 2 -> Crazy Mode
                 else if (true)
                 {
                     currentAttack = GetCopyState(crazyComboAttackState);
                 }
+                // Push player back and attack
                 else if (true)
                 {
                     currentAttack = GetCopyState(pushBackAttackState);
                 }
+                // Push player back and attack, and move back
                 else if (true)
                 {
                     currentAttack = GetCopyState(pushBackDisengageAttackState);
@@ -77,16 +96,7 @@ namespace ProjectSteppe.AI.States
 
                 if (currentAttack)
                 {
-                    if (!currentAttack.attackScriptableObject)
-                        currentAttack.attackScriptableObject = defaultAttackScriptableObject;
-                    currentAttack.attackHandler = this;
-                    currentAttack.controller = controller;
-                    if (controller.animator.GetBool("ForceExit"))
-                    {
-                        controller.animator.ResetTrigger("ForceExit");
-                    }
-                    controller.GetComponent<EntityAttacking>().currentAttack = currentAttack.attackScriptableObject;
-                    currentAttack.Execute();
+                    ExecuteAttack();
                 }
             }
         }
