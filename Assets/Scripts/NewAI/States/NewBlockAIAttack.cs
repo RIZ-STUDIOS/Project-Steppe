@@ -1,40 +1,45 @@
-﻿using System;
+using ProjectSteppe.Entities;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectSteppe.AI.States
 {
-    //[CreateAssetMenu(menuName = "AI/New States/Follow Up Attack")]
-    [Obsolete("Use Chain attack")]
-    public class NewAIFollowUpAttack : NewAIAttackState
+    [CreateAssetMenu(menuName = "AI/New States/Block State")]
+    public class NewBlockAIAttack : NewAIAttackState
     {
         [SerializeField]
-        private string animatorVariable;
+        private string triggerName;
 
         [SerializeField]
-        private float attackDuration;
+        private float animationLength;
 
         private Coroutine attackCoroutine;
 
+        public override bool CanUseAttack()
+        {
+            return true;
+        }
+
         public override void Execute()
         {
+            controller.AIEntity.EntityAttacking.DisableWeaponCollision();
+            controller.AIEntity.EntityBlock.StartBlock();
             controller.NavMeshAgent.isStopped = true;
             controller.animator.SetTrigger("ForceAnimation");
-            controller.animator.SetTrigger(animatorVariable);
+            controller.animator.SetTrigger(triggerName);
+            attackHandler.blocking = true;
             attackCoroutine = controller.StartCoroutine(AttackDurationCoroutine());
         }
 
         private IEnumerator AttackDurationCoroutine()
         {
-            yield return new WaitForSeconds(attackDuration);
+            yield return new WaitForSeconds(animationLength);
             attackFinished = true;
             controller.NavMeshAgent.nextPosition = controller.transform.position;
             controller.NavMeshAgent.isStopped = false;
-        }
-
-        public override bool CanUseAttack()
-        {
-            return true;
+            controller.AIEntity.EntityBlock.EndBlock();
+            attackHandler.blocking = false;
         }
 
         public override void OnForceExit()
@@ -45,6 +50,8 @@ namespace ProjectSteppe.AI.States
                 controller.StopCoroutine(attackCoroutine);
                 controller.NavMeshAgent.nextPosition = controller.transform.position;
                 controller.NavMeshAgent.isStopped = false;
+                controller.AIEntity.EntityBlock.EndBlock();
+                attackHandler.blocking = false;
             }
         }
     }

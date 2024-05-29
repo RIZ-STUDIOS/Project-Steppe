@@ -22,6 +22,9 @@ namespace ProjectSteppe.AI.States
 
         protected AttackScriptableObject defaultAttackScriptableObject;
 
+        [System.NonSerialized]
+        public bool blocking;
+
         public override void OnEnter()
         {
             defaultAttackScriptableObject = controller.GetComponent<EntityAttacking>().currentAttack;
@@ -62,17 +65,8 @@ namespace ProjectSteppe.AI.States
                     attack.controller = controller;
                     if (attack.CanUseAttack())
                     {
-                        if (!attack.attackScriptableObject)
-                            attack.attackScriptableObject = defaultAttackScriptableObject;
                         currentAttack = attack;
-                        controller.SetPathToTarget();
-                        controller.GetComponent<EntityAttacking>().currentAttack = attack.attackScriptableObject;
-                        if (controller.animator.GetBool("ForceExit"))
-                        {
-                            controller.animator.ResetTrigger("ForceExit");
-                        }
-                        attack.Execute();
-                        controller.NavMeshAgent.ResetPath();
+                        ExecuteAttack();
                         return;
                     }
                 }
@@ -85,11 +79,26 @@ namespace ProjectSteppe.AI.States
             {
                 currentAttack.OnForceExit();
             }
+            controller.AIEntity.EntityAttacking.currentAttack = defaultAttackScriptableObject;
         }
 
         protected AttackState GetCopyState<AttackState>(AttackState state) where AttackState : NewAIAttackState
         {
             return Instantiate(state);
+        }
+
+        protected void ExecuteAttack()
+        {
+            if (!currentAttack.attackScriptableObject)
+                currentAttack.attackScriptableObject = defaultAttackScriptableObject;
+            currentAttack.attackHandler = this;
+            currentAttack.controller = controller;
+            if (controller.animator.GetBool("ForceExit"))
+            {
+                controller.animator.ResetTrigger("ForceExit");
+            }
+            controller.AIEntity.EntityAttacking.currentAttack = currentAttack.attackScriptableObject;
+            currentAttack.Execute();
         }
     }
 }
