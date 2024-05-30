@@ -15,15 +15,30 @@ MonoBehaviour:
   idleState: {fileID: 11400000, guid: 7220ea0d7a5ea2f428ee87a86ef7be17, type: 2}
   chaseState: {fileID: 11400000, guid: 1f607c8c57307e14286236e6ac8c8455, type: 2}
   attackStates: []
-  simpleAttackState: {fileID: 0}
-  thurstAttackState: {fileID: 0}
-  aroundTheWorldAttackState: {fileID: 0}
-  heavyAttackState: {fileID: 0}
-  kickAttackState: {fileID: 0}
-  chargeAttackState: {fileID: 0}
-  simpleHeavyAttackState: {fileID: 0}
-  thurstHeavyAttackState: {fileID: 0}
-  thurstAroundTheWorldAttackState: {fileID: 0}
-  kickHeavyAttackState: {fileID: 0}
-  kickChargeAttackState: {fileID: 0}
-  blockState: {fileID: 0}
+  fullBasicAttackState: {fileID: 11400000, guid: f2b400bd27f0bfa48bf43fbdf98f247c,
+    type: 2}
+  thrustAttackState: {fileID: 11400000, guid: 75b1552133b126f48921862fb504c158, type: 2}
+  aroundTheWorldAttackState: {fileID: 11400000, guid: a76faafeb4309d1449218b40599a4c26,
+    type: 2}
+  heavyAttackState: {fileID: 11400000, guid: 6ce1f6377708b1d44997314978007892, type: 2}
+  kickAttackState: {fileID: 11400000, guid: b08acda2a3095254fa91f5af332cf183, type: 2}
+  chargeAttackState: {fileID: 11400000, guid: 6c65acfe08ca9f24898a74d85786ebdd, type: 2}
+  fullBasicHeavyAttackState: {fileID: 11400000, guid: 93cc9c3d4fc90e84ba56e8cd3b69fb15,
+    type: 2}
+  thrustHeavyAttackState: {fileID: 11400000, guid: 87bd32ad84a5bd345b8dbf95833c62e0,
+    type: 2}
+  thrustAroundTheWorldAttackState: {fileID: 11400000, guid: 5bb7aa13cfd9d374283bf7b85bbcded7,
+    type: 2}
+  kickHeavyAttackState: {fileID: 11400000, guid: aa519c33b1b795e438c44a1622ced201,
+    type: 2}
+  kickChargeAttackState: {fileID: 11400000, guid: 92bb36b9126550a40b9857edc2cc20e5,
+    type: 2}
+  chargeHeavyAttackState: {fileID: 11400000, guid: bce0cdb4bf72a3848aa51172fa2d5518,
+    type: 2}
+  buttPokeHeavyAttackState: {fileID: 11400000, guid: 60d0baa968c58a348b34d2ba376cce3a,
+    type: 2}
+  buttPokeAroundTheWorldAttackState: {fileID: 11400000, guid: ad480c7cb6403404fb9e28667ffd4fa6,
+    type: 2}
+  blockState: {fileID: 11400000, guid: 4433045d2b01ebe47a798ffa0c411b6b, type: 2}
+  balanceCheckPer: 0.65
+  healthCheckPer: 0.35

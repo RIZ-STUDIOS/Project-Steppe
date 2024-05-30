@@ -27,7 +27,7 @@ namespace ProjectSteppe.AI.States
                 return;
             }
 
-            if(Vector3.Distance(controller.transform.position, controller.targetTransform.position) <= controller.distanceToTargetToAttack)
+            if(Vector3.Distance(controller.transform.position, controller.targetTransform.transform.position) <= controller.distanceToTargetToAttack)
             {
                 controller.SwitchAIState(attackHandlerState);
                 return;

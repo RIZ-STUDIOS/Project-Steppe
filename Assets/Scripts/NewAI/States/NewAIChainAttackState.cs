@@ -31,7 +31,7 @@ namespace ProjectSteppe.AI.States
                 yield return new WaitForSeconds(animationData.animationLength);
                 if (animationData.canRotateAfter)
                 {
-                    controller.RotateTowards(controller.targetTransform);
+                    controller.RotateTowards(controller.targetTransform.transform);
                 }
             }
             controller.NavMeshAgent.nextPosition = controller.transform.position;
