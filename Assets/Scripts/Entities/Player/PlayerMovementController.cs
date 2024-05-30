@@ -269,7 +269,7 @@ namespace ProjectSteppe.Entities.Player
 
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
-            if ((_input.move != Vector2.zero || dashing) && playerManager.HasCapability(PlayerCapability.Rotate))
+            if (((_input.move != Vector2.zero || dashing || playerManager.PlayerTargetLock.lockOn) && playerManager.HasCapability(PlayerCapability.Rotate)))
             {
                 if (dashing)
                 {
@@ -292,11 +292,12 @@ namespace ProjectSteppe.Entities.Player
                         RotationSmoothTime);
 
                 // rotate to face input direction relative to camera position
-                if (dashing)
+                if (dashing || playerManager.PlayerTargetLock.lockOn)
                     transform.rotation = Quaternion.Euler(0.0f, targetRotation, 0.0f);
                 else
                     transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
-            }else if(!playerManager.HasCapability(PlayerCapability.Rotate) && dashing)
+            }
+            else if(!playerManager.HasCapability(PlayerCapability.Rotate) && dashing)
             {
                 if (playerManager.PlayerTargetLock.lockOn)
                 {
