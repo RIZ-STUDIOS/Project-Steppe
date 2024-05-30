@@ -26,9 +26,12 @@ namespace ProjectSteppe.AI
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player"))
+            var aiTarget = other.GetComponent<AITarget>();
+            if (aiTarget)
             {
-                controller.targetTransform = other.transform;
+                if (aiTarget.currentController == null)
+                    aiTarget.currentController = controller;
+                controller.targetTransform = aiTarget;
 
                 var playerUI = other.GetComponent<PlayerManager>().PlayerUI;
 
@@ -44,8 +47,11 @@ namespace ProjectSteppe.AI
         }
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Player") && other.GetComponent<PlayerManager>())
+            var aiTarget = other.GetComponent<AITarget>();
+            if (aiTarget)
             {
+                aiTarget.currentController = null;
+                controller.targetTransform = null;
                 Debug.Log("Left!");
             }
         }

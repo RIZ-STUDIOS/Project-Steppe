@@ -39,13 +39,16 @@ namespace ProjectSteppe.AI.States
                 return;
             }
 
-            controller.NavMeshAgent.ResetPath();
+            if (controller.NavMeshAgent.hasPath)
+                controller.NavMeshAgent.ResetPath();
 
-            if(Vector3.Distance(controller.transform.position, controller.targetTransform.position) >= controller.distanceToTargetToChase)
+            if(Vector3.Distance(controller.transform.position, controller.targetTransform.transform.position) >= controller.distanceToTargetToChase)
             {
                 controller.SwitchAIState(chaseState);   
                 return;
             }
+
+            if (controller.targetTransform.currentController != controller) return;
 
             ChooseAttack();
         }
