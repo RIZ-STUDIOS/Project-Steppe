@@ -38,7 +38,7 @@ namespace ProjectSteppe
 
         private Coroutine staggerCoroutine;
 
-        private MonoBehaviour controller;
+        private AIController controller;
 
         public UnityEvent OnFootstep;
         public UnityEvent OnMortalBlow;
@@ -51,9 +51,7 @@ namespace ProjectSteppe
             animator = GetComponent<Animator>();
             health = GetComponent<EntityHealth>();
             navMeshAgent = GetComponent<NavMeshAgent>();
-            controller = GetComponent<AIController>();
-            if(!controller)
-                controller = GetComponent<NewAIController>();
+                controller = GetComponent<AIController>();
         }
 
         private void Start()
