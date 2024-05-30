@@ -18,6 +18,10 @@ namespace ProjectSteppe.UI.Menus
 
         protected UIPlayerInput playerInput;
 
+        private bool justSwitched;
+
+        public bool JustSwitched => justSwitched;
+
         public static void SetMenu(MenuBase menu, bool forceShow = false)
         {
             var prevMenu = CurrentMenu;
@@ -40,6 +44,7 @@ namespace ProjectSteppe.UI.Menus
         {
             if (!CurrentMenu) return;
             CurrentMenu.SubscribeInputEvents();
+            CurrentMenu.justSwitched = true;
             CurrentMenu.ShowMenu();
         }
 
@@ -52,6 +57,12 @@ namespace ProjectSteppe.UI.Menus
         {
             eventSystem = EventSystem.current;
             playerInput = UIPlayerInput.Instance;
+        }
+
+        protected virtual void Update()
+        {
+            if (justSwitched)
+                justSwitched = false;
         }
 
         protected virtual void HideMenu()
