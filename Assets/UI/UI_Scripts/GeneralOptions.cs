@@ -1,3 +1,4 @@
+using ProjectSteppe.Managers;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -11,6 +12,14 @@ public class GeneralOptions : MonoBehaviour
     [SerializeField]
     private TMP_Text resText;
     private int resolutionIndex;
+    [SerializeField]
+    private TextMeshProUGUI vsyncText;
+
+    [SerializeField]
+    private TextMeshProUGUI grassDensityText;
+    private int grassDensityIndex;
+
+    private int vsyncCount;
 
     [Header("Audio Settings")]
     [SerializeField]
@@ -66,10 +75,16 @@ public class GeneralOptions : MonoBehaviour
         masterVolSlider.value = PlayerPrefs.GetFloat("MasterVol", 1);
         musicVolSlider.value = PlayerPrefs.GetFloat("MusicVol", 1);
         sfxVolSlider.value = PlayerPrefs.GetFloat("SFXVol", 1);
+        grassDensityIndex = PlayerPrefs.GetInt("grassDensity", (int)GrassDensity.High);
+        vsyncCount = PlayerPrefs.GetInt("vsyncCount", 1);
 
         SetMasterVolume();
         SetMusicVolume();
         SetSfxVolume();
+
+        UpdateGrassDensity();
+
+        UpdateVSync();
     }
     #region Resolution
     private void UpdateResolution()
@@ -80,7 +95,7 @@ public class GeneralOptions : MonoBehaviour
     }
     public void ResLeft()
     {
-        Debug.Log("S");
+        //Debug.Log("S");
         resolutionIndex--;
         if (resolutionIndex < 0)
         {
@@ -90,7 +105,7 @@ public class GeneralOptions : MonoBehaviour
     }
     public void ResRight()
     {
-        Debug.Log("S");
+        //Debug.Log("S");
         resolutionIndex++;
         if (resolutionIndex > resolutions.Count - 1)
         {
@@ -98,6 +113,61 @@ public class GeneralOptions : MonoBehaviour
         }
         UpdateResolution();
     }
+
+    public void GrassDensityLeft()
+    {
+        grassDensityIndex--;
+        if(grassDensityIndex < 0)
+        {
+            grassDensityIndex = 0;
+        }
+        UpdateGrassDensity();
+    }
+
+    public void GrassDensityRight()
+    {
+        grassDensityIndex++;
+        if(grassDensityIndex >= (int)GrassDensity.High)
+        {
+            grassDensityIndex = (int)GrassDensity.High;
+        }
+        UpdateGrassDensity();
+    }
+
+    private void UpdateGrassDensity()
+    {
+        grassDensityText.text = ((GrassDensity)grassDensityIndex).ToString();
+        PlayerPrefs.SetInt("grassDensity", grassDensityIndex);
+        if (GrassDensityManager.Instance)
+        {
+            GrassDensityManager.Instance.UpdateGrass();
+        }
+    }
+
+    public void VSyncLeft()
+    {
+        vsyncCount--;
+        if (vsyncCount < 0)
+            vsyncCount = 0;
+        QualitySettings.vSyncCount = vsyncCount;
+        UpdateVSync();
+    }
+
+    public void VSyncRight()
+    {
+        vsyncCount++;
+        if (vsyncCount > 1)
+            vsyncCount = 1;
+        QualitySettings.vSyncCount = vsyncCount;
+        UpdateVSync();
+    }
+
+    private void UpdateVSync()
+    {
+        PlayerPrefs.SetInt("vsyncCount", vsyncCount);
+        vsyncText.text = QualitySettings.vSyncCount == 0 ? "Off" : "On";
+    }
+
     [System.Serializable]
     public class ResItem
     {
