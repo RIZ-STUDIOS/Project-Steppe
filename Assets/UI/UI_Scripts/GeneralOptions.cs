@@ -1,3 +1,4 @@
+using ProjectSteppe.Managers;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -11,6 +12,10 @@ public class GeneralOptions : MonoBehaviour
     [SerializeField]
     private TMP_Text resText;
     private int resolutionIndex;
+
+    [SerializeField]
+    private TextMeshProUGUI grassDensityText;
+    private int grassDensityIndex;
 
     [Header("Audio Settings")]
     [SerializeField]
@@ -66,10 +71,13 @@ public class GeneralOptions : MonoBehaviour
         masterVolSlider.value = PlayerPrefs.GetFloat("MasterVol", 1);
         musicVolSlider.value = PlayerPrefs.GetFloat("MusicVol", 1);
         sfxVolSlider.value = PlayerPrefs.GetFloat("SFXVol", 1);
+        grassDensityIndex = PlayerPrefs.GetInt("grassDensity", (int)GrassDensity.High);
 
         SetMasterVolume();
         SetMusicVolume();
         SetSfxVolume();
+
+        UpdateGrassDensity();
     }
     #region Resolution
     private void UpdateResolution()
@@ -80,7 +88,7 @@ public class GeneralOptions : MonoBehaviour
     }
     public void ResLeft()
     {
-        Debug.Log("S");
+        //Debug.Log("S");
         resolutionIndex--;
         if (resolutionIndex < 0)
         {
@@ -90,7 +98,7 @@ public class GeneralOptions : MonoBehaviour
     }
     public void ResRight()
     {
-        Debug.Log("S");
+        //Debug.Log("S");
         resolutionIndex++;
         if (resolutionIndex > resolutions.Count - 1)
         {
@@ -98,6 +106,37 @@ public class GeneralOptions : MonoBehaviour
         }
         UpdateResolution();
     }
+
+    public void GrassDensityLeft()
+    {
+        grassDensityIndex--;
+        if(grassDensityIndex < 0)
+        {
+            grassDensityIndex = 0;
+        }
+        UpdateGrassDensity();
+    }
+
+    public void GrassDensityRight()
+    {
+        grassDensityIndex++;
+        if(grassDensityIndex >= (int)GrassDensity.High)
+        {
+            grassDensityIndex = (int)GrassDensity.High;
+        }
+        UpdateGrassDensity();
+    }
+
+    private void UpdateGrassDensity()
+    {
+        grassDensityText.text = ((GrassDensity)grassDensityIndex).ToString();
+        PlayerPrefs.SetInt("grassDensity", grassDensityIndex);
+        if (GrassDensityManager.Instance)
+        {
+            GrassDensityManager.Instance.UpdateGrass();
+        }
+    }
+
     [System.Serializable]
     public class ResItem
     {
