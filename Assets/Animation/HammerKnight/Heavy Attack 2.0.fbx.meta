@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: aef26c79a8210254f9b1e18502ed1be2
+guid: 0b04be8c505f39546b21b31d157c390f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -19,9 +19,16 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
       copied configuration does not match position in animation file:\n\t'L_pink1'
-      : position error = 1.098048 mm\n"
+      : position error = 1.098146 mm\n"
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'Heavy Attack 2.0' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'L_leg' has translation animation that will
+      be discarded.\n\t'L_knee' has translation animation that will be discarded.\n\t'L_anke'
+      has translation animation that will be discarded.\n\t'R_knee' has translation
+      animation that will be discarded.\n\t'R_anke' has translation animation that
+      will be discarded.\n\t'chest' has translation animation that will be discarded.\n\t'neck'
+      has translation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -35,11 +42,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: 2 Lights Attacks
-      takeName: 2 Lights Attacks
-      internalID: 5484916770142948553
+      name: Heavy Attack 2.0
+      takeName: Heavy Attack 2.0
+      internalID: -7639168568907214759
       firstFrame: 0
-      lastFrame: 62
+      lastFrame: 147
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
