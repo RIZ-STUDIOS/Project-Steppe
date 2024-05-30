@@ -1,21 +1,21 @@
 using RicTools.EditorAttributes;
 using RicTools.ScriptableObjects;
+using UnityEngine;
+
 
 namespace ProjectSteppe
 {
-    [DefaultScriptableObjectName(nameof(nameOfAttackSO))]
-    public class AIAttackActionScriptableObject : GenericScriptableObject
+    [CreateAssetMenu(fileName = "AIAttackSO", menuName = "1543493/AIAttackSO")]
+    public class AIAttackActionScriptableObject : ScriptableObject
     {
-        [EditorVariable] public string nameOfAttackSO;
+        public string attackAnimName;
 
-        [EditorVariable] public string attackAnimation;
+        public AIAttackActionScriptableObject comboAction;
+        public bool canThisAnimationCombo = false;
 
-        [EditorVariable] public AIAttackActionScriptableObject comboAction;
-        [EditorVariable] public bool canThisAnimationCombo = false;
-
-        [EditorVariable] public float weight = 50f;
-        [EditorVariable] public float attackRecovery = 1.5f;
-        [EditorVariable] public float minDistanceToTarget = 0f;
-        [EditorVariable] public float maxDistanceToTarget = 5f;
+        public float weight = 50f;
+        public float attackRecovery = 1.5f;
+        public float minDistanceToTarget = 0f;
+        public float maxDistanceToTarget = 5f;
     }
 }

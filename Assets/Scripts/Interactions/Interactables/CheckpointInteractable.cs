@@ -34,6 +34,16 @@ namespace ProjectSteppe.Interactions.Interactables
 
         public Transform spawnPoint;
 
+        public float flickerMinIntensity;
+        public float flickerMaxIntensity;
+        public float flickerSpeed;
+        private Light firelight;
+
+        private void Awake()
+        {
+            firelight = GetComponentInChildren<Light>();
+        }
+
         public void DiscoveredQuery()
         {
             if (StartDiscovered)
@@ -98,13 +108,36 @@ namespace ProjectSteppe.Interactions.Interactables
                 particle.Play();
             }
 
-            var light = GetComponentInChildren<Light>();
-
-            light.colorTemperature = 3000;
-            light.intensity = 1;
+            firelight.colorTemperature = 3000;
+            firelight.intensity = 6;
 
             initialBlastSound.Play();
             checkpointLoop.Play();
+
+            StartCoroutine(FlickerFlame());
+        }
+
+        private IEnumerator FlickerFlame()
+        {
+            while (true)
+            {
+                float previousIntensity = firelight.intensity;
+                float newIntensity = Random.Range(flickerMinIntensity, flickerMaxIntensity);
+                float timer = 0;
+                while (true)
+                {
+                    if (Mathf.Abs((firelight.intensity - newIntensity)) < 0.05)
+                    {
+                        firelight.intensity = newIntensity;
+                        break;
+                    }
+
+                    timer += Time.deltaTime * flickerSpeed;
+                    firelight.intensity = Mathf.Lerp(previousIntensity, newIntensity, timer);
+
+                    yield return null;
+                }
+            }
         }
     }
 }

@@ -19,12 +19,14 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
       copied configuration does not match position in animation file:\n\t'L_pink1'
-      : position error = 1.098089 mm\n"
+      : position error = 1.098146 mm\n"
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Heavy Attack' has import animation warnings
       that might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'R_knee' has translation animation that
-      will be discarded.\n\t'R_anke' has translation animation that will be discarded.\n"
+      to improve retargeting quality.\n\t'L_leg' has translation animation that will
+      be discarded.\n\t'R_knee' has translation animation that will be discarded.\n\t'R_anke'
+      has translation animation that will be discarded.\n\t'neck' has translation
+      animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -42,7 +44,7 @@ ModelImporter:
       takeName: Heavy Attack
       internalID: 3971412263066827745
       firstFrame: 0
-      lastFrame: 101
+      lastFrame: 99
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -51,7 +53,7 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 0
+      loopBlendOrientation: 1
       loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1

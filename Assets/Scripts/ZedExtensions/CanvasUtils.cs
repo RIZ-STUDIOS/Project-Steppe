@@ -29,7 +29,7 @@ namespace ProjectSteppe.ZedExtensions
         {
             ToggleCanvasGroupInteraction(canvasGroup, false, isInteractable, canBlockRaycasts);
 
-            IEnumerator lerpOut = LerpCanvasAlphaOverTime(canvasGroup, 0);
+            IEnumerator lerpOut = LerpCanvasAlphaOverTime(canvasGroup, 0, fadeSpeedMod);
             yield return lerpOut;
         }
 
