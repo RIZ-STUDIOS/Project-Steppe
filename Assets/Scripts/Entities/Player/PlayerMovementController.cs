@@ -339,6 +339,11 @@ namespace ProjectSteppe.Entities.Player
                 velX = _input.move.x;
                 velY = _input.move.y;
 
+                if(velX < 0)
+                {
+                    velY *= -1;
+                }
+
                 if (dashing)
                 {
                     var d = moveDirection.normalized;
