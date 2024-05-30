@@ -1,3 +1,4 @@
+using ProjectSteppe.Entities.Player;
 using ProjectSteppe.Saving;
 using RicTools.Managers;
 using TMPro;
@@ -34,6 +35,8 @@ namespace ProjectSteppe.Managers
         protected override bool DontDestroyManagerOnLoad => true;
 
         public AvailableInventoryItemsScriptableObject availableItems;
+
+        public PlayerManager playerManager;
 
         protected override void Awake()
         {

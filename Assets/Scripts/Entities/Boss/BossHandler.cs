@@ -1,6 +1,7 @@
 using ProjectSteppe.AI;
 using ProjectSteppe.Entities;
 using ProjectSteppe.Entities.Player;
+using ProjectSteppe.Managers;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -31,7 +32,7 @@ namespace ProjectSteppe
 
         private bool staggered;
 
-        public PlayerManager playerManager;
+        private PlayerManager playerManager;
 
         private NavMeshAgent navMeshAgent;
 
@@ -53,6 +54,11 @@ namespace ProjectSteppe
             controller = GetComponent<AIController>();
             if(!controller)
                 controller = GetComponent<NewAIController>();
+        }
+
+        private void Start()
+        {
+            playerManager = GameManager.Instance.playerManager;
         }
 
         public void OnMortalSteppe()
