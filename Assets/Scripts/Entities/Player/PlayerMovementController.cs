@@ -285,6 +285,7 @@ namespace ProjectSteppe.Entities.Player
                     {
                         targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
                     }
+                    if(_input.move != Vector2.zero)
                     this.moveDirection = inputDirection;
                 }
 
@@ -307,6 +308,8 @@ namespace ProjectSteppe.Entities.Player
                     }
                     else
                         targetRotation = playerCamera.transform.eulerAngles.y;
+
+                    transform.rotation = Quaternion.Euler(0.0f, targetRotation, 0.0f);
                 }
             }
 
