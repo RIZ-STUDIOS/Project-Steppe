@@ -20,7 +20,8 @@ namespace ProjectSteppe.AI.States
 
         protected NewAIAttackState currentAttack;
 
-        protected AttackScriptableObject defaultAttackScriptableObject;
+        [System.NonSerialized]
+        public AttackScriptableObject defaultAttackScriptableObject;
 
         [System.NonSerialized]
         public bool blocking;
