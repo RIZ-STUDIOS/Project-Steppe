@@ -1,3 +1,4 @@
+using ProjectSteppe.Managers;
 using ProjectSteppe.UI;
 using StarterAssets;
 using UnityEngine;
@@ -36,6 +37,11 @@ namespace ProjectSteppe.Entities.Player
         public bool bossDead;
 
         private CharacterController characterController;
+
+        private void Awake()
+        {
+            GameManager.Instance.playerManager = this;
+        }
 
         public void BossDead()
         {

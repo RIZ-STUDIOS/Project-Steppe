@@ -38,6 +38,8 @@ public class Pause : MonoBehaviour
     [SerializeField]
     private PauseMenu pauseMenu;
 
+    private bool justPausedSwitched;
+
     private void Awake()
     {
         player = GetComponent<PlayerManager>();
@@ -80,21 +82,31 @@ public class Pause : MonoBehaviour
     {
         if (inputValue.Get<float>() == 0) return;
 
-        if (paused)
+        if (justPausedSwitched) return;
+
+        if (paused && MenuBase.CurrentMenu == pauseMenu && !MenuBase.CurrentMenu.JustSwitched)
         {
-            Time.timeScale = 1;
-            MenuBase.SetMenu(null);
-            StartCoroutine(ReEnableControls());
+            UnpauseGameFromMenu();
         }
-        else
+        else if(!paused)
         {
+            pauseMenu.pause = this;
             Time.timeScale = 0;
             input.ResetInputs();
             input.respondToData = false;
             MenuBase.SetMenu(pauseMenu, true);
+            paused = true;
+            justPausedSwitched = true;
         }
+    }
 
-        paused = !paused;
+    public void UnpauseGameFromMenu()
+    {
+        Time.timeScale = 1;
+        MenuBase.SetMenu(null);
+        StartCoroutine(ReEnableControls());
+        paused = false;
+        justPausedSwitched = true;
     }
 
     /*private void OnPause()
@@ -142,6 +154,12 @@ public class Pause : MonoBehaviour
             }
         }
     }*/
+
+    private void Update()
+    {
+        if (justPausedSwitched)
+            justPausedSwitched = false;
+    }
 
     private IEnumerator ReEnableControls()
     {

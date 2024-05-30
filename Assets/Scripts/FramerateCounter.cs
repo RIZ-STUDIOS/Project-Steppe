@@ -21,12 +21,12 @@ namespace ProjectSteppe
         {
             if (currenTick < refreshTime)
             {
-                currenTick += Time.deltaTime;
+                currenTick += Time.unscaledDeltaTime;
             }
             else
             {
                 currenTick = 0;
-                tmp.text = ((int)(1 / Time.smoothDeltaTime)).ToString();
+                tmp.text = ((int)(1 / Time.unscaledDeltaTime)).ToString();
             }
         }
     }

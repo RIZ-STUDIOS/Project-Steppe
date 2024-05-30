@@ -269,26 +269,23 @@ namespace ProjectSteppe.Entities.Player
 
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
-            if ((_input.move != Vector2.zero || dashing) && playerManager.HasCapability(PlayerCapability.Rotate))
+            if (((_input.move != Vector2.zero || dashing || playerManager.PlayerTargetLock.lockOn) && playerManager.HasCapability(PlayerCapability.Rotate)))
             {
-                if (playerManager.PlayerTargetLock.lockOn)
+                if (dashing)
                 {
-                    if (dashing)
+                    targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
+                }
+                else
+                {
+                    if (playerManager.PlayerTargetLock.lockOn)
                     {
-                        targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
+                        targetRotation = playerCamera.transform.eulerAngles.y;
                     }
                     else
-                        targetRotation = playerCamera.transform.eulerAngles.y;
-                }
-                if (!dashing)
-                {
-                    if (!playerManager.PlayerTargetLock.lockOn)
                     {
                         targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
                     }
-                    else
-                    {
-                    }
+                    if(_input.move != Vector2.zero)
                     this.moveDirection = inputDirection;
                 }
 
@@ -296,11 +293,12 @@ namespace ProjectSteppe.Entities.Player
                         RotationSmoothTime);
 
                 // rotate to face input direction relative to camera position
-                if (playerManager.PlayerTargetLock.lockOn && dashing)
+                if (dashing || playerManager.PlayerTargetLock.lockOn)
                     transform.rotation = Quaternion.Euler(0.0f, targetRotation, 0.0f);
                 else
                     transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
-            }else if(!playerManager.HasCapability(PlayerCapability.Rotate) && dashing)
+            }
+            else if(!playerManager.HasCapability(PlayerCapability.Rotate) && dashing)
             {
                 if (playerManager.PlayerTargetLock.lockOn)
                 {
@@ -310,6 +308,8 @@ namespace ProjectSteppe.Entities.Player
                     }
                     else
                         targetRotation = playerCamera.transform.eulerAngles.y;
+
+                    transform.rotation = Quaternion.Euler(0.0f, targetRotation, 0.0f);
                 }
             }
 
@@ -360,6 +360,7 @@ namespace ProjectSteppe.Entities.Player
         private void CameraRotation()
         {
             if (!virtualCamera.enabled) return;
+            if (playerManager.PlayerTargetLock.lockOn) return;
             // if there is an input and camera position is not fixed
             if (_input.look.sqrMagnitude >= _threshold)
             {

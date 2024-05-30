@@ -44,6 +44,10 @@ namespace ProjectSteppe.Entities
         public float Health { get { return health; } private set { health = value; onHealthChange.Invoke(health, maxHealth); } }
         public float Balance { get { return balance; } private set { balance = value; if (balance < 0) balance = 0; if (balance > maxBalance) balance = maxBalance; onBalanceChange.Invoke(balance, maxBalance); } }
 
+        public float HealthPer => health / maxHealth;
+
+        public float BalancePer => balance / maxBalance;
+
         [Header("Unity Events")]
         public UnityEvent<float, float> onHealthChange;
         [FormerlySerializedAs("onPostureChange")]

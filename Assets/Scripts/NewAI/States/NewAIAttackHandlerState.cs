@@ -20,7 +20,8 @@ namespace ProjectSteppe.AI.States
 
         protected NewAIAttackState currentAttack;
 
-        protected AttackScriptableObject defaultAttackScriptableObject;
+        [System.NonSerialized]
+        public AttackScriptableObject defaultAttackScriptableObject;
 
         [System.NonSerialized]
         public bool blocking;
@@ -38,13 +39,16 @@ namespace ProjectSteppe.AI.States
                 return;
             }
 
-            controller.NavMeshAgent.ResetPath();
+            if (controller.NavMeshAgent.hasPath)
+                controller.NavMeshAgent.ResetPath();
 
-            if(Vector3.Distance(controller.transform.position, controller.targetTransform.position) >= controller.distanceToTargetToChase)
+            if(Vector3.Distance(controller.transform.position, controller.targetTransform.transform.position) >= controller.distanceToTargetToChase)
             {
                 controller.SwitchAIState(chaseState);   
                 return;
             }
+
+            if (controller.targetTransform.currentController != controller) return;
 
             ChooseAttack();
         }
@@ -84,6 +88,7 @@ namespace ProjectSteppe.AI.States
 
         protected AttackState GetCopyState<AttackState>(AttackState state) where AttackState : NewAIAttackState
         {
+            if(!state) return null;
             return Instantiate(state);
         }
 

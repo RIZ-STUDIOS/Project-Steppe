@@ -1,3 +1,4 @@
+using ProjectSteppe.Entities.Player;
 using ProjectSteppe.Saving;
 using RicTools.Managers;
 using TMPro;
@@ -22,6 +23,11 @@ namespace ProjectSteppe.Managers
         [SerializeField]
         private TMP_SpriteAsset kbm;
 
+#if UNITY_EDITOR
+        [SerializeField]
+        private InputType debugInput;
+#endif
+
         TextMeshProUGUI[] sceneTMPs;
 
         public int defaultGameSceneIndex = SceneConstants.LEVEL_1_INDEX;
@@ -29,6 +35,8 @@ namespace ProjectSteppe.Managers
         protected override bool DontDestroyManagerOnLoad => true;
 
         public AvailableInventoryItemsScriptableObject availableItems;
+
+        public PlayerManager playerManager;
 
         protected override void Awake()
         {
@@ -61,6 +69,14 @@ namespace ProjectSteppe.Managers
         {
             if (device == null) return;
 
+#if UNITY_EDITOR
+            if (debugInput != InputType.None)
+            {
+                UpdateDebugInput();
+                return;
+            }
+#endif
+
             if (userChange == InputUserChange.DevicePaired || userChange == InputUserChange.Added)
             {
                 TMP_SpriteAsset spriteAsset;
@@ -84,7 +100,8 @@ namespace ProjectSteppe.Managers
 
                 foreach (var tmp in sceneTMPs)
                 {
-                    tmp.spriteAsset = spriteAsset;
+                    if (tmp)
+                        tmp.spriteAsset = spriteAsset;
                 }
             }
         }
@@ -94,5 +111,50 @@ namespace ProjectSteppe.Managers
             GetTMPUGUIs(default, 0);
             OnDeviceChange(default, 0, InputSystem.devices[0]);
         }
+
+#if UNITY_EDITOR
+        private void UpdateDebugInput()
+        {
+            TMP_SpriteAsset spriteAsset;
+            if (sceneTMPs == null) return;
+            if (debugInput == InputType.None)
+            {
+                return;
+            }
+            switch (debugInput)
+            {
+                default:
+                case InputType.Kb:
+                    spriteAsset = kbm;
+                    break;
+                case InputType.Xbox:
+                    spriteAsset = xbox;
+                    break;
+                case InputType.PS:
+                    spriteAsset = ps5;
+                    break;
+            }
+            foreach (var tmp in sceneTMPs)
+            {
+                if (tmp)
+                    tmp.spriteAsset = spriteAsset;
+            }
+        }
+
+        private void OnValidate()
+        {
+            UpdateDebugInput();
+        }
+#endif
+
+#if UNITY_EDITOR
+        private enum InputType
+        {
+            None,
+            Kb,
+            PS,
+            Xbox
+        }
+#endif
     }
 }

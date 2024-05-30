@@ -26,6 +26,9 @@ namespace ProjectSteppe.UI.Menus
 
         private GameObject lastSelectedGameObject;
 
+        [System.NonSerialized]
+        public Pause pause;
+
         protected override void ShowMenu()
         {
             base.ShowMenu();
@@ -59,6 +62,11 @@ namespace ProjectSteppe.UI.Menus
         public void ShowSettings()
         {
             SetMenu(settingsMenu);
+        }
+
+        protected override void OnCancelPerformed(InputAction.CallbackContext callbackContext)
+        {
+            pause.UnpauseGameFromMenu();
         }
     }
 }
