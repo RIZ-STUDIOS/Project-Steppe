@@ -85,6 +85,7 @@ namespace ProjectSteppe.AI.States
 
         protected AttackState GetCopyState<AttackState>(AttackState state) where AttackState : NewAIAttackState
         {
+            if(!state) return null;
             return Instantiate(state);
         }
 

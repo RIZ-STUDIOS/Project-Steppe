@@ -8,10 +8,10 @@ namespace ProjectSteppe.AI.States
     public class BossAIAttackHandlerState : NewAIAttackHandlerState
     {
         [SerializeField]
-        private NewAIAttackState simpleAttackState;
+        private NewAIAttackState fullBasicAttackState;
 
         [SerializeField]
-        private NewAIAttackState thurstAttackState;
+        private NewAIAttackState thrustAttackState;
 
         [SerializeField]
         private NewAIAttackState aroundTheWorldAttackState;
@@ -26,13 +26,13 @@ namespace ProjectSteppe.AI.States
         private NewAIAttackState chargeAttackState;
 
         [SerializeField]
-        private NewAIAttackState simpleHeavyAttackState;
+        private NewAIAttackState fullBasicHeavyAttackState;
 
         [SerializeField]
-        private NewAIAttackState thurstHeavyAttackState;
+        private NewAIAttackState thrustHeavyAttackState;
 
         [SerializeField]
-        private NewAIAttackState thurstAroundTheWorldAttackState;
+        private NewAIAttackState thrustAroundTheWorldAttackState;
 
         [SerializeField]
         private NewAIAttackState kickHeavyAttackState;
@@ -41,7 +41,32 @@ namespace ProjectSteppe.AI.States
         private NewAIAttackState kickChargeAttackState;
 
         [SerializeField]
+        private NewAIAttackState chargeHeavyAttackState;
+
+        [SerializeField]
+        private NewAIAttackState buttPokeHeavyAttackState;
+
+        [SerializeField]
+        private NewAIAttackState buttPokeAroundTheWorldAttackState;
+
+        [SerializeField]
         private NewBlockAIAttack blockState;
+
+        [SerializeField]
+        [Range(0, 1)]
+        private float balanceCheckPer;
+
+        [SerializeField]
+        [Range(0, 1)]
+        private float healthCheckPer;
+
+        private BossHandler bossHandler;
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            bossHandler = controller.GetComponent<BossHandler>();
+        }
 
         protected override void ChooseAttack()
         {
@@ -61,19 +86,124 @@ namespace ProjectSteppe.AI.States
 
             if (!currentAttack)
             {
-                if (true)
-                {
-                    currentAttack = GetCopyState(simpleAttackState);
-                }else if (true)
-                {
-                    currentAttack = GetCopyState(thurstAttackState);
-                }
+                currentAttack = GetCopyState(BalanceCheck());
 
                 if (currentAttack)
                 {
                     ExecuteAttack();
                 }
             }
+        }
+
+        private NewAIAttackState BalanceCheck()
+        {
+            if(controller.AIEntity.EntityHealth.BalancePer >= balanceCheckPer)
+            {
+                return HealthCheck();
+            }
+            return OffensiveCheck();
+        }
+
+        private NewAIAttackState HealthCheck()
+        {
+            if(controller.AIEntity.EntityHealth.HealthPer <= healthCheckPer)
+            {
+                return DefensiveCheck();
+            }
+            return OffensiveCheck();
+        }
+
+        private NewAIAttackState DefensiveCheck()
+        {
+            var rollDice = Random.value;
+            if (bossHandler.currentPhase == 0)
+            {
+                if(rollDice <= .6f)
+                {
+                    return kickAttackState;
+                }else if(rollDice < .9f)
+                {
+                    return thrustAttackState;
+                }
+                return StandardAttack();
+            }
+            if(rollDice <= .4f)
+            {
+                return aroundTheWorldAttackState;
+            }else if(rollDice < .6f)
+            {
+                return kickHeavyAttackState;
+            }
+            return StandardAdvancedAttack();
+        }
+
+        private NewAIAttackState StandardAttack()
+        {
+            var rollDice = Random.value;
+            if(rollDice <= .6f)
+            {
+                rollDice = Random.value;
+                if (rollDice <= .5f)
+                    return fullBasicAttackState;
+                else if (rollDice < .8f)
+                    return thrustAttackState;
+                return heavyAttackState;
+            }
+            rollDice = Random.value;
+            if (rollDice <= .25f)
+                return fullBasicHeavyAttackState;
+            else if (rollDice <= .5f)
+                return thrustHeavyAttackState;
+            else if (rollDice <= .75f)
+                return kickHeavyAttackState;
+            return chargeHeavyAttackState;
+        }
+
+        private NewAIAttackState StandardAdvancedAttack()
+        {
+            var rollDice = Random.value;
+            if(rollDice <= .4f)
+            {
+                return AdvancedAttack();
+            }
+            return StandardAttack();
+        }
+
+        private NewAIAttackState AdvancedAttack()
+        {
+            var rollDice = Random.value;
+
+            if(rollDice <= .2f)
+            {
+                return aroundTheWorldAttackState;
+            }else if(rollDice <= .4f)
+            {
+                return thrustAroundTheWorldAttackState;
+            }else if(rollDice <= .6f)
+            {
+                return buttPokeAroundTheWorldAttackState;
+            }else if(rollDice <= .8f)
+            {
+                return kickChargeAttackState;
+            }
+            return buttPokeHeavyAttackState;
+        }
+
+        private NewAIAttackState OffensiveCheck()
+        {
+            var distance = Vector3.Distance(controller.transform.position, controller.targetTransform.position);
+            if(distance > controller.distanceToTargetToAttack && distance < controller.distanceToTargetToChase)
+            {
+                var rollDice = Random.value;
+                if (rollDice <= 0.5f)
+                    return chargeAttackState;
+                return chargeHeavyAttackState;
+            }
+            if(bossHandler.currentPhase == 0)
+            {
+                return StandardAttack();
+            }
+            return StandardAdvancedAttack();
         }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ProjectSteppe.AI.States
 {
+    [CreateAssetMenu(menuName = "AI/New States/Combo Attack")]
     public class NewComboAIAttackState : NewAIAttackState
     {
         [SerializeField]
