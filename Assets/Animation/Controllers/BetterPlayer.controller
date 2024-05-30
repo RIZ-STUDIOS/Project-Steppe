@@ -951,6 +951,7 @@ AnimatorStateMachine:
   m_StateMachineBehaviours:
   - {fileID: -178108258520279486}
   - {fileID: -2833395959999234044}
+  - {fileID: 2737805550720631927}
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
@@ -2070,6 +2071,20 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &2737805550720631927
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46f9c11c30175644793a804b851e1f07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  capability: 2
+  onStateEnter: 0
 --- !u!1101 &2739647120379716187
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
