@@ -50,7 +50,8 @@ namespace ProjectSteppe.AI
             var aiTarget = other.GetComponent<AITarget>();
             if (aiTarget)
             {
-                aiTarget.currentController = null;
+                if (aiTarget.currentController == controller)
+                    aiTarget.currentController = null;
                 controller.targetTransform = null;
                 Debug.Log("Left!");
             }
