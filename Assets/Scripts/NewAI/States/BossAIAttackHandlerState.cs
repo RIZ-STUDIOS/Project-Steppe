@@ -1,4 +1,3 @@
-using ProjectSteppe.Entities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,25 +11,34 @@ namespace ProjectSteppe.AI.States
         private NewAIAttackState simpleAttackState;
 
         [SerializeField]
+        private NewAIAttackState thurstAttackState;
+
+        [SerializeField]
+        private NewAIAttackState aroundTheWorldAttackState;
+
+        [SerializeField]
+        private NewAIAttackState heavyAttackState;
+
+        [SerializeField]
+        private NewAIAttackState kickAttackState;
+
+        [SerializeField]
         private NewAIAttackState chargeAttackState;
 
         [SerializeField]
-        private NewAIAttackState swipeAttackState;
+        private NewAIAttackState simpleHeavyAttackState;
 
         [SerializeField]
-        private NewAIAttackState disengageState;
+        private NewAIAttackState thurstHeavyAttackState;
 
         [SerializeField]
-        private NewAIAttackState crazyModeAttackState;
+        private NewAIAttackState thurstAroundTheWorldAttackState;
 
         [SerializeField]
-        private NewAIAttackState crazyComboAttackState;
+        private NewAIAttackState kickHeavyAttackState;
 
         [SerializeField]
-        private NewAIAttackState pushBackAttackState;
-
-        [SerializeField]
-        private NewAIAttackState pushBackDisengageAttackState;
+        private NewAIAttackState kickChargeAttackState;
 
         [SerializeField]
         private NewBlockAIAttack blockState;
@@ -43,7 +51,7 @@ namespace ProjectSteppe.AI.States
             }
 
             // Block
-            if(!blocking && controller.playerAttacking && !controller.CommittedToAttack /* potentially add some random value to make boss easier */)
+            if (!blocking && controller.playerAttacking && !controller.CommittedToAttack /* potentially add some random value to make boss easier */)
             {
                 OnExit();
 
@@ -53,45 +61,12 @@ namespace ProjectSteppe.AI.States
 
             if (!currentAttack)
             {
-                // 1 -> 2 -> 3
                 if (true)
                 {
                     currentAttack = GetCopyState(simpleAttackState);
-                }
-                // 1 -> Charge
-                else if (true)
+                }else if (true)
                 {
-                    currentAttack = GetCopyState(chargeAttackState);
-                }
-                // 2 -> Swipe
-                else if (true)
-                {
-                    currentAttack = GetCopyState(swipeAttackState);
-                }
-                // Move back
-                else if (true)
-                {
-                    currentAttack = GetCopyState(disengageState);
-                }
-                // Crazy Mode
-                else if (true)
-                {
-                    currentAttack = GetCopyState(crazyModeAttackState);
-                }
-                // 1 -> 2 -> Crazy Mode
-                else if (true)
-                {
-                    currentAttack = GetCopyState(crazyComboAttackState);
-                }
-                // Push player back and attack
-                else if (true)
-                {
-                    currentAttack = GetCopyState(pushBackAttackState);
-                }
-                // Push player back and attack, and move back
-                else if (true)
-                {
-                    currentAttack = GetCopyState(pushBackDisengageAttackState);
+                    currentAttack = GetCopyState(thurstAttackState);
                 }
 
                 if (currentAttack)
