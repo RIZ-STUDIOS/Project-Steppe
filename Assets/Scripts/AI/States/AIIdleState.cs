@@ -14,7 +14,7 @@ namespace ProjectSteppe.AI.States
         {
             if(controller.NavMeshAgent.hasPath) controller.NavMeshAgent.ResetPath();
 
-            if (controller.targetEntity)
+            if (controller.targetEntity && controller.targetEntity.EntityHealth.Health > 0)
             {
                 controller.SwitchAIState(chaseState);
             }
