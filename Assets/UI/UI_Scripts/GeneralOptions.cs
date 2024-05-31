@@ -149,7 +149,6 @@ public class GeneralOptions : MonoBehaviour
         vsyncCount--;
         if (vsyncCount < 0)
             vsyncCount = 0;
-        QualitySettings.vSyncCount = vsyncCount;
         UpdateVSync();
     }
 
@@ -158,14 +157,14 @@ public class GeneralOptions : MonoBehaviour
         vsyncCount++;
         if (vsyncCount > 1)
             vsyncCount = 1;
-        QualitySettings.vSyncCount = vsyncCount;
         UpdateVSync();
     }
 
     private void UpdateVSync()
     {
+        QualitySettings.vSyncCount = vsyncCount;
+        vsyncText.text = vsyncCount == 0 ? "Off" : "On";
         PlayerPrefs.SetInt("vsyncCount", vsyncCount);
-        vsyncText.text = QualitySettings.vSyncCount == 0 ? "Off" : "On";
     }
 
     [System.Serializable]
