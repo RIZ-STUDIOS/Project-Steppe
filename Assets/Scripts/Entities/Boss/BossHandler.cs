@@ -45,6 +45,12 @@ namespace ProjectSteppe
         public float volumeReduceMod = 1;
         public AudioSource bossMusic;
 
+        [SerializeField]
+        private Weapon footWeapon;
+
+        [SerializeField]
+        private Weapon normalWeapon;
+
         private void Awake()
         {
             animator = GetComponent<Animator>();
@@ -196,6 +202,16 @@ namespace ProjectSteppe
         {
             controller.enabled = true;
             health.SetInvicible(false);
+        }
+
+        public void SwitchToFootWeapon()
+        {
+            GetComponent<Entity>().EntityAttacking.SetWeapon(footWeapon);
+        }
+
+        public void SwitchToNormalWeapon()
+        {
+            GetComponent<Entity>().EntityAttacking.SetWeapon(normalWeapon);
         }
     }
 }
