@@ -9,8 +9,9 @@ namespace ProjectSteppe.Managers
     {
         private Terrain terrain;
 
-        private void Start()
+        protected override void Awake()
         {
+            base.Awake();
             terrain = GetComponent<Terrain>();
             UpdateGrass();
         }
