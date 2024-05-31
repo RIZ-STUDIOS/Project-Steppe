@@ -67,6 +67,11 @@ namespace ProjectSteppe.AI
 
         protected virtual void OnEntityDeath()
         {
+            RemoveController();
+        }
+
+        public void RemoveController()
+        {
             GameManager.Instance.playerManager.GetComponent<AITarget>().nearbyControllers.Remove(controller);
             GameManager.Instance.playerManager.GetComponent<AITarget>().UpdateControllersList();
         }
