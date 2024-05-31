@@ -29,6 +29,7 @@ namespace ProjectSteppe
             ragdollTransform.rotation = current.rotation;
             for (int i = 0; i < current.childCount; i++)
             {
+                if (i >= ragdollTransform.childCount) continue;
                 CopyTransform(current.GetChild(i), ragdollTransform.GetChild(i));
             }
         }
