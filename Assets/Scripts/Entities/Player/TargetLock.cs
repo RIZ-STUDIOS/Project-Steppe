@@ -69,10 +69,7 @@ namespace ProjectSteppe.Entities.Player
 
             if (_input.targetLock && !justLocked && canLock)
             {
-                if (lockOn)
-                    StopLockOn();
-                else
-                    StartLockOn();
+                AttemptLockOn();
                 justLocked = true;
             }
 
@@ -87,7 +84,33 @@ namespace ProjectSteppe.Entities.Player
             }
         }
 
-        private void StartLockOn()
+        private void AttemptLockOn()
+        {
+            if (lockOn)
+            {
+                var targetLockTarget = StartLockOn();
+                if (targetLockTarget && targetLockTarget.lookAtTransform != lookAtTransform)
+                {
+                    SetLockTarget(targetLockTarget.lookAtTransform);
+                    SetLockOn(true);
+                }
+                else
+                {
+                    StopLockOn();
+                }
+            }
+            else
+            {
+                var targetLockTarget = StartLockOn();
+                if (targetLockTarget)
+                {
+                    SetLockTarget(targetLockTarget.lookAtTransform);
+                    SetLockOn(true);
+                }
+            }
+        }
+
+        private TargetLockTarget StartLockOn()
         {
             var hits = ConeCastExtension.ConeCastAll(playerMovement.playerCamera.transform.position, maxConeRadius, playerMovement.playerCamera.transform.forward, lockOnDistance, coneAngle, targetLockLayer);
             int index = -1;
@@ -95,22 +118,22 @@ namespace ProjectSteppe.Entities.Player
             for (int i = 0; i < hits.Length; i++)
             {
                 var hit = hits[i];
-                if (!hit.collider.GetComponentInParent<TargetLockTarget>()) return;
+                var temp = hit.collider.GetComponentInParent<TargetLockTarget>();
+                if (!temp) return null;
                 Vector3 hitPoint = hit.point;
                 Vector3 directionToHit = hitPoint - transform.position;
                 float angleToHit = Vector3.Angle(playerMovement.playerCamera.transform.forward, directionToHit);
 
-                if (angleToHit < angle)
+                if (angleToHit < angle && (temp && temp.lookAtTransform != lookAtTransform))
                 {
                     index = i;
                     angle = angleToHit;
                 }
             }
-            if (index == -1) return;
+            if (index == -1) return null;
             var lookHit = hits[index];
             var targetLockTarget = lookHit.collider.GetComponentInParent<TargetLockTarget>();
-            SetLockTarget(targetLockTarget.lookAtTransform);
-            SetLockOn(true);
+            return targetLockTarget;
         }
 
         private void StopLockOn()

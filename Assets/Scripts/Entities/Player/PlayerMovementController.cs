@@ -365,7 +365,18 @@ namespace ProjectSteppe.Entities.Player
         private void CameraRotation()
         {
             if (!virtualCamera.enabled) return;
-            if (playerManager.PlayerTargetLock.lockOn) return;
+            if (playerManager.PlayerTargetLock.lockOn)
+            {
+                var rot = Quaternion.LookRotation(playerManager.PlayerTargetLock.lookAtTransform.position - playerCamera.transform.position).eulerAngles;
+
+                _cinemachineTargetPitch = rot.x;
+                _cinemachineTargetYaw = rot.y;
+
+                virtualCamera.Follow.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + 0,
+                    _cinemachineTargetYaw, 0.0f);
+
+                return;
+            }
             // if there is an input and camera position is not fixed
             if (_input.look.sqrMagnitude >= _threshold)
             {
@@ -387,8 +398,8 @@ namespace ProjectSteppe.Entities.Player
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
         {
-            if (lfAngle < -360f) lfAngle += 360f;
-            if (lfAngle > 360f) lfAngle -= 360f;
+            while (lfAngle < -360f) lfAngle += 360f;
+            while (lfAngle > 360f) lfAngle -= 360f;
             return Mathf.Clamp(lfAngle, lfMin, lfMax);
         }
     }
