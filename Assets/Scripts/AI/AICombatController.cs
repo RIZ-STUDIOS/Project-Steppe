@@ -29,7 +29,7 @@ namespace ProjectSteppe.AI
             {
                 if (aiTarget.currentController == null)
                     aiTarget.currentController = controller;
-                controller.targetTransform = aiTarget;
+                controller.targetEntity = aiTarget.GetComponentInParent<Entity>();
 
                 OnPlayerEnter();
             }
@@ -43,7 +43,7 @@ namespace ProjectSteppe.AI
 
                 if (aiTarget.currentController == controller)
                     aiTarget.currentController = null;
-                controller.targetTransform = null;
+                controller.targetEntity = aiTarget.GetComponentInParent<Entity>();
 
                 Debug.Log("Left!");
             }

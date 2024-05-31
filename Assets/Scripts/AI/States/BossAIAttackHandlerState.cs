@@ -191,7 +191,7 @@ namespace ProjectSteppe.AI.States
 
         private AIAttackState OffensiveCheck()
         {
-            var distance = Vector3.Distance(controller.transform.position, controller.targetTransform.transform.position);
+            var distance = Vector3.Distance(controller.transform.position, controller.targetEntity.transform.position);
             if(distance > controller.distanceToTargetToAttack && distance < controller.distanceToTargetToChase)
             {
                 var rollDice = Random.value;

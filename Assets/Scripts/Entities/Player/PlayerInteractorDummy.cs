@@ -13,6 +13,8 @@ namespace ProjectSteppe.Entities.Player
 
         private void OnInteract()
         {
+            if (Time.timeScale == 0) return;
+            if (GetComponent<EntityHealth>().Health <= 0) return;
             interactor.OnInteract();
         }
     }

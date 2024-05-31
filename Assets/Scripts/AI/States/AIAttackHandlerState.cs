@@ -41,7 +41,7 @@ namespace ProjectSteppe.AI.States
 
         public override void Execute()
         {
-            if (!controller.targetTransform)
+            if (!controller.targetEntity || controller.targetEntity.EntityHealth.Health <= 0)
             {
                 controller.SwitchAIState(idleState);
                 return;
@@ -50,13 +50,13 @@ namespace ProjectSteppe.AI.States
             if (controller.NavMeshAgent.hasPath)
                 controller.NavMeshAgent.ResetPath();
 
-            if(Vector3.Distance(controller.transform.position, controller.targetTransform.transform.position) >= controller.distanceToTargetToChase && !controller.CommittedToAttack)
+            if(Vector3.Distance(controller.transform.position, controller.targetEntity.transform.position) >= controller.distanceToTargetToChase && !controller.CommittedToAttack)
             {
                 controller.SwitchAIState(chaseState);   
                 return;
             }
 
-            if (controller.targetTransform.currentController != controller) return;
+            //if (controller.targetTransform.currentController != controller) return;
 
             ChooseAttack();
         }

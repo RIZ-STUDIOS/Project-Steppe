@@ -23,7 +23,7 @@ namespace ProjectSteppe.AI
         private AIState currentAiState;
 
         [System.NonSerialized]
-        public AITarget targetTransform;
+        public Entity targetEntity;
 
         public float distanceToTargetToAttack;
         public float distanceToTargetToChase;
@@ -94,9 +94,9 @@ namespace ProjectSteppe.AI
 
         private void Update()
         {
-            if (rotateTowardsTarget && targetTransform)
+            if (rotateTowardsTarget && targetEntity)
             {
-                RotateTowards(targetTransform.transform);
+                RotateTowards(targetEntity.transform);
             }
         }
 
@@ -114,8 +114,8 @@ namespace ProjectSteppe.AI
 
         public void SetPathToTarget()
         {
-            if (!targetTransform) return;
-            SetPathTo(targetTransform.transform);
+            if (!targetEntity) return;
+            SetPathTo(targetEntity.transform);
         }
 
         public void RotateTowards(Transform transform)
