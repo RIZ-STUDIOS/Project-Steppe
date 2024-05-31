@@ -147,7 +147,11 @@ namespace ProjectSteppe.Entities
             this.invicible = value;
         }
 
-
+        [ContextMenu("Invicible")]
+        private void BecomeGod()
+        {
+            SetInvicible(true);
+        }
 
         public void MakeVulnerable()
         {

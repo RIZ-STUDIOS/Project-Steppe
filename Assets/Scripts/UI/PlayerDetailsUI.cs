@@ -24,7 +24,7 @@ namespace ProjectSteppe.UI
             StartCoroutine(balanceUI.FadeIn());
         }
 
-        public void HideBalancee()
+        public void HideBalance()
         {
             StartCoroutine(balanceUI.FadeOut());
         }

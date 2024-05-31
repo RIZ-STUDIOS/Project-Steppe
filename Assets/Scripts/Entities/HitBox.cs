@@ -22,7 +22,7 @@ namespace ProjectSteppe
         public bool IsValidHit(Entity other)
         {
             if (!parentEntity) return false;
-            return other != parentEntity;
+            return other != parentEntity && other.isPlayer != parentEntity.isPlayer;
         }
     }
 }

@@ -5,13 +5,21 @@ namespace ProjectSteppe.Items
     public abstract class UsableItem : MonoBehaviour
     {
         public string title;
-        public int charges;
+        private int _charges;
+
+        public int Charges { get { return _charges; } set
+            {
+                _charges = value;
+                onChargesChange?.Invoke();
+            }
+        }
 
         public System.Action onUse;
+        public System.Action onChargesChange;
 
         public bool CanUseQuery()
         {
-            if (charges > 0 || charges == -1) return true;
+            if (Charges > 0 || Charges == -1) return true;
 
             return false;
         }
@@ -20,16 +28,21 @@ namespace ProjectSteppe.Items
         {
             if (!CanUseQuery()) return;
 
-            if (charges != -1)
+            if (Charges != -1)
             {
-                charges--;
-                if (charges < 0) charges = 0;
+                Charges--;
+                if (Charges < 0) Charges = 0;
             }
 
             onUse?.Invoke();
         }
 
         public virtual void OnAnimationEnd()
+        {
+
+        }
+
+        public virtual void Recharge()
         {
 
         }

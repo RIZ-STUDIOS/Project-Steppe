@@ -26,5 +26,10 @@ namespace ProjectSteppe.AI
         {
 
         }
+
+        protected override void OnEntityDeath()
+        {
+
+        }
     }
 }

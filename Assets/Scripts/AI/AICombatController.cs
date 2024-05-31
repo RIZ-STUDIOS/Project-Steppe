@@ -19,16 +19,20 @@ namespace ProjectSteppe.AI
         {
             controller = GetComponentInParent<AIController>();
             GetComponentInParent<Entity>().EntityHealth.onHit.AddListener(PlayerHitAssessment);
+            GetComponentInParent<Entity>().EntityHealth.onKill.AddListener(OnEntityDeath);
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (controller.GetComponentInParent<EntityHealth>().Health <= 0) return;
+            if (controller.GetComponentInParent<EntityHealth>().Health <= 0)
+            {
+                return;
+            }
             var aiTarget = other.GetComponent<AITarget>();
             if (aiTarget)
             {
-                if (aiTarget.currentController == null)
-                    aiTarget.currentController = controller;
+                if (!aiTarget.nearbyControllers.Contains(controller))
+                    aiTarget.nearbyControllers.Add(controller);
                 controller.targetEntity = aiTarget.GetComponentInParent<Entity>();
 
                 OnPlayerEnter();
@@ -39,10 +43,10 @@ namespace ProjectSteppe.AI
             var aiTarget = other.GetComponent<AITarget>();
             if (aiTarget)
             {
-                OnPlayerExit(aiTarget);
 
-                if (aiTarget.currentController == controller)
-                    aiTarget.currentController = null;
+                if (aiTarget.nearbyControllers.Contains(controller))
+                    aiTarget.nearbyControllers.Remove(controller);
+                OnPlayerExit(aiTarget);
                 controller.targetEntity = aiTarget.GetComponentInParent<Entity>();
 
                 Debug.Log("Left!");
@@ -57,9 +61,14 @@ namespace ProjectSteppe.AI
 
         protected virtual void OnPlayerExit(AITarget aiTarget)
         {
-            if(aiTarget.currentController == controller)
-            GameManager.Instance.playerManager.PlayerUI.playerDetails.HidePlayerDetails();
+            aiTarget.UpdateControllersList();
             controller.AIEntity.EntityDetails.HideDetails();
+        }
+
+        protected virtual void OnEntityDeath()
+        {
+            GameManager.Instance.playerManager.GetComponent<AITarget>().nearbyControllers.Remove(controller);
+            GameManager.Instance.playerManager.GetComponent<AITarget>().UpdateControllersList();
         }
 
         private void PlayerHitAssessment()

@@ -1,3 +1,4 @@
+using ProjectSteppe.AI;
 using UnityEngine;
 
 namespace ProjectSteppe.Entities.Player
@@ -15,6 +16,7 @@ namespace ProjectSteppe.Entities.Player
         {
             if (Time.timeScale == 0) return;
             if (GetComponent<EntityHealth>().Health <= 0) return;
+            if (GetComponent<AITarget>().nearbyControllers.Count > 0) return;
             interactor.OnInteract();
         }
     }

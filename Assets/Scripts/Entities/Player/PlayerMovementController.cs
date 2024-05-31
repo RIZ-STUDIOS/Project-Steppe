@@ -113,6 +113,7 @@ namespace ProjectSteppe.Entities.Player
             //animator = GetComponent<Animator>();
             virtualCamera = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
             playerManager = GetComponent<PlayerManager>();
+            playerManager.onCapabilityChange.AddListener(OnPlayerCapability);
 
             _cinemachineTargetYaw = transform.eulerAngles.y;
         }
@@ -327,6 +328,7 @@ namespace ProjectSteppe.Entities.Player
 
             //if (jumping) targetDirection.y = Mathf.Sqrt(5 * 2 * -9.8f);
 
+            if(characterController.enabled)
             characterController.Move((targetDirection.normalized * (speed * Time.deltaTime)) + new Vector3(0, verticalVelocity, 0) * Time.deltaTime);
 
 

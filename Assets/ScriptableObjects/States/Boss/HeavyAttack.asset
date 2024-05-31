@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cad76706306e4fe4ab76a51f3edc7215, type: 3}
   m_Name: HeavyAttack
   m_EditorClassIdentifier: 
-  attackScriptableObject: {fileID: 0}
+  changeRotationSpeed: 0
+  rotationSpeed: 0
+  attackScriptableObject: {fileID: 11400000, guid: d1a3cd0a431af9548a0b2200164a5b48,
+    type: 2}
   triggerName: HeavyAttack
   attackDuration: 4.9

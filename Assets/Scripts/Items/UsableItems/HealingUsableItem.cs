@@ -1,4 +1,5 @@
 using ProjectSteppe.Entities;
+using ProjectSteppe.Saving;
 using System.Collections;
 using UnityEngine;
 
@@ -19,6 +20,16 @@ namespace ProjectSteppe.Items.UsableItems
         {
             animator = GetComponentInParent<Animator>();
             entityHealth = GetComponentInParent<EntityHealth>();
+        }
+
+        private void Start()
+        {
+            Recharge();
+        }
+
+        public override void Recharge()
+        {
+            Charges = 5 + (1 * (SaveHandler.CurrentSave.pouchesCollected));
         }
 
         public override void OnUse()
