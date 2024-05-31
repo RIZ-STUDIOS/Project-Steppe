@@ -152,5 +152,16 @@ namespace ProjectSteppe.AI
         {
             committedToAttack = false;
         }
+
+        // Animation
+        public void EnableNavMesh()
+        {
+            navMeshAgent.isStopped = false;
+        }
+
+        public void DisableNavMesh()
+        {
+            navMeshAgent.isStopped = true;
+        }
     }
 }
