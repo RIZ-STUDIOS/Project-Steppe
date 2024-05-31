@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cad76706306e4fe4ab76a51f3edc7215, type: 3}
   m_Name: ThrustAttack
   m_EditorClassIdentifier: 
-  attackScriptableObject: {fileID: 0}
+  changeRotationSpeed: 0
+  rotationSpeed: 0
+  attackScriptableObject: {fileID: 11400000, guid: 4caceea22cdf7c64698f980e1acaa1c4,
+    type: 2}
   triggerName: ThrustAttack
   attackDuration: 2.067

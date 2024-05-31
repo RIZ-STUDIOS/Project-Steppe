@@ -12,11 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3cbfde7de9ffa04eb45738fa6c05fd1, type: 3}
   m_Name: KickChargeAttack
   m_EditorClassIdentifier: 
+  changeRotationSpeed: 0
+  rotationSpeed: 0
   attackScriptableObject: {fileID: 0}
   animationDatas:
   - triggerName: KickChargeAttack
     animationLength: 1.167
+    changeRotationSpeed: 0
+    rotationSpeed: 0
+    attackScriptableObject: {fileID: 11400000, guid: ba8502098ed7d134c87875bcc271020b,
+      type: 2}
     canRotateAfter: 0
   - triggerName: 
     animationLength: 3.667
+    changeRotationSpeed: 0
+    rotationSpeed: 0
+    attackScriptableObject: {fileID: 11400000, guid: a343c3fc32f8aac41bf7bbe130d75604,
+      type: 2}
     canRotateAfter: 0

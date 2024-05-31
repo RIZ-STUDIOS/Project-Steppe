@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cad76706306e4fe4ab76a51f3edc7215, type: 3}
   m_Name: KickAttack
   m_EditorClassIdentifier: 
-  attackScriptableObject: {fileID: 0}
+  changeRotationSpeed: 0
+  rotationSpeed: 0
+  attackScriptableObject: {fileID: 11400000, guid: ba8502098ed7d134c87875bcc271020b,
+    type: 2}
   triggerName: KickAttack
   attackDuration: 1.167

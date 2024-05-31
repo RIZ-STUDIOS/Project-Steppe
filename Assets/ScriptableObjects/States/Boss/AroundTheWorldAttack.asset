@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cad76706306e4fe4ab76a51f3edc7215, type: 3}
   m_Name: AroundTheWorldAttack
   m_EditorClassIdentifier: 
-  attackScriptableObject: {fileID: 0}
+  changeRotationSpeed: 0
+  rotationSpeed: 0
+  attackScriptableObject: {fileID: 11400000, guid: d766f09d27bffea40b71ec21f444900e,
+    type: 2}
   triggerName: AroundTheWorldAttack
   attackDuration: 5.733
