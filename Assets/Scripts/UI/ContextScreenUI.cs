@@ -61,7 +61,7 @@ namespace ProjectSteppe.UI
         {
             yield return new WaitForSeconds(waitTime);
 
-            contextTMP.text = "<color=red>YOU DIED</color>";
+            contextTMP.text = "<color=#E53654>DEFEATED</color>";
 
             StartCoroutine(canvasGroup.FadeIn());
 
@@ -78,7 +78,7 @@ namespace ProjectSteppe.UI
 
         public IEnumerator PlayRespiteFound(float waitTime = 2)
         {
-            contextTMP.text = "<color=#FF8100>RESPITE KINDLED</color>";
+            contextTMP.text = "<color=#FFFFFF>RESPITE KINDLED</color>";
 
             StartCoroutine(canvasGroup.FadeIn());
 
