@@ -173,7 +173,8 @@ namespace ProjectSteppe
                 health.ForceStagger();
                 return;
             }
-            phaseNodeImages[currentPhase].color = Color.grey;
+            //phaseNodeImages[currentPhase].color = Color.grey;
+            StartCoroutine(FadeNode(phaseNodeImages[currentPhase]));
             currentPhase++;
             health.healthBarIndex = currentPhase;
             if (currentPhase >= phaseNodeImages.Length)
@@ -212,6 +213,42 @@ namespace ProjectSteppe
         public void SwitchToNormalWeapon()
         {
             GetComponent<Entity>().EntityAttacking.SetWeapon(normalWeapon);
+        }
+
+        private IEnumerator FadeNode(Image node)
+        {
+            var nodeLs = node.rectTransform.localScale;
+            while (node.rectTransform.localScale.x < 1.2f)
+            {
+                Debug.Log(node.rectTransform.localScale);
+                nodeLs.x += Time.deltaTime * .5f;
+                nodeLs.y += Time.deltaTime * .5f;
+                node.rectTransform.localScale = nodeLs;
+                yield return null;
+            }
+
+            var grayCol = new Vector3(Color.gray.r, Color.gray.g, Color.gray.b);
+            float timer = 0;
+            while (node.rectTransform.localScale.x > 0)
+            {
+                timer += Time.deltaTime * .5f;
+
+                nodeLs = node.rectTransform.localScale;
+                nodeLs.x -= Time.deltaTime * .5f;
+                nodeLs.y -= Time.deltaTime * .5f;
+
+                node.rectTransform.localScale = nodeLs;
+
+                var col = new Vector3(node.color.r, node.color.g, node.color.b);
+
+                var newCol = Vector3.Lerp(col, grayCol, Time.deltaTime);
+
+                node.color = new Color(newCol.x, newCol.y, newCol.z);
+
+                yield return null;
+            }
+
+            node.color = Color.gray;
         }
     }
 }
