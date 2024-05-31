@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ce2cd4c6b2535547984dd6b24840d75, type: 3}
+  m_Name: SpearmanAttackHandlerState
+  m_EditorClassIdentifier: 
+  idleState: {fileID: 11400000, guid: dd210833d0573c34cab756057f6c4803, type: 2}
+  chaseState: {fileID: 11400000, guid: 569c0beb23262914097e720460a58790, type: 2}
+  attackStates:
+  - attackState: {fileID: 11400000, guid: 9120f38a50c8e9d4abe1770537ead6d9, type: 2}
+    percentage: 0.4
+  - attackState: {fileID: 11400000, guid: e2c375567f62d394cbfcba9dce1e5e89, type: 2}
+    percentage: 0.6

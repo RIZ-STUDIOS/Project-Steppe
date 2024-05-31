@@ -9,6 +9,14 @@ namespace ProjectSteppe.AI.States
     [CreateAssetMenu(menuName = "AI/States/Attack Handler")]
     public class AIAttackHandlerState : AIState
     {
+        [System.Serializable]
+        private struct AttackData
+        {
+            public AIAttackState attackState;
+            [Range(0,1)]
+            public float percentage;
+        }
+
         [SerializeField]
         private AIState idleState;
 
@@ -16,7 +24,7 @@ namespace ProjectSteppe.AI.States
         private AIState chaseState;
 
         [SerializeField]
-        private AIAttackState[] attackStates;
+        private AttackData[] attackStates;
 
         protected AIAttackState currentAttack;
 
@@ -62,12 +70,13 @@ namespace ProjectSteppe.AI.States
 
             if (!currentAttack)
             {
+                var diceRole = Random.value;
                 for (int i = 0; i < attackStates.Length; i++)
                 {
-                    var attack = Instantiate(attackStates[i]);
+                    var attack = Instantiate(attackStates[i].attackState);
                     attack.attackHandler = this;
                     attack.controller = controller;
-                    if (attack.CanUseAttack())
+                    if (attackStates[i].percentage <= diceRole)
                     {
                         currentAttack = attack;
                         ExecuteAttack();

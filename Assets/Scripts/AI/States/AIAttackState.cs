@@ -20,7 +20,10 @@ namespace ProjectSteppe.AI.States
 
         public abstract void Execute();
 
-        public abstract bool CanUseAttack();
+        public virtual bool CanUseAttack()
+        {
+            return true;
+        }
 
         public void FinishAttack()
         {
