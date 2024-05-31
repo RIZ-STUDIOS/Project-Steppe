@@ -12,11 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3cbfde7de9ffa04eb45738fa6c05fd1, type: 3}
   m_Name: ThrustAroundTheWorldAttack
   m_EditorClassIdentifier: 
+  changeRotationSpeed: 0
+  rotationSpeed: 0
   attackScriptableObject: {fileID: 0}
   animationDatas:
   - triggerName: ThrustAroundTheWorldAttack
     animationLength: 2.067
+    changeRotationSpeed: 0
+    rotationSpeed: 0
+    attackScriptableObject: {fileID: 11400000, guid: 4caceea22cdf7c64698f980e1acaa1c4,
+      type: 2}
     canRotateAfter: 0
   - triggerName: 
     animationLength: 5.733
+    changeRotationSpeed: 0
+    rotationSpeed: 0
+    attackScriptableObject: {fileID: 11400000, guid: d766f09d27bffea40b71ec21f444900e,
+      type: 2}
     canRotateAfter: 0
