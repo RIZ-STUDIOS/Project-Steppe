@@ -14593,9 +14593,9 @@ MonoBehaviour:
   targetLockLayer:
     serializedVersion: 2
     m_Bits: 512
-  maxConeRadius: 5
-  lockOnDistance: 50
-  lockOffDistance: 60
+  maxConeRadius: 12
+  lockOnDistance: 20
+  lockOffDistance: 30
   coneAngle: 90
   onLockStateChange:
     m_PersistentCalls:
