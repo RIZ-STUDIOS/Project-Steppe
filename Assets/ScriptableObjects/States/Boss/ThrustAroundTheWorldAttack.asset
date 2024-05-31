@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f1216bd078f40242a69817204667a49, type: 3}
+  m_Script: {fileID: 11500000, guid: c3cbfde7de9ffa04eb45738fa6c05fd1, type: 3}
   m_Name: ThrustAroundTheWorldAttack
   m_EditorClassIdentifier: 
   attackScriptableObject: {fileID: 0}
-  attacks:
-  - attack: {fileID: 11400000, guid: 75b1552133b126f48921862fb504c158, type: 2}
-    useCutOffTime: 0
-    cutOffTime: 0
-  - attack: {fileID: 11400000, guid: a76faafeb4309d1449218b40599a4c26, type: 2}
-    useCutOffTime: 0
-    cutOffTime: 0
+  animationDatas:
+  - triggerName: ThrustAroundTheWorldAttack
+    animationLength: 2.067
+    canRotateAfter: 0
+  - triggerName: 
+    animationLength: 5.733
+    canRotateAfter: 0

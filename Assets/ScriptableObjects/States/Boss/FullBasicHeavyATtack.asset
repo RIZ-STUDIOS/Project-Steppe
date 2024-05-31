@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f1216bd078f40242a69817204667a49, type: 3}
+  m_Script: {fileID: 11500000, guid: c3cbfde7de9ffa04eb45738fa6c05fd1, type: 3}
   m_Name: FullBasicHeavyAttack
   m_EditorClassIdentifier: 
   attackScriptableObject: {fileID: 0}
-  attacks:
-  - attack: {fileID: 11400000, guid: f2b400bd27f0bfa48bf43fbdf98f247c, type: 2}
-    useCutOffTime: 0
-    cutOffTime: 0
-  - attack: {fileID: 11400000, guid: 6ce1f6377708b1d44997314978007892, type: 2}
-    useCutOffTime: 0
-    cutOffTime: 0
+  animationDatas:
+  - triggerName: FullBasicHeavyAttack
+    animationLength: 4.333
+    canRotateAfter: 0
+  - triggerName: 
+    animationLength: 4.9
+    canRotateAfter: 0
