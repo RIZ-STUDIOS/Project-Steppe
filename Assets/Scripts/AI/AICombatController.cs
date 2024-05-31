@@ -23,6 +23,7 @@ namespace ProjectSteppe.AI
 
         private void OnTriggerEnter(Collider other)
         {
+            if (controller.GetComponentInParent<EntityHealth>().Health <= 0) return;
             var aiTarget = other.GetComponent<AITarget>();
             if (aiTarget)
             {

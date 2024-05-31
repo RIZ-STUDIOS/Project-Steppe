@@ -618,6 +618,7 @@ GameObject:
   - component: {fileID: 4301651762160615346}
   - component: {fileID: 5246136870837233934}
   - component: {fileID: 3992538624408395188}
+  - component: {fileID: 4090993855165387999}
   m_Layer: 11
   m_Name: Spearman
   m_TagString: Untagged
@@ -754,7 +755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   balance: 0
-  maxHealth: 50
+  maxHealth: 5
   maxBalance: 100
   timeBeforeBalanceRegeneration: 1.5
   balanceRegenerationRate: 0.2
@@ -767,7 +768,19 @@ MonoBehaviour:
       m_Calls: []
   onKill:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4090993855165387999}
+        m_TargetAssemblyTypeName: ProjectSteppe.RagdollReplacer, ProjectSteppe
+        m_MethodName: Replace
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onPostureFull:
     m_PersistentCalls:
       m_Calls: []
@@ -844,6 +857,21 @@ MonoBehaviour:
   distanceToTargetToAttack: 4
   distanceToTargetToChase: 8
   RotationSmoothTime: 0.12
+--- !u!114 &4090993855165387999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9197232685386256049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e49fc05dbb30e04a99322382c9fa88f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ragdollPrefab: {fileID: 1927695956069552053, guid: b8a7182aced32e345b66c25289e63bbe,
+    type: 3}
+  hipsTransform: {fileID: 88130701409236187}
 --- !u!1001 &3311001552838886810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1174,6 +1202,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 7829458010497852995}
   m_SourcePrefab: {fileID: 100100000, guid: b1121c3b93feb164abdd28aacc0daa18, type: 3}
+--- !u!4 &88130701409236187 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -5995962115801271999, guid: b1121c3b93feb164abdd28aacc0daa18,
+    type: 3}
+  m_PrefabInstance: {fileID: 3311001552838886810}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &167305181384257151 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3432140336875908069, guid: b1121c3b93feb164abdd28aacc0daa18,
