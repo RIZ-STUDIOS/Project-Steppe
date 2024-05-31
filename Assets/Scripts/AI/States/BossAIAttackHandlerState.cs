@@ -76,13 +76,13 @@ namespace ProjectSteppe.AI.States
             }
 
             // Block
-            if (!blocking && controller.playerAttacking && !controller.CommittedToAttack /* potentially add some random value to make boss easier */)
-            {
+            /*if (!blocking && controller.playerAttacking && !controller.CommittedToAttack /* potentially add some random value to make boss easier *///)
+            /*{
                 OnExit();
 
                 currentAttack = GetCopyState(blockState);
                 ExecuteAttack();
-            }
+            }*/
 
             if (!currentAttack)
             {
