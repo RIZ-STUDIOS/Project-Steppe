@@ -104,13 +104,13 @@ namespace ProjectSteppe.Entities.Player
 
         private void EnableCombo()
         {
-            //Debug.Log("Combo enabled");
+            Debug.Log("Combo enabled");
             canCombo = true;
         }
 
         private void DisableCombo()
         {
-            //Debug.Log("Combo disabled");
+            Debug.Log("Combo disabled");
             canCombo = false;
             animator.SetBool(animIDAttacking, false);
         }
