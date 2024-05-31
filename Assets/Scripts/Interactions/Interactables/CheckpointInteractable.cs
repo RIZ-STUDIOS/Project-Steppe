@@ -1,4 +1,5 @@
 using ProjectSteppe.Entities.Player;
+using ProjectSteppe.Managers;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -94,7 +95,7 @@ namespace ProjectSteppe.Interactions.Interactables
 
         private void CheckpointInteract()
         {
-            if (player.bossDead) SceneManager.LoadScene(SceneConstants.LEVEL_1_INDEX);
+            if (player.bossDead) GameManager.Instance.RespawnCharacter();
             player.PlayerUsableItemSlot.currentUsable.Recharge();
             player.PlayerEntity.EntityHealth.ResetHealth();
             player.PlayerUI.messagePrompt.ShowMessage("...");
