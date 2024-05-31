@@ -13,7 +13,14 @@ namespace ProjectSteppe.AI
         public void UpdateControllersList()
         {
             if (nearbyControllers.Count == 0)
+            {
                 GetComponent<PlayerManager>().PlayerUI.playerDetails.HideBalance();
+                GetComponent<PlayerManager>().PlayerInteractor.ShowPrompt();
+            }
+            else
+            {
+                GetComponent<PlayerManager>().PlayerInteractor.HidePrompt();
+            }
         }
     }
 }

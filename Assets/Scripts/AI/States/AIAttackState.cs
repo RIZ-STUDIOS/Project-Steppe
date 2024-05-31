@@ -16,6 +16,10 @@ namespace ProjectSteppe.AI.States
         [System.NonSerialized]
         public bool attackFinished;
 
+        public bool changeRotationSpeed;
+        [Range(0, 1)]
+        public float rotationSpeed;
+
         public AttackScriptableObject attackScriptableObject;
 
         public abstract void Execute();

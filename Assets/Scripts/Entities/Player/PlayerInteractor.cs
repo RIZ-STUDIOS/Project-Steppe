@@ -1,3 +1,4 @@
+using ProjectSteppe.AI;
 using ProjectSteppe.Interactions;
 using System.Collections;
 using UnityEngine;
@@ -27,6 +28,8 @@ namespace ProjectSteppe.Entities.Player
                 }
             }
         }
+
+        private Interactable tempInteractable;
 
         public System.Action<string> onCurrentInteractableChange;
         public System.Action<float> onInteractionEnded;
@@ -64,6 +67,11 @@ namespace ProjectSteppe.Entities.Player
 
                 if (interactable.OneTime && interactable.Interacted) return;
 
+                if (GetComponentInParent<AITarget>().nearbyControllers.Count > 0)
+                {
+                    tempInteractable = interactable;
+                }
+                else
                 if (interactable != CurrentInteractable) CurrentInteractable = interactable;
             }
         }
@@ -72,11 +80,29 @@ namespace ProjectSteppe.Entities.Player
         {
             if (other.CompareTag("Interactable"))
             {
+                if (GetComponentInParent<AITarget>().nearbyControllers.Count > 0)
+                {
+                    if (other.GetComponent<Interactable>() == tempInteractable)
+                    {
+                        tempInteractable = null;
+                    }
+                }
                 if (other.GetComponent<Interactable>() == CurrentInteractable)
                 {
                     CurrentInteractable = null;
                 }
             }
+        }
+
+        public void HidePrompt()
+        {
+            tempInteractable = CurrentInteractable;
+            CurrentInteractable = null;
+        }
+
+        public void ShowPrompt()
+        {
+            CurrentInteractable = tempInteractable;
         }
 
         public void LookForInteractable(float seconds)

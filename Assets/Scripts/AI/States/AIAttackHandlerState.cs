@@ -34,9 +34,12 @@ namespace ProjectSteppe.AI.States
         [System.NonSerialized]
         public bool blocking;
 
+        private float rotationSpeed;
+
         public override void OnEnter()
         {
             defaultAttackScriptableObject = controller.GetComponent<EntityAttacking>().currentAttack;
+            rotationSpeed = controller.RotationSmoothTime;
         }
 
         public override void Execute()
@@ -93,6 +96,7 @@ namespace ProjectSteppe.AI.States
                 currentAttack.OnForceExit();
             }
             controller.AIEntity.EntityAttacking.currentAttack = defaultAttackScriptableObject;
+            controller.RotationSmoothTime = rotationSpeed;
         }
 
         protected AttackState GetCopyState<AttackState>(AttackState state) where AttackState : AIAttackState
@@ -112,6 +116,8 @@ namespace ProjectSteppe.AI.States
                 controller.animator.ResetTrigger("ForceExit");
             }
             controller.AIEntity.EntityAttacking.currentAttack = currentAttack.attackScriptableObject;
+            if (currentAttack.changeRotationSpeed)
+                controller.RotationSmoothTime = currentAttack.rotationSpeed;
             currentAttack.Execute();
         }
     }

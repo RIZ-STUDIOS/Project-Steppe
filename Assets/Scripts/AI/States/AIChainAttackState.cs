@@ -32,6 +32,8 @@ namespace ProjectSteppe.AI.States
                 controller.AIEntity.EntityAttacking.currentAttack = attackScriptableObject;
                 if(animationData.attackScriptableObject)
                     controller.AIEntity.EntityAttacking.currentAttack = animationData.attackScriptableObject;
+                if (animationData.canRotateAfter)
+                    controller.RotationSmoothTime = animationData.rotationSpeed;
                 yield return new WaitForSeconds(animationData.animationLength);
                 if (animationData.canRotateAfter)
                 {
@@ -65,6 +67,9 @@ namespace ProjectSteppe.AI.States
         {
             public string triggerName;
             public float animationLength;
+            public bool changeRotationSpeed;
+            [Range(0,1)]
+            public float rotationSpeed;
             public AttackScriptableObject attackScriptableObject;
             public bool canRotateAfter;
         }
