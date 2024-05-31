@@ -883,7 +883,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7101048689058532354}
-  - component: {fileID: 5735884660914235403}
   m_Layer: 0
   m_Name: HammerKnight
   m_TagString: Untagged
@@ -908,27 +907,6 @@ Transform:
   - {fileID: 1137624455252942339}
   m_Father: {fileID: 9220824021073745363}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &5735884660914235403
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 496988280989027007}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 7d5edae0de1ca1d47b52e13306d1d688, type: 3}
-  m_Controller: {fileID: 9100000, guid: 87cdb48022d833647b75453849219155, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &628800252904215062
 GameObject:
   m_ObjectHideFlags: 0
@@ -11187,7 +11165,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6174741706873425927}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.441184, z: -0, w: -0.8974166}
+  m_LocalRotation: {x: 0, y: 0.4411851, z: -0, w: -0.8974162}
   m_LocalPosition: {x: 388.76, y: 229.65, z: 524.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11211,7 +11189,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6174741706873425927}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 0d6a86662eddbc648a64d4db8ccf68ef, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 7d5edae0de1ca1d47b52e13306d1d688, type: 3}
   m_Controller: {fileID: 9100000, guid: 87cdb48022d833647b75453849219155, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
@@ -11557,7 +11535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4856f25c5815ef2459f23f6bf7d83d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAiState: {fileID: 11400000, guid: 39e95ca34dec704478c50a635a9e883c, type: 2}
+  currentAiState: {fileID: 11400000, guid: 7220ea0d7a5ea2f428ee87a86ef7be17, type: 2}
   distanceToTargetToAttack: 2
   distanceToTargetToChase: 4
   RotationSmoothTime: 0.12
