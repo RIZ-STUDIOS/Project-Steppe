@@ -21,13 +21,13 @@ namespace ProjectSteppe.AI.States
 
         public override void Execute()
         {
-            if (!controller.targetTransform)
+            if (!controller.targetEntity || controller.targetEntity.EntityHealth.Health <= 0)
             {
                 controller.SwitchAIState(idleState);
                 return;
             }
 
-            if(Vector3.Distance(controller.transform.position, controller.targetTransform.transform.position) <= controller.distanceToTargetToAttack)
+            if(Vector3.Distance(controller.transform.position, controller.targetEntity.transform.position) <= controller.distanceToTargetToAttack)
             {
                 controller.SwitchAIState(attackHandlerState);
                 return;

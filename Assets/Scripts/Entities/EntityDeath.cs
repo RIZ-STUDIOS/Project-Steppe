@@ -17,6 +17,7 @@ namespace ProjectSteppe.Entities
         public void OnEntityDeath()
         {
             animator.SetTrigger("Death");
+            animator.SetBool("IsDead", true);
             //StartCoroutine(PlayFX());
             //Destroy(gameObject);
         }
