@@ -42,7 +42,7 @@ namespace ProjectSteppe.AI.States
             if (controller.NavMeshAgent.hasPath)
                 controller.NavMeshAgent.ResetPath();
 
-            if(Vector3.Distance(controller.transform.position, controller.targetTransform.transform.position) >= controller.distanceToTargetToChase)
+            if(Vector3.Distance(controller.transform.position, controller.targetTransform.transform.position) >= controller.distanceToTargetToChase && !controller.CommittedToAttack)
             {
                 controller.SwitchAIState(chaseState);   
                 return;
