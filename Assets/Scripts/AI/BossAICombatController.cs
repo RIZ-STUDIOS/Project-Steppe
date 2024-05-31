@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 namespace ProjectSteppe.AI
 {
@@ -13,11 +14,17 @@ namespace ProjectSteppe.AI
 
         protected override void OnPlayerEnter()
         {
+            base.OnPlayerEnter();
             if (!bossMusicStarted)
             {
                 bossMusicStarted = true;
                 bossMusic.Play();
             }
+        }
+
+        protected override void OnPlayerExit(AITarget aiTarget)
+        {
+
         }
     }
 }

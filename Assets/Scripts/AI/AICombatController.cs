@@ -1,5 +1,6 @@
 using ProjectSteppe.Entities;
 using ProjectSteppe.Entities.Player;
+using ProjectSteppe.Managers;
 using System.Collections;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace ProjectSteppe.AI
 {
     public class AICombatController : MonoBehaviour
     {
-        private AIController controller;
+        protected AIController controller;
 
         private Coroutine hitCoroutine;
 
@@ -30,11 +31,6 @@ namespace ProjectSteppe.AI
                 controller.targetTransform = aiTarget;
 
                 OnPlayerEnter();
-
-                var playerUI = other.GetComponent<PlayerManager>().PlayerUI;
-
-                playerUI.playerDetails.ShowPlayerDetails();
-                playerUI.bossDetails.ShowBossDetails();
             }
         }
         private void OnTriggerExit(Collider other)
@@ -42,16 +38,27 @@ namespace ProjectSteppe.AI
             var aiTarget = other.GetComponent<AITarget>();
             if (aiTarget)
             {
+                OnPlayerExit(aiTarget);
+
                 if (aiTarget.currentController == controller)
                     aiTarget.currentController = null;
                 controller.targetTransform = null;
+
                 Debug.Log("Left!");
             }
         }
 
         protected virtual void OnPlayerEnter()
         {
+            GameManager.Instance.playerManager.PlayerUI.playerDetails.ShowPlayerDetails();
+            controller.AIEntity.EntityDetails.ShowDetails();
+        }
 
+        protected virtual void OnPlayerExit(AITarget aiTarget)
+        {
+            if(aiTarget.currentController == controller)
+            GameManager.Instance.playerManager.PlayerUI.playerDetails.HidePlayerDetails();
+            controller.AIEntity.EntityDetails.HideDetails();
         }
 
         private void PlayerHitAssessment()

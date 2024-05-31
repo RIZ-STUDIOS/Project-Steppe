@@ -44,7 +44,7 @@ namespace ProjectSteppe.AI.States
             }
 
             // Block
-            if(!blocking && controller.playerAttacking && !controller.CommittedToAttack /* potentially add some random value to make boss easier */)
+            if(false && !blocking && controller.playerAttacking && !controller.CommittedToAttack /* potentially add some random value to make boss easier */)
             {
                 OnExit();
 

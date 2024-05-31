@@ -9,6 +9,8 @@ namespace ProjectSteppe.UI
         [SerializeField] private CanvasGroup healthUI;
         [SerializeField] private CanvasGroup balanceUI;
 
+        private bool detailsShown;
+
         private void Awake()
         {
             canvasGroup = GetComponent<CanvasGroup>();
@@ -16,12 +18,21 @@ namespace ProjectSteppe.UI
 
         public void ShowPlayerDetails()
         {
+            if (detailsShown) return;
+            detailsShown = true;
             StartCoroutine(healthUI.FadeIn());
             StartCoroutine(balanceUI.FadeIn());
         }
 
+        public void HideBalancee()
+        {
+            StartCoroutine(balanceUI.FadeOut());
+        }
+
         public void HidePlayerDetails()
         {
+            if (!detailsShown) return;
+            detailsShown = false;
             StartCoroutine(healthUI.FadeOut());
             StartCoroutine(balanceUI.FadeOut());
         }

@@ -133,6 +133,8 @@ GameObject:
   - component: {fileID: 2248650245181406979}
   - component: {fileID: 4621906324847061777}
   - component: {fileID: 4347561102258969255}
+  - component: {fileID: 6849010196306822109}
+  - component: {fileID: 4686985631265614640}
   m_Layer: 11
   m_Name: Canvas
   m_TagString: Untagged
@@ -237,6 +239,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inverseLookAt: 1
   target: {fileID: 0}
+--- !u!114 &6849010196306822109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2936891396521482101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db7774b851a3e34d997d8bb64416977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthUI: {fileID: 3170887378925020479}
+  balanceUI: {fileID: 0}
+--- !u!225 &4686985631265614640
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2936891396521482101}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &5027662710038573086
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,7 +840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 083f6a0cd9ac5d7448c170013bbf86c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAiState: {fileID: 0}
+  currentAiState: {fileID: 11400000, guid: 39e95ca34dec704478c50a635a9e883c, type: 2}
   distanceToTargetToAttack: 4
   distanceToTargetToChase: 8
   RotationSmoothTime: 0.12
@@ -1369,7 +1397,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: b1121c3b93feb164abdd28aacc0daa18, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
