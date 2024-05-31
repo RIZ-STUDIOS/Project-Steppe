@@ -1,3 +1,4 @@
+using ProjectSteppe.Entities;
 using ProjectSteppe.Managers;
 using ProjectSteppe.ZedExtensions;
 using System.Collections;
@@ -23,9 +24,9 @@ namespace ProjectSteppe.UI
             canvasGroup = GetComponent<CanvasGroup>();
         }
 
-        public void TriggerVictory()
+        public void TriggerVictory(Entity killedEntity)
         {
-            StartCoroutine(PlayVictory());
+            StartCoroutine(PlayVictory(killedEntity));
         }
 
         public void TriggerDefeat()
@@ -38,12 +39,12 @@ namespace ProjectSteppe.UI
             StartCoroutine(PlayRespiteFound());
         }
 
-        public IEnumerator PlayVictory(float waitTime = 2)
+        public IEnumerator PlayVictory(Entity killedEntity, float waitTime = 2)
         {
             yield return new WaitForSeconds(waitTime);
 
-            uiManager.playerDetails.HidePlayerDetails();
-            uiManager.bossDetails.HideBossDetails();
+            GameManager.Instance.playerManager.PlayerUI.playerDetails.HidePlayerDetails();
+            killedEntity.EntityDetails.HideDetails();
 
             contextTMP.text = "FOE SLAIN";
 

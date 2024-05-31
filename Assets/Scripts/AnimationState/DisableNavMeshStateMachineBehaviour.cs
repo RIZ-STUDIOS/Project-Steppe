@@ -6,7 +6,7 @@ namespace ProjectSteppe
     {
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.GetComponent<AIController>().navmesh.isStopped = true;
+            //animator.GetComponent<AIController>().navmesh.isStopped = true;
         }
     }
 }

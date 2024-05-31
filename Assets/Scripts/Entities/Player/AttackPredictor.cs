@@ -9,7 +9,7 @@ namespace ProjectSteppe.Entities.Player
     {
         private PlayerAttackController attackController;
 
-        private List<NewAIController> enemies = new List<NewAIController>();
+        private List<AIController> enemies = new List<AIController>();
 
         private void Awake()
         {
@@ -20,7 +20,7 @@ namespace ProjectSteppe.Entities.Player
 
         private void OnTriggerEnter(Collider other)
         {
-            var controller = other.GetComponent<NewAIController>();
+            var controller = other.GetComponent<AIController>();
             if (controller && !enemies.Contains(controller))
             {
                 Debug.Log(other.name + " entered attack predictor");
@@ -30,7 +30,7 @@ namespace ProjectSteppe.Entities.Player
 
         private void OnTriggerExit(Collider other)
         {
-            var controller = other.GetComponent<NewAIController>();
+            var controller = other.GetComponent<AIController>();
             if (controller && enemies.Contains(controller))
             {
                 Debug.Log(other.name + " exit attack predictor");

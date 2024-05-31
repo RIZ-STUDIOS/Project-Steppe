@@ -25,8 +25,7 @@ namespace ProjectSteppe
         [Header("Events")]
         public UnityEvent OnBossDeath;
 
-        [Header("Components")]
-        public EntityHealth health;
+        private EntityHealth health;
 
         private Animator animator;
 
@@ -38,7 +37,7 @@ namespace ProjectSteppe
 
         private Coroutine staggerCoroutine;
 
-        private MonoBehaviour controller;
+        private AIController controller;
 
         public UnityEvent OnFootstep;
         public UnityEvent OnMortalBlow;
@@ -51,9 +50,8 @@ namespace ProjectSteppe
             animator = GetComponent<Animator>();
             health = GetComponent<EntityHealth>();
             navMeshAgent = GetComponent<NavMeshAgent>();
-            controller = GetComponent<AIController>();
-            if(!controller)
-                controller = GetComponent<NewAIController>();
+                controller = GetComponent<AIController>();
+            health = GetComponent<EntityHealth>();
         }
 
         private void Start()
@@ -84,6 +82,7 @@ namespace ProjectSteppe
 
             yield return new WaitForSeconds(4);
 
+            playerManager.PlayerUI.contextScreen.TriggerVictory(GetComponent<Entity>());
             OnBossDeath.Invoke();
         }
 
