@@ -17,6 +17,7 @@ namespace ProjectSteppe.Entities.Player
         private Entity playerEntity;
         private PlayerMovementController playerMovementController;
         private PlayerInventory playerInventory;
+        private PlayerUsableItemSlot playerUsableItemSlot;
 
         public Transform bossTeleportTransform;
 
@@ -29,6 +30,8 @@ namespace ProjectSteppe.Entities.Player
         public Entity PlayerEntity => this.GetComponentIfNull(ref playerEntity);
         public PlayerMovementController PlayerMovement => this.GetComponentIfNull(ref playerMovementController);
         public PlayerInventory PlayerInventory => this.GetComponentIfNull(ref playerInventory);
+        public PlayerUsableItemSlot PlayerUsableItemSlot => this.GetComponentIfNull(ref playerUsableItemSlot);
+
 
         private PlayerCapability capabilities = (PlayerCapability)0b111111;
 

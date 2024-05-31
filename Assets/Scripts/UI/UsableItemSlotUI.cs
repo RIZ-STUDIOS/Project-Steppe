@@ -13,14 +13,14 @@ namespace ProjectSteppe.UI
 
         private void Awake()
         {
-            playerSlot.currentUsable.onUse += UpdateSlotUI;
+            playerSlot.currentUsable.onChargesChange += UpdateSlotUI;
             UpdateSlotUI();
         }
 
         private void UpdateSlotUI()
         {
             itemTitle.text = playerSlot.currentUsable.title;
-            itemCharges.text = playerSlot.currentUsable.charges.ToString();
+            itemCharges.text = playerSlot.currentUsable.Charges.ToString();
         }
     }
 }
