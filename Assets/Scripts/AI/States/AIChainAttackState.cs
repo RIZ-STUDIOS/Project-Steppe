@@ -1,3 +1,4 @@
+using ProjectSteppe.ScriptableObjects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +29,9 @@ namespace ProjectSteppe.AI.States
             }
             foreach(var animationData in animationDatas)
             {
+                controller.AIEntity.EntityAttacking.currentAttack = attackScriptableObject;
+                if(animationData.attackScriptableObject)
+                    controller.AIEntity.EntityAttacking.currentAttack = animationData.attackScriptableObject;
                 yield return new WaitForSeconds(animationData.animationLength);
                 if (animationData.canRotateAfter)
                 {
@@ -61,6 +65,7 @@ namespace ProjectSteppe.AI.States
         {
             public string triggerName;
             public float animationLength;
+            public AttackScriptableObject attackScriptableObject;
             public bool canRotateAfter;
         }
     }
