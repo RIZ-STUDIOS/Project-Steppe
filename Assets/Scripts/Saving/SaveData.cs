@@ -9,5 +9,6 @@ namespace ProjectSteppe.Saving
         public Dictionary<string, bool> checkpointStates = new();
         public Dictionary<string, bool> pickupItemStates = new();
         public List<string> playerInventoryIDs = new();
+        public int pouchesCollected;
     }
 }

@@ -10,6 +10,8 @@ namespace ProjectSteppe.Entities
         private EntityBlock _entityBlock;
         private EntityDetailsUI _entityDetailsUI;
 
+        public bool isPlayer;
+
         public EntityHealth EntityHealth => this.GetComponentIfNull(ref _entityHealth);
         public EntityAttacking EntityAttacking => this.GetComponentIfNull(ref _entityAttacking);
         public EntityBlock EntityBlock => this.GetComponentIfNull(ref _entityBlock);

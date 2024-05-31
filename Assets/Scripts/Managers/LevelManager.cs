@@ -10,7 +10,7 @@ namespace ProjectSteppe.Managers
     public class LevelManager : GenericManager<LevelManager>
     {
         public CheckpointInteractable[] checkpoints;
-        public InventoryInteractable[] items;
+        private InventoryInteractable[] items;
 
         public int LevelIndex { get; private set; } = -1;
 
@@ -20,6 +20,8 @@ namespace ProjectSteppe.Managers
         protected override void Awake()
         {
             base.Awake();
+
+            items = GameObject.FindObjectsOfType<InventoryInteractable>();
 
             if (LevelIndex < 0 || LevelIndex != SceneManager.GetActiveScene().buildIndex)
             {
