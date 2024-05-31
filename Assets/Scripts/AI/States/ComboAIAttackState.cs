@@ -47,6 +47,7 @@ namespace ProjectSteppe.AI.States
                 }
             }
             attack = null;
+            attackFinished = true;
         }
 
         public override void OnForceExit()
