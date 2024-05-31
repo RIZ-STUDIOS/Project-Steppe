@@ -7,14 +7,11 @@ namespace ProjectSteppe.Managers
 {
     public class GrassDensityManager : GenericManager<GrassDensityManager>
     {
-        private List<GameObject> grassChildren = new List<GameObject>();
+        private Terrain terrain;
 
         private void Start()
         {
-            foreach(Transform child in transform)
-            {
-                grassChildren.Add(child.gameObject);
-            }
+            terrain = GetComponent<Terrain>();
             UpdateGrass();
         }
 
@@ -22,11 +19,9 @@ namespace ProjectSteppe.Managers
         {
             var index = PlayerPrefs.GetInt("grassDensity", (int)GrassDensity.High);
 
-            for (int i = 0; i < grassChildren.Count; i++)
-            {
-                var grass = grassChildren[i];
-                grass.SetActive(i % (((int)GrassDensity.High - index) + 1) == 0);
-            }
+            terrain.detailObjectDensity = ((index + 1) / ((float)GrassDensity.High + 1));
+
+            terrain.detailObjectDistance = 50 + (index * 75);
         }
     }
 
