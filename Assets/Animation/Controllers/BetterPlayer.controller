@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46f9c11c30175644793a804b851e1f07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  capability: -1
+  capability: 59
   onStateEnter: 0
 --- !u!1101 &-8189872242093908082
 AnimatorStateTransition:
@@ -1268,7 +1268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f4335210acb77745a2172a669c5839c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  capability: -1
+  capability: 59
   onStateEnter: 1
 --- !u!1109 &-3307662006668160202
 AnimatorTransition:
@@ -1726,20 +1726,20 @@ AnimatorStateMachine:
   - {fileID: 4366750446024357452}
   m_EntryTransitions: []
   m_StateMachineTransitions:
+  - first: {fileID: -4914970645159455969}
+    second:
+    - {fileID: -6523272650578260754}
+  - first: {fileID: -3723043535489957720}
+    second:
+    - {fileID: 8001291886349765163}
   - first: {fileID: 2892196285543554643}
     second: []
   - first: {fileID: 7342983833498689382}
     second:
     - {fileID: 7998804360164486781}
-  - first: {fileID: -4914970645159455969}
-    second:
-    - {fileID: -6523272650578260754}
   - first: {fileID: 8768451857712532936}
     second:
     - {fileID: 151257669235709656}
-  - first: {fileID: -3723043535489957720}
-    second:
-    - {fileID: 8001291886349765163}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
