@@ -32,6 +32,9 @@ namespace ProjectSteppe
 
         private Coroutine ignoreHitCoroutine;
 
+        [SerializeField]
+        private TrailRenderer trailRenderer;
+
         private void Start()
         {
             foreach (var collider in weaponColliders)
@@ -45,11 +48,13 @@ namespace ProjectSteppe
         public void EnableColliders()
         {
             WeaponSwingAction(true);
+            trailRenderer.emitting = true;
         }
 
         public void DisableColliders()
         {
             WeaponSwingAction(false);
+            trailRenderer.emitting = false;
         }
 
         public void ToggleAttack(float startTime, float endTime)
