@@ -46,7 +46,7 @@ namespace ProjectSteppe.UI
             GameManager.Instance.playerManager.PlayerUI.playerDetails.HidePlayerDetails();
             killedEntity.EntityDetails.HideDetails();
 
-            contextTMP.text = "FOE SLAIN";
+            contextTMP.text = "DEMO FINISHED";
 
             StartCoroutine(canvasGroup.FadeIn());
 
