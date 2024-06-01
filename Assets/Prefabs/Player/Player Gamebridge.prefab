@@ -14731,10 +14731,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
+  onPostureFull:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8761187037963401986}
+        m_TargetAssemblyTypeName: ProjectSteppe.Entities.EntityDeath, ProjectSteppe
+        m_MethodName: OnPostureFull
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -14743,12 +14746,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onPostureFull:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8761187037963401986}
-        m_TargetAssemblyTypeName: ProjectSteppe.Entities.EntityDeath, ProjectSteppe
-        m_MethodName: OnPostureFull
+      - m_Target: {fileID: 983263563340590556}
+        m_TargetAssemblyTypeName: ProjectSteppe.Entities.EntityHealth, ProjectSteppe
+        m_MethodName: ResetBalance
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
