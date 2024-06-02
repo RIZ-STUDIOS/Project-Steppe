@@ -1,0 +1,31 @@
+using ProjectSteppe.Entities.Player;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace ProjectSteppe
+{
+    public class HeadLook : MonoBehaviour
+    {
+        public PlayerManager playerManager;
+        private Transform mainCam;
+
+        private void Awake()
+        {
+            playerManager = GetComponentInParent<PlayerManager>();
+            mainCam = playerManager.PlayerCamera.mainCameraTransform;
+        }
+
+        private void Update()
+        {
+            if (Physics.Raycast(mainCam.position, mainCam.forward, out RaycastHit hit, 200, LayerMask.GetMask("Environment", "Enemy")))
+            {
+                transform.position = hit.point;
+            }
+            else
+            {
+                transform.localPosition = new Vector3(0, 1.6f, 1);
+            }
+        }
+    }
+}
