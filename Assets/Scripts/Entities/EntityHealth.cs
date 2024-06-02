@@ -86,7 +86,11 @@ namespace ProjectSteppe.Entities
 
         public void DamageHealth(float amount)
         {
-            if (vulnerable) amount *= 2;
+            if (vulnerable)
+            {
+                if (GetComponent<BossHandler>()) amount = health;
+                else amount *= 2;
+            }
 
             Health -= amount;
 
