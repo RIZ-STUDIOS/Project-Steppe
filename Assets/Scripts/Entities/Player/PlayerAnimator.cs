@@ -137,14 +137,13 @@ namespace ProjectSteppe.Entities.Player
         {
             spineConstraint.weight = 0;
 
-            animator.SetLayerWeight(_layerIndexBlock, 0);
+            //animator.SetLayerWeight(_layerIndexBlock, 0);
+            //animator.SetFloat(_animIDDeflectIndex, currentDeflectIndex);
+            //animator.SetBool(_animIDPerfectBlock, true);
 
-            animator.SetFloat(_animIDDeflectIndex, currentDeflectIndex);
-            animator.SetBool(_animIDPerfectBlock, true);
+            //currentDeflectIndex = currentDeflectIndex == 0 ? 1 : 0;
 
-            currentDeflectIndex = currentDeflectIndex == 0 ? 1 : 0;
-
-            StartCoroutine(ParryReset());
+            //StartCoroutine(ParryReset());
         }
 
         private void OnBlockStart()

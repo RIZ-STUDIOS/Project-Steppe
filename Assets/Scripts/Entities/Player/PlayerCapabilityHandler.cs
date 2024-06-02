@@ -23,5 +23,10 @@ namespace ProjectSteppe
             playerManager.DisableCapability(PlayerCapability.Drink);
             playerManager.DisableCapability(PlayerCapability.Sit);
         }
+
+        public void SlowTime()
+        {
+            Time.timeScale = .1f;
+        }
     }
 }
