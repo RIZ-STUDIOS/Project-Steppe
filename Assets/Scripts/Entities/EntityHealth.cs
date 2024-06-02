@@ -93,7 +93,7 @@ namespace ProjectSteppe.Entities
             if (Health <= 0)
             {
                 onKill.Invoke();
-                //animator.SetBool("PostureBreak", false);
+                animator.SetBool("PostureBreak", false);
             }
             else
             {
