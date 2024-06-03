@@ -17,10 +17,10 @@ namespace ProjectSteppe.ScriptableObjects
         [EditorVariable]
         public float balanceDamage;
 
-        [SliderEditorVariable(0, 1)]
-        public float healthBlockPassthrough;
+        [EditorVariable]
+        public float perfectBlockBalanceDamage;
 
-        [SliderEditorVariable(0, 1)]
-        public float balanceBlockPassthrough;
+        [EditorVariable]
+        public bool balanceBlockPassthrough;
     }
 }
