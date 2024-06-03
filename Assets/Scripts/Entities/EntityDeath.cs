@@ -66,8 +66,8 @@ namespace ProjectSteppe.Entities
         public IEnumerator StaggerTimeoutIEnumerator()
         {
             health.vulnerable = true;
-            if (controller)
-                controller.enabled = false;
+            /*if (controller)
+                controller.enabled = false;*/
             navMeshAgent.enabled = false;
 
             yield return new WaitForSeconds(staggerLength);
@@ -75,8 +75,8 @@ namespace ProjectSteppe.Entities
             health.vulnerable = false;
 
             navMeshAgent.enabled = true;
-            if (controller)
-                controller.enabled = true;
+            /*if (controller)
+                controller.enabled = true;*/
             animator.SetBool("PostureBreak", false);
         }
     }

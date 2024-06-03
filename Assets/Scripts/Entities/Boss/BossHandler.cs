@@ -117,8 +117,8 @@ namespace ProjectSteppe
         {
             staggered = true;
             health.vulnerable = true;
-            if (controller)
-                controller.enabled = false;
+            /*if (controller)
+                controller.enabled = false;*/
             navMeshAgent.enabled = false;
 
             yield return new WaitForSeconds(3);
@@ -126,8 +126,8 @@ namespace ProjectSteppe
             health.vulnerable = false;
 
             navMeshAgent.enabled = true;
-            if(controller)
-                controller.enabled = true;
+            /*if(controller)
+                controller.enabled = true;*/
             animator.SetBool("PostureBreak", false);
             staggered = false;
         }
