@@ -32,7 +32,7 @@ namespace ProjectSteppe.Entities.Player
 
         [Header("Camera")]
 
-        public Camera playerCamera;
+        private Camera playerCamera;
 
         [Tooltip("How far in degrees can you move the camera up")]
         public float TopClamp = 70.0f;
@@ -114,6 +114,7 @@ namespace ProjectSteppe.Entities.Player
             virtualCamera = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
             playerManager = GetComponent<PlayerManager>();
             playerManager.onCapabilityChange.AddListener(OnPlayerCapability);
+            playerCamera = playerManager.PlayerCamera.mainCamera;
         }
 
         private void Start()

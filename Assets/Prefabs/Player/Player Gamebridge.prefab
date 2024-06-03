@@ -14492,7 +14492,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a71a0b60fdceca4ab443376561465b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossTeleportTransform: {fileID: 0}
   onCapabilityChange:
     m_PersistentCalls:
       m_Calls: []
@@ -14611,6 +14610,7 @@ MonoBehaviour:
   respondToData: 1
   move: {x: 0, y: 0}
   look: {x: 0, y: 0}
+  targetLook: {x: 0, y: 0}
   jump: 0
   sprint: 0
   dash: 0
@@ -14665,7 +14665,6 @@ MonoBehaviour:
   walkSpeed: 4
   speedChangeRate: 10
   RotationSmoothTime: 0.04
-  playerCamera: {fileID: 0}
   TopClamp: 70
   BottomClamp: -30
   groundedOffset: 0.14
@@ -14849,18 +14848,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3340632246463849396}
-        m_TargetAssemblyTypeName: ProjectSteppe.PlayerCapabilityHandler, ProjectSteppe
-        m_MethodName: SlowTime
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   onHit:
     m_PersistentCalls:
       m_Calls:
@@ -14908,7 +14895,6 @@ MonoBehaviour:
   - {fileID: 3873282917367884920}
   - {fileID: 8950460737053631166}
   - {fileID: 2553046914992226700}
-  unblockableFX: []
   OnBlockStart:
     m_PersistentCalls:
       m_Calls:
@@ -15010,14 +14996,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 244c03ad87063084d8a33ad7e34652fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetLockLayer:
-    serializedVersion: 2
-    m_Bits: 512
-  maxConeRadius: 12
   lockOnDistance: 35
   lockOffDistance: 45
-  coneAngle: 90
-  playerCamera: {fileID: 0}
+  cameraMoveLockOnTimer: 0.2
   onLockStateChange:
     m_PersistentCalls:
       m_Calls:
@@ -15046,7 +15027,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vCam: {fileID: 0}
-  mainCameraTransform: {fileID: 0}
+  mainCamera: {fileID: 0}
   thirdPersonFollow: {fileID: 11400000, guid: 9968f2b7d076f094285fafd19e81c429, type: 2}
   lockFramingTransposer: {fileID: 11400000, guid: 0d21d097a2892624284b83dfb57a30e7,
     type: 2}
@@ -35812,6 +35793,7 @@ MonoBehaviour:
   hitEntity: {fileID: 0}
   ignoreTimer: 0.5
   trailRenderer: {fileID: 9084198577685907793}
+  weaponMeshRenderer: {fileID: 0}
 --- !u!1 &5273951165026305268
 GameObject:
   m_ObjectHideFlags: 0

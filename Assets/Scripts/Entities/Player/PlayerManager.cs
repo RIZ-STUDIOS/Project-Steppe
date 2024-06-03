@@ -21,8 +21,6 @@ namespace ProjectSteppe.Entities.Player
         private PlayerUsableItemSlot playerUsableItemSlot;
         private CinemachineVirtualCamera virtualCamera;
 
-        public Transform bossTeleportTransform;
-
         public TargetLock PlayerTargetLock => this.GetComponentIfNull(ref playerTargetLock);
         public Animator PlayerAnimator => this.GetComponentIfNull(ref playerAnimator);
         public PlayerCamera PlayerCamera => this.GetComponentIfNull(ref playerCamera);

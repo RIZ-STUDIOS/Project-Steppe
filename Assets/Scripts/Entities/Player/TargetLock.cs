@@ -28,22 +28,12 @@ namespace ProjectSteppe.Entities.Player
         private bool justLocked;
 
         [SerializeField]
-        private LayerMask targetLockLayer;
-
-        [SerializeField]
-        private float maxConeRadius;
-
-        [SerializeField]
         [FormerlySerializedAs("maxConeLength")]
         private float lockOnDistance;
 
         [SerializeField]
         private float lockOffDistance;
 
-        [SerializeField]
-        private float coneAngle;
-
-        [SerializeField]
         private Camera playerCamera;
 
         [SerializeField]
@@ -65,6 +55,7 @@ namespace ProjectSteppe.Entities.Player
             playerInput = GetComponent<PlayerInput>();
             playerMovement = GetComponent<PlayerMovementController>();
             playerManager = GetComponent<PlayerManager>();
+            playerCamera = playerManager.PlayerCamera.mainCamera;
             playerManager.PlayerEntity.EntityHealth.onKill.AddListener(() =>
             {
                 StopLockOn();
@@ -105,9 +96,10 @@ namespace ProjectSteppe.Entities.Player
                 TryLockOn();
             }
 
-            if (lookAtTransform && Vector3.Distance(transform.position, lookAtTransform.position) > lockOnDistance)
+            if (lookAtTransform && Vector3.Distance(transform.position, lookAtTransform.position) > lockOffDistance)
             {
                 StopLockOn();
+                justLocked = true;
             }
 
             if (cameraMoveLockOnTime <= 0 && lockOn && _input.targetLook.sqrMagnitude >= _threshold)
