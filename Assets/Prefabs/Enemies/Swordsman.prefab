@@ -4946,7 +4946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 083f6a0cd9ac5d7448c170013bbf86c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAiState: {fileID: 11400000, guid: dd210833d0573c34cab756057f6c4803, type: 2}
+  currentAiState: {fileID: 11400000, guid: 621e501dcc83cf544bc1201a2591869c, type: 2}
   distanceToTargetToAttack: 3
   distanceToTargetToChase: 8
   RotationSmoothTime: 0.12
@@ -7166,7 +7166,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.00165
+  m_Radius: 0.0023
   m_Height: 0.0042
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0.00025}
@@ -11010,7 +11010,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.00165
+  m_Radius: 0.002
   m_Height: 0.0048
   m_Direction: 0
   m_Center: {x: 0, y: 0.0005, z: 0.0002}
