@@ -174,7 +174,7 @@ namespace ProjectSteppe
         {
             foreach(var material in weaponMaterials)
             {
-                material.SetInteger("_Unblockable", 1);
+                material.EnableKeyword("_Unblockable");
             }
         }
 
@@ -182,7 +182,7 @@ namespace ProjectSteppe
         {
             foreach(var material in weaponMaterials)
             {
-                material.SetInteger("_Unblockable", 0);
+                material.DisableKeyword("_Unblockable");
             }
         }
     }
