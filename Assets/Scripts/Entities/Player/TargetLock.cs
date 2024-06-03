@@ -39,9 +39,14 @@ namespace ProjectSteppe.Entities.Player
         [SerializeField]
         private float coneAngle;
 
+        [SerializeField]
+        private Camera playerCamera;
+
         public UnityEvent onLockStateChange;
 
         private bool canLock = true;
+
+        public Vector3 CameraToTargetDistance { get; private set; }
 
         private void Awake()
         {
@@ -71,6 +76,11 @@ namespace ProjectSteppe.Entities.Player
             {
                 AttemptLockOn();
                 justLocked = true;
+            }
+
+            if (lookAtTransform)
+            {
+                CameraToTargetDistance = lookAtTransform.position - playerCamera.transform.position;
             }
 
             if (lockOn && !lookAtTransform)

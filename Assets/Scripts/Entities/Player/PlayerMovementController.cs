@@ -372,10 +372,12 @@ namespace ProjectSteppe.Entities.Player
             if (!virtualCamera.enabled) return;
             if (playerManager.PlayerTargetLock.lockOn)
             {
-                var rot = Quaternion.LookRotation(playerManager.PlayerTargetLock.lookAtTransform.position - playerCamera.transform.position).eulerAngles;
+                var rot = Quaternion.LookRotation(playerManager.PlayerTargetLock.CameraToTargetDistance).eulerAngles;
 
                 _cinemachineTargetPitch = rot.x;
                 _cinemachineTargetYaw = rot.y;
+
+                Debug.Log("Pitch: " + _cinemachineTargetPitch + " Yaw: " + _cinemachineTargetYaw);
 
                 virtualCamera.Follow.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + 0,
                     _cinemachineTargetYaw, 0.0f);
@@ -393,8 +395,8 @@ namespace ProjectSteppe.Entities.Player
             }
 
             // clamp our rotations so our values are limited 360 degrees
-            _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
-            _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
+            //_cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
+            //_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
 
             // Cinemachine will follow this target
             virtualCamera.Follow.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + 0,
