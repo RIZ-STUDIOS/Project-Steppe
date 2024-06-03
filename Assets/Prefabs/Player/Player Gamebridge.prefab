@@ -1597,7 +1597,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 2.25
+  m_Time: 0.75
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -8625,6 +8625,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7561026691004703301}
+  - component: {fileID: 6567715300937374651}
   m_Layer: 0
   m_Name: HeadLookAt
   m_TagString: Untagged
@@ -8641,12 +8642,25 @@ Transform:
   m_GameObject: {fileID: 1992092549604247315}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.000012919307, y: 1.6000061, z: 1}
+  m_LocalPosition: {x: 0, y: 1.6, z: 1}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8127215291797437555}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6567715300937374651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992092549604247315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3c31a37920c5ca479340e536dcd9846, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerManager: {fileID: 0}
 --- !u!1 &2032339735069210313
 GameObject:
   m_ObjectHideFlags: 0
@@ -14332,6 +14346,7 @@ GameObject:
   - component: {fileID: 247752105038845862}
   - component: {fileID: 596040942698167489}
   - component: {fileID: 4878909014512478084}
+  - component: {fileID: 3340632246463849396}
   m_Layer: 8
   m_Name: Player Gamebridge
   m_TagString: Player
@@ -14758,6 +14773,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3340632246463849396}
+        m_TargetAssemblyTypeName: ProjectSteppe.PlayerCapabilityHandler, ProjectSteppe
+        m_MethodName: SlowTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onHit:
     m_PersistentCalls:
       m_Calls:
@@ -14878,6 +14905,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathFX: {fileID: 3970044432818333076}
+  staggerLength: 0
 --- !u!114 &661879464492405019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14912,6 +14940,7 @@ MonoBehaviour:
   lockOnDistance: 35
   lockOffDistance: 45
   coneAngle: 90
+  playerCamera: {fileID: 0}
   onLockStateChange:
     m_PersistentCalls:
       m_Calls:
@@ -15085,6 +15114,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51096e6fec6ad9b42a670e78eed2f745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3340632246463849396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2282056347538574736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d63843525ae5fef4eb1eed4c939a9a42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2292957748182160486
@@ -47316,7 +47357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b37cffab30b939469bac076fdd82c59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 0.025
+  m_Weight: 0.00005
   m_Data:
     m_ConstrainedObject: {fileID: 7166550027405880336}
     m_Source: {fileID: 590599393298118736}
@@ -52526,7 +52567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c430f382484144e925c097c2d33cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 0
+  m_Weight: 1
   m_Data:
     m_ConstrainedObject: {fileID: 6322671050915908053}
     m_SourceObjects:
@@ -52749,7 +52790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b37cffab30b939469bac076fdd82c59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 0.005
+  m_Weight: 0.00005
   m_Data:
     m_ConstrainedObject: {fileID: 6322671050915908053}
     m_Source: {fileID: 5159391276687972769}
