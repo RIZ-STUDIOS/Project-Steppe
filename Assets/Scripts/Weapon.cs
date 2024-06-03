@@ -132,13 +132,13 @@ namespace ProjectSteppe
                     if (parentEntity.EntityAttacking.currentAttack.balanceBlockPassthrough)
                     {
                         hitbox.ParentEntity.EntityHealth.DamageBalance(parentEntity.EntityAttacking.currentAttack.balanceDamage);
-                        hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage);
-                        hitbox.ParentEntity.EntityAttacking.CurrentWeapon.onParry?.Invoke();
-                        hitbox.ParentEntity.EntityBlock.OnParryAttack.Invoke();
+                        hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage);                        
                     }
                     else
                     {
-                        parentEntity.EntityHealth.DamageBalance(hitbox.ParentEntity.EntityAttacking.currentAttack.perfectBlockBalanceDamage);
+                        parentEntity.EntityHealth.DamageBalance(parentEntity.EntityAttacking.currentAttack.perfectBlockBalanceDamage);
+                        hitbox.ParentEntity.EntityAttacking.CurrentWeapon.onParry?.Invoke();
+                        hitbox.ParentEntity.EntityBlock.OnParryAttack.Invoke();
                     }
                 }
 
@@ -174,7 +174,8 @@ namespace ProjectSteppe
         {
             foreach(var material in weaponMaterials)
             {
-                material.EnableKeyword("_Unblockable");
+                Debug.Log("FX!");
+                material.SetFloat("_Unblockable", 1);
             }
         }
 
@@ -182,7 +183,7 @@ namespace ProjectSteppe
         {
             foreach(var material in weaponMaterials)
             {
-                material.DisableKeyword("_Unblockable");
+                material.SetFloat("_Unblockable", 0);
             }
         }
     }
