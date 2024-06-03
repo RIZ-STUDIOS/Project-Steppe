@@ -114,7 +114,10 @@ namespace ProjectSteppe.Entities.Player
             virtualCamera = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
             playerManager = GetComponent<PlayerManager>();
             playerManager.onCapabilityChange.AddListener(OnPlayerCapability);
+        }
 
+        private void Start()
+        {
             _cinemachineTargetYaw = transform.eulerAngles.y;
         }
 

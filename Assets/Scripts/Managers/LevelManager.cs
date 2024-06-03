@@ -58,6 +58,8 @@ namespace ProjectSteppe.Managers
                     spawnRot
                 );
 
+            player.VirtualCamera.Follow.transform.rotation = spawnRot;
+
             player.GetComponent<CharacterController>().enabled = true;
         }
 
