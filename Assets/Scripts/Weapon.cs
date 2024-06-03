@@ -36,14 +36,14 @@ namespace ProjectSteppe
         private TrailRenderer trailRenderer;
 
         [SerializeField]
-        private MeshRenderer weaponMeshRenderer;
+        private Renderer weaponMeshRenderer;
 
         private List<Material> weaponMaterials = new List<Material>();
 
         private void Awake()
         {
             if(!weaponMeshRenderer)
-                weaponMeshRenderer = GetComponent<MeshRenderer>();
+                weaponMeshRenderer = GetComponent<Renderer>();
             weaponMaterials.AddRange(weaponMeshRenderer.materials);
         }
 
