@@ -14908,6 +14908,7 @@ MonoBehaviour:
   - {fileID: 3873282917367884920}
   - {fileID: 8950460737053631166}
   - {fileID: 2553046914992226700}
+  unblockableFX: []
   OnBlockStart:
     m_PersistentCalls:
       m_Calls:
@@ -46345,7 +46346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8244870284049214000
 RectTransform:
   m_ObjectHideFlags: 0
@@ -54115,6 +54116,16 @@ PrefabInstance:
         type: 3}
       propertyPath: moveWithTransform
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198110779176885192, guid: b8f929e2e3a24894db6cbd97a2a83429,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 198110779176885192, guid: b8f929e2e3a24894db6cbd97a2a83429,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.z
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 199154704347157076, guid: b8f929e2e3a24894db6cbd97a2a83429,
         type: 3}

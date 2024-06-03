@@ -1067,7 +1067,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cd8bfa6960b7d164a88c35bf7514ac3a, type: 2}
+  - {fileID: 2100000, guid: bda881300625a3e44bc8cd0521f528a1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4922,6 +4922,7 @@ MonoBehaviour:
   normalBlockColor: {r: 0, g: 0, b: 0, a: 0}
   perfectBlockColor: {r: 0, g: 0, b: 0, a: 0}
   blockFX: []
+  unblockableFX: []
   OnBlockStart:
     m_PersistentCalls:
       m_Calls: []
