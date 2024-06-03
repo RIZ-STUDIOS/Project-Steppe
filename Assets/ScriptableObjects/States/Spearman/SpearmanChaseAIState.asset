@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cad76706306e4fe4ab76a51f3edc7215, type: 3}
-  m_Name: AttackState
+  m_Script: {fileID: 11500000, guid: 94272cfa1352c59409a72ee5fca14a16, type: 3}
+  m_Name: SpearmanChaseAIState
   m_EditorClassIdentifier: 
-  attackScriptableObject: {fileID: 0}
-  triggerName: Attack
-  attackDuration: 3.667
+  idleState: {fileID: 11400000, guid: dd210833d0573c34cab756057f6c4803, type: 2}
+  attackHandlerState: {fileID: 11400000, guid: b03dbe02b633bfa4a8c192ccfd5fa6e6, type: 2}

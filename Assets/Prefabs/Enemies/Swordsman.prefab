@@ -1015,7 +1015,7 @@ GameObject:
   - component: {fileID: 1539344529716166762}
   - component: {fileID: 4527672682368363143}
   - component: {fileID: 2222410836779154302}
-  - component: {fileID: 4838561562458194743}
+  - component: {fileID: 4003400306203545600}
   m_Layer: 13
   m_Name: Sword
   m_TagString: Untagged
@@ -1067,7 +1067,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cd8bfa6960b7d164a88c35bf7514ac3a, type: 2}
+  - {fileID: 2100000, guid: bda881300625a3e44bc8cd0521f528a1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1102,13 +1102,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponColliders:
-  - {fileID: 4838561562458194743}
+  - {fileID: 4003400306203545600}
   startEnabled: 0
   hitEntity: {fileID: 0}
   ignoreTimer: 0.5
   trailRenderer: {fileID: 7407334158662941639}
---- !u!65 &4838561562458194743
-BoxCollider:
+--- !u!136 &4003400306203545600
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1125,9 +1125,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.000751094, y: 0.0003929476, z: 0.009242101}
-  m_Center: {x: -0.000023328263, y: -1.1178261e-10, z: -0.0055}
+  serializedVersion: 2
+  m_Radius: 0.0005710511
+  m_Height: 0.0095
+  m_Direction: 2
+  m_Center: {x: -0.000023090244, y: -0.00000047761006, z: -0.0055}
 --- !u!1 &2282222488258121638
 GameObject:
   m_ObjectHideFlags: 0
@@ -4812,7 +4814,7 @@ MonoBehaviour:
   health: 0
   balance: 0
   maxHealth: 10
-  maxBalance: 100
+  maxBalance: 20
   timeBeforeBalanceRegeneration: 1.5
   balanceRegenerationRate: 0.2
   balanceHealthRegenerationRatio: 0.5
@@ -4855,6 +4857,18 @@ MonoBehaviour:
       - m_Target: {fileID: 8260738318475526680}
         m_TargetAssemblyTypeName: ProjectSteppe.Entities.EntityDeath, ProjectSteppe
         m_MethodName: StaggerTimeout
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3141308261746472348}
+        m_TargetAssemblyTypeName: ProjectSteppe.Entities.EntityHealth, ProjectSteppe
+        m_MethodName: ResetBalance
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4908,6 +4922,7 @@ MonoBehaviour:
   normalBlockColor: {r: 0, g: 0, b: 0, a: 0}
   perfectBlockColor: {r: 0, g: 0, b: 0, a: 0}
   blockFX: []
+  unblockableFX: []
   OnBlockStart:
     m_PersistentCalls:
       m_Calls: []
@@ -4946,7 +4961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 083f6a0cd9ac5d7448c170013bbf86c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAiState: {fileID: 11400000, guid: dd210833d0573c34cab756057f6c4803, type: 2}
+  currentAiState: {fileID: 11400000, guid: 621e501dcc83cf544bc1201a2591869c, type: 2}
   distanceToTargetToAttack: 3
   distanceToTargetToChase: 8
   RotationSmoothTime: 0.12
@@ -7166,7 +7181,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.00165
+  m_Radius: 0.0023
   m_Height: 0.0042
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0.00025}
@@ -11010,7 +11025,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.00165
+  m_Radius: 0.002
   m_Height: 0.0048
   m_Direction: 0
   m_Center: {x: 0, y: 0.0005, z: 0.0002}
