@@ -23,6 +23,9 @@ namespace ProjectSteppe.Entities
         [SerializeField]
         private ParticleSystem[] blockFX;
 
+        [SerializeField]
+        private ParticleSystem[] unblockableFX;
+
         public bool IsBlocking => blocking;
 
         public UnityEvent OnBlockStart;
@@ -73,6 +76,14 @@ namespace ProjectSteppe.Entities
         public void PlayBlockFX()
         {
             foreach (var fx in blockFX)
+            {
+                fx.Play();
+            }
+        }
+
+        public void ShowUnblockFX()
+        {
+            foreach(var fx in unblockableFX)
             {
                 fx.Play();
             }

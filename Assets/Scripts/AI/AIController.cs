@@ -133,6 +133,12 @@ namespace ProjectSteppe.AI
             transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
         }
 
+        public void ShowUnblockFX()
+        {
+            if (!targetEntity) return;
+            targetEntity.EntityBlock.ShowUnblockFX();
+        }
+
         public void EnableRotationTowardsTarget()
         {
             rotateTowardsTarget = true;
