@@ -1,6 +1,7 @@
 using ProjectSteppe.Entities.Player;
 using ProjectSteppe.Saving;
 using RicTools.Managers;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -37,6 +38,9 @@ namespace ProjectSteppe.Managers
         public AvailableInventoryItemsScriptableObject availableItems;
 
         public PlayerManager playerManager;
+
+        [System.NonSerialized]
+        public List<TargetLockTarget> visibleTargets = new List<TargetLockTarget>();
 
         protected override void Awake()
         {

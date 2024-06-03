@@ -1,5 +1,7 @@
+using ProjectSteppe.Managers;
 using ProjectSteppe.Utilities;
 using StarterAssets;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -10,8 +12,10 @@ namespace ProjectSteppe.Entities.Player
     {
         private StarterAssetsInputs _input;
 
-        [System.NonSerialized]
-        public Transform lookAtTransform;
+        public Transform lookAtTransform => currentTargetLock ? currentTargetLock.transform : null;
+
+        private TargetLockTarget currentTargetLock;
+
         private PlayerMovementController playerMovement;
         private PlayerManager playerManager;
 
@@ -101,7 +105,7 @@ namespace ProjectSteppe.Entities.Player
                 var targetLockTarget = StartLockOn();
                 if (targetLockTarget && targetLockTarget.lookAtTransform != lookAtTransform)
                 {
-                    SetLockTarget(targetLockTarget.lookAtTransform);
+                    SetLockTarget(targetLockTarget);
                     SetLockOn(true);
                 }
                 else
@@ -114,7 +118,7 @@ namespace ProjectSteppe.Entities.Player
                 var targetLockTarget = StartLockOn();
                 if (targetLockTarget)
                 {
-                    SetLockTarget(targetLockTarget.lookAtTransform);
+                    SetLockTarget(targetLockTarget);
                     SetLockOn(true);
                 }
             }
@@ -122,7 +126,7 @@ namespace ProjectSteppe.Entities.Player
 
         private TargetLockTarget StartLockOn()
         {
-            var hits = ConeCastExtension.ConeCastAll(playerMovement.playerCamera.transform.position, maxConeRadius, playerMovement.playerCamera.transform.forward, lockOnDistance, coneAngle, targetLockLayer);
+            /*var hits = ConeCastExtension.ConeCastAll(playerMovement.playerCamera.transform.position, maxConeRadius, playerMovement.playerCamera.transform.forward, lockOnDistance, coneAngle, targetLockLayer);
             int index = -1;
             float angle = float.MaxValue;
             for (int i = 0; i < hits.Length; i++)
@@ -142,8 +146,8 @@ namespace ProjectSteppe.Entities.Player
             }
             if (index == -1) return null;
             var lookHit = hits[index];
-            var targetLockTarget = lookHit.collider.GetComponentInParent<TargetLockTarget>();
-            return targetLockTarget;
+            var targetLockTarget = lookHit.collider.GetComponentInParent<TargetLockTarget>();*/
+            return GetClosestTarget();
         }
 
         private void StopLockOn()
@@ -162,10 +166,10 @@ namespace ProjectSteppe.Entities.Player
             onLockStateChange.Invoke();
         }
 
-        private void SetLockTarget(Transform target)
+        private void SetLockTarget(TargetLockTarget target)
         {
-            lookAtTransform = target;
-            playerManager.PlayerCamera.vCam.LookAt = target;
+            currentTargetLock = target;
+            playerManager.PlayerCamera.vCam.LookAt = lookAtTransform;
             if (target)
             {
                 playerManager.PlayerCamera.SwitchToLockFramingTransposer();
@@ -174,6 +178,32 @@ namespace ProjectSteppe.Entities.Player
             {
                 playerManager.PlayerCamera.SwitchToThirdPersonFollow();
             }
+        }
+
+        private TargetLockTarget GetClosestTarget()
+        {
+            var viewPortPosition = new Vector3(0.5f, 0.5f, 0);
+            if (currentTargetLock)
+                viewPortPosition = currentTargetLock.ViewPortPosition;
+
+            float distance = float.MaxValue;
+            TargetLockTarget targetLockTarget = null;
+
+            foreach(var target in GameManager.Instance.visibleTargets)
+            {
+                if (target.ViewPortPosition.z >= lockOnDistance || target == currentTargetLock) continue;
+                Vector2 temp = viewPortPosition;
+                Vector2 temp2 = target.ViewPortPosition;
+
+                var tempDistance = Vector2.Distance(temp, temp2);
+                if(tempDistance < distance)
+                {
+                    distance = tempDistance;
+                    targetLockTarget = target;
+                }
+            }
+
+            return targetLockTarget;
         }
     }
 }

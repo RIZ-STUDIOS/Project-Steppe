@@ -26,6 +26,7 @@ namespace ProjectSteppe
 
         public void SlowTime()
         {
+            return;
             Time.timeScale = .1f;
         }
     }

@@ -133,12 +133,12 @@ namespace ProjectSteppe
                     {
                         hitbox.ParentEntity.EntityHealth.DamageBalance(parentEntity.EntityAttacking.currentAttack.balanceDamage);
                         hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage);
-                        hitbox.ParentEntity.EntityAttacking.CurrentWeapon.onParry?.Invoke();
-                        hitbox.ParentEntity.EntityBlock.OnParryAttack.Invoke();
                     }
                     else
                     {
                         parentEntity.EntityHealth.DamageBalance(hitbox.ParentEntity.EntityAttacking.currentAttack.perfectBlockBalanceDamage);
+                        hitbox.ParentEntity.EntityAttacking.CurrentWeapon.onParry?.Invoke();
+                        hitbox.ParentEntity.EntityBlock.OnParryAttack.Invoke();
                     }
                 }
 
