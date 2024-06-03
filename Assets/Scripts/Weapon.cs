@@ -108,16 +108,25 @@ namespace ProjectSteppe
                 if (!hitbox.ParentEntity.EntityBlock.IsPerfectBlock())
                 {
                     hitbox.ParentEntity.EntityHealth.DamageBalance(parentEntity.EntityAttacking.currentAttack.balanceDamage);
+
+                    if (parentEntity.EntityAttacking.currentAttack.balanceBlockPassthrough)
+                    {
+                        hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage);
+                    }
                     hitbox.ParentEntity.EntityBlock.OnBlockAttack.Invoke();
                 }
                 else
                 {
-                    parentEntity.EntityHealth.DamageBalance(hitbox.ParentEntity.EntityAttacking.currentAttack.balanceDamage * (1 - hitbox.ParentEntity.EntityAttacking.currentAttack.balanceBlockPassthrough));
-                    hitbox.ParentEntity.EntityHealth.DamageBalance(hitbox.ParentEntity.EntityAttacking.currentAttack.balanceDamage * hitbox.ParentEntity.EntityAttacking.currentAttack.balanceBlockPassthrough);
-                    if (hitbox.ParentEntity.EntityAttacking.currentAttack.balanceBlockPassthrough == 0)
+                    if (parentEntity.EntityAttacking.currentAttack.balanceBlockPassthrough)
                     {
+                        hitbox.ParentEntity.EntityHealth.DamageBalance(parentEntity.EntityAttacking.currentAttack.balanceDamage);
+                        hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage);
                         hitbox.ParentEntity.EntityAttacking.CurrentWeapon.onParry?.Invoke();
                         hitbox.ParentEntity.EntityBlock.OnParryAttack.Invoke();
+                    }
+                    else
+                    {
+                        parentEntity.EntityHealth.DamageBalance(hitbox.ParentEntity.EntityAttacking.currentAttack.perfectBlockBalanceDamage);
                     }
                 }
 
