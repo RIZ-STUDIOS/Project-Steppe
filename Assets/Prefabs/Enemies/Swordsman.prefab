@@ -1015,7 +1015,7 @@ GameObject:
   - component: {fileID: 1539344529716166762}
   - component: {fileID: 4527672682368363143}
   - component: {fileID: 2222410836779154302}
-  - component: {fileID: 4838561562458194743}
+  - component: {fileID: 4003400306203545600}
   m_Layer: 13
   m_Name: Sword
   m_TagString: Untagged
@@ -1102,13 +1102,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponColliders:
-  - {fileID: 4838561562458194743}
+  - {fileID: 4003400306203545600}
   startEnabled: 0
   hitEntity: {fileID: 0}
   ignoreTimer: 0.5
   trailRenderer: {fileID: 7407334158662941639}
---- !u!65 &4838561562458194743
-BoxCollider:
+--- !u!136 &4003400306203545600
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1125,9 +1125,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.000751094, y: 0.0003929476, z: 0.009242101}
-  m_Center: {x: -0.000023328263, y: -1.1178261e-10, z: -0.0055}
+  serializedVersion: 2
+  m_Radius: 0.0005710511
+  m_Height: 0.0095
+  m_Direction: 2
+  m_Center: {x: -0.000023090244, y: -0.00000047761006, z: -0.0055}
 --- !u!1 &2282222488258121638
 GameObject:
   m_ObjectHideFlags: 0
@@ -4855,6 +4857,18 @@ MonoBehaviour:
       - m_Target: {fileID: 8260738318475526680}
         m_TargetAssemblyTypeName: ProjectSteppe.Entities.EntityDeath, ProjectSteppe
         m_MethodName: StaggerTimeout
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3141308261746472348}
+        m_TargetAssemblyTypeName: ProjectSteppe.Entities.EntityHealth, ProjectSteppe
+        m_MethodName: ResetBalance
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

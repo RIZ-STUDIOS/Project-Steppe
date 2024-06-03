@@ -5331,7 +5331,7 @@ GameObject:
   - component: {fileID: 1879460234183329323}
   - component: {fileID: 276242853231119769}
   - component: {fileID: 7535966344231343278}
-  - component: {fileID: 1909188081774791493}
+  - component: {fileID: 925164376971186421}
   m_Layer: 13
   m_Name: Spear
   m_TagString: Untagged
@@ -5418,13 +5418,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponColliders:
-  - {fileID: 1909188081774791493}
+  - {fileID: 925164376971186421}
   startEnabled: 0
   hitEntity: {fileID: 0}
   ignoreTimer: 0.5
   trailRenderer: {fileID: 277983937739042164}
---- !u!65 &1909188081774791493
-BoxCollider:
+--- !u!136 &925164376971186421
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5441,9 +5441,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.001, y: 0.00079793774, z: 0.013}
-  m_Center: {x: 0, y: 0, z: 0.00075}
+  serializedVersion: 2
+  m_Radius: 0.0012
+  m_Height: 0.00979353
+  m_Direction: 2
+  m_Center: {x: 0.00000023968525, y: -0.0000005704102, z: 0.002}
 --- !u!1 &7800215924929046207
 GameObject:
   m_ObjectHideFlags: 0
@@ -6530,6 +6532,18 @@ MonoBehaviour:
       - m_Target: {fileID: 5246136870837233934}
         m_TargetAssemblyTypeName: ProjectSteppe.Entities.EntityDeath, ProjectSteppe
         m_MethodName: StaggerTimeout
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4942376863841053451}
+        m_TargetAssemblyTypeName: ProjectSteppe.Entities.EntityHealth, ProjectSteppe
+        m_MethodName: ResetBalance
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
