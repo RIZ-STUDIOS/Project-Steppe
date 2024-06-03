@@ -35,6 +35,18 @@ namespace ProjectSteppe
         [SerializeField]
         private TrailRenderer trailRenderer;
 
+        [SerializeField]
+        private MeshRenderer weaponMeshRenderer;
+
+        private List<Material> weaponMaterials = new List<Material>();
+
+        private void Awake()
+        {
+            if(!weaponMeshRenderer)
+                weaponMeshRenderer = GetComponent<MeshRenderer>();
+            weaponMaterials.AddRange(weaponMeshRenderer.materials);
+        }
+
         private void Start()
         {
             foreach (var collider in weaponColliders)
@@ -156,6 +168,22 @@ namespace ProjectSteppe
             }
 
             hitEntity = null;
+        }
+
+        public void ShowFernel()
+        {
+            foreach(var material in weaponMaterials)
+            {
+                material.SetInteger("_Unblockable", 1);
+            }
+        }
+
+        public void HideFernel()
+        {
+            foreach(var material in weaponMaterials)
+            {
+                material.SetInteger("_Unblockable", 0);
+            }
         }
     }
 }

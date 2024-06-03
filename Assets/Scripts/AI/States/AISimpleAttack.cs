@@ -28,8 +28,9 @@ namespace ProjectSteppe.AI.States
         private IEnumerator AttackDurationCoroutine()
         {
             if (controller.AIEntity.EntityAttacking.currentAttack.balanceBlockPassthrough)
-                controller.ShowUnblockFX();
+                controller.TurnOnUnblockable();
             yield return new WaitForSeconds(attackDuration);
+                controller.TurnOffUnblockable();
             attackFinished = true;
             controller.NavMeshAgent.nextPosition = controller.transform.position;
             controller.NavMeshAgent.isStopped = false;

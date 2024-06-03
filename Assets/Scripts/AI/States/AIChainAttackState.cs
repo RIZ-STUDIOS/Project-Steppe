@@ -33,10 +33,11 @@ namespace ProjectSteppe.AI.States
                 if(animationData.attackScriptableObject)
                     controller.AIEntity.EntityAttacking.currentAttack = animationData.attackScriptableObject;
                 if (controller.AIEntity.EntityAttacking.currentAttack.balanceBlockPassthrough)
-                    controller.ShowUnblockFX();
+                    controller.TurnOnUnblockable();
                 if (animationData.canRotateAfter)
                     controller.RotationSmoothTime = animationData.rotationSpeed;
                 yield return new WaitForSeconds(animationData.animationLength);
+                    controller.TurnOffUnblockable();
                 if (animationData.canRotateAfter)
                 {
                     controller.RotateTowards(controller.targetEntity.transform);
