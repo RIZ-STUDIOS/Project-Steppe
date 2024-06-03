@@ -219,13 +219,14 @@ namespace ProjectSteppe.Entities.Player
 
         private void SetLockTarget(TargetLockTarget target)
         {
+            var prevTarget = currentTargetLock;
             currentTargetLock = target;
             playerManager.PlayerCamera.vCam.LookAt = lookAtTransform;
-            if (target)
+            if (target && target != prevTarget)
             {
                 playerManager.PlayerCamera.SwitchToLockFramingTransposer();
             }
-            else
+            else if(!target)
             {
                 playerManager.PlayerCamera.SwitchToThirdPersonFollow();
             }
