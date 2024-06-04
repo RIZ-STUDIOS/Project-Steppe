@@ -52,5 +52,10 @@ namespace ProjectSteppe.Entities
 
             currentWeapon.DisableColliders();
         }
+
+        public void ResetHitTimer()
+        {
+            currentWeapon.ResetHitTimer();
+        }
     }
 }

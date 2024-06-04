@@ -53,6 +53,8 @@ namespace ProjectSteppe.Entities.Player
 
         private const float _threshold = 0.3f;
 
+        private TargetLockTarget storedTarget;
+
         private void Awake()
         {
             _input = GetComponent<StarterAssetsInputs>();
@@ -286,6 +288,24 @@ namespace ProjectSteppe.Entities.Player
             }
 
             return targetLockTarget;
+        }
+
+        //Animation
+        public void StoreCurrentTarget()
+        {
+            storedTarget = currentTargetLock;
+            StopLockOn();
+            canLock = false;
+        }
+
+        public void RestoreTarget()
+        {
+            if (storedTarget)
+            {
+                SetLockTarget(storedTarget);
+                SetLockOn(true);
+            }
+            canLock = true;
         }
     }
 }
