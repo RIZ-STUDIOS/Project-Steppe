@@ -4,11 +4,12 @@ namespace ProjectSteppe.Audio
 {
     public class SoundPlayer : MonoBehaviour
     {
+        public bool getChildren;
         public AudioSource[] sounds;
 
         private void Awake()
         {
-            sounds = GetComponentsInChildren<AudioSource>();
+            if (getChildren) sounds = GetComponentsInChildren<AudioSource>();
         }
 
         public void PlayRandomSound()

@@ -827,6 +827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977c619898071e644b93d4e11256d0bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  getChildren: 1
   sounds:
   - {fileID: 425934829761233505}
   - {fileID: 4189989839656864567}
@@ -6738,6 +6739,7 @@ Transform:
   - {fileID: 3571247742876082071}
   - {fileID: 8750037304722699098}
   - {fileID: 4266660001888620951}
+  - {fileID: 8081102888268905587}
   m_Father: {fileID: 9220824021073745363}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1531290705204611890
@@ -6892,7 +6894,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 801f0dd137be7f849b8b81dafb0c0bdf, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -7437,6 +7439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977c619898071e644b93d4e11256d0bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  getChildren: 1
   sounds:
   - {fileID: 9055484433518868535}
   - {fileID: 5112095193296897339}
@@ -9190,6 +9193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977c619898071e644b93d4e11256d0bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  getChildren: 1
   sounds: []
 --- !u!1 &3203884060192976270
 GameObject:
@@ -12876,6 +12880,7 @@ GameObject:
   - component: {fileID: 5229627897446809193}
   - component: {fileID: 7931571383535912719}
   - component: {fileID: 5253185858980636403}
+  - component: {fileID: 1523574760915350386}
   m_Layer: 11
   m_Name: Boss Amr
   m_TagString: Untagged
@@ -13256,6 +13261,21 @@ MonoBehaviour:
   distanceToTargetToAttack: 2.5
   distanceToTargetToChase: 6
   RotationSmoothTime: 0.12
+--- !u!114 &1523574760915350386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6174741706873425927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977c619898071e644b93d4e11256d0bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  getChildren: 0
+  sounds:
+  - {fileID: 7020401660672742041}
 --- !u!1 &6189992602926585263
 GameObject:
   m_ObjectHideFlags: 0
@@ -14554,6 +14574,135 @@ AudioSource:
     - serializedVersion: 3
       time: 0
       value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!1 &7299633385435404907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8081102888268905587}
+  - component: {fileID: 7020401660672742041}
+  m_Layer: 11
+  m_Name: Enrage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8081102888268905587
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299633385435404907}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2808621242541774607}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &7020401660672742041
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299633385435404907}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -1431711852814478582, guid: eb6142622e5aa58488bd8607f1654fa2,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 930fe01c5a132d04681e6da1085ef102, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 0.8
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.8
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -17255,6 +17404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977c619898071e644b93d4e11256d0bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  getChildren: 1
   sounds:
   - {fileID: 3719048604479434442}
   - {fileID: 3797418468222400646}
