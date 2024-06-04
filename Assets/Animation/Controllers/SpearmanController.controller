@@ -121,12 +121,12 @@ AnimatorStateMachine:
   - {fileID: -773957122489608024}
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 9175449243001072502}
-    second:
-    - {fileID: -6097120537030035150}
   - first: {fileID: 4836490349254023848}
     second:
     - {fileID: -378769646971900933}
+  - first: {fileID: 9175449243001072502}
+    second:
+    - {fileID: -6097120537030035150}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 820, y: 80, z: 0}
   m_EntryPosition: {x: 230, y: 330, z: 0}
@@ -2468,7 +2468,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e89cbbb1d0049f94d9d44bbfe0b5f357, type: 3}
   m_Name: 
