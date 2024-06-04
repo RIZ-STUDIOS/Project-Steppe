@@ -32,7 +32,7 @@ namespace ProjectSteppe.Entities.Player
 
         [Header("Camera")]
 
-        public Camera playerCamera;
+        private Camera playerCamera;
 
         [Tooltip("How far in degrees can you move the camera up")]
         public float TopClamp = 70.0f;
@@ -114,7 +114,11 @@ namespace ProjectSteppe.Entities.Player
             virtualCamera = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
             playerManager = GetComponent<PlayerManager>();
             playerManager.onCapabilityChange.AddListener(OnPlayerCapability);
+            playerCamera = playerManager.PlayerCamera.mainCamera;
+        }
 
+        private void Start()
+        {
             _cinemachineTargetYaw = transform.eulerAngles.y;
         }
 
@@ -395,8 +399,8 @@ namespace ProjectSteppe.Entities.Player
             }
 
             // clamp our rotations so our values are limited 360 degrees
-            //_cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
-            //_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
+            _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
+            _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
 
             // Cinemachine will follow this target
             virtualCamera.Follow.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + 0,

@@ -1,3 +1,4 @@
+using Cinemachine;
 using ProjectSteppe.Managers;
 using ProjectSteppe.UI;
 using StarterAssets;
@@ -18,8 +19,7 @@ namespace ProjectSteppe.Entities.Player
         private PlayerMovementController playerMovementController;
         private PlayerInventory playerInventory;
         private PlayerUsableItemSlot playerUsableItemSlot;
-
-        public Transform bossTeleportTransform;
+        private CinemachineVirtualCamera virtualCamera;
 
         public TargetLock PlayerTargetLock => this.GetComponentIfNull(ref playerTargetLock);
         public Animator PlayerAnimator => this.GetComponentIfNull(ref playerAnimator);
@@ -31,6 +31,17 @@ namespace ProjectSteppe.Entities.Player
         public PlayerMovementController PlayerMovement => this.GetComponentIfNull(ref playerMovementController);
         public PlayerInventory PlayerInventory => this.GetComponentIfNull(ref playerInventory);
         public PlayerUsableItemSlot PlayerUsableItemSlot => this.GetComponentIfNull(ref playerUsableItemSlot);
+        public CinemachineVirtualCamera VirtualCamera
+        {
+            get
+            {
+                if (!virtualCamera)
+                {
+                    virtualCamera = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
+                }
+                return virtualCamera;
+            }
+        }
 
 
         private PlayerCapability capabilities = (PlayerCapability)0b111111;

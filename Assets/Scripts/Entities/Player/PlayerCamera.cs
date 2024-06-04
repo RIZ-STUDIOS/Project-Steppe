@@ -9,7 +9,9 @@ namespace ProjectSteppe.Entities.Player
     {
         public CinemachineVirtualCamera vCam;
 
-        public Transform mainCameraTransform;
+        public Transform MainCameraTransform => mainCamera.transform;
+
+        public Camera mainCamera;
 
         [SerializeField]
         private CameraDataScriptableObject thirdPersonFollow;
@@ -37,8 +39,8 @@ namespace ProjectSteppe.Entities.Player
                 vCam.PreviousStateIsValid = false;
                 lerpCameraCoroutine = null;
             }
-            var startPos = mainCameraTransform.position;
-            var startRot = mainCameraTransform.rotation;
+            var startPos = MainCameraTransform.position;
+            var startRot = MainCameraTransform.rotation;
             thirdPersonFollow.ApplyCameraData(vCam);
             vCam.PreviousStateIsValid = false;
 
@@ -49,8 +51,8 @@ namespace ProjectSteppe.Entities.Player
         {
             yield return null;
             vCam.enabled = false;
-            var endPosition = mainCameraTransform.position;
-            var endRotation = mainCameraTransform.rotation;
+            var endPosition = MainCameraTransform.position;
+            var endRotation = MainCameraTransform.rotation;
             Vector3 pos = startPosition;
             Quaternion rot = startRosition;
             float time = 0;
@@ -61,8 +63,8 @@ namespace ProjectSteppe.Entities.Player
 
                 time += Time.deltaTime / lerpTime;
 
-                mainCameraTransform.position = pos;
-                mainCameraTransform.rotation = rot;
+                MainCameraTransform.position = pos;
+                MainCameraTransform.rotation = rot;
 
                 yield return null;
             }
@@ -79,8 +81,8 @@ namespace ProjectSteppe.Entities.Player
                 vCam.PreviousStateIsValid = false;
                 lerpCameraCoroutine = null;
             }
-            var startPos = mainCameraTransform.position;
-            var startRot = mainCameraTransform.rotation;
+            var startPos = MainCameraTransform.position;
+            var startRot = MainCameraTransform.rotation;
             lockFramingTransposer.ApplyCameraData(vCam);
             vCam.PreviousStateIsValid = false;
 

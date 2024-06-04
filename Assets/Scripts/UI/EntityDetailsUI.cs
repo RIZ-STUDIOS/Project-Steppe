@@ -11,7 +11,9 @@ namespace ProjectSteppe.UI
         private EntityHealthUI healthUI;
 
         [SerializeField]
-        private EntityBalanceUI balanceUI;  
+        private EntityBalanceUI balanceUI;
+
+        private Coroutine showCoroutine;
 
         private bool shown;
 
@@ -22,16 +24,22 @@ namespace ProjectSteppe.UI
 
         public void ShowDetails()
         {
-            if (shown) return;
-            shown = true;
-            StartCoroutine(canvasGroup.FadeIn());
+            if(showCoroutine != null)
+            {
+                StopCoroutine(showCoroutine);
+                showCoroutine = null;
+            }
+            showCoroutine = StartCoroutine(canvasGroup.FadeIn());
         }
 
         public void HideDetails()
         {
-            if (!shown) return;
-            shown = false;
-            StartCoroutine(canvasGroup.FadeOut());
+            if (showCoroutine != null)
+            {
+                StopCoroutine(showCoroutine);
+                showCoroutine = null;
+            }
+            showCoroutine = StartCoroutine(canvasGroup.FadeOut());
         }
     }
 }

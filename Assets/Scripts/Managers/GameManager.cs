@@ -1,6 +1,7 @@
 using ProjectSteppe.Entities.Player;
 using ProjectSteppe.Saving;
 using RicTools.Managers;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -38,7 +39,8 @@ namespace ProjectSteppe.Managers
 
         public PlayerManager playerManager;
 
-        public int currentDeviceIndex = 0;
+        [System.NonSerialized]
+        public List<TargetLockTarget> visibleTargets = new List<TargetLockTarget>();
 
         protected override void Awake()
         {
@@ -49,7 +51,7 @@ namespace ProjectSteppe.Managers
             SceneManager.sceneLoaded += GetTMPUGUIs;
 
             GetTMPUGUIs(default, 0);
-            OnDeviceChange(default, 0, InputSystem.devices[currentDeviceIndex]);
+            OnDeviceChange(default, 0, InputSystem.devices[0]);
 
             SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -111,7 +113,7 @@ namespace ProjectSteppe.Managers
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             GetTMPUGUIs(default, 0);
-            OnDeviceChange(default, 0, InputSystem.devices[currentDeviceIndex]);
+            OnDeviceChange(default, 0, InputSystem.devices[0]);
         }
 
 #if UNITY_EDITOR

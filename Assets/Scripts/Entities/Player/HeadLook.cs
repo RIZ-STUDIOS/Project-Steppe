@@ -13,7 +13,7 @@ namespace ProjectSteppe
         private void Awake()
         {
             playerManager = GetComponentInParent<PlayerManager>();
-            mainCam = playerManager.PlayerCamera.mainCameraTransform;
+            mainCam = playerManager.PlayerCamera.MainCameraTransform;
         }
 
         private void Update()

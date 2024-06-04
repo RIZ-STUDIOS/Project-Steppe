@@ -14,6 +14,7 @@ namespace StarterAssets
         [Header("Character Input Values")]
         public Vector2 move;
         public Vector2 look;
+        public Vector2 targetLook;
         public bool jump;
         public bool sprint;
         public bool dash;
@@ -99,6 +100,7 @@ namespace StarterAssets
         public void LookInput(Vector2 newLookDirection)
         {
             look = newLookDirection;
+            targetLook = newLookDirection;
         }
 
         public void JumpInput(bool newJumpState)

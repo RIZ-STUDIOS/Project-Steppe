@@ -1,7 +1,10 @@
+using ProjectSteppe.Managers;
 using ProjectSteppe.Utilities;
 using StarterAssets;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 namespace ProjectSteppe.Entities.Player
@@ -10,24 +13,19 @@ namespace ProjectSteppe.Entities.Player
     {
         private StarterAssetsInputs _input;
 
-        [System.NonSerialized]
-        public Transform lookAtTransform;
+        public Transform lookAtTransform => currentTargetLock ? currentTargetLock.transform : null;
+
+        private TargetLockTarget currentTargetLock;
+
         private PlayerMovementController playerMovement;
         private PlayerManager playerManager;
 
-        /*[SerializeField]
-        private Transform bossTransform;*/
+        private PlayerInput playerInput;
 
         [System.NonSerialized]
         public bool lockOn;
 
         private bool justLocked;
-
-        [SerializeField]
-        private LayerMask targetLockLayer;
-
-        [SerializeField]
-        private float maxConeRadius;
 
         [SerializeField]
         [FormerlySerializedAs("maxConeLength")]
@@ -36,11 +34,12 @@ namespace ProjectSteppe.Entities.Player
         [SerializeField]
         private float lockOffDistance;
 
-        [SerializeField]
-        private float coneAngle;
+        private Camera playerCamera;
 
         [SerializeField]
-        private Camera playerCamera;
+        private float cameraMoveLockOnTimer;
+
+        private float cameraMoveLockOnTime;
 
         public UnityEvent onLockStateChange;
 
@@ -48,11 +47,15 @@ namespace ProjectSteppe.Entities.Player
 
         public Vector3 CameraToTargetDistance { get; private set; }
 
+        private const float _threshold = 0.1f;
+
         private void Awake()
         {
             _input = GetComponent<StarterAssetsInputs>();
+            playerInput = GetComponent<PlayerInput>();
             playerMovement = GetComponent<PlayerMovementController>();
             playerManager = GetComponent<PlayerManager>();
+            playerCamera = playerManager.PlayerCamera.mainCamera;
             playerManager.PlayerEntity.EntityHealth.onKill.AddListener(() =>
             {
                 StopLockOn();
@@ -74,8 +77,13 @@ namespace ProjectSteppe.Entities.Player
 
             if (_input.targetLock && !justLocked && canLock)
             {
-                AttemptLockOn();
-                justLocked = true;
+                if (!lockOn)
+                    TryLockOn();
+                else
+                {
+                    StopLockOn();
+                    justLocked = true;
+                }
             }
 
             if (lookAtTransform)
@@ -85,12 +93,59 @@ namespace ProjectSteppe.Entities.Player
 
             if (lockOn && !lookAtTransform)
             {
-                StopLockOn();
+                TryLockOn();
             }
 
-            if(lookAtTransform && Vector3.Distance(transform.position, lookAtTransform.position) > lockOnDistance)
+            if (lookAtTransform && Vector3.Distance(transform.position, lookAtTransform.position) > lockOffDistance)
             {
                 StopLockOn();
+                justLocked = true;
+            }
+
+            if (cameraMoveLockOnTime <= 0 && lockOn && _input.targetLook.sqrMagnitude >= _threshold)
+            {
+                //Don't multiply mouse input by Time.deltaTime;
+                float deltaTimeMultiplier = playerInput.currentControlScheme == "KeyboardMouse" ? 1.0f : Time.deltaTime;
+
+                AttemptLockOn(_input.targetLook);
+                cameraMoveLockOnTime = cameraMoveLockOnTimer;
+                justLocked = true;
+                _input.targetLook = Vector2.zero;
+
+                //Debug.Log($"X: {_input.look.x * deltaTimeMultiplier} Y: {_input.look.y * deltaTimeMultiplier}");
+            }
+
+            if (cameraMoveLockOnTime > 0)
+            {
+                cameraMoveLockOnTime -= Time.deltaTime;
+            }
+        }
+
+        private void TryLockOn()
+        {
+            AttemptLockOn();
+            justLocked = true;
+        }
+
+        private void AttemptLockOn(Vector2 offset)
+        {
+            if (lockOn)
+            {
+                var targetLockTarget = GetClosestTarget(offset);
+                if (targetLockTarget && targetLockTarget.lookAtTransform != lookAtTransform)
+                {
+                    SetLockTarget(targetLockTarget);
+                    SetLockOn(true);
+                }
+            }
+            else
+            {
+                var targetLockTarget = GetClosestTarget(offset);
+                if (targetLockTarget)
+                {
+                    SetLockTarget(targetLockTarget);
+                    SetLockOn(true);
+                }
             }
         }
 
@@ -101,7 +156,7 @@ namespace ProjectSteppe.Entities.Player
                 var targetLockTarget = StartLockOn();
                 if (targetLockTarget && targetLockTarget.lookAtTransform != lookAtTransform)
                 {
-                    SetLockTarget(targetLockTarget.lookAtTransform);
+                    SetLockTarget(targetLockTarget);
                     SetLockOn(true);
                 }
                 else
@@ -114,7 +169,7 @@ namespace ProjectSteppe.Entities.Player
                 var targetLockTarget = StartLockOn();
                 if (targetLockTarget)
                 {
-                    SetLockTarget(targetLockTarget.lookAtTransform);
+                    SetLockTarget(targetLockTarget);
                     SetLockOn(true);
                 }
             }
@@ -122,7 +177,7 @@ namespace ProjectSteppe.Entities.Player
 
         private TargetLockTarget StartLockOn()
         {
-            var hits = ConeCastExtension.ConeCastAll(playerMovement.playerCamera.transform.position, maxConeRadius, playerMovement.playerCamera.transform.forward, lockOnDistance, coneAngle, targetLockLayer);
+            /*var hits = ConeCastExtension.ConeCastAll(playerMovement.playerCamera.transform.position, maxConeRadius, playerMovement.playerCamera.transform.forward, lockOnDistance, coneAngle, targetLockLayer);
             int index = -1;
             float angle = float.MaxValue;
             for (int i = 0; i < hits.Length; i++)
@@ -142,8 +197,8 @@ namespace ProjectSteppe.Entities.Player
             }
             if (index == -1) return null;
             var lookHit = hits[index];
-            var targetLockTarget = lookHit.collider.GetComponentInParent<TargetLockTarget>();
-            return targetLockTarget;
+            var targetLockTarget = lookHit.collider.GetComponentInParent<TargetLockTarget>();*/
+            return GetClosestTarget(Vector2.zero);
         }
 
         private void StopLockOn()
@@ -162,18 +217,54 @@ namespace ProjectSteppe.Entities.Player
             onLockStateChange.Invoke();
         }
 
-        private void SetLockTarget(Transform target)
+        private void SetLockTarget(TargetLockTarget target)
         {
-            lookAtTransform = target;
-            playerManager.PlayerCamera.vCam.LookAt = target;
-            if (target)
+            var prevTarget = currentTargetLock;
+            currentTargetLock = target;
+            playerManager.PlayerCamera.vCam.LookAt = lookAtTransform;
+            if (target && target != prevTarget)
             {
                 playerManager.PlayerCamera.SwitchToLockFramingTransposer();
             }
-            else
+            else if(!target)
             {
                 playerManager.PlayerCamera.SwitchToThirdPersonFollow();
             }
+        }
+
+        private TargetLockTarget GetClosestTarget()
+        {
+            return GetClosestTarget(Vector2.zero);
+        }
+
+        private TargetLockTarget GetClosestTarget(Vector2 dir)
+        {
+            var viewPortPosition = new Vector3(0.5f, 0.5f, 0);
+            if (currentTargetLock)
+                viewPortPosition = currentTargetLock.ViewPortPosition;// + new Vector3(dir.x, dir.y);
+            bool anyDir = dir == Vector2.zero;
+            // True = Right False = Left
+            bool leftRight = dir.x > 0f;
+
+            float distance = float.MaxValue;
+            TargetLockTarget targetLockTarget = null;
+
+            foreach(var target in GameManager.Instance.visibleTargets)
+            {
+                if (target.ViewPortPosition.z >= lockOnDistance || target == currentTargetLock) continue;
+                Vector2 temp = viewPortPosition;
+                Vector2 temp2 = target.ViewPortPosition;
+                if (anyDir || (((leftRight && temp2.x > temp.x) || (!leftRight && temp2.x < temp.x)))){
+                    var tempDistance = Vector2.Distance(temp, temp2);
+                    if (tempDistance < distance)
+                    {
+                        distance = tempDistance;
+                        targetLockTarget = target;
+                    }
+                }
+            }
+
+            return targetLockTarget;
         }
     }
 }
