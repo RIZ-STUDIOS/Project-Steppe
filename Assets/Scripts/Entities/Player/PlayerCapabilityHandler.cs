@@ -26,8 +26,9 @@ namespace ProjectSteppe
 
         public void SlowTime()
         {
-            return;
+#if UNITY_EDITOR
             Time.timeScale = .1f;
+#endif
         }
     }
 }
