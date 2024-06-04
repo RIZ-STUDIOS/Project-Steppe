@@ -1458,6 +1458,7 @@ MonoBehaviour:
   hitEntity: {fileID: 0}
   ignoreTimer: 0.5
   trailRenderer: {fileID: 4376065524931793599}
+  weaponMeshRenderer: {fileID: 0}
 --- !u!65 &8011931193266729857
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13097,7 +13098,6 @@ MonoBehaviour:
   normalBlockColor: {r: 1, g: 0, b: 0, a: 0}
   perfectBlockColor: {r: 1, g: 0.73324853, b: 0, a: 0}
   blockFX: []
-  unblockableFX: []
   OnBlockStart:
     m_PersistentCalls:
       m_Calls: []
@@ -13728,6 +13728,7 @@ MonoBehaviour:
   hitEntity: {fileID: 0}
   ignoreTimer: 0.5
   trailRenderer: {fileID: 1158312329844842992}
+  weaponMeshRenderer: {fileID: 3301100736138258365}
 --- !u!136 &7016134729572656116
 CapsuleCollider:
   m_ObjectHideFlags: 0
