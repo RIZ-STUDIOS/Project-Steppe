@@ -170,20 +170,20 @@ namespace ProjectSteppe
             hitEntity = null;
         }
 
-        public void ShowFernel()
+        [ContextMenu("Show Unblockable")]
+        public void ShowUnblockable()
         {
             foreach(var material in weaponMaterials)
             {
-                Debug.Log("FX!");
-                material.SetFloat("_Unblockable", 1);
+                material.EnableKeyword("_EMISSION");
             }
         }
 
-        public void HideFernel()
+        public void HideUnblockable()
         {
             foreach(var material in weaponMaterials)
             {
-                material.SetFloat("_Unblockable", 0);
+                material.DisableKeyword("_EMISSION");
             }
         }
     }

@@ -141,12 +141,12 @@ namespace ProjectSteppe.AI
 
         public void TurnOnUnblockable()
         {
-            AIEntity.EntityAttacking.CurrentWeapon.ShowFernel();
+            AIEntity.EntityAttacking.CurrentWeapon.ShowUnblockable();
         }
 
         public void TurnOffUnblockable()
         {
-            AIEntity.EntityAttacking.CurrentWeapon.HideFernel();
+            AIEntity.EntityAttacking.CurrentWeapon.HideUnblockable();
         }
 
         public void EnableRotationTowardsTarget()
