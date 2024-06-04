@@ -1362,9 +1362,9 @@ GameObject:
   - component: {fileID: 8369465796487766565}
   - component: {fileID: 8505646430873721839}
   - component: {fileID: 7019936400114263720}
-  - component: {fileID: 8011931193266729857}
-  - component: {fileID: 2570368322657699795}
   - component: {fileID: 1366269980483852906}
+  - component: {fileID: 6807958661213062000}
+  - component: {fileID: 7083147360408456120}
   m_Layer: 13
   m_Name: Maul_mesh
   m_TagString: Untagged
@@ -1451,56 +1451,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponColliders:
-  - {fileID: 8011931193266729857}
-  - {fileID: 2570368322657699795}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 1366269980483852906}
   startEnabled: 0
   hitEntity: {fileID: 0}
   ignoreTimer: 0.5
   trailRenderer: {fileID: 4376065524931793599}
   weaponMeshRenderer: {fileID: 0}
---- !u!65 &8011931193266729857
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 947103227367814659}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.15, y: 0.4, z: 0.23}
-  m_Center: {x: 0.000060884944, y: 0.02579129, z: 0.9}
---- !u!65 &2570368322657699795
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 947103227367814659}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.1, y: 0.1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0.3}
 --- !u!135 &1366269980483852906
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1516,12 +1474,58 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.1
   m_Center: {x: 0.000060884944, y: 0, z: -0.24}
+--- !u!136 &6807958661213062000
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947103227367814659}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.06
+  m_Height: 1
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.33}
+--- !u!136 &7083147360408456120
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947103227367814659}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Height: 0.45
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.02, z: 0.9}
 --- !u!1 &1049093627354643157
 GameObject:
   m_ObjectHideFlags: 0
