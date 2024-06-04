@@ -47,7 +47,8 @@ namespace ProjectSteppe.AI
                 if (aiTarget.nearbyControllers.Contains(controller))
                     aiTarget.nearbyControllers.Remove(controller);
                 OnPlayerExit(aiTarget);
-                controller.targetEntity = aiTarget.GetComponentInParent<Entity>();
+                if(aiTarget.GetComponentInParent<Entity>() == controller.targetEntity)
+                controller.targetEntity = null;
 
                 Debug.Log("Left!");
             }
