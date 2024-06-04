@@ -67,8 +67,8 @@ namespace ProjectSteppe.Entities
         public IEnumerator StaggerTimeoutIEnumerator()
         {
             health.vulnerable = true;
-            /*if (controller)
-                controller.enabled = false;*/
+            if (controller)
+                controller.enabled = false;
             navMeshAgent.enabled = false;
 
             yield return new WaitForSeconds(staggerLength);

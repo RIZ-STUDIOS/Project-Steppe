@@ -103,6 +103,7 @@ namespace ProjectSteppe.AI.States
         {
             if (currentAttack && !currentAttack.attackFinished)
             {
+                controller.UncommitToAttack();
                 currentAttack.OnForceExit();
             }
         }
