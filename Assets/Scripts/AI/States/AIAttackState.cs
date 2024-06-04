@@ -36,6 +36,7 @@ namespace ProjectSteppe.AI.States
 
         public virtual void OnForceExit()
         {
+            attackFinished = true;
             controller.AIEntity.EntityAttacking.CurrentWeapon.HideFernel();
             controller.animator.SetTrigger("ForceExit");
         }
