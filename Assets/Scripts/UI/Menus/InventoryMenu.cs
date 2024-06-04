@@ -48,7 +48,6 @@ namespace ProjectSteppe.UI.Menus
                 for (int i = invButtonGOB.transform.childCount; i < player.PlayerInventory.items.Count; i++)
                 {
                     var inventoryButton = Instantiate(buttonPrefab).GetComponent<InventoryButton>();
-                    inventoryButton.inventoryItemScriptableObject = player.PlayerInventory.items[i];
                     inventoryButton.titleText = title;
                     inventoryButton.typeText = itemType;
                     inventoryButton.bodyText = description;
@@ -60,8 +59,12 @@ namespace ProjectSteppe.UI.Menus
                 }
             }
 
+            // Sort List
+            player.PlayerInventory.items.Sort((a,b)=>a.title.CompareTo(b.title));
+
             for (int i = 0; i < player.PlayerInventory.items.Count; i++)
             {
+                buttons[i].GetComponent<InventoryButton>().UpdateData(player.PlayerInventory.items[i]);
                 var button = buttons[i];
                 button.navigation = new Navigation()
                 {

@@ -23,13 +23,14 @@ public class InventoryButton : MonoBehaviour, ISelectHandler
         icon.sprite = inventoryItemScriptableObject.icon;
     }
 
+    public void UpdateData(InventoryItemScriptableObject inventoryItem)
+    {
+        inventoryItemScriptableObject = inventoryItem;
+        buttonText.text = inventoryItemScriptableObject.title.ToUpper();
+    }
+
     private void Awake()
     {
         buttonText = GetComponentInChildren<TMP_Text>();
-    }
-
-    private void Start()
-    {
-        buttonText.text = inventoryItemScriptableObject.title.ToUpper();
     }
 }
