@@ -27,11 +27,14 @@ namespace ProjectSteppe.Entities
             if (currentWeapon)
             {
                 currentWeapon.parentEntity = null;
+                currentWeapon.HideUnblockable();
             }
 
             currentWeapon = weapon;
             if (currentWeapon)
+            {
                 currentWeapon.parentEntity = Entity;
+            }
         }
 
         public void EnableWeaponCollision()

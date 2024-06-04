@@ -32,6 +32,9 @@ namespace ProjectSteppe.Entities.Player
         private float lockOnDistance;
 
         [SerializeField]
+        private LayerMask checkObjectVisibilityLayer;
+
+        [SerializeField]
         private float lockOffDistance;
 
         private Camera playerCamera;
@@ -47,7 +50,7 @@ namespace ProjectSteppe.Entities.Player
 
         public Vector3 CameraToTargetDistance { get; private set; }
 
-        private const float _threshold = 0.1f;
+        private const float _threshold = 0.3f;
 
         private void Awake()
         {
@@ -226,7 +229,7 @@ namespace ProjectSteppe.Entities.Player
             {
                 playerManager.PlayerCamera.SwitchToLockFramingTransposer();
             }
-            else if(!target)
+            else if(!target && prevTarget != null)
             {
                 playerManager.PlayerCamera.SwitchToThirdPersonFollow();
             }
@@ -249,12 +252,20 @@ namespace ProjectSteppe.Entities.Player
             float distance = float.MaxValue;
             TargetLockTarget targetLockTarget = null;
 
-            foreach(var target in GameManager.Instance.visibleTargets)
+            foreach (var target in GameManager.Instance.visibleTargets)
             {
                 if (target.ViewPortPosition.z >= lockOnDistance || target == currentTargetLock) continue;
+                var cameraPos = GameManager.Instance.playerManager.PlayerCamera.MainCameraTransform.position;
+                var dis = (target.transform.position - cameraPos);
+                if (Physics.Raycast(cameraPos, dis, out var hitInfo, lockOnDistance, checkObjectVisibilityLayer))
+                {
+                    if (target.ViewPortPosition.z > hitInfo.distance)
+                        continue;
+                }
                 Vector2 temp = viewPortPosition;
                 Vector2 temp2 = target.ViewPortPosition;
-                if (anyDir || (((leftRight && temp2.x > temp.x) || (!leftRight && temp2.x < temp.x)))){
+                if (anyDir || (((leftRight && temp2.x > temp.x) || (!leftRight && temp2.x < temp.x))))
+                {
                     var tempDistance = Vector2.Distance(temp, temp2);
                     if (tempDistance < distance)
                     {
