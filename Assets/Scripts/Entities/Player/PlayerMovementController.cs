@@ -386,6 +386,9 @@ namespace ProjectSteppe.Entities.Player
                 _cinemachineTargetPitch = rot.x;
                 _cinemachineTargetYaw = rot.y;
 
+                if (_cinemachineTargetPitch > TopClamp)
+                    _cinemachineTargetPitch -= 360;
+
                 //Debug.Log("Pitch: " + _cinemachineTargetPitch + " Yaw: " + _cinemachineTargetYaw);
 
                 virtualCamera.Follow.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + 0,
