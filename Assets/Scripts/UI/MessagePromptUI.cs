@@ -10,6 +10,9 @@ namespace ProjectSteppe.UI
     {
         public bool isShowing;
 
+        [SerializeField]
+        private AudioSource closeAudio;
+
         private PlayerManager playerManager;
         private CanvasGroup canvasGroup;
         private Button button;
@@ -48,6 +51,7 @@ namespace ProjectSteppe.UI
             GetComponentInParent<PlayerManager>().PlayerAnimator.SetBool("Sitting", false);
 
             playerManager.PlayerInteractor.onInteractionEnded?.Invoke(.25f);
+            closeAudio.Play();
         }
     }
 }

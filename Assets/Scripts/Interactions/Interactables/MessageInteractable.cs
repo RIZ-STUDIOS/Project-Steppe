@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace ProjectSteppe.Interactions.Interactables
 {
@@ -11,9 +12,12 @@ namespace ProjectSteppe.Interactions.Interactables
         public override bool OneTime => false;
         public override bool Interacted { get; set; }
 
+        public UnityEvent OnInteract;
+
         public override void Interact()
         {
             player.PlayerUI.messagePrompt.ShowMessage(messageText);
+            OnInteract.Invoke();
         }
     }
 }
