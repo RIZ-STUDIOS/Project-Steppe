@@ -40,7 +40,7 @@ namespace ProjectSteppe.Entities
 
         public void OnPostureFull()
         {
-            animator.SetTrigger("ForceExit");
+            //animator.SetTrigger("ForceExit");
             animator.SetTrigger("ForceAnimation");
             animator.SetBool("PostureBreak", true);
             animator.SetTrigger("PostureBreak");

@@ -99,6 +99,14 @@ namespace ProjectSteppe.AI.States
             controller.RotationSmoothTime = rotationSpeed;
         }
 
+        public override void OnDisable()
+        {
+            if (currentAttack && !currentAttack.attackFinished)
+            {
+                currentAttack.OnForceExit();
+            }
+        }
+
         protected AttackState GetCopyState<AttackState>(AttackState state) where AttackState : AIAttackState
         {
             if(!state) return null;

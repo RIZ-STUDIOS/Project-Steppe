@@ -100,6 +100,12 @@ namespace ProjectSteppe.AI
             }
         }
 
+        private void OnDisable()
+        {
+            if (!currentAiState) return;
+            currentAiState.OnDisable();
+        }
+
         public void SetPathTo(Transform target)
         {
             SetPathTo(target.position);

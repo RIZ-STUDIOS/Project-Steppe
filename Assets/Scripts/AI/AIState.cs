@@ -20,5 +20,10 @@ namespace ProjectSteppe.AI
         {
 
         }
+
+        public virtual void OnDisable()
+        {
+
+        }
     }
 }
