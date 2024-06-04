@@ -21,7 +21,7 @@ MonoBehaviour:
     m_FamilyName: 
     m_StyleName: 
     m_PointSize: 0
-    m_Scale: 0
+    m_Scale: 1.5
     m_UnitsPerEM: 0
     m_LineHeight: 0
     m_AscentLine: 0
@@ -43,97 +43,97 @@ MonoBehaviour:
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 26
-    m_Scale: 1
+    m_Scale: 1.5
     m_Name: HID_0
     m_HashCode: 82911658
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 5
-    m_Scale: 1
+    m_Scale: 1.5
     m_Name: HID_1
     m_HashCode: 82911659
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 6
-    m_Scale: 1
+    m_Scale: 1.5
     m_Name: HID_2
     m_HashCode: 82911656
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 4
-    m_Scale: 1
+    m_Scale: 1.5
     m_Name: HID_3
     m_HashCode: 82911657
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 2
-    m_Scale: 1
+    m_Scale: 1.5
     m_Name: HID_4
     m_HashCode: 82911662
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 0
-    m_Scale: 1
+    m_Scale: 1.5
     m_Name: HID_5
     m_HashCode: 82911663
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 11
-    m_Scale: 1
+    m_Scale: 1.5
     m_Name: HID_6
     m_HashCode: 82911660
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 17
-    m_Scale: 1
+    m_Scale: 1.5
     m_Name: HID_7
     m_HashCode: 82911661
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 19
-    m_Scale: 1
+    m_Scale: 1.5
     m_Name: HID_8
     m_HashCode: 82911650
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 8
-    m_Scale: 1
+    m_Scale: 1.5
     m_Name: HID_9
     m_HashCode: 82911651
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 21
-    m_Scale: 1
+    m_Scale: 1.5
     m_Name: HID_10
     m_HashCode: -1558882501
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 6
-    m_Scale: 1
+    m_Scale: 1.5
     m_Name: HID_11
     m_HashCode: -1558882502
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 4
-    m_Scale: 1
+    m_Scale: 1.5
     m_Name: HID_12
     m_HashCode: -1558882503
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 9
-    m_Scale: 1
+    m_Scale: 1.5
     m_Name: HID_13
     m_HashCode: -1558882504
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 0
-    m_Scale: 1
+    m_Scale: 1.5
     m_Name: HID_14
     m_HashCode: -1558882497
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 2
-    m_Scale: 1
+    m_Scale: 1.5
     m_Name: HID_15
     m_HashCode: -1558882498
   - m_ElementType: 2
@@ -213,8 +213,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 100
       m_Height: 100
-      m_HorizontalBearingX: -50
-      m_HorizontalBearingY: 50
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 75
       m_HorizontalAdvance: 100
     m_GlyphRect:
       m_X: 0
@@ -245,8 +245,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 100
       m_Height: 100
-      m_HorizontalBearingX: -50
-      m_HorizontalBearingY: 50
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 75
       m_HorizontalAdvance: 100
     m_GlyphRect:
       m_X: 200
@@ -277,8 +277,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 100
       m_Height: 100
-      m_HorizontalBearingX: -50
-      m_HorizontalBearingY: 50
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 75
       m_HorizontalAdvance: 100
     m_GlyphRect:
       m_X: 400
@@ -293,8 +293,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 100
       m_Height: 100
-      m_HorizontalBearingX: -50
-      m_HorizontalBearingY: 50
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 75
       m_HorizontalAdvance: 100
     m_GlyphRect:
       m_X: 500
@@ -309,8 +309,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 100
       m_Height: 100
-      m_HorizontalBearingX: -50
-      m_HorizontalBearingY: 50
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 75
       m_HorizontalAdvance: 100
     m_GlyphRect:
       m_X: 0
@@ -341,8 +341,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 100
       m_Height: 100
-      m_HorizontalBearingX: -50
-      m_HorizontalBearingY: 50
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 75
       m_HorizontalAdvance: 100
     m_GlyphRect:
       m_X: 200
@@ -357,8 +357,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 100
       m_Height: 100
-      m_HorizontalBearingX: -50
-      m_HorizontalBearingY: 50
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 75
       m_HorizontalAdvance: 100
     m_GlyphRect:
       m_X: 300
@@ -389,8 +389,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 100
       m_Height: 100
-      m_HorizontalBearingX: -50
-      m_HorizontalBearingY: 50
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 75
       m_HorizontalAdvance: 100
     m_GlyphRect:
       m_X: 500
@@ -485,8 +485,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 100
       m_Height: 100
-      m_HorizontalBearingX: -50
-      m_HorizontalBearingY: 50
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 75
       m_HorizontalAdvance: 100
     m_GlyphRect:
       m_X: 500
@@ -517,8 +517,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 100
       m_Height: 100
-      m_HorizontalBearingX: -50
-      m_HorizontalBearingY: 50
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 75
       m_HorizontalAdvance: 100
     m_GlyphRect:
       m_X: 100
@@ -549,8 +549,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 100
       m_Height: 100
-      m_HorizontalBearingX: -50
-      m_HorizontalBearingY: 50
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 75
       m_HorizontalAdvance: 100
     m_GlyphRect:
       m_X: 300
@@ -629,8 +629,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 100
       m_Height: 100
-      m_HorizontalBearingX: -50
-      m_HorizontalBearingY: 50
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 75
       m_HorizontalAdvance: 100
     m_GlyphRect:
       m_X: 300
