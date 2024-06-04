@@ -132,7 +132,8 @@ namespace ProjectSteppe
                     if (parentEntity.EntityAttacking.currentAttack.balanceBlockPassthrough)
                     {
                         hitbox.ParentEntity.EntityHealth.DamageBalance(parentEntity.EntityAttacking.currentAttack.balanceDamage);
-                        hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage);                        
+                        hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage);
+                        hitbox.ParentEntity.EntityBlock.ChangeBlockColor(false);
                     }
                     else
                     {
