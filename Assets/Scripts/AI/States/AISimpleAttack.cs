@@ -48,6 +48,7 @@ namespace ProjectSteppe.AI.States
             {
                 controller.StopCoroutine(attackCoroutine);
                 controller.NavMeshAgent.nextPosition = controller.transform.position;
+                if(controller.NavMeshAgent.enabled)
                 controller.NavMeshAgent.isStopped = false;
             }
         }

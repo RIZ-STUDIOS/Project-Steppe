@@ -76,6 +76,7 @@ namespace ProjectSteppe.Entities
             health.vulnerable = false;
 
             navMeshAgent.enabled = true;
+            navMeshAgent.isStopped = false;
             /*if (controller)
                 controller.enabled = true;*/
             animator.SetBool("PostureBreak", false);
