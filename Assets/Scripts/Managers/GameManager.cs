@@ -38,6 +38,8 @@ namespace ProjectSteppe.Managers
 
         public PlayerManager playerManager;
 
+        public int currentDeviceIndex = 0;
+
         protected override void Awake()
         {
             base.Awake();
@@ -47,7 +49,7 @@ namespace ProjectSteppe.Managers
             SceneManager.sceneLoaded += GetTMPUGUIs;
 
             GetTMPUGUIs(default, 0);
-            OnDeviceChange(default, 0, InputSystem.devices[0]);
+            OnDeviceChange(default, 0, InputSystem.devices[currentDeviceIndex]);
 
             SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -109,7 +111,7 @@ namespace ProjectSteppe.Managers
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             GetTMPUGUIs(default, 0);
-            OnDeviceChange(default, 0, InputSystem.devices[0]);
+            OnDeviceChange(default, 0, InputSystem.devices[currentDeviceIndex]);
         }
 
 #if UNITY_EDITOR

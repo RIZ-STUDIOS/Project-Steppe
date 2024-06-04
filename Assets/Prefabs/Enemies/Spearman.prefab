@@ -2949,7 +2949,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5423,6 +5423,7 @@ MonoBehaviour:
   hitEntity: {fileID: 0}
   ignoreTimer: 0.5
   trailRenderer: {fileID: 277983937739042164}
+  weaponMeshRenderer: {fileID: 0}
 --- !u!136 &925164376971186421
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6008,7 +6009,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 1
   m_UseSpriteMesh: 0
@@ -6597,7 +6598,6 @@ MonoBehaviour:
   normalBlockColor: {r: 0, g: 0, b: 0, a: 0}
   perfectBlockColor: {r: 0, g: 0, b: 0, a: 0}
   blockFX: []
-  unblockableFX: []
   OnBlockStart:
     m_PersistentCalls:
       m_Calls: []
@@ -9082,6 +9082,7 @@ MonoBehaviour:
   hitEntity: {fileID: 0}
   ignoreTimer: 0.5
   trailRenderer: {fileID: 0}
+  weaponMeshRenderer: {fileID: 0}
 --- !u!64 &4679135430096147915
 MeshCollider:
   m_ObjectHideFlags: 0
