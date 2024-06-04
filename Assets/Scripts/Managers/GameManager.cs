@@ -1,5 +1,6 @@
 using ProjectSteppe.Entities.Player;
 using ProjectSteppe.Saving;
+using ProjectSteppe.UI;
 using RicTools.Managers;
 using System.Collections.Generic;
 using TMPro;
@@ -7,6 +8,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 using UnityEngine.SceneManagement;
+using UnityEngine.TextCore.Text;
 
 namespace ProjectSteppe.Managers
 {
@@ -47,11 +49,13 @@ namespace ProjectSteppe.Managers
             base.Awake();
             if (!SaveHandler.InitSave()) SaveHandler.LoadGame();
 
-            InputUser.onChange += OnDeviceChange;
+            UIPlayerInput.Instance.onControlSchemeChanged += OnDeviceChange;
+
+            //InputUser.onChange += OnDeviceChange;
             SceneManager.sceneLoaded += GetTMPUGUIs;
 
             GetTMPUGUIs(default, 0);
-            OnDeviceChange(default, 0, InputSystem.devices[0]);
+            OnDeviceChange();
 
             SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -69,9 +73,9 @@ namespace ProjectSteppe.Managers
             sceneTMPs = FindObjectsByType<TextMeshProUGUI>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         }
 
-        private void OnDeviceChange(InputUser user, InputUserChange userChange, InputDevice device)
+        private void OnDeviceChange()
         {
-            if (device == null) return;
+            //if (UIPlayerInput.Instance.currentDevice == null) return;
 
 #if UNITY_EDITOR
             if (debugInput != InputType.None)
@@ -81,39 +85,40 @@ namespace ProjectSteppe.Managers
             }
 #endif
 
-            if (userChange == InputUserChange.DevicePaired || userChange == InputUserChange.Added)
+            TMP_SpriteAsset spriteAsset;
+            if (UIPlayerInput.Instance.currentDevice != null && UIPlayerInput.Instance.controlScheme == UIPlayerInput.ControlScheme.Gamepad)
             {
-                TMP_SpriteAsset spriteAsset;
-                switch (device.description.interfaceName)
+                switch (UIPlayerInput.Instance.currentDevice.description.interfaceName)
                 {
+
                     case "HID":
                         spriteAsset = ps5;
 
                         break;
 
+                    default:
                     case "XInput":
                         spriteAsset = xbox;
 
                         break;
-
-                    default:
-                        spriteAsset = kbm;
-
-                        break;
                 }
+            }
+            else
+            {
+                spriteAsset = kbm;
+            }
 
-                foreach (var tmp in sceneTMPs)
-                {
-                    if (tmp)
-                        tmp.spriteAsset = spriteAsset;
-                }
+            foreach (var tmp in sceneTMPs)
+            {
+                if (tmp)
+                    tmp.spriteAsset = spriteAsset;
             }
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             GetTMPUGUIs(default, 0);
-            OnDeviceChange(default, 0, InputSystem.devices[0]);
+            OnDeviceChange();
         }
 
 #if UNITY_EDITOR
