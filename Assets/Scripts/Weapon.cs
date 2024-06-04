@@ -158,6 +158,12 @@ namespace ProjectSteppe
             ignoreHitCoroutine = StartCoroutine(IgnoreHits());
         }
 
+        public void ResetHitTimer()
+        {
+            if (ignoreHitCoroutine != null) StopCoroutine(ignoreHitCoroutine);
+            hitEntity = null;
+        }
+
         private IEnumerator IgnoreHits()
         {
             float timer = 0;
@@ -170,7 +176,6 @@ namespace ProjectSteppe
             hitEntity = null;
         }
 
-        [ContextMenu("Show Unblockable")]
         public void ShowUnblockable()
         {
             foreach(var material in weaponMaterials)

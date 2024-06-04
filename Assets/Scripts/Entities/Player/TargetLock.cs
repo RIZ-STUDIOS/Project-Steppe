@@ -1,3 +1,4 @@
+using Cinemachine;
 using ProjectSteppe.Managers;
 using ProjectSteppe.Utilities;
 using StarterAssets;
@@ -51,6 +52,8 @@ namespace ProjectSteppe.Entities.Player
         public Vector3 CameraToTargetDistance { get; private set; }
 
         private const float _threshold = 0.3f;
+
+        private TargetLockTarget storedTarget;
 
         private void Awake()
         {
@@ -121,6 +124,15 @@ namespace ProjectSteppe.Entities.Player
             if (cameraMoveLockOnTime > 0)
             {
                 cameraMoveLockOnTime -= Time.deltaTime;
+            }
+
+            if (lookAtTransform)
+            {
+                var distance = Vector3.Distance(transform.position, lookAtTransform.position);
+                if (distance < 8)
+                {
+                    playerManager.VirtualCamera.GetCinemachineComponent<CinemachineComposer>().m_TrackedObjectOffset.y = Mathf.Lerp(0, .4f, 1 - ((distance - 4) / 4f));
+                }
             }
         }
 
@@ -276,6 +288,24 @@ namespace ProjectSteppe.Entities.Player
             }
 
             return targetLockTarget;
+        }
+
+        //Animation
+        public void StoreCurrentTarget()
+        {
+            storedTarget = currentTargetLock;
+            StopLockOn();
+            canLock = false;
+        }
+
+        public void RestoreTarget()
+        {
+            if (storedTarget)
+            {
+                SetLockTarget(storedTarget);
+                SetLockOn(true);
+            }
+            canLock = true;
         }
     }
 }
