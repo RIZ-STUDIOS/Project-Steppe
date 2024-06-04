@@ -169,7 +169,6 @@ namespace ProjectSteppe.Entities.Player
             if (lockOn)
             {
                 var targetLockTarget = StartLockOn();
-                Debug.Log(targetLockTarget);
                 if (targetLockTarget && targetLockTarget.lookAtTransform != lookAtTransform)
                 {
                     SetLockTarget(targetLockTarget);
@@ -177,7 +176,6 @@ namespace ProjectSteppe.Entities.Player
                 }
                 else
                 {
-                    Debug.Log("Stop lockon");
                     StopLockOn();
                 }
             }
