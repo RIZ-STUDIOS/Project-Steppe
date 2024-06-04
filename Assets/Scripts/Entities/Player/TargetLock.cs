@@ -241,7 +241,7 @@ namespace ProjectSteppe.Entities.Player
             {
                 playerManager.PlayerCamera.SwitchToLockFramingTransposer();
             }
-            else if(!target && prevTarget != null)
+            else if(!target)
             {
                 playerManager.PlayerCamera.SwitchToThirdPersonFollow();
             }

@@ -220,7 +220,7 @@ namespace ProjectSteppe
             var nodeLs = node.rectTransform.localScale;
             while (node.rectTransform.localScale.x < 1.2f)
             {
-                Debug.Log(node.rectTransform.localScale);
+                //Debug.Log(node.rectTransform.localScale);
                 nodeLs.x += Time.deltaTime * .5f;
                 nodeLs.y += Time.deltaTime * .5f;
                 node.rectTransform.localScale = nodeLs;
