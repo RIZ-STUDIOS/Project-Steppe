@@ -7,7 +7,7 @@ namespace ProjectSteppe.Interactions.Interactables
     {
         [SerializeField] private string messageText;
 
-        public override string InteractText => "<sprite=8>Read Message";
+        public override string InteractText => "<sprite=9>Read Message";
 
         public override bool OneTime => false;
         public override bool Interacted { get; set; }

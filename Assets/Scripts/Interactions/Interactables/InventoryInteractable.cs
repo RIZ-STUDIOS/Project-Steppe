@@ -6,7 +6,7 @@ namespace ProjectSteppe.Interactions.Interactables
 {
     public class InventoryInteractable : Interactable
     {
-        public override string InteractText => "<sprite=8> Pick up";
+        public override string InteractText => "<sprite=9>Pick up";
 
         public override bool OneTime => true;
 
