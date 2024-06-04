@@ -1,3 +1,4 @@
+using Cinemachine;
 using ProjectSteppe.Managers;
 using ProjectSteppe.Utilities;
 using StarterAssets;
@@ -121,6 +122,15 @@ namespace ProjectSteppe.Entities.Player
             if (cameraMoveLockOnTime > 0)
             {
                 cameraMoveLockOnTime -= Time.deltaTime;
+            }
+
+            if (lookAtTransform)
+            {
+                var distance = Vector3.Distance(transform.position, lookAtTransform.position);
+                if (distance < 8)
+                {
+                    playerManager.VirtualCamera.GetCinemachineComponent<CinemachineComposer>().m_TrackedObjectOffset.y = Mathf.Lerp(0, .4f, 1 - ((distance - 4) / 4f));
+                }
             }
         }
 

@@ -35,5 +35,10 @@ namespace ProjectSteppe
                     GameManager.Instance.visibleTargets.Remove(this);
             }
         }
+
+        private void OnDestroy()
+        {
+            GameManager.Instance.visibleTargets.Remove(this);
+        }
     }
 }
