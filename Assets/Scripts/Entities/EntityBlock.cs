@@ -31,6 +31,21 @@ namespace ProjectSteppe.Entities
         public UnityEvent OnBlockAttack;
         public UnityEvent OnParryAttack;
 
+        public float parryGracePeriod = 0.2f;
+        private bool parryGrace;
+        private float parryTime;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            OnParryAttack.AddListener(EnableParryGrace);
+        }
+
+        private void EnableParryGrace()
+        {
+            parryGrace = true;
+        }
+
         [ContextMenu("Start Block")]
         public void StartBlock()
         {
@@ -48,7 +63,7 @@ namespace ProjectSteppe.Entities
 
         public bool IsPerfectBlock()
         {
-            return blocking && blockTime <= perfectBlockTimeWindow;
+            return blocking && blockTime <= perfectBlockTimeWindow || parryGrace;
         }
 
         private void Update()
@@ -56,6 +71,17 @@ namespace ProjectSteppe.Entities
             if (blocking)
             {
                 blockTime += Time.deltaTime;
+            }
+
+            if (parryGrace)
+            {
+                parryTime += Time.deltaTime;
+
+                if (parryTime >= parryGracePeriod)
+                {
+                    parryTime = 0;
+                    parryGrace = false;
+                }
             }
         }
 
