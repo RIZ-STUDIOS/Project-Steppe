@@ -23,7 +23,15 @@ namespace ProjectSteppe.Interactions.Interactables
         [SerializeField] private AudioSource initialBlastSound;
         [SerializeField] private AudioSource checkpointLoop;
 
-        public override string InteractText => Interacted ? "<sprite=9>Rest" : "<sprite=9>Kindle Respite";
+        public override string InteractText
+        {
+            get
+            {
+                if (player.bossDead) return "<sprite=9>Respawn Foes";
+                if (Interacted) return "<sprite=9>Rest";
+                return "<sprite=9>Kindle Respite";
+            }
+        }
 
         public override bool OneTime => false;
         public override bool Interacted { get; set; }
