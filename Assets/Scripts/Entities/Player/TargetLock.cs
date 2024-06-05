@@ -55,6 +55,13 @@ namespace ProjectSteppe.Entities.Player
 
         private TargetLockTarget storedTarget;
 
+        [Header("Target Lock Close Up")]
+        [SerializeField]
+        private float startDistance = 8;
+
+        [SerializeField]
+        private float endDistance = 4;
+
         private void Awake()
         {
             _input = GetComponent<StarterAssetsInputs>();
@@ -129,9 +136,9 @@ namespace ProjectSteppe.Entities.Player
             if (lookAtTransform)
             {
                 var distance = Vector3.Distance(transform.position, lookAtTransform.position);
-                if (distance < 8)
+                if (distance < startDistance)
                 {
-                    playerManager.PlayerCamera.cinemachineCameraOffset.m_Offset.y = -Mathf.Lerp(0, .35f, 1 - ((distance - 4) / 4f));
+                    playerManager.PlayerCamera.cinemachineCameraOffset.m_Offset.y = -Mathf.Lerp(0, .35f, 1 - ((distance - endDistance) / (startDistance - endDistance)));
                 }
                 else
                 {
