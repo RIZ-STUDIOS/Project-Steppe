@@ -1,10 +1,12 @@
 using ProjectSteppe.Entities.Player;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.UI.Extensions;
 
 namespace ProjectSteppe.UI.Menus
 {
@@ -30,6 +32,14 @@ namespace ProjectSteppe.UI.Menus
 
         private List<Button> buttons = new List<Button>();
 
+        [SerializeField]
+        private UIScrollToSelection itemScroller;
+
+        protected override void Awake()
+        {
+            base.Awake();
+        }
+
         protected override void ShowMenu()
         {
             SetupInventoryItems();
@@ -38,6 +48,7 @@ namespace ProjectSteppe.UI.Menus
 
         protected override void OnCancelPerformed(InputAction.CallbackContext callbackContext)
         {
+            itemScroller.enabled = false;
             SetMenu(previousMenu);
         }
 
@@ -74,6 +85,14 @@ namespace ProjectSteppe.UI.Menus
                 };
             }
             EventSystem.current.SetSelectedGameObject(buttons[0].gameObject);
+
+            StartCoroutine(StartScroller());
+        }
+
+        private IEnumerator StartScroller()
+        {
+            yield return null;
+            itemScroller.enabled = true;
         }
     }
 }
