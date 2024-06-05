@@ -17,6 +17,7 @@ namespace ProjectSteppe.Entities.Player
         private int animIDNextAttack;
         private int animIDBlocking;
 
+        private bool canBlock = true;
         private bool attacking;
         private bool blocking;
 
@@ -76,7 +77,7 @@ namespace ProjectSteppe.Entities.Player
 
         private void Block()
         {
-            if (input.blocking && playerManager.HasCapability(PlayerCapability.Attack))
+            if (input.blocking && playerManager.HasCapability(PlayerCapability.Attack) && canBlock)
             {
                 if (attacking)
                 {
@@ -98,7 +99,7 @@ namespace ProjectSteppe.Entities.Player
                     Entity.EntityBlock.EndBlock();
                 }
             }
-            blocking = input.blocking && playerManager.HasCapability(PlayerCapability.Attack);
+            blocking = input.blocking && playerManager.HasCapability(PlayerCapability.Attack) && canBlock;
             animator.SetBool(animIDBlocking, blocking);
         }
 
@@ -113,6 +114,22 @@ namespace ProjectSteppe.Entities.Player
             Debug.Log("Combo disabled");
             canCombo = false;
             animator.SetBool(animIDAttacking, false);
+        }
+
+        private void EnableBlocking()
+        {
+            canBlock = true;
+        }
+
+        private void DisableBlocking()
+        {
+            canBlock = false;
+            if (blocking)
+            {
+                Entity.EntityBlock.EndBlock();
+                blocking = false;
+                animator.SetBool(animIDBlocking, blocking);
+            }
         }
 
         public void RestartAttack()
