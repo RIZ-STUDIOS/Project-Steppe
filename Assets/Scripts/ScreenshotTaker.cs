@@ -34,7 +34,7 @@ namespace ProjectSteppe
                 canvases.Clear();
                 foreach(var canvas in c)
                 {
-                    if(canvas.renderMode != RenderMode.WorldSpace)
+                    if(canvas.renderMode != RenderMode.WorldSpace && canvas.enabled)
                     {
                         canvases.Add(canvas);
                         canvas.enabled = false;
