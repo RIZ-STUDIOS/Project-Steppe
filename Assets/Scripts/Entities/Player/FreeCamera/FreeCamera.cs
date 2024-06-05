@@ -18,7 +18,15 @@ namespace ProjectSteppe
         private FreeCameraInput input;
 
         [SerializeField]
-        private float speed = 5;
+        private float speed = 10;
+
+        [SerializeField]
+        private float verticalSpeed = 10;
+
+        [SerializeField]
+        private float speedDownMultipler = 0.5f;
+
+        private float speedMultiplier = 1;
 
         private Vector2 moveVector;
         private float verticalMovement;
@@ -36,8 +44,13 @@ namespace ProjectSteppe
 
         private bool playerMovementEnabled;
 
+        private List<Canvas> canvases = new List<Canvas>();
+
+        private ScreenshotTaker screenshotTaker;
+
         private void Awake()
         {
+            screenshotTaker = GetComponent<ScreenshotTaker>();
             brain = GetComponent<CinemachineBrain>();
             input = new FreeCameraInput();
             instance = this;
@@ -48,6 +61,24 @@ namespace ProjectSteppe
             input.Player.Look.performed += Look_performed;
             input.Player.Look.canceled += Look_canceled;
             input.Player.Back.performed += Back_performed;
+            input.Player.Screenshot.performed += Screenshot_performed;
+            input.Player.SlowDown.performed += SlowDown_performed;
+            input.Player.SlowDown.canceled += SlowDown_canceled;
+        }
+
+        private void SlowDown_canceled(InputAction.CallbackContext obj)
+        {
+            speedMultiplier = 1;
+        }
+
+        private void SlowDown_performed(InputAction.CallbackContext obj)
+        {
+            speedMultiplier = speedDownMultipler;
+        }
+
+        private void Screenshot_performed(InputAction.CallbackContext obj)
+        {
+            screenshotTaker.TakeScreenshot();
         }
 
         private void Back_performed(InputAction.CallbackContext obj)
@@ -99,8 +130,10 @@ namespace ProjectSteppe
             yaw = ClampAngle(yaw, float.MinValue, float.MaxValue);
             pitch = ClampAngle(pitch, -80, 80);
 
+            transform.rotation = Quaternion.Euler(0, yaw, 0);
+            transform.Translate(new Vector3(moveVector.x, 0, moveVector.y) * speed * speedMultiplier * Time.unscaledDeltaTime);
+            transform.Translate(new Vector3(0, verticalMovement, 0) * verticalSpeed * speedMultiplier * Time.unscaledDeltaTime);
             transform.rotation = Quaternion.Euler(pitch, yaw, 0);
-            transform.Translate(new Vector3(moveVector.x, verticalMovement, moveVector.y) * speed * Time.unscaledDeltaTime);
         }
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
@@ -119,6 +152,18 @@ namespace ProjectSteppe
             yaw = transform.eulerAngles.y;
             playerMovementEnabled = GameManager.Instance.playerManager.PlayerMovement.enabled;
             GameManager.Instance.playerManager.PlayerMovement.enabled = false;
+            canvases.Clear();
+
+            var c = GameObject.FindObjectsOfType<Canvas>();
+
+            foreach(var canvas in c)
+            {
+                if(canvas.renderMode != RenderMode.WorldSpace && canvas.enabled)
+                {
+                    canvas.enabled = false;
+                    canvases.Add(canvas);
+                }
+            }
         }
 
         private void OnDisable()
@@ -126,6 +171,11 @@ namespace ProjectSteppe
             GameManager.Instance.playerManager.PlayerMovement.enabled = playerMovementEnabled;
             brain.enabled = true;
             input.Disable();
+
+            foreach (var canvas in canvases)
+            {
+                canvas.enabled = true;
+            }
         }
     }
 }

@@ -39,6 +39,24 @@ namespace ProjectSteppe.Inputs
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""Screenshot"",
+                    ""type"": ""Button"",
+                    ""id"": ""672bed15-fea4-44a5-bbb4-efa8414dd639"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SlowDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""764d2dbc-43b0-41b9-9f96-71b0d1f7a610"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Look"",
                     ""type"": ""Value"",
                     ""id"": ""2690c379-f54d-45be-a724-414123833eb4"",
@@ -246,7 +264,7 @@ namespace ProjectSteppe.Inputs
                 {
                     ""name"": ""negative"",
                     ""id"": ""4fd4d269-a11a-4eac-81ff-0884da6c1d61"",
-                    ""path"": ""<Keyboard>/shift"",
+                    ""path"": ""<Keyboard>/ctrl"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
@@ -257,7 +275,7 @@ namespace ProjectSteppe.Inputs
                 {
                     ""name"": ""positive"",
                     ""id"": ""ed8216c9-6e92-4e82-8a82-7b60b5042f08"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
@@ -279,7 +297,7 @@ namespace ProjectSteppe.Inputs
                 {
                     ""name"": ""negative"",
                     ""id"": ""df011c84-5282-441a-ba73-48df9bc0a208"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -290,13 +308,57 @@ namespace ProjectSteppe.Inputs
                 {
                     ""name"": ""positive"",
                     ""id"": ""27c4d96a-9ac5-4294-ae98-1e30e26c5b31"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Vertical"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8ba4292a-6a27-44cb-b967-595ffb5b4e24"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Screenshot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""27817cb8-9042-4448-87a0-2be2623d7275"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Screenshot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9bf8a7ff-b3e3-4d3a-b7da-15d43b90cfc8"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""SlowDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""05dea095-1447-4471-a274-c6ec297db051"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SlowDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -354,6 +416,8 @@ namespace ProjectSteppe.Inputs
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+            m_Player_Screenshot = m_Player.FindAction("Screenshot", throwIfNotFound: true);
+            m_Player_SlowDown = m_Player.FindAction("SlowDown", throwIfNotFound: true);
             m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             m_Player_Back = m_Player.FindAction("Back", throwIfNotFound: true);
             m_Player_Vertical = m_Player.FindAction("Vertical", throwIfNotFound: true);
@@ -419,6 +483,8 @@ namespace ProjectSteppe.Inputs
         private readonly InputActionMap m_Player;
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
         private readonly InputAction m_Player_Move;
+        private readonly InputAction m_Player_Screenshot;
+        private readonly InputAction m_Player_SlowDown;
         private readonly InputAction m_Player_Look;
         private readonly InputAction m_Player_Back;
         private readonly InputAction m_Player_Vertical;
@@ -427,6 +493,8 @@ namespace ProjectSteppe.Inputs
             private @FreeCameraInput m_Wrapper;
             public PlayerActions(@FreeCameraInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Player_Move;
+            public InputAction @Screenshot => m_Wrapper.m_Player_Screenshot;
+            public InputAction @SlowDown => m_Wrapper.m_Player_SlowDown;
             public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputAction @Back => m_Wrapper.m_Player_Back;
             public InputAction @Vertical => m_Wrapper.m_Player_Vertical;
@@ -442,6 +510,12 @@ namespace ProjectSteppe.Inputs
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Screenshot.started += instance.OnScreenshot;
+                @Screenshot.performed += instance.OnScreenshot;
+                @Screenshot.canceled += instance.OnScreenshot;
+                @SlowDown.started += instance.OnSlowDown;
+                @SlowDown.performed += instance.OnSlowDown;
+                @SlowDown.canceled += instance.OnSlowDown;
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
@@ -458,6 +532,12 @@ namespace ProjectSteppe.Inputs
                 @Move.started -= instance.OnMove;
                 @Move.performed -= instance.OnMove;
                 @Move.canceled -= instance.OnMove;
+                @Screenshot.started -= instance.OnScreenshot;
+                @Screenshot.performed -= instance.OnScreenshot;
+                @Screenshot.canceled -= instance.OnScreenshot;
+                @SlowDown.started -= instance.OnSlowDown;
+                @SlowDown.performed -= instance.OnSlowDown;
+                @SlowDown.canceled -= instance.OnSlowDown;
                 @Look.started -= instance.OnLook;
                 @Look.performed -= instance.OnLook;
                 @Look.canceled -= instance.OnLook;
@@ -523,6 +603,8 @@ namespace ProjectSteppe.Inputs
         public interface IPlayerActions
         {
             void OnMove(InputAction.CallbackContext context);
+            void OnScreenshot(InputAction.CallbackContext context);
+            void OnSlowDown(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
             void OnBack(InputAction.CallbackContext context);
             void OnVertical(InputAction.CallbackContext context);
