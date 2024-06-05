@@ -24,13 +24,19 @@ namespace ProjectSteppe.AI
 
         private Entity _targetEntity;
 
-        public Entity targetEntity { get
+        public Entity targetEntity
+        {
+            get
             {
                 return _targetEntity;
-            } set
+            }
+            set
             {
-                previousPosition = value.transform.position;
-                targetFuturePosition = previousPosition;
+                if (value)
+                {
+                    previousPosition = value.transform.position;
+                    targetFuturePosition = previousPosition;
+                }
                 _targetEntity = value;
             }
         }
@@ -113,6 +119,7 @@ namespace ProjectSteppe.AI
             if (targetEntity)
             {
                 var diff = targetEntity.transform.position - previousPosition;
+                if(Time.timeScale > 0)
                 targetFuturePosition = targetEntity.transform.position + ((diff * (1 / Time.deltaTime)) * futurePositionAccuracy);
                 previousPosition = targetEntity.transform.position;
                 if (rotateTowardsTarget)
