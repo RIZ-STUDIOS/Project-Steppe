@@ -21,9 +21,13 @@ ModelImporter:
       copied configuration does not match position in animation file:\n\t'L_pink1'
       : position error = 1.098111 mm\n"
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'HK_Wide Attacks' has import animation warnings
-      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'chest' has translation animation that will
+    animationImportWarnings: "\nClip 'HK Wide 3' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'L_leg' has translation animation that will
+      be discarded.\n\t'R_leg' has translation animation that will be discarded.\n\t'spine'
+      has translation animation that will be discarded.\n\t'chest' has translation
+      animation that will be discarded.\n\t'L_shoulder' has translation animation
+      that will be discarded.\n\t'R_shoulder' has translation animation that will
       be discarded.\n\t'neck' has translation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
@@ -38,9 +42,9 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: HK_Wide Attacks
-      takeName: HK_Wide Attacks
-      internalID: -4020381304133469394
+      name: HK Wide 3
+      takeName: HK Wide 3
+      internalID: 7448713662722743179
       firstFrame: 0
       lastFrame: 139
       wrapMode: 0
