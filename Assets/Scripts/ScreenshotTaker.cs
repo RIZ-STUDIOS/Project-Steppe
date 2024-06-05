@@ -8,13 +8,13 @@ namespace ProjectSteppe
     [ExecuteAlways]
     public class ScreenshotTaker : MonoBehaviour
     {
-#if UNITY_EDITOR
         private bool takeScreenshot;
 
         private List<Canvas> canvases = new List<Canvas>();
 
-        [ContextMenu("Take Screenshot")]
-        private void TakeScreenshot()
+        static int screenshotIndex;
+
+        public void TakeScreenshot()
         {
             takeScreenshot = true;
         }
@@ -27,7 +27,6 @@ namespace ProjectSteppe
 
         private void RenderPipelineManager_beginCameraRendering(ScriptableRenderContext arg1, Camera arg2)
         {
-            if (arg2.name != "SceneCamera") return;
             if(takeScreenshot)
             {
                 var c = GameObject.FindObjectsOfType<Canvas>();
@@ -45,7 +44,6 @@ namespace ProjectSteppe
 
         private void RenderPipelineManager_endCameraRendering(ScriptableRenderContext arg1, Camera arg2)
         {
-            if (arg2.name != "SceneCamera") return;
             if (takeScreenshot)
             {
                 takeScreenshot = false;
@@ -58,7 +56,7 @@ namespace ProjectSteppe
                 screenshotTexture.Apply();
 
                 byte[] byteArray = screenshotTexture.EncodeToPNG();
-                System.IO.File.WriteAllBytes(Application.dataPath + "/screenshot.png", byteArray);
+                System.IO.File.WriteAllBytes(Application.persistentDataPath + $"/screenshot{screenshotIndex++}.png", byteArray);
 
                 foreach(var canvas in canvases)
                 {
@@ -74,10 +72,5 @@ namespace ProjectSteppe
             RenderPipelineManager.endCameraRendering -= RenderPipelineManager_endCameraRendering;
             RenderPipelineManager.beginCameraRendering -= RenderPipelineManager_beginCameraRendering;
         }
-#else
-        private void OnEnable(){
-            Destroy(this);
-        }
-#endif
     }
 }
