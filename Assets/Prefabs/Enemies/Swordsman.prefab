@@ -1067,7 +1067,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cd8bfa6960b7d164a88c35bf7514ac3a, type: 2}
+  - {fileID: 2100000, guid: 00f6f72ad077ac64bbba92e176e103a1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4937,6 +4937,7 @@ MonoBehaviour:
   OnParryAttack:
     m_PersistentCalls:
       m_Calls: []
+  parryGracePeriod: 0.2
 --- !u!114 &8260738318475526680
 MonoBehaviour:
   m_ObjectHideFlags: 0

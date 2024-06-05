@@ -45,6 +45,7 @@ namespace ProjectSteppe
             if(!weaponMeshRenderer)
                 weaponMeshRenderer = GetComponent<Renderer>();
             weaponMaterials.AddRange(weaponMeshRenderer.materials);
+            HideUnblockable();
         }
 
         private void Start()
