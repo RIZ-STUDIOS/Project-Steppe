@@ -151,7 +151,7 @@ namespace ProjectSteppe.Entities.Player
                 var distance = Vector3.Distance(transform.position, lookAtTransform.position);
                 if (distance < startDistance)
                 {
-                    playerManager.PlayerCamera.cinemachineCameraOffset.m_Offset.y = -Mathf.Lerp(0, .35f, 1 - ((distance - endDistance) / (startDistance - endDistance)));
+                    playerManager.PlayerCamera.cinemachineCameraOffset.m_Offset.y = -Mathf.Lerp(0, Mathf.Abs(lookAtTransform.position.y - playerManager.PlayerCamera.targetLockVCam.Follow.position.y) / 2f + .35f, 1 - ((distance - endDistance) / (startDistance - endDistance)));
                 }
                 else
                 {
