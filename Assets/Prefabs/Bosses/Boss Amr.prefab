@@ -12942,7 +12942,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 6
+  m_Speed: 4
   m_Acceleration: 28
   avoidancePriority: 50
   m_AngularSpeed: 180
@@ -13119,6 +13119,7 @@ MonoBehaviour:
   OnParryAttack:
     m_PersistentCalls:
       m_Calls: []
+  parryGracePeriod: 0.2
 --- !u!114 &3528992543910565552
 MonoBehaviour:
   m_ObjectHideFlags: 0
