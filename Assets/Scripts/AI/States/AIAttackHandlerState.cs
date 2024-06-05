@@ -44,9 +44,16 @@ namespace ProjectSteppe.AI.States
 
         public override void Execute()
         {
-            if (!controller.targetEntity || controller.targetEntity.EntityHealth.Health <= 0)
+            if (!controller.targetEntity)
             {
                 controller.SwitchAIState(idleState);
+                return;
+            }
+
+            if(controller.targetEntity.EntityHealth.Health <= 0)
+            {
+                if(!currentAttack || (currentAttack && currentAttack.attackFinished))
+                    controller.SwitchAIState(idleState);
                 return;
             }
 

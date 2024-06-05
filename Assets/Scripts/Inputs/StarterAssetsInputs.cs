@@ -36,7 +36,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM
         public void OnMove(InputValue value)
         {
-            if (!respondToData) return;
+            //if (!respondToData) return;
             MoveInput(value.Get<Vector2>());
         }
 
@@ -157,7 +157,7 @@ namespace StarterAssets
 
         public void ResetInputs()
         {
-            MoveInput(Vector2.zero);
+            //MoveInput(Vector2.zero);
             LookInput(Vector2.zero);
             DashInput(false);
         }

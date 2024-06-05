@@ -1,5 +1,6 @@
 using Cinemachine;
 using ProjectSteppe.Inputs;
+using ProjectSteppe.Interactions.Interactables;
 using ProjectSteppe.Managers;
 using ProjectSteppe.UI;
 using ProjectSteppe.UI.Menus;
@@ -56,6 +57,7 @@ namespace ProjectSteppe
 
         private List<Canvas> canvases = new List<Canvas>();
         private List<Canvas> worldCanvas = new List<Canvas>();
+        private List<ParticleSystem> particleSystems = new List<ParticleSystem>();
 
         private ScreenshotTaker screenshotTaker;
 
@@ -85,6 +87,11 @@ namespace ProjectSteppe
             foreach(var canvas in worldCanvas)
             {
                 canvas.enabled = !canvas.enabled;
+            }
+
+            foreach(var ps in particleSystems)
+            {
+                ps.gameObject.SetActive(!ps.gameObject.activeSelf);
             }
         }
 
@@ -211,6 +218,17 @@ namespace ProjectSteppe
                     worldCanvas.Add(canvas);
                 }
             }
+
+            var p = GameObject.FindObjectsOfType<InventoryInteractable>();
+            
+            foreach(var ps in p)
+            {
+                var d = ps.GetComponentInChildren<ParticleSystem>(true);
+                if (d.gameObject.activeSelf)
+                {
+                    particleSystems.Add(d);
+                }
+            }
         }
 
         private void OnDisable()
@@ -227,6 +245,11 @@ namespace ProjectSteppe
             foreach(var canvas in worldCanvas)
             {
                 canvas.enabled = true;
+            }
+
+            foreach(var ps in particleSystems)
+            {
+                ps.gameObject.SetActive(true);
             }
         }
     }

@@ -92,6 +92,8 @@ namespace ProjectSteppe.Entities
                 else amount *= 2;
             }
 
+            if (Health <= 0) return;
+
             Health -= amount;
 
             if (Health <= 0)

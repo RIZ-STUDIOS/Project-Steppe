@@ -340,38 +340,41 @@ namespace ProjectSteppe.Entities.Player
 
 
             // FOR ANIMATOR //
-            float velX;
-            float velY;
-
-            if (playerManager.PlayerTargetLock.lockOn)
+            if (Time.timeScale > 0)
             {
-                velX = _input.move.x;
-                velY = _input.move.y;
+                float velX;
+                float velY;
 
-                if(velY < 0)
+                if (playerManager.PlayerTargetLock.lockOn)
                 {
-                    velX *= -1;
+                    velX = _input.move.x;
+                    velY = _input.move.y;
+
+                    if (velY < -0.1f)
+                    {
+                        velX *= -1;
+                    }
+
+                    if (velX < -0.1f)
+                    {
+                        velY *= -1;
+                    }
+
+                    if (dashing)
+                    {
+                        var d = moveDirection.normalized;
+                        velX = d.x > 0 ? 1 : 0;
+                        velY = d.z > 0 ? 1 : 0;
+                    }
+                }
+                else
+                {
+                    velX = 0;
+                    velY = animationBlend / walkSpeed;
                 }
 
-                if (velX < 0)
-                {
-                    velY *= -1;
-                }
-
-                if (dashing)
-                {
-                    var d = moveDirection.normalized;
-                    velX = d.x > 0 ? 1 : 0;
-                    velY = d.z > 0 ? 1 : 0;
-                }
+                onMoveAnimator?.Invoke(animationBlend, inputMagnitude, velX, velY);
             }
-            else
-            {
-                velX = 0;
-                velY = animationBlend / walkSpeed;
-            }
-
-            onMoveAnimator?.Invoke(animationBlend, inputMagnitude, velX, velY);
         }
 
 
