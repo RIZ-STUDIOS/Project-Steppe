@@ -1,4 +1,5 @@
 using ProjectSteppe.Items;
+using StarterAssets;
 using UnityEngine;
 
 namespace ProjectSteppe.Entities.Player
@@ -17,16 +18,23 @@ namespace ProjectSteppe.Entities.Player
         [SerializeField]
         private FollowObject pouchFollowObject;
 
+        private StarterAssetsInputs _input;
+
         private void Awake()
         {
+            _input = GetComponent<StarterAssetsInputs>();
             playerManager = GetComponent<PlayerManager>();
             SwitchToHipPouch();
         }
 
-        public void OnUsable()
+        private void Update()
         {
-            if (playerManager.HasCapability(PlayerCapability.Drink))
-                currentUsable.OnUse();
+            if (_input.useable)
+            {
+                if (playerManager.HasCapability(PlayerCapability.Drink))
+                    currentUsable.OnUse();
+                _input.useable = false;
+            }
         }
 
         public void OnAnimationEnd()

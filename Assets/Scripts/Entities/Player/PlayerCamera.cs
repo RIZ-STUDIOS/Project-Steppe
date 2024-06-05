@@ -2,12 +2,15 @@ using Cinemachine;
 using ProjectSteppe.ScriptableObjects.CameraData;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ProjectSteppe.Entities.Player
 {
     public class PlayerCamera : MonoBehaviour
     {
-        public CinemachineVirtualCamera vCam;
+        [FormerlySerializedAs("vCam")]
+        public CinemachineVirtualCamera thirdPersonVCam;
+        public CinemachineVirtualCamera targetLockVCam;
 
         public Transform MainCameraTransform => mainCamera.transform;
 
@@ -30,32 +33,36 @@ namespace ProjectSteppe.Entities.Player
 
         private void Start()
         {
-            thirdPersonFollow.ApplyCameraData(vCam);
-            cinemachineCameraOffset = vCam.GetComponent<CinemachineCameraOffset>();
+            thirdPersonFollow.ApplyCameraData(thirdPersonVCam);
+            lockFramingTransposer.ApplyCameraData(targetLockVCam);
+            cinemachineCameraOffset = targetLockVCam.GetComponent<CinemachineCameraOffset>();
         }
 
         public void SwitchToThirdPersonFollow()
         {
             cinemachineCameraOffset.m_Offset.y = 0;
+            targetLockVCam.Priority = 0;
+            thirdPersonVCam.Priority = 10;
+            /*cinemachineCameraOffset.m_Offset.y = 0;
             if (lerpCameraCoroutine != null)
             {
                 StopCoroutine(lerpCameraCoroutine);
-                vCam.enabled = true;
-                vCam.PreviousStateIsValid = false;
+                thirdPersonVCam.enabled = true;
+                thirdPersonVCam.PreviousStateIsValid = false;
                 lerpCameraCoroutine = null;
             }
             var startPos = MainCameraTransform.position;
             var startRot = MainCameraTransform.rotation;
-            thirdPersonFollow.ApplyCameraData(vCam);
-            vCam.PreviousStateIsValid = false;
+            thirdPersonFollow.ApplyCameraData(thirdPersonVCam);
+            thirdPersonVCam.PreviousStateIsValid = false;
 
-            lerpCameraCoroutine = StartCoroutine(LepCameraIEnumerator(startPos, startRot));
+            lerpCameraCoroutine = StartCoroutine(LepCameraIEnumerator(startPos, startRot));*/
         }
 
         private IEnumerator LepCameraIEnumerator(Vector3 startPosition, Quaternion startRosition)
         {
             yield return null;
-            vCam.enabled = false;
+            thirdPersonVCam.enabled = false;
             var endPosition = MainCameraTransform.position;
             var endRotation = MainCameraTransform.rotation;
             Vector3 pos = startPosition;
@@ -74,25 +81,27 @@ namespace ProjectSteppe.Entities.Player
                 yield return null;
             }
 
-            vCam.enabled = true;
+            thirdPersonVCam.enabled = true;
         }
 
         public void SwitchToLockFramingTransposer()
         {
-            if (lerpCameraCoroutine != null)
+            thirdPersonVCam.Priority = 0;
+            targetLockVCam.Priority = 10;
+            /*if (lerpCameraCoroutine != null)
             {
                 StopCoroutine(lerpCameraCoroutine);
-                vCam.enabled = true;
-                vCam.PreviousStateIsValid = false;
+                thirdPersonVCam.enabled = true;
+                thirdPersonVCam.PreviousStateIsValid = false;
                 lerpCameraCoroutine = null;
             }
             var startPos = MainCameraTransform.position;
             var startRot = MainCameraTransform.rotation;
-            lockFramingTransposer.ApplyCameraData(vCam);
-            vCam.PreviousStateIsValid = false;
+            lockFramingTransposer.ApplyCameraData(thirdPersonVCam);
+            thirdPersonVCam.PreviousStateIsValid = false;
 
 
-            lerpCameraCoroutine = StartCoroutine(LepCameraIEnumerator(startPos, startRot));
+            lerpCameraCoroutine = StartCoroutine(LepCameraIEnumerator(startPos, startRot));*/
         }
     }
 }

@@ -38,14 +38,19 @@ namespace ProjectSteppe
         [SerializeField]
         private Renderer weaponMeshRenderer;
 
+        private Color unblockableColor;
+
         private List<Material> weaponMaterials = new List<Material>();
+
+        private Coroutine unblockCoroutine;
 
         private void Awake()
         {
             if(!weaponMeshRenderer)
                 weaponMeshRenderer = GetComponent<Renderer>();
             weaponMaterials.AddRange(weaponMeshRenderer.materials);
-            HideUnblockable();
+            unblockableColor = weaponMaterials[0].GetColor("_EmissionColor");
+            ForceHideUnblockable();
         }
 
         private void Start()
@@ -180,17 +185,68 @@ namespace ProjectSteppe
 
         public void ShowUnblockable()
         {
-            foreach(var material in weaponMaterials)
+            if (unblockCoroutine != null)
             {
-                material.EnableKeyword("_EMISSION");
+                StopCoroutine(unblockCoroutine);
+                unblockCoroutine = null;
+            }
+            unblockCoroutine = StartCoroutine(ShowUnblockableCoroutine());
+        }
+
+        private void ForceHideUnblockable()
+        {
+            foreach (var material in weaponMaterials)
+            {
+                //material.DisableKeyword("_EMISSION");
+                material.SetColor("_EmissionColor", Color.black);
             }
         }
 
         public void HideUnblockable()
         {
-            foreach(var material in weaponMaterials)
+            if (unblockCoroutine != null)
             {
-                material.DisableKeyword("_EMISSION");
+                StopCoroutine(unblockCoroutine);
+                unblockCoroutine = null;
+            }
+            unblockCoroutine = StartCoroutine(HideUnblockableCoroutine());
+        }
+
+        private IEnumerator HideUnblockableCoroutine()
+        {
+            float timer = 0;
+            var startColor = weaponMaterials[0].GetColor("_EmissionColor");
+            while (timer < 1)
+            {
+                foreach (var material in weaponMaterials)
+                {
+                    material.SetColor("_EmissionColor", Color.Lerp(startColor, Color.black, timer));
+                }
+                timer += Time.deltaTime * 15;
+                yield return null;
+            }
+            foreach (var material in weaponMaterials)
+            {
+                material.SetColor("_EmissionColor", Color.black);
+            }
+        }
+
+        private IEnumerator ShowUnblockableCoroutine()
+        {
+            float timer = 0;
+            var startColor = weaponMaterials[0].GetColor("_EmissionColor");
+            while (timer < 1)
+            {
+                foreach (var material in weaponMaterials)
+                {
+                    material.SetColor("_EmissionColor", Color.Lerp(startColor, unblockableColor, timer));
+                }
+                timer += Time.deltaTime * 15;
+                yield return null;
+            }
+            foreach (var material in weaponMaterials)
+            {
+                material.SetColor("_EmissionColor", unblockableColor);
             }
         }
     }

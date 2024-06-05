@@ -22,8 +22,18 @@ namespace ProjectSteppe.AI
         [SerializeField]
         private AIState currentAiState;
 
-        [System.NonSerialized]
-        public Entity targetEntity;
+        private Entity _targetEntity;
+
+        public Entity targetEntity { get
+            {
+                return _targetEntity;
+            } set
+            {
+                previousPosition = value.transform.position;
+                targetFuturePosition = previousPosition;
+                _targetEntity = value;
+            }
+        }
 
         public float distanceToTargetToAttack;
         public float distanceToTargetToChase;
@@ -48,6 +58,12 @@ namespace ProjectSteppe.AI
 
         private Entity aiEntity;
         public Entity AIEntity => this.GetComponentIfNull(ref aiEntity);
+
+        private Vector3 previousPosition;
+        private Vector3 targetFuturePosition;
+
+        [SerializeField]
+        private float futurePositionAccuracy = 1;
 
         private void Awake()
         {
@@ -94,10 +110,22 @@ namespace ProjectSteppe.AI
 
         private void Update()
         {
-            if (rotateTowardsTarget && targetEntity)
+            if (targetEntity)
             {
-                RotateTowards(targetEntity.transform);
+                var diff = targetEntity.transform.position - previousPosition;
+                targetFuturePosition = targetEntity.transform.position + ((diff * (1 / Time.deltaTime)) * futurePositionAccuracy);
+                previousPosition = targetEntity.transform.position;
+                if (rotateTowardsTarget)
+                {
+                    RotateTowards(targetFuturePosition);
+                }
             }
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawCube(targetFuturePosition, new Vector3(1.5f, 1.5f, 1.5f));
         }
 
         private void OnDisable()
@@ -121,7 +149,13 @@ namespace ProjectSteppe.AI
         public void SetPathToTarget()
         {
             if (!targetEntity) return;
-            SetPathTo(targetEntity.transform);
+            SetPathTo(targetFuturePosition);
+        }
+
+        public void RotateTowardsTarget()
+        {
+            if (!targetEntity) return;
+            RotateTowards(targetFuturePosition);
         }
 
         public void RotateTowards(Transform transform)

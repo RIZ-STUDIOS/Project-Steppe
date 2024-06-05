@@ -249,7 +249,7 @@ namespace ProjectSteppe.Entities.Player
         {
             var prevTarget = currentTargetLock;
             currentTargetLock = target;
-            playerManager.PlayerCamera.vCam.LookAt = lookAtTransform;
+            playerManager.PlayerCamera.targetLockVCam.LookAt = lookAtTransform;
             if (target && target != prevTarget)
             {
                 playerManager.PlayerCamera.SwitchToLockFramingTransposer();

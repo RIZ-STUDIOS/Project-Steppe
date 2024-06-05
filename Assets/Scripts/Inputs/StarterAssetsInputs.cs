@@ -21,6 +21,7 @@ namespace StarterAssets
         public bool attack;
         public bool targetLock;
         public bool blocking;
+        public bool useable;
 
         [Header("Movement Settings")]
         public bool analogMovement;
@@ -46,6 +47,12 @@ namespace StarterAssets
             {
                 LookInput(value.Get<Vector2>());
             }
+        }
+
+        public void OnUseable(InputValue value)
+        {
+            if (!respondToData) return;
+            UseableInput(value.isPressed);
         }
 
         public void OnBlock(InputValue value)
@@ -121,6 +128,11 @@ namespace StarterAssets
         public void AttackInput(bool newAttackState)
         {
             attack = newAttackState;
+        }
+
+        public void UseableInput(bool newUseableState)
+        {
+            useable = newUseableState;
         }
 
         public void LockInput(bool newLockState)
