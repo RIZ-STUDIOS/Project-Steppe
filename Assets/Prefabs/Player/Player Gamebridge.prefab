@@ -14591,6 +14591,7 @@ MonoBehaviour:
   attack: 0
   targetLock: 0
   blocking: 0
+  useable: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
@@ -14971,6 +14972,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 244c03ad87063084d8a33ad7e34652fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startDistance: 8
+  endDistance: 4
   lockOnDistance: 35
   checkObjectVisibilityLayer:
     serializedVersion: 2
@@ -15004,7 +15007,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fe448d4e48b7484586a8a5211e12cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vCam: {fileID: 0}
+  thirdPersonVCam: {fileID: 0}
+  targetLockVCam: {fileID: 0}
   mainCamera: {fileID: 0}
   thirdPersonFollow: {fileID: 11400000, guid: 9968f2b7d076f094285fafd19e81c429, type: 2}
   lockFramingTransposer: {fileID: 11400000, guid: 0d21d097a2892624284b83dfb57a30e7,
@@ -15737,7 +15741,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 340}
+  m_AnchoredPosition: {x: 0, y: 339.99997}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &372216155080617438
@@ -16410,7 +16414,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 50.639977, y: 25}
+  m_AnchoredPosition: {x: 60, y: 25}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6492778687121651196
@@ -46694,8 +46698,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4732566296299855046}
   m_HandleRect: {fileID: 6068122371998383430}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0
+  m_Value: 1
+  m_Size: 0.5
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -55019,6 +55023,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269574518132180619, guid: f566e347ec30f394a8855a59dc99fd70,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 403.4941
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269574518132180619, guid: f566e347ec30f394a8855a59dc99fd70,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 675.54297
       objectReference: {fileID: 0}
     - target: {fileID: 7314234357999048510, guid: f566e347ec30f394a8855a59dc99fd70,
         type: 3}

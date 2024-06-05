@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class GeneralOptions : MonoBehaviour
@@ -25,9 +27,14 @@ public class GeneralOptions : MonoBehaviour
     [SerializeField]
     private AudioMixer audioMixer;
     [SerializeField]
-    private TMP_Text masterVolText, musicVolText, sfxVolText;
+    private TMP_Text masterVolText, musicVolText, sfxVolText, gammaText;
     [SerializeField]
-    private Slider masterVolSlider, musicVolSlider, sfxVolSlider;
+    private Slider masterVolSlider, musicVolSlider, sfxVolSlider, gammaSlider;
+
+    [SerializeField]
+    private VolumeProfile volumeProfile;
+    private LiftGammaGain liftGammaGain;
+
     private void Start()
     {
         resolutions.Clear();
@@ -72,15 +79,20 @@ public class GeneralOptions : MonoBehaviour
         musicVolText.text = Mathf.RoundToInt(musicVolSlider.value * 100).ToString() + "%";
         sfxVolText.text = Mathf.RoundToInt(sfxVolSlider.value * 100).ToString() + "%";*/
 
+        volumeProfile.TryGet(out liftGammaGain);
+
         masterVolSlider.value = PlayerPrefs.GetFloat("MasterVol", 1);
         musicVolSlider.value = PlayerPrefs.GetFloat("MusicVol", 1);
         sfxVolSlider.value = PlayerPrefs.GetFloat("SFXVol", 1);
+        gammaSlider.value = PlayerPrefs.GetFloat("Gamma", 0);
         grassDensityIndex = PlayerPrefs.GetInt("grassDensity", (int)GrassDensity.High);
         vsyncCount = PlayerPrefs.GetInt("vsyncCount", 1);
 
         SetMasterVolume();
         SetMusicVolume();
         SetSfxVolume();
+        SetGamma();
+
 
         UpdateGrassDensity();
 
@@ -203,4 +215,11 @@ public class GeneralOptions : MonoBehaviour
         PlayerPrefs.SetFloat("SFXVol", sfxVolSlider.value);
     }
     #endregion
+
+    public void SetGamma()
+    {
+        gammaText.text = Mathf.RoundToInt(gammaSlider.value * 100).ToString() + "%";
+        PlayerPrefs.SetFloat("Gamma", gammaSlider.value);
+        liftGammaGain.gamma.Override(new Vector4(1,1,1,gammaSlider.value));
+    }
 }
