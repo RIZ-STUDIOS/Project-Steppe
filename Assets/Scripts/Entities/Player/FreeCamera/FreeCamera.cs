@@ -16,12 +16,22 @@ namespace ProjectSteppe
     {
         private CinemachineBrain brain;
         private FreeCameraInput input;
+        private new Camera camera;
 
         [SerializeField]
         private float speed = 10;
 
         [SerializeField]
         private float verticalSpeed = 10;
+
+        [SerializeField]
+        private float minimumFOV = 20;
+
+        [SerializeField]
+        private float maximumFOV = 90;
+
+        [SerializeField]
+        private float fovIncrement = 5;
 
         [SerializeField]
         private float speedDownMultipler = 0.5f;
@@ -45,11 +55,13 @@ namespace ProjectSteppe
         private bool playerMovementEnabled;
 
         private List<Canvas> canvases = new List<Canvas>();
+        private List<Canvas> worldCanvas = new List<Canvas>();
 
         private ScreenshotTaker screenshotTaker;
 
         private void Awake()
         {
+            camera = GetComponent<Camera>();
             screenshotTaker = GetComponent<ScreenshotTaker>();
             brain = GetComponent<CinemachineBrain>();
             input = new FreeCameraInput();
@@ -64,6 +76,35 @@ namespace ProjectSteppe
             input.Player.Screenshot.performed += Screenshot_performed;
             input.Player.SlowDown.performed += SlowDown_performed;
             input.Player.SlowDown.canceled += SlowDown_canceled;
+            input.Player.Zoom.performed += Zoom_performed;
+            input.Player.ToggleCanvas.performed += ToggleCanvas_performed;
+        }
+
+        private void ToggleCanvas_performed(InputAction.CallbackContext obj)
+        {
+            foreach(var canvas in worldCanvas)
+            {
+                canvas.enabled = !canvas.enabled;
+            }
+        }
+
+        private void Zoom_performed(InputAction.CallbackContext obj)
+        {
+            var val = obj.ReadValue<float>();
+            var fov = camera.fieldOfView;
+            if(val > 0)
+            {
+                fov += fovIncrement;
+                if(fov > maximumFOV)
+                    fov = maximumFOV;
+            }
+            else if(val < 0)
+            {
+                fov -= fovIncrement;
+                if (fov < minimumFOV)
+                    fov = minimumFOV;
+            }
+            camera.fieldOfView = fov;
         }
 
         private void SlowDown_canceled(InputAction.CallbackContext obj)
@@ -153,6 +194,8 @@ namespace ProjectSteppe
             playerMovementEnabled = GameManager.Instance.playerManager.PlayerMovement.enabled;
             GameManager.Instance.playerManager.PlayerMovement.enabled = false;
             canvases.Clear();
+            worldCanvas.Clear();
+            camera.fieldOfView = 40;
 
             var c = GameObject.FindObjectsOfType<Canvas>();
 
@@ -162,6 +205,10 @@ namespace ProjectSteppe
                 {
                     canvas.enabled = false;
                     canvases.Add(canvas);
+                }
+                if(canvas.renderMode == RenderMode.WorldSpace && canvas.enabled)
+                {
+                    worldCanvas.Add(canvas);
                 }
             }
         }
@@ -173,6 +220,11 @@ namespace ProjectSteppe
             input.Disable();
 
             foreach (var canvas in canvases)
+            {
+                canvas.enabled = true;
+            }
+
+            foreach(var canvas in worldCanvas)
             {
                 canvas.enabled = true;
             }

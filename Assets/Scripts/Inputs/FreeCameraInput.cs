@@ -82,6 +82,24 @@ namespace ProjectSteppe.Inputs
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""Value"",
+                    ""id"": ""dd8b3653-3036-4c88-a3c5-98bb3f4d36cd"",
+                    ""expectedControlType"": ""Analog"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ToggleCanvas"",
+                    ""type"": ""Button"",
+                    ""id"": ""847e3f30-c7fc-41ef-b0c9-a53a3e58139c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -370,6 +388,127 @@ namespace ProjectSteppe.Inputs
                     ""action"": ""SlowDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Keyboard"",
+                    ""id"": ""68d1190a-dd32-4e5d-9f28-0b61225bb82a"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""35669a83-ff11-40cf-ba9e-dfa4c313faf8"",
+                    ""path"": ""<Keyboard>/numpadMinus"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""c468f76f-e780-406b-a245-f271413d9d99"",
+                    ""path"": ""<Keyboard>/numpadPlus"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Keyboard"",
+                    ""id"": ""bb6cdd60-ee8c-403d-b86b-618c3b7d642a"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""d9dd07c1-fd02-4f63-85e7-9a4830a299af"",
+                    ""path"": ""<Keyboard>/minus"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""f9bfc9b4-015a-4c11-8708-b3b559e9eb3a"",
+                    ""path"": ""<Keyboard>/equals"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Gamepad"",
+                    ""id"": ""6449ba12-da1d-4e06-83e7-6887f695e35f"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""1fe02130-854d-4437-90c5-0a5bf1fe8a2b"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""e8ba5ed6-3d7e-4d42-a60b-112018a686a9"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b8c82d1e-5e62-4875-afb3-fec03576de78"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""ToggleCanvas"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9ae070f1-fb7f-43af-bb3d-65870405d5a1"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ToggleCanvas"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -432,6 +571,8 @@ namespace ProjectSteppe.Inputs
             m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             m_Player_Back = m_Player.FindAction("Back", throwIfNotFound: true);
             m_Player_Vertical = m_Player.FindAction("Vertical", throwIfNotFound: true);
+            m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
+            m_Player_ToggleCanvas = m_Player.FindAction("ToggleCanvas", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -499,6 +640,8 @@ namespace ProjectSteppe.Inputs
         private readonly InputAction m_Player_Look;
         private readonly InputAction m_Player_Back;
         private readonly InputAction m_Player_Vertical;
+        private readonly InputAction m_Player_Zoom;
+        private readonly InputAction m_Player_ToggleCanvas;
         public struct PlayerActions
         {
             private @FreeCameraInput m_Wrapper;
@@ -509,6 +652,8 @@ namespace ProjectSteppe.Inputs
             public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputAction @Back => m_Wrapper.m_Player_Back;
             public InputAction @Vertical => m_Wrapper.m_Player_Vertical;
+            public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
+            public InputAction @ToggleCanvas => m_Wrapper.m_Player_ToggleCanvas;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -536,6 +681,12 @@ namespace ProjectSteppe.Inputs
                 @Vertical.started += instance.OnVertical;
                 @Vertical.performed += instance.OnVertical;
                 @Vertical.canceled += instance.OnVertical;
+                @Zoom.started += instance.OnZoom;
+                @Zoom.performed += instance.OnZoom;
+                @Zoom.canceled += instance.OnZoom;
+                @ToggleCanvas.started += instance.OnToggleCanvas;
+                @ToggleCanvas.performed += instance.OnToggleCanvas;
+                @ToggleCanvas.canceled += instance.OnToggleCanvas;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -558,6 +709,12 @@ namespace ProjectSteppe.Inputs
                 @Vertical.started -= instance.OnVertical;
                 @Vertical.performed -= instance.OnVertical;
                 @Vertical.canceled -= instance.OnVertical;
+                @Zoom.started -= instance.OnZoom;
+                @Zoom.performed -= instance.OnZoom;
+                @Zoom.canceled -= instance.OnZoom;
+                @ToggleCanvas.started -= instance.OnToggleCanvas;
+                @ToggleCanvas.performed -= instance.OnToggleCanvas;
+                @ToggleCanvas.canceled -= instance.OnToggleCanvas;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -619,6 +776,8 @@ namespace ProjectSteppe.Inputs
             void OnLook(InputAction.CallbackContext context);
             void OnBack(InputAction.CallbackContext context);
             void OnVertical(InputAction.CallbackContext context);
+            void OnZoom(InputAction.CallbackContext context);
+            void OnToggleCanvas(InputAction.CallbackContext context);
         }
     }
 }
