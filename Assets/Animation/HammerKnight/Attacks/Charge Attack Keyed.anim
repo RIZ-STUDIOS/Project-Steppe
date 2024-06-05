@@ -111754,6 +111754,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0
+    functionName: TurnOnUnblockable
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.6666667
     functionName: DisableRotationTowardsTarget
     data: 
@@ -111819,6 +111826,13 @@ AnimationClip:
     messageOptions: 0
   - time: 3.3333333
     functionName: EnableRotationTowardsTarget
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 3.6666667
+    functionName: TurnOffUnblockable
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
