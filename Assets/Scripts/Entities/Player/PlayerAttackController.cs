@@ -124,12 +124,6 @@ namespace ProjectSteppe.Entities.Player
         private void DisableBlocking()
         {
             canBlock = false;
-            if (blocking)
-            {
-                Entity.EntityBlock.EndBlock();
-                blocking = false;
-                animator.SetBool(animIDBlocking, blocking);
-            }
         }
 
         public void RestartAttack()
