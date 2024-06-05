@@ -3515,7 +3515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977c619898071e644b93d4e11256d0bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  getChildren: 0
+  getChildren: 1
   sounds:
   - {fileID: 8335627797739164543}
   - {fileID: 1853462308009596214}
@@ -4495,7 +4495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977c619898071e644b93d4e11256d0bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  getChildren: 0
+  getChildren: 1
   sounds:
   - {fileID: 2860865767737725596}
   - {fileID: 8372141341482868719}
@@ -4968,6 +4968,7 @@ MonoBehaviour:
   distanceToTargetToAttack: 2
   distanceToTargetToChase: 4
   RotationSmoothTime: 0.12
+  futurePositionAccuracy: 1
 --- !u!114 &8351466365226365903
 MonoBehaviour:
   m_ObjectHideFlags: 0

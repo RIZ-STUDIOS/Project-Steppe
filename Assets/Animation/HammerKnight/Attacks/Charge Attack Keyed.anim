@@ -111748,6 +111748,13 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
+    functionName: CommitToAttack
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0
     functionName: EnableRotationTowardsTarget
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -111761,15 +111768,8 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.6666667
+  - time: 1.2666667
     functionName: DisableRotationTowardsTarget
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.6666667
-    functionName: CommitToAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
