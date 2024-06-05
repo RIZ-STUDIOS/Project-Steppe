@@ -23,6 +23,15 @@ namespace ProjectSteppe.Entities.Player
 
         private PlayerInput playerInput;
 
+        [Header("Target Lock Close Up")]
+        [SerializeField]
+        private float startDistance = 8;
+
+        [SerializeField]
+        private float endDistance = 4;
+
+        [Space]
+
         [System.NonSerialized]
         public bool lockOn;
 
@@ -54,13 +63,6 @@ namespace ProjectSteppe.Entities.Player
         private const float _threshold = 0.3f;
 
         private TargetLockTarget storedTarget;
-
-        [Header("Target Lock Close Up")]
-        [SerializeField]
-        private float startDistance = 8;
-
-        [SerializeField]
-        private float endDistance = 4;
 
         private void Awake()
         {
