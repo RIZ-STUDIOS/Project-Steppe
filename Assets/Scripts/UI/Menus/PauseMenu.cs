@@ -64,6 +64,13 @@ namespace ProjectSteppe.UI.Menus
             SetMenu(settingsMenu);
         }
 
+        public void GoFreeCam()
+        {
+            SetMenu(null);
+            FreeCamera.instance.enabled = true;
+            FreeCamera.instance.menu = this;
+        }
+
         protected override void OnCancelPerformed(InputAction.CallbackContext callbackContext)
         {
             pause.UnpauseGameFromMenu();
