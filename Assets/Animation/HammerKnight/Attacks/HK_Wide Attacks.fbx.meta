@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0b04be8c505f39546b21b31d157c390f
+guid: 9a0cd0da46b35184b9d533e32342b1cb
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -19,18 +19,12 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
       copied configuration does not match position in animation file:\n\t'L_pink1'
-      : position error = 1.098146 mm\n"
+      : position error = 1.098111 mm\n"
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'Heavy Attack 2.0' has import animation warnings
+    animationImportWarnings: "\nClip 'HK_Wide Attacks' has import animation warnings
       that might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'L_leg' has translation animation that will
-      be discarded.\n\t'L_knee' has translation animation that will be discarded.\n\t'L_anke'
-      has translation animation that will be discarded.\n\t'R_leg' has translation
-      animation that will be discarded.\n\t'R_knee' has translation animation that
-      will be discarded.\n\t'R_anke' has translation animation that will be discarded.\n\t'chest'
-      has translation animation that will be discarded.\n\t'L_shoulder' has translation
-      animation that will be discarded.\n\t'R_shoulder' has translation animation
-      that will be discarded.\n\t'neck' has translation animation that will be discarded.\n"
+      to improve retargeting quality.\n\t'chest' has translation animation that will
+      be discarded.\n\t'neck' has translation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -44,11 +38,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Heavy Attack 2.0
-      takeName: Heavy Attack 2.0
-      internalID: -7639168568907214759
+      name: HK_Wide Attacks
+      takeName: HK_Wide Attacks
+      internalID: -4020381304133469394
       firstFrame: 0
-      lastFrame: 148
+      lastFrame: 139
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
