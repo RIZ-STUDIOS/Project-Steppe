@@ -348,12 +348,12 @@ namespace ProjectSteppe.Entities.Player
                 velX = _input.move.x;
                 velY = _input.move.y;
 
-                if(velY < 0)
+                if(velY < -0.1f)
                 {
                     velX *= -1;
                 }
 
-                if (velX < 0)
+                if (velX < -0.1f)
                 {
                     velY *= -1;
                 }
