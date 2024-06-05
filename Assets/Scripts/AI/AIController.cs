@@ -1,3 +1,4 @@
+using ProjectSteppe.AI.States;
 using ProjectSteppe.Entities;
 using System.Collections;
 using System.Collections.Generic;
@@ -118,13 +119,17 @@ namespace ProjectSteppe.AI
         {
             if (targetEntity)
             {
-                var diff = targetEntity.transform.position - previousPosition;
-                if(Time.timeScale > 0)
-                targetFuturePosition = targetEntity.transform.position + ((diff * (1 / Time.deltaTime)) * futurePositionAccuracy);
+                if (Time.timeScale > 0)
+                {
+                    var diff = targetEntity.transform.position - previousPosition;
+                    var thisFrameTargetFuturePosition = targetEntity.transform.position + ((diff * (1 / Time.deltaTime)) * futurePositionAccuracy);
+                    targetFuturePosition = Vector3.MoveTowards(targetFuturePosition, thisFrameTargetFuturePosition, 20 * Time.deltaTime);
+                }
                 previousPosition = targetEntity.transform.position;
                 if (rotateTowardsTarget)
                 {
-                    RotateTowards(targetFuturePosition);
+                    var state = currentAiState as AIAttackHandlerState;
+                    RotateTowards((state != null && state.InAttack()) ? targetFuturePosition : targetEntity.transform.position);
                 }
             }
         }

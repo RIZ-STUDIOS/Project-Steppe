@@ -41,8 +41,9 @@ namespace ProjectSteppe.Entities.Player
         public void SwitchToThirdPersonFollow()
         {
             cinemachineCameraOffset.m_Offset.y = 0;
+            targetLockVCam.Priority = 10;
+            thirdPersonVCam.Priority = 11;
             targetLockVCam.Priority = 0;
-            thirdPersonVCam.Priority = 10;
             /*cinemachineCameraOffset.m_Offset.y = 0;
             if (lerpCameraCoroutine != null)
             {
@@ -86,8 +87,9 @@ namespace ProjectSteppe.Entities.Player
 
         public void SwitchToLockFramingTransposer()
         {
+            thirdPersonVCam.Priority = 10;
+            targetLockVCam.Priority = 11;
             thirdPersonVCam.Priority = 0;
-            targetLockVCam.Priority = 10;
             /*if (lerpCameraCoroutine != null)
             {
                 StopCoroutine(lerpCameraCoroutine);

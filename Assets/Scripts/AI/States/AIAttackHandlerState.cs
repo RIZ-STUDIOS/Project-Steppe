@@ -129,5 +129,10 @@ namespace ProjectSteppe.AI.States
                 controller.RotationSmoothTime = currentAttack.rotationSpeed;
             currentAttack.Execute();
         }
+
+        public bool InAttack()
+        {
+            return currentAttack && !currentAttack.attackFinished;
+        }
     }
 }
