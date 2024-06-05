@@ -49,7 +49,7 @@ namespace StarterAssets
             }
         }
 
-        public void OnUseable(InputValue value)
+        public void OnUsable(InputValue value)
         {
             if (!respondToData) return;
             UseableInput(value.isPressed);

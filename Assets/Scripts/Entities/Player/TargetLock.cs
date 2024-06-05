@@ -50,6 +50,9 @@ namespace ProjectSteppe.Entities.Player
         private Camera playerCamera;
 
         [SerializeField]
+        private Transform playerTargetLockLookAt;
+
+        [SerializeField]
         private float cameraMoveLockOnTimer;
 
         private float cameraMoveLockOnTime;
@@ -76,6 +79,12 @@ namespace ProjectSteppe.Entities.Player
                 StopLockOn();
                 canLock = false;
             });
+        }
+
+        private void Start()
+        {
+            playerTargetLockLookAt.parent = null;
+            playerManager.PlayerCamera.targetLockVCam.LookAt = playerTargetLockLookAt;
         }
 
         private void Update()
@@ -137,6 +146,8 @@ namespace ProjectSteppe.Entities.Player
 
             if (lookAtTransform)
             {
+                playerTargetLockLookAt.position = Vector3.MoveTowards(playerTargetLockLookAt.position, lookAtTransform.position, 90 * Time.deltaTime);
+
                 var distance = Vector3.Distance(transform.position, lookAtTransform.position);
                 if (distance < startDistance)
                 {
@@ -145,6 +156,14 @@ namespace ProjectSteppe.Entities.Player
                 else
                 {
                     playerManager.PlayerCamera.cinemachineCameraOffset.m_Offset.y = 0;
+                }
+            }
+            else
+            {
+                var closest = GetClosestTarget();
+                if (closest)
+                {
+                    playerTargetLockLookAt.position = closest.transform.position;
                 }
             }
         }
@@ -249,7 +268,10 @@ namespace ProjectSteppe.Entities.Player
         {
             var prevTarget = currentTargetLock;
             currentTargetLock = target;
-            playerManager.PlayerCamera.targetLockVCam.LookAt = lookAtTransform;
+            if(!prevTarget && currentTargetLock)
+            {
+                playerTargetLockLookAt.position = currentTargetLock.transform.position;
+            }
             if (target && target != prevTarget)
             {
                 playerManager.PlayerCamera.SwitchToLockFramingTransposer();
