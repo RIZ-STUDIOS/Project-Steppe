@@ -19,6 +19,9 @@ namespace ProjectSteppe.Entities.Player
         [SerializeField]
         private CameraDataScriptableObject lockFramingTransposer;
 
+        [System.NonSerialized]
+        public CinemachineCameraOffset cinemachineCameraOffset;
+
         private Coroutine lerpCameraCoroutine;
 
         [SerializeField]
@@ -28,10 +31,12 @@ namespace ProjectSteppe.Entities.Player
         private void Start()
         {
             thirdPersonFollow.ApplyCameraData(vCam);
+            cinemachineCameraOffset = vCam.GetComponent<CinemachineCameraOffset>();
         }
 
         public void SwitchToThirdPersonFollow()
         {
+            cinemachineCameraOffset.m_Offset.y = 0;
             if (lerpCameraCoroutine != null)
             {
                 StopCoroutine(lerpCameraCoroutine);

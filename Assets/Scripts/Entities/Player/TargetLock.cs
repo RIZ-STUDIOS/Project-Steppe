@@ -131,7 +131,11 @@ namespace ProjectSteppe.Entities.Player
                 var distance = Vector3.Distance(transform.position, lookAtTransform.position);
                 if (distance < 8)
                 {
-                    playerManager.VirtualCamera.GetCinemachineComponent<CinemachineComposer>().m_TrackedObjectOffset.y = Mathf.Lerp(0, .4f, 1 - ((distance - 4) / 4f));
+                    playerManager.PlayerCamera.cinemachineCameraOffset.m_Offset.y = -Mathf.Lerp(0, .35f, 1 - ((distance - 4) / 4f));
+                }
+                else
+                {
+                    playerManager.PlayerCamera.cinemachineCameraOffset.m_Offset.y = 0;
                 }
             }
         }
