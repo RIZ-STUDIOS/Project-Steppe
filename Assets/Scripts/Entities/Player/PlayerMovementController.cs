@@ -5,6 +5,7 @@ using StarterAssets;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace ProjectSteppe.Entities.Player
 {
@@ -66,6 +67,12 @@ namespace ProjectSteppe.Entities.Player
         private float dashTimer;
         private float dashCooldownTimer;
 
+        [Header("Running")]
+
+        [SerializeField]
+        [FormerlySerializedAs("sprintSpeed")]
+        private float sprintSpeedModifier;
+
         [Header("Events")]
         public UnityEvent onJump;
         public UnityEvent onDashStart;
@@ -108,8 +115,8 @@ namespace ProjectSteppe.Entities.Player
 
         public UnityEvent onFootstep;
 
+        [System.NonSerialized]
         public bool sprinting;
-        public float sprintSpeed;
 
         protected override void Awake()
         {
@@ -131,17 +138,17 @@ namespace ProjectSteppe.Entities.Player
 
         private void Update()
         {
+            CheckSprint();
             CheckJump();
             CheckGrounded();
             CheckDash();
             CheckMovement();
-            ForceToGround();
+            KeepToGround();
         }
 
-        private void ForceToGround()
+        private void KeepToGround()
         {
-            if (!dashing) return;
-
+            if (!characterController.enabled) return;
             if(Physics.Raycast(transform.position, Vector3.down, out var hitInfo, 0.5f, groundLayers))
             {
                 characterController.enabled = false;
@@ -155,10 +162,20 @@ namespace ProjectSteppe.Entities.Player
             CameraRotation();
         }
 
-        private void OnSprint()
+        private void CheckSprint()
         {
-            sprinting = !sprinting;
-            if (playerManager.PlayerTargetLock.lookAtTransform != null) sprinting = false;
+            if(UIPlayerInput.Instance.controlScheme == UIPlayerInput.ControlScheme.KeyboardMouse)
+            {
+                sprinting = _input.sprinting;
+            }
+            else
+            {
+                if (_input.sprinting)
+                {
+                    sprinting = !sprinting;
+                    _input.sprinting = false;
+                }
+            }
         }
 
         public void OnFootstep()
@@ -271,7 +288,7 @@ namespace ProjectSteppe.Entities.Player
         private void CheckMovement()
         {
             float targetSpeed = dashing ? dashSpeed : walkSpeed;
-            if (sprinting) targetSpeed *= sprintSpeed;
+            if (sprinting) targetSpeed *= sprintSpeedModifier;
 
             if (!dashing && (_input.move == Vector2.zero || !playerManager.HasCapability(PlayerCapability.Move))) targetSpeed = 0;
 
@@ -315,7 +332,7 @@ namespace ProjectSteppe.Entities.Player
                     }
                     else
                     {
-                        if (playerManager.PlayerTargetLock.lockOn)
+                        if (playerManager.PlayerTargetLock.lockOn && !sprinting)
                         {
                             targetRotation = playerCamera.transform.eulerAngles.y;
                         }
@@ -357,13 +374,16 @@ namespace ProjectSteppe.Entities.Player
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
 
-            if (playerManager.PlayerTargetLock.lockOn && !dashing)
+            if (!sprinting)
             {
-                targetDirection = Quaternion.Euler(0, targetRotation + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg, 0) * Vector3.forward;
-            }
-            else if (playerManager.PlayerTargetLock.lockOn && dashing)
-            {
-                targetDirection = Quaternion.Euler(0, targetRotation, 0) * Vector3.forward;
+                if (playerManager.PlayerTargetLock.lockOn && !dashing)
+                {
+                    targetDirection = Quaternion.Euler(0, targetRotation + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg, 0) * Vector3.forward;
+                }
+                else if (playerManager.PlayerTargetLock.lockOn && dashing)
+                {
+                    targetDirection = Quaternion.Euler(0, targetRotation, 0) * Vector3.forward;
+                }
             }
 
             //if (jumping) targetDirection.y = Mathf.Sqrt(5 * 2 * -9.8f);
@@ -377,7 +397,7 @@ namespace ProjectSteppe.Entities.Player
             {
                 Vector2 animVel = _input.move;
 
-                if (playerManager.PlayerTargetLock.lockOn)
+                if (playerManager.PlayerTargetLock.lockOn && !sprinting)
                 {
                     animVel.Normalize();
 
@@ -392,6 +412,11 @@ namespace ProjectSteppe.Entities.Player
                 {
                     animVel.x = 0;
                     animVel.y = animationBlend / walkSpeed;
+                }
+
+                if (playerManager.PlayerTargetLock.lockOn)
+                {
+                    playerManager.PlayerAnimator.SetBool("Strafing", !sprinting);
                 }
 
                 onMoveAnimator?.Invoke(animationBlend, inputMagnitude, animVel.x, animVel.y);

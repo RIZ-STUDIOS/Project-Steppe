@@ -259,6 +259,7 @@ namespace ProjectSteppe.Entities.Player
             this.lockOn = lockOn;
             //playerMovement.strafe = lockOn;
 
+            if(!playerManager.PlayerMovement.sprinting)
             playerManager.PlayerAnimator.SetBool("Strafing", lockOn);
 
             onLockStateChange.Invoke();
