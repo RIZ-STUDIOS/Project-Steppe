@@ -10,7 +10,7 @@ namespace ProjectSteppe
     public class EntityCurrencyDispenser : CurrencyDispenser
     {
         [SerializeField]
-        private float dispenseDelay = 4;
+        private float dispenseDelay = 3;
 
         private EntityHealth parentHealth;
 
