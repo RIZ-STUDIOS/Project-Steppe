@@ -18,6 +18,12 @@ namespace ProjectSteppe.Currencies
             InitContainer();
         }
 
+        [ContextMenu("Give EXP")]
+        public void GiveExperience()
+        {
+            AddCurrencyToContainer(CurrencyType.Experience, 250);
+        }
+
         public void AddCurrencyToContainer(CurrencyType type, int amount)
         {
             for (int i = 0; i < _currencies.Length; i++)

@@ -46,6 +46,7 @@ namespace ProjectSteppe
         public void UpdateIncomingText()
         {
             incomingTMP.text = "+ " + incomingAmount;
+            counterTMP.text = container.GetCurrencyAmount(currencyType).ToString();
         }
 
         private void UpdateCurrency(CurrencyType type, int amount)
@@ -53,7 +54,7 @@ namespace ProjectSteppe
             if (type != currencyType) return;
 
             animator.SetTrigger("Pulse");
-            incomingAmount += amount;
+            incomingAmount = amount;
             StartCoroutine(UpdateCurrencyWithFlavour());
         }
 

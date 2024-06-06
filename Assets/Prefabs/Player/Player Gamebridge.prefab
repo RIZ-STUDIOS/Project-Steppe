@@ -14428,6 +14428,7 @@ GameObject:
   - component: {fileID: 596040942698167489}
   - component: {fileID: 4878909014512478084}
   - component: {fileID: 3340632246463849396}
+  - component: {fileID: 4272376086388374369}
   m_Layer: 8
   m_Name: Player Gamebridge
   m_TagString: Player
@@ -15214,6 +15215,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d63843525ae5fef4eb1eed4c939a9a42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4272376086388374369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2282056347538574736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a89985edc415749941ce04ec770493, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCurrencyChange:
+    m_PersistentCalls:
+      m_Calls: []
+  _currencies: []
 --- !u!1 &2292957748182160486
 GameObject:
   m_ObjectHideFlags: 0
@@ -46178,7 +46195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a91c26d7cf41e1345a635d5df3fd1445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  container: {fileID: 0}
+  container: {fileID: 4272376086388374369}
   currencyType: 0
   visCG: {fileID: 1430711651884612431}
   incomingCG: {fileID: 6620304915492108577}
@@ -50681,6 +50698,7 @@ RectTransform:
   - {fileID: 1275433567474894233}
   - {fileID: 2872100330825954717}
   - {fileID: 297956798286117167}
+  - {fileID: 1208935607859800788}
   - {fileID: 7850026994262521940}
   - {fileID: 1772853545640726907}
   - {fileID: 2862918213741030746}
@@ -50688,7 +50706,6 @@ RectTransform:
   - {fileID: 4345264482062714727}
   - {fileID: 6365822954179049888}
   - {fileID: 2749016412883708590}
-  - {fileID: 1208935607859800788}
   m_Father: {fileID: 913231873559065012}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -51820,7 +51837,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 6068122371998383430}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.5
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
