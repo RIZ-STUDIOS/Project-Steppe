@@ -97,6 +97,7 @@ namespace ProjectSteppe.Entities.Player
         private float _rotationVelocity;
 
         private const float _threshold = 0.01f;
+        private const float _thresholdMove = 0.03f;
 
         private bool dashing;
 
@@ -322,8 +323,10 @@ namespace ProjectSteppe.Entities.Player
                         {
                             targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
                         }
-                        if (_input.move != Vector2.zero)
-                            this.moveDirection = inputDirection;
+                        if (Mathf.Abs(_input.move.x) > _thresholdMove)
+                            moveDirection.x = inputDirection.x;
+                        if (Mathf.Abs(_input.move.y) > _thresholdMove)
+                            moveDirection.z = inputDirection.z;
                     }
 
                     float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref _rotationVelocity,
