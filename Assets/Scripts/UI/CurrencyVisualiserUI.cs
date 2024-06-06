@@ -32,10 +32,14 @@ namespace ProjectSteppe
         [SerializeField]
         private Animator animator;
 
+        [SerializeField]
+        private CurrencyIncomingDummy incomingDummy;
+
         private void Awake()
         {
             container.OnCurrencyChange.AddListener(UpdateCurrency);
-            GetComponentInChildren<CurrencyIncomingDummy>().OnUpdateText.AddListener(UpdateIncomingText);
+            incomingDummy.OnUpdateText.AddListener(UpdateIncomingText);
+            incomingDummy.OnDispenseWithFlavour.AddListener(UpdateIncomingText);
         }
 
         private void Start()
@@ -46,7 +50,6 @@ namespace ProjectSteppe
         public void UpdateIncomingText()
         {
             incomingTMP.text = "+ " + incomingAmount;
-            counterTMP.text = container.GetCurrencyAmount(currencyType).ToString();
         }
 
         private void UpdateCurrency(CurrencyType type, int amount)
@@ -59,7 +62,8 @@ namespace ProjectSteppe
         }
 
         private IEnumerator UpdateCurrencyWithFlavour()
-        {            
+        {
+
             yield return null;
         }
     }
