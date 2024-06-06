@@ -2,6 +2,7 @@ using Cinemachine;
 using ProjectSteppe.Managers;
 using ProjectSteppe.UI;
 using StarterAssets;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -154,10 +155,18 @@ namespace ProjectSteppe.Entities.Player
         private void KeepToGround()
         {
             if (!characterController.enabled) return;
-            if(Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, out var hitInfo, 0.5f, groundLayers))
+            /*if(Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, out var hitInfo, 0.5f, groundLayers))
             {
                 characterController.enabled = false;
                 transform.position = hitInfo.point;
+                characterController.enabled = true;
+            }*/
+            Vector3 p1 = transform.position + characterController.center + Vector3.up * -characterController.height * 0.5F;
+            Vector3 p2 = p1 + Vector3.up * characterController.height;
+            if (Physics.CapsuleCast(p1, p2, characterController.radius, Vector3.down, out var hitInfo, 0.1f))
+            {
+                characterController.enabled = false;
+                //transform.position = hitInfo.point;
                 characterController.enabled = true;
             }
         }
