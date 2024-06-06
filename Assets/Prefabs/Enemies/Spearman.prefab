@@ -1141,6 +1141,54 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1571541800991123301
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7468616411903766086}
+  - component: {fileID: 1110628128513362721}
+  m_Layer: 11
+  m_Name: CurrencyDispenser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7468616411903766086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571541800991123301}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 345527471280896424}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1110628128513362721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571541800991123301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 605fd9ac2df3b9948800bfd09977e030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dispenserPayloads:
+  - type: 0
+    _amount: 100
+  dispenseDelay: 4
 --- !u!1 &1591921486660390646
 GameObject:
   m_ObjectHideFlags: 0
@@ -9719,7 +9767,6 @@ GameObject:
   - component: {fileID: 5246136870837233934}
   - component: {fileID: 3992538624408395188}
   - component: {fileID: 4090993855165387999}
-  - component: {fileID: 955006768538857964}
   m_Layer: 11
   m_Name: Spearman
   m_TagString: Untagged
@@ -9746,6 +9793,7 @@ Transform:
   - {fileID: 1952309417365526817}
   - {fileID: 5058723379103691095}
   - {fileID: 2646402650350862962}
+  - {fileID: 7468616411903766086}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7998554555362653034
@@ -10039,22 +10087,6 @@ MonoBehaviour:
   ragdollPrefab: {fileID: 1927695956069552053, guid: b8a7182aced32e345b66c25289e63bbe,
     type: 3}
   hipsTransform: {fileID: 88130701409236187}
---- !u!114 &955006768538857964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9197232685386256049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 772c78e037547794982342695a3c836f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dispenserPayloads:
-  - type: 0
-    canBeNegative: 0
-    _amount: 100
 --- !u!1001 &3311001552838886810
 PrefabInstance:
   m_ObjectHideFlags: 0
