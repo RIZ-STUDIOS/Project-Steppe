@@ -11,7 +11,13 @@ namespace ProjectSteppe
         {
             //uint refreshRate = Screen.currentResolution.refreshRateRatio.numerator / 1000;
             //QualitySettings.vSyncCount = 0;
-            //Application.targetFrameRate = refreshLock;
+            Application.targetFrameRate = refreshLock;
+        }
+
+        private void OnValidate()
+        {
+            if(Application.isPlaying)
+            Application.targetFrameRate = refreshLock;
         }
     }
 }

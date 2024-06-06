@@ -14258,7 +14258,6 @@ MonoBehaviour:
   onCapabilityChange:
     m_PersistentCalls:
       m_Calls: []
-  bossDead: 0
 --- !u!114 &270321711254958724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14375,12 +14374,12 @@ MonoBehaviour:
   look: {x: 0, y: 0}
   targetLook: {x: 0, y: 0}
   jump: 0
-  sprint: 0
   dash: 0
   attack: 0
   targetLock: 0
   blocking: 0
   useable: 0
+  sprinting: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
@@ -14427,7 +14426,7 @@ MonoBehaviour:
   terminalVelocity: -53
   jumpForce: 8
   walkSpeed: 4
-  speedChangeRate: 10
+  speedChangeRate: 0.12
   RotationSmoothTime: 0.04
   TopClamp: 70
   BottomClamp: -30
@@ -14439,6 +14438,7 @@ MonoBehaviour:
   dashSpeed: 7
   dashTime: 0.9
   dashCooldown: 0.3
+  sprintSpeedModifier: 1.4
   onJump:
     m_PersistentCalls:
       m_Calls:
@@ -14491,8 +14491,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  sprinting: 0
-  sprintSpeed: 1.4
 --- !u!114 &4368182963796099304
 MonoBehaviour:
   m_ObjectHideFlags: 0
