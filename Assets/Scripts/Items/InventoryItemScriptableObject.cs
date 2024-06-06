@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ProjectSteppe.Items
 {
-    [CreateAssetMenu(fileName = "InventoryItem", menuName = "1543493/InventoryItem")]
+    [CreateAssetMenu(fileName = "InventoryItem", menuName = "Steppe/Items/InventoryItem")]
     public class InventoryItemScriptableObject : ScriptableObject
     {
         public Sprite icon;

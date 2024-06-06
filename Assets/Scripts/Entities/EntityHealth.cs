@@ -1,3 +1,4 @@
+using ProjectSteppe.Currencies;
 using RicTools.Attributes;
 using UnityEngine;
 using UnityEngine.Events;
@@ -64,6 +65,8 @@ namespace ProjectSteppe.Entities
 
         private Animator animator;
 
+        public Entity mostRecentEntityHitBy;
+
         private void Start()
         {
             Health = maxHealth;
@@ -100,11 +103,27 @@ namespace ProjectSteppe.Entities
             {
                 onKill.Invoke();
                 animator.SetBool("PostureBreak", false);
+
+                var currencyDispenser = GetComponent<CurrencyDispenser>();
+                if (currencyDispenser != null)
+                {
+                    var attackerCurrencyContainer = mostRecentEntityHitBy.GetComponent<CurrencyContainer>();
+                    if (attackerCurrencyContainer != null)
+                    {
+                        currencyDispenser.DispenseCurrencyPayloads(attackerCurrencyContainer);
+                    }
+                }
             }
             else
             {
                 onHit.Invoke();
             }
+        }
+
+        public void DamageHealth(float amount, Entity attackingEntity)
+        {
+            mostRecentEntityHitBy = attackingEntity;
+            DamageHealth(amount);
         }
 
         public void ResetHealth()
