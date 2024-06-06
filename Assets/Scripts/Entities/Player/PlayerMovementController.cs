@@ -139,6 +139,7 @@ namespace ProjectSteppe.Entities.Player
 
         private void Update()
         {
+            CheckSprint();
             CheckJump();
             CheckGrounded();
             CheckDash();
@@ -162,10 +163,20 @@ namespace ProjectSteppe.Entities.Player
             CameraRotation();
         }
 
-        private void OnSprint(InputValue value)
+        private void CheckSprint()
         {
-            sprinting = value.Get<float>() > 0;
-            //if (playerManager.PlayerTargetLock.lookAtTransform != null) sprinting = false;
+            if(UIPlayerInput.Instance.controlScheme == UIPlayerInput.ControlScheme.KeyboardMouse)
+            {
+                sprinting = _input.sprinting;
+            }
+            else
+            {
+                if (_input.sprinting)
+                {
+                    sprinting = !sprinting;
+                    _input.sprinting = false;
+                }
+            }
         }
 
         public void OnFootstep()

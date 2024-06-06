@@ -240,7 +240,7 @@ namespace StarterAssets
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = dashing ? SprintSpeed : MoveSpeed;
 
-            if (_input.sprint && (dashing || !Grounded))
+            /*if (_input.sprint && (dashing || !Grounded))
             {
                 _input.sprint = false;
             }
@@ -251,7 +251,7 @@ namespace StarterAssets
                 canRotate = false;
                 dashTimer = dashTime;
                 _input.sprint = false;
-            }
+            }*/
 
             if (dashing)
             {
