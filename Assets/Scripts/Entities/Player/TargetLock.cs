@@ -150,16 +150,20 @@ namespace ProjectSteppe.Entities.Player
 
                 var distance = Vector3.Distance(transform.position, lookAtTransform.position);
                 var framingTransposer = playerManager.PlayerCamera.targetLockVCam.GetCinemachineComponent<CinemachineFramingTransposer>();
+                var composer = playerManager.PlayerCamera.targetLockVCam.GetCinemachineComponent<CinemachineComposer>();
                 if (distance < startDistance)
                 {
-                    framingTransposer.m_TrackedObjectOffset = new Vector3(0, 0.5f, Mathf.Lerp(0, 0.2f, ((distance - endDistance) / (startDistance - endDistance))));
-                    framingTransposer.m_CameraDistance = Mathf.Lerp(1.25f, 5, ((distance - endDistance) / (startDistance - endDistance)));
+                    var diff = lookAtTransform.position.y - playerManager.PlayerCamera.targetLockVCam.Follow.position.y;
+                    var sign = diff < 0 ? -1 : 1;
+                    //framingTransposer.m_TrackedObjectOffset = new Vector3(0, (sign * Mathf.Lerp(0, Mathf.Abs(diff), 1- ((distance - endDistance) / (startDistance - endDistance)))), 0);
+                    composer.m_TrackedObjectOffset.y = Mathf.Lerp(0, framingTransposer.m_TrackedObjectOffset.y + Mathf.Abs(diff), 1 -((distance - endDistance) / (startDistance - endDistance)));
                     //playerManager.PlayerCamera.cinemachineCameraOffset.m_Offset.y = -Mathf.Lerp(0, Mathf.Abs(lookAtTransform.position.y - playerManager.PlayerCamera.targetLockVCam.Follow.position.y) / 2f + .35f, 1 - ((distance - endDistance) / (startDistance - endDistance)));
                 }
                 else
                 {
-                    framingTransposer.m_TrackedObjectOffset = new Vector3(0, 0.5f, 0);
-                    framingTransposer.m_CameraDistance = 5;
+                    //framingTransposer.m_TrackedObjectOffset = new Vector3(0, 0.5f, 0);
+                    //framingTransposer.m_CameraDistance = 5;
+                    composer.m_TrackedObjectOffset.y = 0;
                     //playerManager.PlayerCamera.cinemachineCameraOffset.m_Offset.y = 0;
                 }
             }
