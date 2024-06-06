@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d155bb2b1f65de848b9e8627517f55aa
+guid: ad60059439a87544c8b854a5e5804607
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -19,18 +19,16 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
       copied configuration does not match position in animation file:\n\t'L_pink1'
-      : position error = 1.098017 mm\n"
+      : position error = 1.098111 mm\n"
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'Full Basic Attack' has import animation warnings
-      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+    animationImportWarnings: "\nClip 'HK Light 3' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
       to improve retargeting quality.\n\t'L_leg' has translation animation that will
-      be discarded.\n\t'L_knee' has translation animation that will be discarded.\n\t'L_anke'
-      has translation animation that will be discarded.\n\t'R_leg' has translation
-      animation that will be discarded.\n\t'spine' has translation animation that
-      will be discarded.\n\t'chest' has translation animation that will be discarded.\n\t'L_shoulder'
-      has translation animation that will be discarded.\n\t'R_shoulder' has translation
-      animation that will be discarded.\n\t'neck' has translation animation that
-      will be discarded.\n"
+      be discarded.\n\t'R_leg' has translation animation that will be discarded.\n\t'spine'
+      has translation animation that will be discarded.\n\t'chest' has translation
+      animation that will be discarded.\n\t'L_shoulder' has translation animation
+      that will be discarded.\n\t'R_shoulder' has translation animation that will
+      be discarded.\n\t'neck' has translation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -44,11 +42,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Full Basic Attack
-      takeName: Full Basic Attack
-      internalID: -9172307133425884979
+      name: HK Light 3
+      takeName: HK Light 3
+      internalID: 2020116946959708403
       firstFrame: 0
-      lastFrame: 129
+      lastFrame: 118
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
