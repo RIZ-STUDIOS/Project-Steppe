@@ -28,7 +28,8 @@ namespace ProjectSteppe.Entities.Player
         private float walkSpeed = 2f;
 
         [SerializeField]
-        private float speedChangeRate = 10;
+        [Range(0.0f, 0.3f)]
+        private float speedChangeRate = 0.12f;
 
         [Range(0.0f, 0.3f)]
         public float RotationSmoothTime = 0.12f;
@@ -102,6 +103,9 @@ namespace ProjectSteppe.Entities.Player
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
         private float _rotationVelocity;
+        private float _moveVelocity;
+        private float _animVelocity;
+        private Vector2 _inputVelocity;
 
         private const float _threshold = 0.01f;
         private const float _thresholdMove = 0.03f;
@@ -109,6 +113,7 @@ namespace ProjectSteppe.Entities.Player
         private bool dashing;
 
         private Vector3 moveDirection;
+        private Vector2 smoothMoveDirection;
 
         [System.NonSerialized]
         public bool jumping;
@@ -149,7 +154,7 @@ namespace ProjectSteppe.Entities.Player
         private void KeepToGround()
         {
             if (!characterController.enabled) return;
-            if(Physics.Raycast(transform.position, Vector3.down, out var hitInfo, 0.5f, groundLayers))
+            if(Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, out var hitInfo, 0.5f, groundLayers))
             {
                 characterController.enabled = false;
                 transform.position = hitInfo.point;
@@ -263,18 +268,18 @@ namespace ProjectSteppe.Entities.Player
 
                 if (verticalVelocity < 0)
                 {
-                    verticalVelocity = -2;
+                    verticalVelocity = 0;
                 }
             }
             else
             {
-
+                if (verticalVelocity > terminalVelocity && usingGravity)
+                {
+                    verticalVelocity += playerGravity * Time.deltaTime;
+                }
             }
 
-            if (verticalVelocity > terminalVelocity && usingGravity)
-            {
-                verticalVelocity += playerGravity * Time.deltaTime;
-            }
+            
         }
 
         private void CheckGrounded()
@@ -298,24 +303,25 @@ namespace ProjectSteppe.Entities.Player
             float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
 
             // accelerate or decelerate to target speed
-            /*if (currentHorizontalSpeed < targetSpeed - speedOffset ||
-                currentHorizontalSpeed > targetSpeed + speedOffset)
+            if ((speed < targetSpeed - speedOffset ||
+                speed > targetSpeed + speedOffset))
             {
                 // creates curved result rather than a linear one giving a more organic speed change
                 // note T in Lerp is clamped, so we don't need to clamp our speed
-                speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
-                    Time.deltaTime * speedChangeRate);
+                speed = Mathf.SmoothDamp(speed, targetSpeed * inputMagnitude, ref _moveVelocity, speedChangeRate);
 
                 // round speed to 3 decimal places
                 //speed = Mathf.Round(speed * 1000f) / 1000f;
             }
             else
             {
-            }*/
-            speed = targetSpeed;
+                speed = targetSpeed;
+            }
 
-            animationBlend = Mathf.Lerp(animationBlend, targetSpeed, Time.deltaTime * speedChangeRate);
+            animationBlend = Mathf.SmoothDamp(animationBlend, targetSpeed, ref _animVelocity, speedChangeRate);
             if (animationBlend < 0.01f) animationBlend = 0f;
+
+            smoothMoveDirection = Vector2.SmoothDamp(smoothMoveDirection, _input.move, ref _inputVelocity, speedChangeRate);
 
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
@@ -340,10 +346,8 @@ namespace ProjectSteppe.Entities.Player
                         {
                             targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
                         }
-                        if (Mathf.Abs(_input.move.x) > _thresholdMove)
-                            moveDirection.x = inputDirection.x;
-                        if (Mathf.Abs(_input.move.y) > _thresholdMove)
-                            moveDirection.z = inputDirection.z;
+                        if (_input.move != Vector2.zero)
+                            this.moveDirection = inputDirection;
                     }
 
                     float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref _rotationVelocity,
@@ -378,7 +382,8 @@ namespace ProjectSteppe.Entities.Player
             {
                 if (playerManager.PlayerTargetLock.lockOn && !dashing)
                 {
-                    targetDirection = Quaternion.Euler(0, targetRotation + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg, 0) * Vector3.forward;
+                    targetDirection = Quaternion.Euler(0, targetRotation + Mathf.Atan2(smoothMoveDirection.x, smoothMoveDirection.y) * Mathf.Rad2Deg, 0) * Vector3.forward;
+                    //Debug.Log("Target Dir: "+targetDirection + " Target Rot: " + targetRotation + " Input: " + _input.move + " Atan2: " + Mathf.Atan2(inputDirection.x, inputDirection.z));
                 }
                 else if (playerManager.PlayerTargetLock.lockOn && dashing)
                 {
@@ -399,7 +404,9 @@ namespace ProjectSteppe.Entities.Player
 
                 if (playerManager.PlayerTargetLock.lockOn && !sprinting)
                 {
-                    animVel.Normalize();
+                    animVel.x = smoothMoveDirection.x * (animationBlend / walkSpeed);
+                    animVel.y = smoothMoveDirection.y * (animationBlend / walkSpeed);
+                    //animVel.Normalize();
 
                     if (dashing)
                     {
