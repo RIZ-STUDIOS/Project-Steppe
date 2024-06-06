@@ -39,6 +39,14 @@ namespace ProjectSteppe
 
         private float speedMultiplier = 1;
 
+        [Header("Canvas Related")]
+
+        [SerializeField]
+        private Canvas freeCamCanvas;
+
+        [SerializeField]
+        private RectTransform controlsRectTransform;
+
         private Vector2 moveVector;
         private float verticalMovement;
 
@@ -84,12 +92,12 @@ namespace ProjectSteppe
 
         private void ToggleCanvas_performed(InputAction.CallbackContext obj)
         {
-            foreach(var canvas in worldCanvas)
+            foreach (var canvas in worldCanvas)
             {
                 canvas.enabled = !canvas.enabled;
             }
 
-            foreach(var ps in particleSystems)
+            foreach (var ps in particleSystems)
             {
                 ps.gameObject.SetActive(!ps.gameObject.activeSelf);
             }
@@ -99,13 +107,13 @@ namespace ProjectSteppe
         {
             var val = obj.ReadValue<float>();
             var fov = camera.fieldOfView;
-            if(val > 0)
+            if (val > 0)
             {
                 fov += fovIncrement;
-                if(fov > maximumFOV)
+                if (fov > maximumFOV)
                     fov = maximumFOV;
             }
-            else if(val < 0)
+            else if (val < 0)
             {
                 fov -= fovIncrement;
                 if (fov < minimumFOV)
@@ -202,26 +210,27 @@ namespace ProjectSteppe
             GameManager.Instance.playerManager.PlayerMovement.enabled = false;
             canvases.Clear();
             worldCanvas.Clear();
+            particleSystems.Clear();
             camera.fieldOfView = 40;
 
             var c = GameObject.FindObjectsOfType<Canvas>();
 
-            foreach(var canvas in c)
+            foreach (var canvas in c)
             {
-                if(canvas.renderMode != RenderMode.WorldSpace && canvas.enabled)
+                if (canvas.renderMode != RenderMode.WorldSpace && canvas.enabled)
                 {
                     canvas.enabled = false;
                     canvases.Add(canvas);
                 }
-                if(canvas.renderMode == RenderMode.WorldSpace && canvas.enabled)
+                if (canvas.renderMode == RenderMode.WorldSpace && canvas.enabled)
                 {
                     worldCanvas.Add(canvas);
                 }
             }
 
             var p = GameObject.FindObjectsOfType<InventoryInteractable>();
-            
-            foreach(var ps in p)
+
+            foreach (var ps in p)
             {
                 var d = ps.GetComponentInChildren<ParticleSystem>(true);
                 if (d.gameObject.activeSelf)
@@ -229,6 +238,11 @@ namespace ProjectSteppe
                     particleSystems.Add(d);
                 }
             }
+
+            freeCamCanvas.enabled = true;
+            var pos = controlsRectTransform.anchoredPosition;
+            pos.x = -controlsRectTransform.sizeDelta.x / 2f;
+            controlsRectTransform.anchoredPosition = pos;
         }
 
         private void OnDisable()
@@ -242,15 +256,17 @@ namespace ProjectSteppe
                 canvas.enabled = true;
             }
 
-            foreach(var canvas in worldCanvas)
+            foreach (var canvas in worldCanvas)
             {
                 canvas.enabled = true;
             }
 
-            foreach(var ps in particleSystems)
+            foreach (var ps in particleSystems)
             {
                 ps.gameObject.SetActive(true);
             }
+
+            freeCamCanvas.enabled = false;
         }
     }
 }

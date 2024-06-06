@@ -50,7 +50,7 @@ namespace ProjectSteppe.Entities.Player
 
         public void OnInteract()
         {
-            if (CurrentInteractable != null)
+            if (CurrentInteractable != null && CurrentInteractable.CanInteract)
             {
                 CurrentInteractable.Interact();
                 CurrentInteractable = null;
