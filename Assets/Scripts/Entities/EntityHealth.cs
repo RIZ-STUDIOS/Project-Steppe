@@ -104,11 +104,9 @@ namespace ProjectSteppe.Entities
                 onKill.Invoke();
                 animator.SetBool("PostureBreak", false);
 
-                var currencyDispenser = GetComponent<CurrencyDispenser>();
-                if (currencyDispenser != null)
+                if (TryGetComponent<CurrencyDispenser>(out var currencyDispenser))
                 {
-                    var attackerCurrencyContainer = mostRecentEntityHitBy.GetComponent<CurrencyContainer>();
-                    if (attackerCurrencyContainer != null)
+                    if (mostRecentEntityHitBy.TryGetComponent<CurrencyContainer>(out var attackerCurrencyContainer))
                     {
                         currencyDispenser.DispenseCurrencyPayloads(attackerCurrencyContainer);
                     }
