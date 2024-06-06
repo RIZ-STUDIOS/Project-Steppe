@@ -19,9 +19,18 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
       copied configuration does not match position in animation file:\n\t'L_pink1'
-      : position error = 1.098034 mm\n"
+      : position error = 1.098017 mm\n"
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'Full Basic Attack' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'L_leg' has translation animation that will
+      be discarded.\n\t'L_knee' has translation animation that will be discarded.\n\t'L_anke'
+      has translation animation that will be discarded.\n\t'R_leg' has translation
+      animation that will be discarded.\n\t'spine' has translation animation that
+      will be discarded.\n\t'chest' has translation animation that will be discarded.\n\t'L_shoulder'
+      has translation animation that will be discarded.\n\t'R_shoulder' has translation
+      animation that will be discarded.\n\t'neck' has translation animation that
+      will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -39,7 +48,7 @@ ModelImporter:
       takeName: Full Basic Attack
       internalID: -9172307133425884979
       firstFrame: 0
-      lastFrame: 130
+      lastFrame: 129
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -908,7 +917,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: ab88cf3f72afd6c4a90b4bb6d601f12e,
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 7d5edae0de1ca1d47b52e13306d1d688,
     type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3

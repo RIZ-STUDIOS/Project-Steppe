@@ -135,7 +135,7 @@ namespace ProjectSteppe
 
                     if (parentEntity.EntityAttacking.currentAttack.balanceBlockPassthrough)
                     {
-                        hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage);
+                        hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage, parentEntity);
                     }
                     hitbox.ParentEntity.EntityBlock.OnBlockAttack.Invoke();
                 }
@@ -144,7 +144,7 @@ namespace ProjectSteppe
                     if (parentEntity.EntityAttacking.currentAttack.balanceBlockPassthrough)
                     {
                         hitbox.ParentEntity.EntityHealth.DamageBalance(parentEntity.EntityAttacking.currentAttack.balanceDamage);
-                        hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage);
+                        hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage, parentEntity);
                         hitbox.ParentEntity.EntityBlock.ChangeBlockColor(false);
                     }
                     else
@@ -161,7 +161,7 @@ namespace ProjectSteppe
             }
             else
             {
-                hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage);
+                hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage, parentEntity);
                 hitbox.ParentEntity.EntityHealth.DamageBalance(parentEntity.EntityAttacking.currentAttack.balanceDamage);
             }
 

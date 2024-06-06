@@ -22253,6 +22253,7 @@ GameObject:
   - component: {fileID: 7931571383535912719}
   - component: {fileID: 5253185858980636403}
   - component: {fileID: 1523574760915350386}
+  - component: {fileID: 7634023398963683091}
   m_Layer: 11
   m_Name: Boss Amr
   m_TagString: Untagged
@@ -22463,6 +22464,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   vulnerable: 0
+  mostRecentEntityHitBy: {fileID: 0}
 --- !u!114 &8085953965965946911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22593,6 +22595,9 @@ MonoBehaviour:
         m_CallState: 2
   volumeReduceMod: 0.125
   bossMusic: {fileID: 968056764112598779}
+  secondPhaseSpeed: 0
+  secondPhaseTimeBeforeBalanceRegeneration: 1.5
+  secondPhaseBalanceRegenerationRate: 0.2
   footWeapon: {fileID: 2498927668637170128}
   normalWeapon: {fileID: 7019936400114263720}
 --- !u!136 &7931571383535912719
@@ -22650,6 +22655,22 @@ MonoBehaviour:
   getChildren: 0
   sounds:
   - {fileID: 7020401660672742041}
+--- !u!114 &7634023398963683091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6174741706873425927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 605fd9ac2df3b9948800bfd09977e030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dispenserPayloads:
+  - type: 0
+    _amount: 550
+  dispenseDelay: 3
 --- !u!1 &6189992602926585263
 GameObject:
   m_ObjectHideFlags: 0
