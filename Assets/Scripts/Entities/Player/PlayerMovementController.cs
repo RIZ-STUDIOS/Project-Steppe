@@ -106,6 +106,9 @@ namespace ProjectSteppe.Entities.Player
 
         public UnityEvent onFootstep;
 
+        public bool sprinting;
+        public float sprintSpeed;
+
         protected override void Awake()
         {
             base.Awake();
@@ -135,6 +138,12 @@ namespace ProjectSteppe.Entities.Player
         private void LateUpdate()
         {
             CameraRotation();
+        }
+
+        private void OnSprint()
+        {
+            sprinting = !sprinting;
+            if (playerManager.PlayerTargetLock.lookAtTransform != null) sprinting = false;
         }
 
         public void OnFootstep()
@@ -246,6 +255,7 @@ namespace ProjectSteppe.Entities.Player
         private void CheckMovement()
         {
             float targetSpeed = dashing ? dashSpeed : walkSpeed;
+            if (sprinting) targetSpeed *= sprintSpeed;
 
             if (!dashing && (_input.move == Vector2.zero || !playerManager.HasCapability(PlayerCapability.Move))) targetSpeed = 0;
 
