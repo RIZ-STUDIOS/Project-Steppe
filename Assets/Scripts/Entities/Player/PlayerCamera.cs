@@ -22,9 +22,6 @@ namespace ProjectSteppe.Entities.Player
         [SerializeField]
         private CameraDataScriptableObject lockFramingTransposer;
 
-        [System.NonSerialized]
-        public CinemachineCameraOffset cinemachineCameraOffset;
-
         private Coroutine lerpCameraCoroutine;
 
         [SerializeField]
@@ -35,15 +32,14 @@ namespace ProjectSteppe.Entities.Player
         {
             thirdPersonFollow.ApplyCameraData(thirdPersonVCam);
             lockFramingTransposer.ApplyCameraData(targetLockVCam);
-            cinemachineCameraOffset = targetLockVCam.GetComponent<CinemachineCameraOffset>();
         }
 
         public void SwitchToThirdPersonFollow()
         {
-            cinemachineCameraOffset.m_Offset.y = 0;
             targetLockVCam.Priority = 10;
             thirdPersonVCam.Priority = 11;
             targetLockVCam.Priority = 0;
+            targetLockVCam.GetCinemachineComponent<CinemachineComposer>().m_TrackedObjectOffset.y = 0;
             /*cinemachineCameraOffset.m_Offset.y = 0;
             if (lerpCameraCoroutine != null)
             {
