@@ -1,4 +1,6 @@
 using Cinemachine;
+using ProjectSteppe.Managers;
+using ProjectSteppe.UI;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.Events;
@@ -342,38 +344,26 @@ namespace ProjectSteppe.Entities.Player
             // FOR ANIMATOR //
             if (Time.timeScale > 0)
             {
-                float velX;
-                float velY;
+                Vector2 animVel = _input.move;
 
                 if (playerManager.PlayerTargetLock.lockOn)
                 {
-                    velX = _input.move.x;
-                    velY = _input.move.y;
-
-                    if (velY < -0.1f)
-                    {
-                        velX *= -1;
-                    }
-
-                    if (velX < -0.1f)
-                    {
-                        velY *= -1;
-                    }
+                    animVel.Normalize();
 
                     if (dashing)
                     {
                         var d = moveDirection.normalized;
-                        velX = d.x > 0 ? 1 : 0;
-                        velY = d.z > 0 ? 1 : 0;
+                        animVel.x = d.x > 0 ? 1 : 0;
+                        animVel.y = d.z > 0 ? 1 : 0;
                     }
                 }
                 else
                 {
-                    velX = 0;
-                    velY = animationBlend / walkSpeed;
+                    animVel.x = 0;
+                    animVel.y = animationBlend / walkSpeed;
                 }
 
-                onMoveAnimator?.Invoke(animationBlend, inputMagnitude, velX, velY);
+                onMoveAnimator?.Invoke(animationBlend, inputMagnitude, animVel.x, animVel.y);
             }
         }
 
