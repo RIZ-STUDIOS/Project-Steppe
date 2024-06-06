@@ -34,6 +34,8 @@ namespace ProjectSteppe.Interactions.Interactables
         }
 
         public override bool OneTime => false;
+
+        public override bool CanInteract => player && !player.gettingUp;
         public override bool Interacted { get; set; }
 
         public UnityEvent<CheckpointInteractable> OnCheckpointActivate;

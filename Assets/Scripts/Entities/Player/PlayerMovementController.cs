@@ -80,12 +80,13 @@ namespace ProjectSteppe.Entities.Player
         private float speed;
         private float animationBlend;
         private float targetRotation;
+        private float cameraRotDash;
 
         public bool Grounded => grounded;
 
         private StarterAssetsInputs _input;
         private CharacterController characterController;
-        //private Animator animator;
+        private Animator animator;
         private PlayerInput playerInput;
         private PlayerManager playerManager;
 
@@ -115,7 +116,7 @@ namespace ProjectSteppe.Entities.Player
             characterController = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
             playerInput = GetComponent<PlayerInput>();
-            //animator = GetComponent<Animator>();
+            animator = GetComponent<Animator>();
             virtualCamera = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
             playerManager = GetComponent<PlayerManager>();
             playerManager.onCapabilityChange.AddListener(OnPlayerCapability);
@@ -133,6 +134,19 @@ namespace ProjectSteppe.Entities.Player
             CheckGrounded();
             CheckDash();
             CheckMovement();
+            ForceToGround();
+        }
+
+        private void ForceToGround()
+        {
+            if (!dashing) return;
+
+            if(Physics.Raycast(transform.position, Vector3.down, out var hitInfo, 0.5f, groundLayers))
+            {
+                characterController.enabled = false;
+                transform.position = hitInfo.point;
+                characterController.enabled = true;
+            }
         }
 
         private void LateUpdate()
@@ -160,6 +174,7 @@ namespace ProjectSteppe.Entities.Player
                     dashing = true;
                     dashTimer = 0;
                     Entity.EntityHealth.SetInvicible(true);
+                    cameraRotDash = playerCamera.transform.eulerAngles.y;
                     onDashStart.Invoke();
                     Entity.EntityAttacking.DisableWeaponCollision();
                 }
@@ -292,7 +307,10 @@ namespace ProjectSteppe.Entities.Player
                 {
                     if (dashing)
                     {
-                        targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
+                        if (playerManager.PlayerTargetLock.lockOn)
+                            targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
+                        else
+                            targetRotation = cameraRotDash + Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
                     }
                     else
                     {

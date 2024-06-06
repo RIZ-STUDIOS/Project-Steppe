@@ -48,7 +48,11 @@ namespace ProjectSteppe.Entities.Player
 
         public UnityEvent onCapabilityChange;
 
+        [System.NonSerialized]
         public bool bossDead;
+
+        [System.NonSerialized]
+        public bool gettingUp;
 
         private CharacterController characterController;
 
@@ -71,6 +75,12 @@ namespace ProjectSteppe.Entities.Player
         public void DisableCapability(PlayerCapability capability)
         {
             this.capabilities &= ~capability;
+            onCapabilityChange.Invoke();
+        }
+
+        public void DisableAllCapabilities()
+        {
+            this.capabilities = 0;
             onCapabilityChange.Invoke();
         }
 

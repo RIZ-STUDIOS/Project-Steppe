@@ -268,10 +268,5 @@ namespace ProjectSteppe
 
             freeCamCanvas.enabled = false;
         }
-
-        private void OnDestroy()
-        {
-
-        }
     }
 }
