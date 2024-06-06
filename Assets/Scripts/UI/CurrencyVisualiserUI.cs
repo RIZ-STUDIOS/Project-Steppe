@@ -1,4 +1,5 @@
 using ProjectSteppe.Currencies;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,8 +15,6 @@ namespace ProjectSteppe
 
         [SerializeField]
         private CurrencyType currencyType;
-
-        private int incomingAmount;
 
         [SerializeField]
         private CanvasGroup visCG;
@@ -35,36 +34,56 @@ namespace ProjectSteppe
         [SerializeField]
         private CurrencyIncomingDummy incomingDummy;
 
+        private bool updatingText;
+        private int previousAmount;
+
+        [SerializeField]
+        private float flavourSpeed = 1;
+
+        private string CurrentCurrency => container.GetCurrencyAmount(currencyType).ToString("N0");
+
         private void Awake()
         {
             container.OnCurrencyChange.AddListener(UpdateCurrency);
-            incomingDummy.OnUpdateText.AddListener(UpdateIncomingText);
-            incomingDummy.OnDispenseWithFlavour.AddListener(UpdateIncomingText);
+            incomingDummy.OnDispenseWithFlavour.AddListener(UpdateWithFlavour); // Called by animator.
         }
 
         private void Start()
         {
-            UpdateIncomingText();
-        }
-
-        public void UpdateIncomingText()
-        {
-            incomingTMP.text = "+ " + incomingAmount;
+            counterTMP.text = CurrentCurrency;
+            previousAmount = container.GetCurrencyAmount(currencyType);
         }
 
         private void UpdateCurrency(CurrencyType type, int amount)
         {
-            if (type != currencyType) return;
+            if (type != currencyType || updatingText) return;
 
+            incomingTMP.text = "+ " + amount.ToString("N0");
             animator.SetTrigger("Pulse");
-            incomingAmount = amount;
+            updatingText = true;
+        }
+
+        private void UpdateWithFlavour()
+        {
             StartCoroutine(UpdateCurrencyWithFlavour());
         }
 
         private IEnumerator UpdateCurrencyWithFlavour()
         {
+            float timer = 0;
+            while (timer < 1)
+            {
+                int amount = Mathf.CeilToInt(Mathf.Lerp(previousAmount, container.GetCurrencyAmount(currencyType), timer));
+                counterTMP.text = amount.ToString("N0");
 
-            yield return null;
+                timer += Time.deltaTime * flavourSpeed;
+                yield return null;
+            }
+
+            counterTMP.text = CurrentCurrency;
+            previousAmount = container.GetCurrencyAmount(currencyType);
+
+            updatingText = false;
         }
     }
 }

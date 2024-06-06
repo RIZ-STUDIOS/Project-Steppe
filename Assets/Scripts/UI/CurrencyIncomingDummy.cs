@@ -7,13 +7,7 @@ namespace ProjectSteppe
 {
     public class CurrencyIncomingDummy : MonoBehaviour
     {
-        public UnityEvent OnUpdateText;
         public UnityEvent OnDispenseWithFlavour;
-
-        public void UpdateText()
-        {
-            OnUpdateText.Invoke();
-        }
 
         public void DispenseWithFlavour()
         {
