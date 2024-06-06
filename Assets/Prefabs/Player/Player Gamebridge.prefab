@@ -2776,6 +2776,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7440014869550765934}
   - component: {fileID: 4124197999313395339}
+  - component: {fileID: 208915601373173582}
   m_Layer: 8
   m_Name: Footstep
   m_TagString: Untagged
@@ -2822,6 +2823,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   getChildren: 1
   sounds: []
+--- !u!114 &208915601373173582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625250594980930525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1daec19ca0a8f32409e9c14e7c6b41e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepSounds:
+  - texture: {fileID: 0}
+    clips:
+    - {fileID: 8300000, guid: e9c2f425b71a93b4991da394ee4ba1af, type: 3}
+    - {fileID: 8300000, guid: 4548e2c4d75fe0441a697a2701ffe6a9, type: 3}
+    - {fileID: 8300000, guid: f3d604c84ac4640499e4d00f5ff40a79, type: 3}
+    - {fileID: 8300000, guid: 6879ab3fbfda3364a9a001261cd0d911, type: 3}
+    - {fileID: 8300000, guid: d9180237d555c15438485ee7cc829eef, type: 3}
+    - {fileID: 8300000, guid: 839612a8a49a29549a635749268c41c4, type: 3}
+    - {fileID: 8300000, guid: 0d2ee6a406b007d45a2cae5ad94d2637, type: 3}
+    - {fileID: 8300000, guid: 4cd8bf27023da394c82e6b4ca4928e8c, type: 3}
+    - {fileID: 8300000, guid: 3ff4d2361ae04c242bf9df76c50e6b63, type: 3}
+    - {fileID: 8300000, guid: e29a4eb7a84818d48b72c92d5c101732, type: 3}
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 16385
+  audioSource: {fileID: 2056461701847462650}
+  blendStepSounds: 0
 --- !u!1 &1670143512284947141
 GameObject:
   m_ObjectHideFlags: 0
@@ -14479,9 +14510,10 @@ MonoBehaviour:
   onFootstep:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4124197999313395339}
-        m_TargetAssemblyTypeName: ProjectSteppe.Audio.SoundPlayer, ProjectSteppe
-        m_MethodName: PlayRandomSound
+      - m_Target: {fileID: 208915601373173582}
+        m_TargetAssemblyTypeName: ProjectSteppe.Entities.Player.FootstepSoundPlayer,
+          ProjectSteppe
+        m_MethodName: PlayFootstepSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14705,7 +14737,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  parryGracePeriod: 0.2
+  parryGracePeriod: 0.6
 --- !u!114 &371130292227585725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15542,7 +15574,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 340.00003}
+  m_AnchoredPosition: {x: 0, y: 339.99997}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &372216155080617438
@@ -27438,13 +27470,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3323024479756885793}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.42829558, y: -0.7901105, z: -0.41471657, w: 0.14247268}
-  m_LocalPosition: {x: -17.239563, y: 31.44023, z: 36.65165}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.08, z: 0.5567}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2667240278289415806}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &6817440377083808258
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -27518,7 +27550,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -51504,8 +51536,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4732566296299855046}
   m_HandleRect: {fileID: 6068122371998383430}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.42647058
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
