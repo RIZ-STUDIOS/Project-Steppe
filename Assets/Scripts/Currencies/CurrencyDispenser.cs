@@ -11,6 +11,7 @@ namespace ProjectSteppe
 
         public void DispenseCurrencyPayloads(CurrencyContainer targetContainer)
         {
+            Debug.Log("Dispensing currencies to " + targetContainer);
             for (int i = 0; i < dispenserPayloads.Length; i++)
             {
                 var payload = dispenserPayloads[i];

@@ -9353,6 +9353,7 @@ GameObject:
   - component: {fileID: 8260738318475526680}
   - component: {fileID: 4688114111615951400}
   - component: {fileID: 8351466365226365903}
+  - component: {fileID: 3159339877001215433}
   m_Layer: 11
   m_Name: Swordsman
   m_TagString: Untagged
@@ -9584,6 +9585,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   vulnerable: 0
+  mostRecentEntityHitBy: {fileID: 0}
 --- !u!114 &9176746715400965546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9671,6 +9673,21 @@ MonoBehaviour:
   ragdollPrefab: {fileID: 5397622290432656032, guid: 5c1ad9df14395b8448d7e76d224b2c42,
     type: 3}
   hipsTransform: {fileID: 7462087962278472180}
+--- !u!114 &3159339877001215433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7004660040719988564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772c78e037547794982342695a3c836f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dispenserPayloads:
+  - type: 0
+    _amount: 125
 --- !u!1 &7231801005130690194
 GameObject:
   m_ObjectHideFlags: 0
