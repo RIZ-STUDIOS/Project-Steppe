@@ -2505,7 +2505,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '9,999
+  m_text: '0
 
 '
   m_isRightToLeft: 0
@@ -46205,6 +46205,7 @@ MonoBehaviour:
   incomingTMP: {fileID: 3372876041268310715}
   animator: {fileID: 8096347411735005513}
   incomingDummy: {fileID: 4991175140326222368}
+  flavourSpeed: 1
 --- !u!225 &1430711651884612431
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -52683,7 +52684,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: + 9,999
+  m_text: + 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d486df5020bdf1d4997d6e8bdccde247, type: 2}
   m_sharedMaterial: {fileID: -3521070536601415082, guid: d486df5020bdf1d4997d6e8bdccde247,
@@ -52798,9 +52799,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d277916f3189f34db29ad8f57f9da61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnUpdateText:
-    m_PersistentCalls:
-      m_Calls: []
   OnDispenseWithFlavour:
     m_PersistentCalls:
       m_Calls: []
