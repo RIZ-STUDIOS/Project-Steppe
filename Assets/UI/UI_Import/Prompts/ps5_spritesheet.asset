@@ -1,5 +1,46 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!21 &-7096069519862637967
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: TextMeshPro/Sprite
+  m_Shader: {fileID: 4800000, guid: cf81c85f95fe47e1a27f6ae460cf182c, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,7 +54,7 @@ MonoBehaviour:
   m_Name: ps5_spritesheet
   m_EditorClassIdentifier: 
   hashCode: -407014161
-  material: {fileID: 1258487927773069987}
+  material: {fileID: -7096069519862637967}
   materialHashCode: 0
   m_Version: 1.1.0
   m_FaceInfo:
@@ -60,10 +101,10 @@ MonoBehaviour:
     m_HashCode: -856791901
   - m_ElementType: 2
     m_Unicode: 65534
-    m_GlyphIndex: 2
+    m_GlyphIndex: 4
     m_Scale: 1
-    m_Name: ps5_spritesheet_2
-    m_HashCode: -856791902
+    m_Name: ps5_spritesheet_4
+    m_HashCode: -856791900
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 9
@@ -114,16 +155,16 @@ MonoBehaviour:
     m_HashCode: -856791901
   - m_ElementType: 2
     m_Unicode: 65534
-    m_GlyphIndex: 2
-    m_Scale: 1
-    m_Name: ps5_spritesheet_2
-    m_HashCode: -856791902
-  - m_ElementType: 2
-    m_Unicode: 65534
     m_GlyphIndex: 4
     m_Scale: 1
     m_Name: ps5_spritesheet_4
     m_HashCode: -856791900
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 1
+    m_Scale: 1
+    m_Name: ps5_spritesheet_1
+    m_HashCode: -856791903
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 6
@@ -138,10 +179,22 @@ MonoBehaviour:
     m_HashCode: -856791895
   - m_ElementType: 2
     m_Unicode: 65534
-    m_GlyphIndex: 1
+    m_GlyphIndex: 10
     m_Scale: 1
-    m_Name: ps5_spritesheet_1
-    m_HashCode: -856791903
+    m_Name: ps5_spritesheet_10
+    m_HashCode: 1790638321
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 7
+    m_Scale: 1
+    m_Name: ps5_spritesheet_7
+    m_HashCode: -856791897
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 4
+    m_Scale: 1
+    m_Name: ps5_spritesheet_4
+    m_HashCode: -856791900
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
@@ -158,7 +211,7 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
-    sprite: {fileID: 2130513880, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
+    sprite: {fileID: -162936424, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
   - m_Index: 1
     m_Metrics:
       m_Width: 102
@@ -174,7 +227,7 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
-    sprite: {fileID: 1007078335, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
+    sprite: {fileID: 554961823, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
   - m_Index: 2
     m_Metrics:
       m_Width: 102
@@ -190,7 +243,7 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
-    sprite: {fileID: 2079447914, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
+    sprite: {fileID: 525154209, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
   - m_Index: 3
     m_Metrics:
       m_Width: 102
@@ -206,7 +259,7 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
-    sprite: {fileID: 1756080167, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
+    sprite: {fileID: -1405060874, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
   - m_Index: 4
     m_Metrics:
       m_Width: 102
@@ -222,7 +275,7 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
-    sprite: {fileID: -2087754970, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
+    sprite: {fileID: -1839941897, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
   - m_Index: 5
     m_Metrics:
       m_Width: 102
@@ -238,7 +291,7 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
-    sprite: {fileID: -1335960019, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
+    sprite: {fileID: 1857523209, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
   - m_Index: 6
     m_Metrics:
       m_Width: 102
@@ -254,7 +307,7 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
-    sprite: {fileID: 73187535, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
+    sprite: {fileID: -426463303, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
   - m_Index: 7
     m_Metrics:
       m_Width: 102
@@ -270,7 +323,7 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
-    sprite: {fileID: -417107737, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
+    sprite: {fileID: 1850952739, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
   - m_Index: 8
     m_Metrics:
       m_Width: 102
@@ -286,7 +339,7 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
-    sprite: {fileID: 825243769, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
+    sprite: {fileID: -619076765, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
   - m_Index: 9
     m_Metrics:
       m_Width: 102
@@ -302,7 +355,7 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
-    sprite: {fileID: 1939184905, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
+    sprite: {fileID: 466722531, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
   - m_Index: 10
     m_Metrics:
       m_Width: 102
@@ -318,7 +371,7 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
-    sprite: {fileID: -909048107, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
+    sprite: {fileID: -1451084406, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
   - m_Index: 11
     m_Metrics:
       m_Width: 102
@@ -334,7 +387,7 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
-    sprite: {fileID: -162915813, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
+    sprite: {fileID: 1050697943, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
   - m_Index: 12
     m_Metrics:
       m_Width: 102
@@ -350,47 +403,6 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
-    sprite: {fileID: -1999843334, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
+    sprite: {fileID: 108825129, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []
---- !u!21 &1258487927773069987
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: TextMeshPro/Sprite
-  m_Shader: {fileID: 4800000, guid: cf81c85f95fe47e1a27f6ae460cf182c, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 582d13f99bf8e49469e521ce0586e176, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _CullMode: 0
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-  m_BuildTextureStacks: []
