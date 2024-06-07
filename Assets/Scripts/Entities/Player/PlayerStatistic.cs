@@ -10,8 +10,10 @@ namespace ProjectSteppe.Entities.Player
         
     }
 
-    public enum Statistics
-    {
-
+    public enum PlayerStatisticType
+    {        
+        Precision,
+        Swiftness,
+        Toughness
     }
 }
