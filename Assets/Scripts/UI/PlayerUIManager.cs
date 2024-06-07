@@ -11,6 +11,7 @@ namespace ProjectSteppe.UI
         public AreaPromptUI areaPrompt;
         public PlayerDetailsUI playerDetails;
         public CheckpointUI checkpointUI;
+        public CanvasGroup blackFade;
 
         private void Awake()
         {

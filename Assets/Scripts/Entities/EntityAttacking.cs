@@ -17,6 +17,8 @@ namespace ProjectSteppe.Entities
 
         public UnityEvent OnAttack;
 
+        public float damageMultiplier = 1;
+
         private void Start()
         {
             SetWeapon(startWeapon);

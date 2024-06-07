@@ -28,6 +28,8 @@ namespace ProjectSteppe.Entities.Player
         [SerializeField]
         private float walkSpeed = 2f;
 
+        public float speedMultiplier = 1;
+
         [SerializeField]
         [Range(0.0f, 0.3f)]
         private float speedChangeRate = 0.12f;
@@ -306,6 +308,8 @@ namespace ProjectSteppe.Entities.Player
             if (sprinting) targetSpeed *= sprintSpeedModifier;
 
             if (!dashing && (_input.move == Vector2.zero || !playerManager.HasCapability(PlayerCapability.Move))) targetSpeed = 0;
+
+            targetSpeed *= speedMultiplier;
 
             float currentHorizontalSpeed = new Vector3(characterController.velocity.x, 0.0f, characterController.velocity.z).magnitude;
 

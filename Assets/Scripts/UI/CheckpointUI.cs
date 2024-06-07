@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace ProjectSteppe.UI
 {
@@ -32,7 +33,7 @@ namespace ProjectSteppe.UI
         {
             checkpoint = activeCheckpoint;
 
-            //checkpoint.player.GetComponent<>
+            checkpoint.player.GetComponent<Pause>().ProhibitPause();
 
             SetMenu(this);
             ShowCurrentMenu();
@@ -56,9 +57,22 @@ namespace ProjectSteppe.UI
             EventSystem.current.SetSelectedGameObject(firstButton);
         }
 
+        public void Rest()
+        {
+            //LoadingManager.LoadScene(SceneConstants.LEVEL_1_INDEX);
+            EventSystem.current.enabled = false;
+            StartCoroutine(OnRest());
+        }
+
         protected override void OnCancelPerformed(InputAction.CallbackContext callbackContext)
         {
             DisableLevelUpInterface();
+        }
+
+        public IEnumerator OnRest()
+        {
+            yield return checkpoint.player.PlayerUI.blackFade.FadeIn();
+            SceneManager.LoadScene(SceneConstants.LEVEL_1_INDEX);
         }
     }
 }

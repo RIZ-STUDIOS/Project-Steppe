@@ -437,7 +437,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 0
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
@@ -561,6 +561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf355df63ce35b44969b7ef63c742ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   id: 1_boss
   _startDiscovered: 0
   particles:
@@ -572,6 +573,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnCheckpointFirstInteraction:
+    m_PersistentCalls:
+      m_Calls: []
+  OnEnteredCheckpoint:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExitedCheckpoint:
     m_PersistentCalls:
       m_Calls: []
   levelIndex: 0
