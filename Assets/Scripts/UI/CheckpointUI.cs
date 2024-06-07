@@ -1,25 +1,25 @@
 using Cinemachine;
 using ProjectSteppe.Entities.Player;
 using ProjectSteppe.Interactions.Interactables;
+using ProjectSteppe.UI.Menus;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectSteppe
 {
-    public class CheckpointUI : MonoBehaviour
+    public class CheckpointUI : MenuBase
     {
         private CheckpointInteractable checkpoint;
 
-        private CanvasGroup canvasGroup;
+        [SerializeField]
+        private GameObject firstButton;
 
-        private void Awake()
+        public void EnterCheckpoint(CheckpointInteractable activeCheckpoint)
         {
-            checkpoint = GetComponent<CheckpointInteractable>();
-        }
+            checkpoint = activeCheckpoint;
 
-        public void EnterCheckpoint()
-        {
+            SetMenu(this);
             
         }
     }
