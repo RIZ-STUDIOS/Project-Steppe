@@ -1,3 +1,4 @@
+using ProjectSteppe.UI.Menus;
 using UnityEngine;
 
 namespace ProjectSteppe.UI
@@ -9,6 +10,7 @@ namespace ProjectSteppe.UI
         public MessagePromptUI messagePrompt;
         public AreaPromptUI areaPrompt;
         public PlayerDetailsUI playerDetails;
+        public CheckpointUI checkpointUI;
 
         private void Awake()
         {
@@ -17,6 +19,7 @@ namespace ProjectSteppe.UI
             messagePrompt = GetComponentInChildren<MessagePromptUI>();
             areaPrompt = GetComponentInChildren<AreaPromptUI>();
             playerDetails = GetComponentInChildren<PlayerDetailsUI>();
+            checkpointUI = GetComponentInChildren<CheckpointUI>();
         }
     }
 }

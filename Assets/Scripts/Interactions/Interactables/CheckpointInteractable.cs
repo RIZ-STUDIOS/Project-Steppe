@@ -1,6 +1,7 @@
 using Cinemachine;
 using ProjectSteppe.Entities.Player;
 using ProjectSteppe.Managers;
+using ProjectSteppe.UI.Menus;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -45,6 +46,9 @@ namespace ProjectSteppe.Interactions.Interactables
 
         [SerializeField]
         private Transform headLook;
+
+        [SerializeField]
+        private CheckpointUI checkpointUI => GameManager.Instance.playerManager.PlayerUI.checkpointUI;
 
         private void Awake()
         {
@@ -114,6 +118,8 @@ namespace ProjectSteppe.Interactions.Interactables
             player.PlayerCamera.mainCamera.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Time = 2.5f;
             player.PlayerCamera.mainCamera.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Style = CinemachineBlendDefinition.Style.EaseInOut;
             GetComponentInChildren<CinemachineVirtualCamera>().Priority = 11;
+
+            checkpointUI.EnterCheckpoint(this);
         }
 
         private void ActivateCheckpointEffects()
