@@ -5,6 +5,7 @@ using ProjectSteppe.UI.Menus;
 using ProjectSteppe.ZedExtensions;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -31,6 +32,11 @@ namespace ProjectSteppe.UI
         [SerializeField]
         private float fadeSpeed = 1f;
 
+        [SerializeField]
+        private TextMeshProUGUI costTMP;
+
+        private int pointsCost;
+
 
         public void EnterCheckpoint(CheckpointInteractable activeCheckpoint)
         {
@@ -50,6 +56,19 @@ namespace ProjectSteppe.UI
         {
             StartCoroutine(levelUpCG.FadeIn(true, true));
             EventSystem.current.SetSelectedGameObject(levelUpFirstButton);
+
+            var buttons = GetComponentsInChildren<LevelUpButton>();
+            foreach (var button in buttons)
+            {
+                button.ActivateButtons();
+                button.OnValueChange.AddListener(RefreshCostText);
+            }
+        }
+
+        public void RefreshCostText(int change)
+        {
+            pointsCost += change;
+            costTMP.text = pointsCost.ToString();
         }
 
         public void DisableLevelUpInterface()
@@ -80,12 +99,12 @@ namespace ProjectSteppe.UI
 
         protected override void ShowMenu()
         {
-            StartCoroutine(canvasGroup.FadeIn(true, true));
+            StartCoroutine(canvasGroup.FadeIn(true, true, 4));
         }
 
         protected override void HideMenu()
         {
-            StartCoroutine(canvasGroup.FadeIn(false, false));
+            StartCoroutine(canvasGroup.FadeIn(false, false, 4));
         }
 
         public IEnumerator OnRest()

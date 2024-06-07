@@ -14,5 +14,6 @@ namespace ProjectSteppe.Saving
         public int pouchesCollected;
         public List<GameCurrency> gameCurrencies = new();
         public List<PlayerStatistic> playerStatistics = new();
+        public int playerStatLevel;
     }
 }

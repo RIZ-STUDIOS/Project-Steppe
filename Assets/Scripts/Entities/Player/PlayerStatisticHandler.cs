@@ -9,10 +9,17 @@ namespace ProjectSteppe.Entities.Player
     public class PlayerStatisticHandler : MonoBehaviour
     {
         public List<PlayerStatistic> statistics = new();
+        public const int BASE_STATISTIC_COST = 1;
+        public int totalStatLevel = 1;
 
         private void Start()
         {
+            if (SaveHandler.CurrentSave.playerStatLevel > 1)
+                totalStatLevel = SaveHandler.CurrentSave.playerStatLevel;
+
             InitStatistics();
+
+            SaveHandlerDetails();
         }
 
         private void InitStatistics()
@@ -33,8 +40,12 @@ namespace ProjectSteppe.Entities.Player
                     statistics.Add(new PlayerStatistic(statType, 1));
                 }
             }
+        }
 
+        private void SaveHandlerDetails()
+        {
             SaveHandler.CurrentSave.playerStatistics = statistics;
+            SaveHandler.CurrentSave.playerStatLevel = totalStatLevel;
             SaveHandler.SaveGame();
         }
     }
@@ -43,12 +54,24 @@ namespace ProjectSteppe.Entities.Player
     public class PlayerStatistic
     {
         public PlayerStatisticType type;
-        public int level;
+        private int _level;
+        public int Level
+        {
+            get { return _level; }
+            set
+            {
+                int diff = value - _level;
+                _level = value;
+                OnValueChange?.Invoke(diff);
+            }
+        }
+
+        System.Action<int> OnValueChange;
 
         public PlayerStatistic(PlayerStatisticType type, int level)
         {
             this.type = type;
-            this.level = level;
+            _level = level;
         }
     }
 
