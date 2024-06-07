@@ -79,9 +79,7 @@ namespace ProjectSteppe.UI
 
             checkpoint.player.CurrencyContainer.RemoveCurrencyFromContainer
                 (CurrencyType.Experience,
-                PlayerStatisticHandler.BASE_STATISTIC_COST *
-                (checkpoint.player.StatisticHandler.totalStatLevel +
-                pointsCost));
+                currentCost);
 
             foreach (var button in levelUpButtons)
             {
@@ -93,6 +91,7 @@ namespace ProjectSteppe.UI
 
             checkpoint.player.StatisticHandler.totalStatLevel += pointsCost;
             checkpoint.player.StatisticHandler.SaveHandlerDetails();
+            checkpoint.player.StatisticHandler.ApplyStatistics();
         }
 
         public void EnterCheckpoint(CheckpointInteractable activeCheckpoint)
@@ -141,29 +140,43 @@ namespace ProjectSteppe.UI
             int newStatLevel = sh.totalStatLevel + newPoints;
 
             int newCost = PlayerStatisticHandler.BASE_STATISTIC_COST * newStatLevel;
+            int appliedCost = currentCost + newCost;
 
-            if (CurrentExperience - newCost < 0)
+            if (CurrentExperience - appliedCost < 0 && change > 0)
             {
                 button.currentValue--;
                 return;
             }
 
-            currentCost = newCost;
+            if (change < 0)
+            {
+                int prevPoints = pointsCost;
+                int prevStatLevel = sh.totalStatLevel + prevPoints;
+
+                int prevCost = PlayerStatisticHandler.BASE_STATISTIC_COST * prevStatLevel;
+
+                appliedCost = currentCost - prevCost;
+            }
+
             pointsCost = newPoints;
+            currentCost = appliedCost;
 
             string currStr = "";
 
-            int advStatLevel = sh.totalStatLevel + newPoints + 1;
-            int advCost = PlayerStatisticHandler.BASE_STATISTIC_COST * advStatLevel;
-
-            if (advCost > CurrentExperience)
+            if (change > 0)
             {
-                currStr = "<color=red>";
+                int advCost = currentCost + PlayerStatisticHandler.BASE_STATISTIC_COST * (newStatLevel + 1);
+
+                Debug.Log(advCost);
+                if (advCost > CurrentExperience)
+                {
+                    currStr = "<color=red>";
+                }
             }
 
             currentExpTMP.text = currStr + (CurrentExperience - currentCost).ToString("N0");
 
-            costTMP.text = pointsCost > 0 ? "<color=red>-" + currentCost.ToString("N0") : "";
+            costTMP.text = pointsCost > 0 ? "<color=red>-" + currentCost.ToString("N0") : "";            
         }
 
         public void Rest()

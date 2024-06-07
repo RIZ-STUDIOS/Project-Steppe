@@ -67,8 +67,9 @@ namespace ProjectSteppe.Entities
 
         public Entity mostRecentEntityHitBy;
 
-        private void Start()
+        protected override void Awake()
         {
+            base.Awake();
             Health = maxHealth;
             Balance = balance;
             startBalanceHealthRatio = maxBalance / (float)maxHealth;

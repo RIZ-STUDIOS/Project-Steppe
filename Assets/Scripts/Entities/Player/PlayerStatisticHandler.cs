@@ -1,3 +1,4 @@
+using ProjectSteppe.Managers;
 using ProjectSteppe.Saving;
 using System;
 using System.Collections;
@@ -13,6 +14,8 @@ namespace ProjectSteppe.Entities.Player
         public List<PlayerStatistic> statistics = new();
         public int totalStatLevel;
 
+        private float playerMaxHealth;
+
         private void Start()
         {
             if (SaveHandler.CurrentSave.playerStatLevel > 1)
@@ -21,6 +24,10 @@ namespace ProjectSteppe.Entities.Player
             InitStatistics();
 
             SaveHandlerDetails();
+
+            playerMaxHealth = GetComponent<EntityHealth>().MaxHealth;
+
+            ApplyStatistics();
         }
 
         private void InitStatistics()
@@ -48,6 +55,22 @@ namespace ProjectSteppe.Entities.Player
             SaveHandler.CurrentSave.playerStatistics = statistics;
             SaveHandler.CurrentSave.playerStatLevel = totalStatLevel;
             SaveHandler.SaveGame();
+        }
+
+        public void ApplyStatistics()
+        {
+            var toughness = statistics.Find(t => t.type == PlayerStatisticType.Toughness);
+            var playerHealth = GetComponent<EntityHealth>();
+            playerHealth.ChangeMaxHealth(playerMaxHealth * (1 + (0.03f * toughness.Level)));
+
+            var precision = statistics.Find(p => p.type == PlayerStatisticType.Precision);
+            var playerAttack = GetComponent<EntityAttacking>();
+            playerAttack.damageMultiplier = 1 + (0.03f * precision.Level);
+
+            var swiftness = statistics.Find(sw => sw.type == PlayerStatisticType.Swiftness);
+            var playerMovement = GetComponent<PlayerMovementController>();
+            playerMovement.speedMultiplier = 1 + (0.03f * swiftness.Level);
+
         }
     }
 
