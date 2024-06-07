@@ -59,7 +59,7 @@ namespace ProjectSteppe
             if (type != currencyType || updatingText) return;
 
             incomingTMP.text = "+ " + amount.ToString("N0");
-            animator.SetTrigger("Pulse");
+            animator.Play("IncomingPulse");
             updatingText = true;
         }
 

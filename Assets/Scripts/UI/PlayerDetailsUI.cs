@@ -16,8 +16,9 @@ namespace ProjectSteppe.UI
 
         public void ShowPlayerDetails()
         {
-            StartCoroutine(healthUI.FadeIn());
-            StartCoroutine(balanceUI.FadeIn());
+            StartCoroutine(canvasGroup.FadeIn());
+            //StartCoroutine(healthUI.FadeIn());
+            //StartCoroutine(balanceUI.FadeIn());
         }
 
         public void HideBalance()
@@ -27,8 +28,9 @@ namespace ProjectSteppe.UI
 
         public void HidePlayerDetails()
         {
-            StartCoroutine(healthUI.FadeOut());
-            StartCoroutine(balanceUI.FadeOut());
+            StartCoroutine(canvasGroup.FadeOut());
+            //StartCoroutine(healthUI.FadeOut());
+            //StartCoroutine(balanceUI.FadeOut());
         }
     }
 }
