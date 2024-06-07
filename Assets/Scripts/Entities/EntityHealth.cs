@@ -26,11 +26,10 @@ namespace ProjectSteppe.Entities
         public float MaxHealth => maxHealth;
 
         [SerializeField]
-        private float timeBeforeBalanceRegeneration = 1.5f;
+        public float timeBeforeBalanceRegeneration = 1.5f;
 
-        [SerializeField]
         [Range(0f, 1f)]
-        private float balanceRegenerationRate = 0.2f;
+        public float balanceRegenerationRate = 0.2f;
 
         [SerializeField]
         [Tooltip("The ratio at which health affects amount of posture.")]

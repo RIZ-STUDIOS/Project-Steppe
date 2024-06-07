@@ -206,6 +206,8 @@ namespace ProjectSteppe
                 MortalBlow();
                 health.ResetHealth();
                 navMeshAgent.speed = secondPhaseSpeed;
+                health.balanceRegenerationRate = secondPhaseBalanceRegenerationRate;
+                health.timeBeforeBalanceRegeneration = secondPhaseTimeBeforeBalanceRegeneration;
             }
         }
 
