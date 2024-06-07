@@ -2732,6 +2732,8 @@ MonoBehaviour:
   levelUpCG: {fileID: 9013198554132483261}
   levelUpFirstButton: {fileID: 3373293354495834658}
   fadeSpeed: 1
+  costTMP: {fileID: 6024871029552306031}
+  currencyTMP: {fileID: 2911248013624408451}
 --- !u!1 &1242240191380032750
 GameObject:
   m_ObjectHideFlags: 0
@@ -16304,7 +16306,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 340.00003}
+  m_AnchoredPosition: {x: 0, y: 340.00006}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &372216155080617438
@@ -40890,7 +40892,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -450, y: -50}
+  m_AnchoredPosition: {x: -450, y: -49.99994}
   m_SizeDelta: {x: -1200, y: -400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &802955640763768331
@@ -51496,7 +51498,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 450, y: -50}
+  m_AnchoredPosition: {x: 450, y: -49.99994}
   m_SizeDelta: {x: 650, y: -400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1654363147359429529
@@ -53476,7 +53478,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 6068122371998383430}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.4999999
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

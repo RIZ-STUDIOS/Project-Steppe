@@ -82,7 +82,9 @@ namespace ProjectSteppe.UI
             int currDeduc = Mathf.CeilToInt(
                 cc.GetCurrencyAmount(CurrencyType.Experience) -
                 costValue);
-            currencyTMP.text = currDeduc.ToString(); 
+            currencyTMP.text = pointsCost > 0 ? 
+                currDeduc.ToString() :
+                checkpoint.player.CurrencyContainer.GetCurrencyAmount(CurrencyType.Experience).ToString(); 
         }
 
         public void DisableLevelUpInterface()
