@@ -15,13 +15,9 @@ namespace ProjectSteppe.UI
             canvasGroup = GetComponent<CanvasGroup>();
         }
 
-        [Obsolete]
         public void ShowPlayerDetails()
         {
-            ShowHealthBar();
-            //StartCoroutine(canvasGroup.FadeIn());
-            //StartCoroutine(healthUI.FadeIn());
-            //StartCoroutine(balanceUI.FadeIn());
+            StartCoroutine(canvasGroup.FadeIn());
         }
 
         public void HideBalance()
@@ -44,14 +40,9 @@ namespace ProjectSteppe.UI
             StartCoroutine(balanceUI.FadeIn());
         }
 
-        [Obsolete]
         public void HidePlayerDetails()
         {
-            HideHealthBar();
-            HideBalance();
-            //StartCoroutine(canvasGroup.FadeOut());
-            //StartCoroutine(healthUI.FadeOut());
-            //StartCoroutine(balanceUI.FadeOut());
+            StartCoroutine(canvasGroup.FadeOut());
         }
     }
 }
