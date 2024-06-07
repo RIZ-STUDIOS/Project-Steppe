@@ -15224,10 +15224,9 @@ MonoBehaviour:
   onFootstep:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 208915601373173582}
-        m_TargetAssemblyTypeName: ProjectSteppe.Entities.Player.FootstepSoundPlayer,
-          ProjectSteppe
-        m_MethodName: PlayFootstepSound
+      - m_Target: {fileID: 4124197999313395339}
+        m_TargetAssemblyTypeName: ProjectSteppe.Audio.SoundPlayer, ProjectSteppe
+        m_MethodName: PlayRandomSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -33805,7 +33804,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8345486821056719671}
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: SetActive
           m_Mode: 6
@@ -33821,7 +33820,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8345486821056719671}
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: SetActive
           m_Mode: 6
