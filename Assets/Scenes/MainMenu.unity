@@ -438,6 +438,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2323769795021019179, guid: bec3f8c0894ba8f42bb88bd58914362b,
+        type: 3}
+      propertyPath: kbm
+      value: 
+      objectReference: {fileID: 11400000, guid: 5edef03c2e08e764ba17922b93f37e15,
+        type: 2}
+    - target: {fileID: 2323769795021019179, guid: bec3f8c0894ba8f42bb88bd58914362b,
+        type: 3}
+      propertyPath: ps5
+      value: 
+      objectReference: {fileID: 11400000, guid: 5da81f7490492784e9b5e8c1e2c9449d,
+        type: 2}
+    - target: {fileID: 2323769795021019179, guid: bec3f8c0894ba8f42bb88bd58914362b,
+        type: 3}
+      propertyPath: xbox
+      value: 
+      objectReference: {fileID: 11400000, guid: 4da8ec38bd07b0540bd9403f91e2f0a3,
+        type: 2}
     - target: {fileID: 6190179207676892118, guid: bec3f8c0894ba8f42bb88bd58914362b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3689,6 +3707,11 @@ PrefabInstance:
     - target: {fileID: 5572313857190497512, guid: f566e347ec30f394a8855a59dc99fd70,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5664298574712943069, guid: f566e347ec30f394a8855a59dc99fd70,
+        type: 3}
+      propertyPath: m_Alpha
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5794386167918211190, guid: f566e347ec30f394a8855a59dc99fd70,
