@@ -1,4 +1,5 @@
 using ProjectSteppe.Entities.Player;
+using ProjectSteppe.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace ProjectSteppe
@@ -35,6 +37,8 @@ namespace ProjectSteppe
         [SerializeField]
         private Animator shifterRight;
 
+        private UIPlayerInput playerInput;
+
         private void Awake()
         {
             button = GetComponent<Button>();
@@ -42,6 +46,7 @@ namespace ProjectSteppe
 
         private void Start()
         {
+            playerInput = GetComponentInParent<CheckpointUI>().playerInput;
             statName.text = Enum.GetName(typeof(PlayerStatisticType), statType);
         }
 
@@ -50,6 +55,8 @@ namespace ProjectSteppe
             descriptionBox.SetActive(true);
             statName.color = selectedColor;
             statValue.color = selectedColor;
+
+            playerInput.playerInput.UI.Navigate.performed += OnNavigate;
         }
 
         public void OnDeselect(BaseEventData baseEventData)
@@ -57,6 +64,22 @@ namespace ProjectSteppe
             descriptionBox.SetActive(false);
             statName.color = Color.white;
             statValue.color = Color.white;
+
+            playerInput.playerInput.UI.Navigate.performed -= OnNavigate;
+        }
+
+        private void OnNavigate(InputAction.CallbackContext context)
+        {
+            Vector2 input = context.ReadValue<Vector2>();
+
+            if (input.x < 0)
+            {
+                shifterLeft.SetTrigger("Pulse");
+            }
+            else if (input.x > 0)
+            {
+                shifterRight.SetTrigger("Pulse");
+            }
         }
     }
 }

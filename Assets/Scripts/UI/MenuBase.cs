@@ -16,7 +16,7 @@ namespace ProjectSteppe.UI.Menus
 
         protected EventSystem eventSystem;
 
-        protected UIPlayerInput playerInput;
+        public UIPlayerInput playerInput;
 
         private bool justSwitched;
 
