@@ -1,3 +1,4 @@
+using ProjectSteppe.Saving;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace ProjectSteppe.Currencies
         private void Awake()
         {
             InitContainer();
+            OnCurrencyChange.AddListener(SaveCurrencies);
         }
 
         [ContextMenu("Give EXP")]
@@ -51,17 +53,31 @@ namespace ProjectSteppe.Currencies
                 if (currency.type == type) return currency.Amount;                
             }
 
-            return -1;
+            return 0;
         }
 
         private void InitContainer()
         {
+            if (SaveHandler.CurrentSave.gameCurrencies.Count > 0)
+            {
+                _currencies = SaveHandler.CurrentSave.gameCurrencies.ToArray();
+                return;
+            }
+
             _currencies = new GameCurrency[Enum.GetNames(typeof(CurrencyType)).Length];
 
             for (int i = 0; i < _currencies.Length; i++)
             {
                 _currencies[i] = new GameCurrency((CurrencyType)i);
             }
+
+            SaveCurrencies();
+        }
+
+        private void SaveCurrencies(CurrencyType type = CurrencyType.Experience, int amount = 0)
+        {
+            SaveHandler.CurrentSave.gameCurrencies = new List<GameCurrency>(_currencies);
+            SaveHandler.SaveGame();
         }
     }
 }

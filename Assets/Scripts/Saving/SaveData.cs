@@ -1,3 +1,4 @@
+using ProjectSteppe.Currencies;
 using System.Collections.Generic;
 
 namespace ProjectSteppe.Saving
@@ -10,5 +11,6 @@ namespace ProjectSteppe.Saving
         public Dictionary<string, bool> pickupItemStates = new();
         public List<string> playerInventoryIDs = new();
         public int pouchesCollected;
+        public List<GameCurrency> gameCurrencies = new();
     }
 }
