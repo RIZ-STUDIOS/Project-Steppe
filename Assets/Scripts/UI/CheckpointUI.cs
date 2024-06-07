@@ -28,6 +28,9 @@ namespace ProjectSteppe.UI
         [SerializeField]
         private GameObject levelUpFirstButton;
 
+        [SerializeField]
+        private float fadeSpeed = 1f;
+
 
         public void EnterCheckpoint(CheckpointInteractable activeCheckpoint)
         {
@@ -39,8 +42,6 @@ namespace ProjectSteppe.UI
             ShowCurrentMenu();
 
             checkpoint.player.PlayerUI.playerDetails.HidePlayerDetails();
-
-            StartCoroutine(canvasGroup.FadeIn(true, true));
 
             EventSystem.current.SetSelectedGameObject(firstButton);
         }
@@ -59,20 +60,50 @@ namespace ProjectSteppe.UI
 
         public void Rest()
         {
-            //LoadingManager.LoadScene(SceneConstants.LEVEL_1_INDEX);
             EventSystem.current.enabled = false;
             StartCoroutine(OnRest());
         }
 
+        protected override void OnSubmitPerformed(InputAction.CallbackContext callbackContext)
+        {
+            if (levelUpCG.alpha > 0)
+            {
+
+            }
+        }
+
         protected override void OnCancelPerformed(InputAction.CallbackContext callbackContext)
         {
-            DisableLevelUpInterface();
+            if (levelUpCG.alpha > 0) DisableLevelUpInterface();
+            else OnExitCheckpoint();
+        }
+
+        protected override void ShowMenu()
+        {
+            StartCoroutine(canvasGroup.FadeIn(true, true));
+        }
+
+        protected override void HideMenu()
+        {
+            StartCoroutine(canvasGroup.FadeIn(false, false));
         }
 
         public IEnumerator OnRest()
         {
             yield return checkpoint.player.PlayerUI.blackFade.FadeIn();
             SceneManager.LoadScene(SceneConstants.LEVEL_1_INDEX);
+        }
+
+        private void OnExitCheckpoint()
+        {
+            checkpoint.ResetCameraBrain();
+            checkpoint.player.GetComponentInChildren<HeadLook>().enabled = true;
+            checkpoint.player.PlayerAnimator.SetBool("Sitting", false);
+            SetMenu(null);
+            ShowCurrentMenu();
+            EventSystem.current.SetSelectedGameObject(null);
+            checkpoint.player.PlayerUI.playerDetails.ShowPlayerDetails();
+
         }
     }
 }

@@ -53,9 +53,15 @@ namespace ProjectSteppe.Interactions.Interactables
         [SerializeField]
         private CheckpointUI checkpointUI => GameManager.Instance.playerManager.PlayerUI.checkpointUI;
 
+        public CinemachineVirtualCamera virtualCam;
+
+        private float cineBrainBlend;
+        private CinemachineBlendDefinition.Style cineBrainStyle;
+
         private void Awake()
         {
             firelight = GetComponentInChildren<Light>();
+            virtualCam = GetComponentInChildren<CinemachineVirtualCamera>();
         }
 
         public void DiscoveredQuery()
@@ -118,12 +124,26 @@ namespace ProjectSteppe.Interactions.Interactables
             player.transform.LookAt(transform.position);
             player.GetComponentInChildren<HeadLook>().transform.position = headLook.position;
             player.GetComponentInChildren<HeadLook>().enabled = false;
-            player.PlayerCamera.mainCamera.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Time = 2.5f;
-            player.PlayerCamera.mainCamera.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Style = CinemachineBlendDefinition.Style.EaseInOut;
-            GetComponentInChildren<CinemachineVirtualCamera>().Priority = 11;
+
+            var cineBrain = player.PlayerCamera.mainCamera.GetComponent<CinemachineBrain>();
+            cineBrainBlend = cineBrain.m_DefaultBlend.m_Time;
+            cineBrainStyle = cineBrain.m_DefaultBlend.m_Style;
+
+            cineBrain.m_DefaultBlend.m_Time = 2.5f;
+            cineBrain.m_DefaultBlend.m_Style = CinemachineBlendDefinition.Style.EaseInOut;
+
+            virtualCam.Priority = 12;
 
             checkpointUI.EnterCheckpoint(this);
             OnEnteredCheckpoint.Invoke();
+        }
+
+        public void ResetCameraBrain()
+        {
+            var cineBrain = player.PlayerCamera.mainCamera.GetComponent<CinemachineBrain>();
+            cineBrain.m_DefaultBlend.m_Time = cineBrainBlend;
+            cineBrain.m_DefaultBlend.m_Style = cineBrainStyle;
+            virtualCam.Priority = 0;
         }
 
         private void ActivateCheckpointEffects()

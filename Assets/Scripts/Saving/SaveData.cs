@@ -1,4 +1,5 @@
 using ProjectSteppe.Currencies;
+using ProjectSteppe.Entities.Player;
 using System.Collections.Generic;
 
 namespace ProjectSteppe.Saving
@@ -12,5 +13,6 @@ namespace ProjectSteppe.Saving
         public List<string> playerInventoryIDs = new();
         public int pouchesCollected;
         public List<GameCurrency> gameCurrencies = new();
+        public List<PlayerStatistic> playerStatistics = new();
     }
 }
