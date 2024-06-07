@@ -2,7 +2,6 @@ using Cinemachine;
 using ProjectSteppe.Managers;
 using ProjectSteppe.UI;
 using StarterAssets;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -304,7 +303,7 @@ namespace ProjectSteppe.Entities.Player
 
         private void CheckMovement()
         {
-            if (_input.move == Vector2.zero && UIPlayerInput.Instance.controlScheme != UIPlayerInput.ControlScheme.KeyboardMouse)
+            if (speed < 0.2f && UIPlayerInput.Instance.controlScheme != UIPlayerInput.ControlScheme.KeyboardMouse)
             {
                 sprinting = false;
             }
@@ -344,6 +343,27 @@ namespace ProjectSteppe.Entities.Player
 
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
+            if (!dashing)
+            {
+                if (UIPlayerInput.Instance.controlScheme == UIPlayerInput.ControlScheme.KeyboardMouse)
+                {
+                    if (_input.move != Vector2.zero)
+                        this.moveDirection = inputDirection;
+                }
+                else
+                {
+                    if (Mathf.Abs(_input.move.x) > _thresholdMove)
+                    {
+                        moveDirection.x = _input.move.x;
+                    }
+
+                    if (Mathf.Abs(_input.move.y) > _thresholdMove)
+                    {
+                        moveDirection.z = _input.move.y;
+                    }
+                }
+            }
+
             if (characterController.enabled)
             {
                 if (((_input.move != Vector2.zero || dashing || playerManager.PlayerTargetLock.lockOn) && playerManager.HasCapability(PlayerCapability.Rotate)))
@@ -366,23 +386,7 @@ namespace ProjectSteppe.Entities.Player
                             targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
                         }
 
-                        if (UIPlayerInput.Instance.controlScheme == UIPlayerInput.ControlScheme.KeyboardMouse)
-                        {
-                            if (_input.move != Vector2.zero)
-                                this.moveDirection = inputDirection;
-                        }
-                        else
-                        {
-                            if (Mathf.Abs(_input.move.x) > _thresholdMove)
-                            {
-                                moveDirection.x = _input.move.x;
-                            }
-
-                            if (Mathf.Abs(_input.move.y) > _thresholdMove)
-                            {
-                                moveDirection.z = _input.move.y;
-                            }
-                        }
+                        
                     }
 
                     float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref _rotationVelocity,

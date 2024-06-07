@@ -798,6 +798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4215659c0be76c344aa3b681629e8329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInput: {fileID: 0}
   settingsMenu: {fileID: 1203311111}
   quitCanvasGroup: {fileID: 1389388095}
   progressSpriteCG: {fileID: 222906129}
@@ -3913,6 +3914,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 741812572}
+    - target: {fileID: 7129242375617201635, guid: 50ecb6626f4b7894d9bbd27d44f448b9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129242375617201635, guid: 50ecb6626f4b7894d9bbd27d44f448b9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MainMenu, ProjectSteppe
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129242375617201635, guid: 50ecb6626f4b7894d9bbd27d44f448b9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8479868630986699954, guid: 50ecb6626f4b7894d9bbd27d44f448b9,
         type: 3}
       propertyPath: m_Pivot.x
