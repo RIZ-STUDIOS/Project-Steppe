@@ -86,6 +86,7 @@ namespace ProjectSteppe.Entities.Player
         private bool usingGravity = true;
 
         private bool grounded;
+        private bool previousGrounded;
         private float speed;
         private float animationBlend;
         private float targetRotation;
@@ -154,21 +155,11 @@ namespace ProjectSteppe.Entities.Player
 
         private void KeepToGround()
         {
-            if (!characterController.enabled) return;
-            /*if(Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, out var hitInfo, 0.5f, groundLayers))
+            /*if (!characterController.enabled) return;
+            if(Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, out var hitInfo, groundedRadius, groundLayers))
             {
-                characterController.enabled = false;
-                transform.position = hitInfo.point;
-                characterController.enabled = true;
+                verticalVelocity = -hitInfo.distance * 5;
             }*/
-            Vector3 p1 = transform.position + characterController.center + Vector3.up * -characterController.height * 0.5F;
-            Vector3 p2 = p1 + Vector3.up * characterController.height;
-            if (Physics.CapsuleCast(p1, p2, characterController.radius, Vector3.down, out var hitInfo, 0.1f))
-            {
-                characterController.enabled = false;
-                //transform.position = hitInfo.point;
-                characterController.enabled = true;
-            }
         }
 
         private void LateUpdate()
@@ -275,13 +266,22 @@ namespace ProjectSteppe.Entities.Player
                     }
                 }
 
-                if (verticalVelocity < 0)
+                if (Physics.Raycast(transform.position + Vector3.up * (groundedRadius/2f), Vector3.down, groundedRadius, groundLayers))
+                {
+                    verticalVelocity = -200;
+                }
+
+                /*if (verticalVelocity < 0)
                 {
                     verticalVelocity = 0;
-                }
+                }*/
             }
             else
             {
+                if (previousGrounded)
+                {
+                    verticalVelocity = 0;
+                }
                 if (verticalVelocity > terminalVelocity && usingGravity)
                 {
                     verticalVelocity += playerGravity * Time.deltaTime;
@@ -295,6 +295,7 @@ namespace ProjectSteppe.Entities.Player
         {
             Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - groundedOffset,
                 transform.position.z);
+            previousGrounded = grounded;
             grounded = Physics.CheckSphere(spherePosition, groundedRadius, groundLayers,
                 QueryTriggerInteraction.Ignore);
         }
