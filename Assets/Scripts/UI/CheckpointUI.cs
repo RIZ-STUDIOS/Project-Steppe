@@ -6,6 +6,7 @@ using ProjectSteppe.UI.Menus;
 using ProjectSteppe.ZedExtensions;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -69,23 +70,32 @@ namespace ProjectSteppe.UI
             }
         }
 
-        public void RefreshCostText(int change)
+        public void RefreshCostText(int change, LevelUpButton button)
         {
-            pointsCost += change;
+            var newPoints = pointsCost + change;
+
             var sh = checkpoint.player.StatisticHandler;
             int costValue = Mathf.CeilToInt(
                 sh.BASE_STATISTIC_COST *
-                (sh.totalStatLevel + pointsCost));
+                (sh.totalStatLevel + newPoints));
+
+            var cc = checkpoint.player.CurrencyContainer;
+            int remainingExp = Mathf.CeilToInt(
+                cc.GetCurrencyAmount(CurrencyType.Experience) -
+                costValue);
+
+            if (remainingExp < 0)
+            {
+                button.currentValue--;
+                //currencyTMP.text.Append<>
+            }
+
             costTMP.text = pointsCost > 0 ?
                 "<color=red>- " + costValue.ToString("N0") :
                 "";
-
-            var cc = checkpoint.player.CurrencyContainer;
-            int currDeduc = Mathf.CeilToInt(
-                cc.GetCurrencyAmount(CurrencyType.Experience) -
-                costValue);
+            
             currencyTMP.text = pointsCost > 0 ? 
-                currDeduc.ToString() :
+                remainingExp.ToString() :
                 checkpoint.player.CurrencyContainer.GetCurrencyAmount(CurrencyType.Experience).ToString(); 
         }
 

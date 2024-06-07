@@ -41,13 +41,13 @@ namespace ProjectSteppe
         private UIPlayerInput playerInput;
         private PlayerStatisticHandler playerStats;
         private PlayerStatistic playerStat;
-        private int currentValue;
+        public int currentValue;
 
         [SerializeField]
         private TextMeshProUGUI costTMP;
         private int cost;
 
-        public UnityEvent<int> OnValueChange;
+        public UnityEvent<int, LevelUpButton> OnValueChange;
 
         private void Awake()
         {
@@ -96,13 +96,13 @@ namespace ProjectSteppe
                 shifterLeft.Play("Pulse");
                 currentValue--;
                 if (currentValue < playerStat.Level) currentValue = playerStat.Level;
-                else OnValueChange.Invoke(-1);
+                else OnValueChange.Invoke(-1, this);
             }
             else if (input.x > 0)
             {
                 shifterRight.Play("Pulse");
                 currentValue++;
-                OnValueChange.Invoke(1);
+                OnValueChange.Invoke(1, this);
             }
 
             valueTMP.text = currentValue.ToString();
