@@ -120,6 +120,7 @@ namespace ProjectSteppe.UI
 
             costTMP.text = "";
 
+            currentCost = 0;
             pointsCost = 0;
         }
 
@@ -127,6 +128,9 @@ namespace ProjectSteppe.UI
         {
             StartCoroutine(levelUpCG.FadeOut(true, true));
             EventSystem.current.SetSelectedGameObject(firstButton);
+
+            pointsCost = 0;
+            currentCost = 0;
 
             UnsubscribeToLevelUpButtons();
         }

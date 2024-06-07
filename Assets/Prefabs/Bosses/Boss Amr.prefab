@@ -15678,6 +15678,54 @@ Transform:
   - {fileID: 7841786881383091370}
   m_Father: {fileID: 4532938875902482286}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4655596121216072538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8069886397317412208}
+  - component: {fileID: 4170582032044786127}
+  m_Layer: 11
+  m_Name: CurrencyDispenser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8069886397317412208
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4655596121216072538}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9220824021073745363}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4170582032044786127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4655596121216072538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 605fd9ac2df3b9948800bfd09977e030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dispenserPayloads:
+  - type: 0
+    _amount: 550
+  dispenseDelay: 2.5
 --- !u!1 &4812284530636028836
 GameObject:
   m_ObjectHideFlags: 0
@@ -22253,7 +22301,6 @@ GameObject:
   - component: {fileID: 7931571383535912719}
   - component: {fileID: 5253185858980636403}
   - component: {fileID: 1523574760915350386}
-  - component: {fileID: 7634023398963683091}
   m_Layer: 11
   m_Name: Boss Amr
   m_TagString: Untagged
@@ -22282,6 +22329,7 @@ Transform:
   - {fileID: 2808621242541774607}
   - {fileID: 5895093698627539048}
   - {fileID: 2297221603046533611}
+  - {fileID: 8069886397317412208}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 307.641, z: 0}
 --- !u!95 &407487688611610047
@@ -22656,22 +22704,6 @@ MonoBehaviour:
   getChildren: 0
   sounds:
   - {fileID: 7020401660672742041}
---- !u!114 &7634023398963683091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6174741706873425927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 605fd9ac2df3b9948800bfd09977e030, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dispenserPayloads:
-  - type: 0
-    _amount: 550
-  dispenseDelay: 2.5
 --- !u!1 &6189992602926585263
 GameObject:
   m_ObjectHideFlags: 0

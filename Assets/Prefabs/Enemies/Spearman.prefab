@@ -1187,7 +1187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dispenserPayloads:
   - type: 0
-    _amount: 100
+    _amount: 105
   dispenseDelay: 3
 --- !u!1 &1591921486660390646
 GameObject:
@@ -9767,7 +9767,6 @@ GameObject:
   - component: {fileID: 5246136870837233934}
   - component: {fileID: 3992538624408395188}
   - component: {fileID: 4090993855165387999}
-  - component: {fileID: 4225266134377414964}
   m_Layer: 11
   m_Name: Spearman
   m_TagString: Untagged
@@ -10089,22 +10088,6 @@ MonoBehaviour:
   ragdollPrefab: {fileID: 1927695956069552053, guid: b8a7182aced32e345b66c25289e63bbe,
     type: 3}
   hipsTransform: {fileID: 88130701409236187}
---- !u!114 &4225266134377414964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9197232685386256049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 605fd9ac2df3b9948800bfd09977e030, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dispenserPayloads:
-  - type: 0
-    _amount: 105
-  dispenseDelay: 3
 --- !u!1001 &3311001552838886810
 PrefabInstance:
   m_ObjectHideFlags: 0
