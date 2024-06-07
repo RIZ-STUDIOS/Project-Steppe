@@ -9539,6 +9539,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  damageMultiplier: 1
 --- !u!114 &3141308261746472348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9737,7 +9738,7 @@ MonoBehaviour:
   dispenserPayloads:
   - type: 0
     _amount: 125
-  dispenseDelay: 2.5
+  dispenseDelay: 3
 --- !u!1 &7231801005130690194
 GameObject:
   m_ObjectHideFlags: 0

@@ -78,7 +78,7 @@ namespace ProjectSteppe.UI
                 (sh.totalStatLevel + pointsCost));
             costTMP.text = pointsCost > 0 ?
                 "<color=red>- " + costValue.ToString("N0") :
-                0.ToString();
+                "";
 
             var cc = checkpoint.player.CurrencyContainer;
             int currDeduc = Mathf.CeilToInt(
