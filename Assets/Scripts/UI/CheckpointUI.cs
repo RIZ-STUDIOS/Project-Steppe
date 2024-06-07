@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace ProjectSteppe.UI
 {
@@ -16,6 +17,9 @@ namespace ProjectSteppe.UI
 
         [SerializeField]
         private GameObject firstButton;
+
+        [SerializeField]
+        private GameObject restartButton;
 
         [SerializeField]
         private CanvasGroup levelUpCG;
@@ -31,6 +35,7 @@ namespace ProjectSteppe.UI
             //checkpoint.player.GetComponent<>
 
             SetMenu(this);
+            ShowCurrentMenu();
 
             checkpoint.player.PlayerUI.playerDetails.HidePlayerDetails();
 
@@ -43,6 +48,17 @@ namespace ProjectSteppe.UI
         {
             StartCoroutine(levelUpCG.FadeIn(true, true));
             EventSystem.current.SetSelectedGameObject(levelUpFirstButton);
+        }
+
+        public void DisableLevelUpInterface()
+        {
+            StartCoroutine(levelUpCG.FadeOut(true, true));
+            EventSystem.current.SetSelectedGameObject(firstButton);
+        }
+
+        protected override void OnCancelPerformed(InputAction.CallbackContext callbackContext)
+        {
+            DisableLevelUpInterface();
         }
     }
 }

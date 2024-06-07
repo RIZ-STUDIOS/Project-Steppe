@@ -16,12 +16,24 @@ namespace ProjectSteppe
         private TextMeshProUGUI statName;
 
         [SerializeField]
-        private TextMeshProUGUI statValue;
+        private TextMeshProUGUI statValue;        
 
         [SerializeField]
         private PlayerStatisticType statType;
 
+        [SerializeField]
+        private GameObject descriptionBox;
+
         private Button button;
+
+        [SerializeField]
+        private Color selectedColor;
+
+        [SerializeField]
+        private Animator shifterLeft;
+
+        [SerializeField]
+        private Animator shifterRight;
 
         private void Awake()
         {
@@ -35,7 +47,16 @@ namespace ProjectSteppe
 
         public void OnSelect(BaseEventData baseEventData)
         {
-            Debug.Log("YUP!");
+            descriptionBox.SetActive(true);
+            statName.color = selectedColor;
+            statValue.color = selectedColor;
+        }
+
+        public void OnDeselect(BaseEventData baseEventData)
+        {
+            descriptionBox.SetActive(false);
+            statName.color = Color.white;
+            statValue.color = Color.white;
         }
     }
 }
