@@ -21,13 +21,10 @@ namespace ProjectSteppe
         [SerializeField]
         private TextMeshProUGUI valueTMP;        
 
-        [SerializeField]
-        private PlayerStatisticType statType;
+        public PlayerStatisticType statType;
 
         [SerializeField]
         private GameObject descriptionBox;
-
-        private Button button;
 
         [SerializeField]
         private Color selectedColor;
@@ -43,16 +40,7 @@ namespace ProjectSteppe
         private PlayerStatistic playerStat;
         public int currentValue;
 
-        [SerializeField]
-        private TextMeshProUGUI costTMP;
-        private int cost;
-
         public UnityEvent<int, LevelUpButton> OnValueChange;
-
-        private void Awake()
-        {
-            button = GetComponent<Button>();
-        }
 
         private void Start()
         {

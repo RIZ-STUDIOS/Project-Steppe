@@ -8,9 +8,10 @@ namespace ProjectSteppe.Entities.Player
 {
     public class PlayerStatisticHandler : MonoBehaviour
     {
+        public const int BASE_STATISTIC_COST = 80;
+
         public List<PlayerStatistic> statistics = new();
-        public readonly int BASE_STATISTIC_COST = 80;
-        public int totalStatLevel = 1;
+        public int totalStatLevel;
 
         private void Start()
         {
@@ -42,7 +43,7 @@ namespace ProjectSteppe.Entities.Player
             }
         }
 
-        private void SaveHandlerDetails()
+        public void SaveHandlerDetails()
         {
             SaveHandler.CurrentSave.playerStatistics = statistics;
             SaveHandler.CurrentSave.playerStatLevel = totalStatLevel;

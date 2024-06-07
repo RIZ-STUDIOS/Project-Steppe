@@ -1699,7 +1699,7 @@ GameObject:
   - component: {fileID: 6791952032749091427}
   - component: {fileID: 2911248013624408451}
   m_Layer: 5
-  m_Name: CurrentText
+  m_Name: CurrentExpText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2733,7 +2733,7 @@ MonoBehaviour:
   levelUpFirstButton: {fileID: 3373293354495834658}
   fadeSpeed: 1
   costTMP: {fileID: 6024871029552306031}
-  currencyTMP: {fileID: 2911248013624408451}
+  currentExpTMP: {fileID: 2911248013624408451}
 --- !u!1 &1242240191380032750
 GameObject:
   m_ObjectHideFlags: 0
@@ -15745,7 +15745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statistics: []
-  totalStatLevel: 1
+  totalStatLevel: 0
 --- !u!1 &2292957748182160486
 GameObject:
   m_ObjectHideFlags: 0
@@ -16319,7 +16319,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 340}
+  m_AnchoredPosition: {x: 0, y: 340.00003}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &372216155080617438
@@ -33730,7 +33730,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2333282663396337183}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7283097740716688721}
+        m_TargetAssemblyTypeName: ProjectSteppe.UI.CheckpointUI, ProjectSteppe
+        m_MethodName: CommitPoints
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3639082324314429217
 GameObject:
   m_ObjectHideFlags: 0
@@ -34618,7 +34630,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3954160754671853729}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -67091,6 +67103,26 @@ PrefabInstance:
       propertyPath: m_Navigation.m_SelectOnRight
       value: 
       objectReference: {fileID: 5893669623682232504}
+    - target: {fileID: 7129242375617201635, guid: 50ecb6626f4b7894d9bbd27d44f448b9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7283097740716688721}
+    - target: {fileID: 7129242375617201635, guid: 50ecb6626f4b7894d9bbd27d44f448b9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnExitCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129242375617201635, guid: 50ecb6626f4b7894d9bbd27d44f448b9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ProjectSteppe.UI.CheckpointUI, ProjectSteppe
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129242375617201635, guid: 50ecb6626f4b7894d9bbd27d44f448b9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8479868630986699954, guid: 50ecb6626f4b7894d9bbd27d44f448b9,
         type: 3}
       propertyPath: m_Pivot.x

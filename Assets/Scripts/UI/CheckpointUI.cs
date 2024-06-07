@@ -2,6 +2,7 @@ using Cinemachine;
 using ProjectSteppe.Currencies;
 using ProjectSteppe.Entities.Player;
 using ProjectSteppe.Interactions.Interactables;
+using ProjectSteppe.Saving;
 using ProjectSteppe.UI.Menus;
 using ProjectSteppe.ZedExtensions;
 using System.Collections;
@@ -38,10 +39,61 @@ namespace ProjectSteppe.UI
         private TextMeshProUGUI costTMP;
 
         [SerializeField]
-        private TextMeshProUGUI currencyTMP;
+        private TextMeshProUGUI currentExpTMP;
 
         private int pointsCost;
 
+        private List<LevelUpButton> levelUpButtons = new();
+
+        private int currentCost;
+
+        private int CurrentExperience => checkpoint.player.CurrencyContainer.GetCurrencyAmount(CurrencyType.Experience);
+
+        protected override void Awake()
+        {
+            base.Awake();
+            levelUpButtons = GetComponentsInChildren<LevelUpButton>().ToList();
+        }
+
+        private void SubscribeToLevelUpButtons()
+        {
+            foreach (var button in levelUpButtons)
+            {
+                button.ActivateButtons();
+                button.OnValueChange.AddListener(RefreshCost);
+            }
+        }
+
+        private void UnsubscribeToLevelUpButtons()
+        {
+            foreach (var button in levelUpButtons)
+            {
+                button.ActivateButtons();
+                button.OnValueChange.RemoveListener(RefreshCost);
+            }
+        }
+
+        public void CommitPoints()
+        {
+            if (currentCost > CurrentExperience) return;
+
+            checkpoint.player.CurrencyContainer.RemoveCurrencyFromContainer
+                (CurrencyType.Experience,
+                PlayerStatisticHandler.BASE_STATISTIC_COST *
+                (checkpoint.player.StatisticHandler.totalStatLevel +
+                pointsCost));
+
+            foreach (var button in levelUpButtons)
+            {
+                checkpoint.player.StatisticHandler.statistics.Find(s => s.type == button.statType).Level = button.currentValue;
+            }
+
+            currentExpTMP.text = CurrentExperience.ToString("N0");
+            costTMP.text = "<color=yellow>Committed";
+
+            checkpoint.player.StatisticHandler.totalStatLevel += pointsCost;
+            checkpoint.player.StatisticHandler.SaveHandlerDetails();
+        }
 
         public void EnterCheckpoint(CheckpointInteractable activeCheckpoint)
         {
@@ -62,61 +114,62 @@ namespace ProjectSteppe.UI
             StartCoroutine(levelUpCG.FadeIn(true, true));
             EventSystem.current.SetSelectedGameObject(levelUpFirstButton);
 
-            var buttons = GetComponentsInChildren<LevelUpButton>();
-            foreach (var button in buttons)
-            {
-                button.ActivateButtons();
-                button.OnValueChange.AddListener(RefreshCostText);
-            }
-        }
+            SubscribeToLevelUpButtons();
 
-        public void RefreshCostText(int change, LevelUpButton button)
-        {
-            var newPoints = pointsCost + change;
+            currentExpTMP.text =
+                checkpoint.player.CurrencyContainer.GetCurrencyAmount(CurrencyType.Experience).ToString();
 
-            var sh = checkpoint.player.StatisticHandler;
-            int costValue = Mathf.CeilToInt(
-                sh.BASE_STATISTIC_COST *
-                (sh.totalStatLevel + newPoints));
+            costTMP.text = "";
 
-            var cc = checkpoint.player.CurrencyContainer;
-            int remainingExp = Mathf.CeilToInt(
-                cc.GetCurrencyAmount(CurrencyType.Experience) -
-                costValue);
-
-            if (remainingExp < 0)
-            {
-                button.currentValue--;
-                //currencyTMP.text.Append<>
-            }
-
-            costTMP.text = pointsCost > 0 ?
-                "<color=red>- " + costValue.ToString("N0") :
-                "";
-            
-            currencyTMP.text = pointsCost > 0 ? 
-                remainingExp.ToString() :
-                checkpoint.player.CurrencyContainer.GetCurrencyAmount(CurrencyType.Experience).ToString(); 
+            pointsCost = 0;
         }
 
         public void DisableLevelUpInterface()
         {
             StartCoroutine(levelUpCG.FadeOut(true, true));
             EventSystem.current.SetSelectedGameObject(firstButton);
+
+            UnsubscribeToLevelUpButtons();
+        }
+
+        public void RefreshCost(int change, LevelUpButton button)
+        {
+            var sh = checkpoint.player.StatisticHandler;
+            var cc = checkpoint.player.CurrencyContainer;
+
+            int newPoints = pointsCost + change;
+            int newStatLevel = sh.totalStatLevel + newPoints;
+
+            int newCost = PlayerStatisticHandler.BASE_STATISTIC_COST * newStatLevel;
+
+            if (CurrentExperience - newCost < 0)
+            {
+                button.currentValue--;
+                return;
+            }
+
+            currentCost = newCost;
+            pointsCost = newPoints;
+
+            string currStr = "";
+
+            int advStatLevel = sh.totalStatLevel + newPoints + 1;
+            int advCost = PlayerStatisticHandler.BASE_STATISTIC_COST * advStatLevel;
+
+            if (advCost > CurrentExperience)
+            {
+                currStr = "<color=red>";
+            }
+
+            currentExpTMP.text = currStr + (CurrentExperience - currentCost).ToString("N0");
+
+            costTMP.text = pointsCost > 0 ? "<color=red>-" + currentCost.ToString("N0") : "";
         }
 
         public void Rest()
         {
             EventSystem.current.enabled = false;
             StartCoroutine(OnRest());
-        }
-
-        protected override void OnSubmitPerformed(InputAction.CallbackContext callbackContext)
-        {
-            if (levelUpCG.alpha > 0)
-            {
-
-            }
         }
 
         protected override void OnCancelPerformed(InputAction.CallbackContext callbackContext)
@@ -132,25 +185,24 @@ namespace ProjectSteppe.UI
 
         protected override void HideMenu()
         {
-            StartCoroutine(canvasGroup.FadeIn(false, false, 4));
+            StartCoroutine(canvasGroup.FadeOut(true, true, 4));
         }
 
-        public IEnumerator OnRest()
+        private IEnumerator OnRest()
         {
             yield return checkpoint.player.PlayerUI.blackFade.FadeIn();
             SceneManager.LoadScene(SceneConstants.LEVEL_1_INDEX);
         }
 
-        private void OnExitCheckpoint()
+        public void OnExitCheckpoint()
         {
             checkpoint.ResetCameraBrain();
             checkpoint.player.GetComponentInChildren<HeadLook>().enabled = true;
             checkpoint.player.PlayerAnimator.SetBool("Sitting", false);
             SetMenu(null);
-            ShowCurrentMenu();
             EventSystem.current.SetSelectedGameObject(null);
             checkpoint.player.PlayerUI.playerDetails.ShowPlayerDetails();
-
+            checkpoint.player.GetComponent<Pause>().AllowPause();
         }
     }
 }
