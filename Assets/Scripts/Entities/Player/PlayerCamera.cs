@@ -20,7 +20,7 @@ namespace ProjectSteppe.Entities.Player
         private CameraDataScriptableObject thirdPersonFollow;
 
         [SerializeField]
-        private CameraDataScriptableObject lockFramingTransposer;=
+        private CameraDataScriptableObject lockFramingTransposer;
 
         private void Start()
         {
