@@ -40,7 +40,9 @@ public class Pause : MonoBehaviour
 
     private bool justPausedSwitched;
 
-    public bool canPause = true;
+    public int canPauseCount = 0;
+
+    public bool canPause => canPauseCount <= 0;
 
     private void Awake()
     {
@@ -51,7 +53,13 @@ public class Pause : MonoBehaviour
 
     public void ProhibitPause()
     {
-        canPause = false;
+        canPauseCount++;
+        //canPause = false;
+    }
+
+    public void AllowPause()
+    {
+        canPauseCount--;
     }
 
     public void OpenInventory()

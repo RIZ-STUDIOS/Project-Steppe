@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class InputDevice : MonoBehaviour
+public class SettingsInputDevice : MonoBehaviour
 {
     private SettingsButton settingsButton;
 
