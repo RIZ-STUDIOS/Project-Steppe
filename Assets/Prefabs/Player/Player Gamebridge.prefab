@@ -3043,9 +3043,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1226164313846605723}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &7283097740716688721
 MonoBehaviour:
@@ -3060,6 +3060,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstButton: {fileID: 2952396723083194765}
+  levelUpCG: {fileID: 9013198554132483261}
+  levelUpFirstButton: {fileID: 3373293354495834658}
 --- !u!1 &1242240191380032750
 GameObject:
   m_ObjectHideFlags: 0
@@ -15551,6 +15553,7 @@ MonoBehaviour:
   description: {fileID: 8590688702206538820}
   itemIcon: {fileID: 5416434409221783062}
   pauseMenu: {fileID: 8646431079153882592}
+  canPause: 1
 --- !u!114 &3648462743309470730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35249,6 +35252,7 @@ GameObject:
   - component: {fileID: 7815439966618722607}
   - component: {fileID: 7739384078477124021}
   - component: {fileID: 2734490208795638675}
+  - component: {fileID: 9013198554132483261}
   m_Layer: 5
   m_Name: LevelUpScreen
   m_TagString: Untagged
@@ -35314,6 +35318,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &9013198554132483261
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3954160754671853729}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3998437800699635758
 GameObject:
   m_ObjectHideFlags: 0

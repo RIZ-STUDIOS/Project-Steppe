@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace ProjectSteppe
+namespace ProjectSteppe.UI
 {
     public class CheckpointUI : MenuBase
     {
@@ -17,17 +17,32 @@ namespace ProjectSteppe
         [SerializeField]
         private GameObject firstButton;
 
+        [SerializeField]
+        private CanvasGroup levelUpCG;
+
+        [SerializeField]
+        private GameObject levelUpFirstButton;
+
+
         public void EnterCheckpoint(CheckpointInteractable activeCheckpoint)
         {
             checkpoint = activeCheckpoint;
+
+            //checkpoint.player.GetComponent<>
 
             SetMenu(this);
 
             checkpoint.player.PlayerUI.playerDetails.HidePlayerDetails();
 
-            StartCoroutine(canvasGroup.FadeIn(fadeSpeedMod: .5f));
+            StartCoroutine(canvasGroup.FadeIn(true, true));
 
             EventSystem.current.SetSelectedGameObject(firstButton);
+        }
+
+        public void EnableLevelUpInterface()
+        {
+            StartCoroutine(levelUpCG.FadeIn(true, true));
+            EventSystem.current.SetSelectedGameObject(levelUpFirstButton);
         }
     }
 }

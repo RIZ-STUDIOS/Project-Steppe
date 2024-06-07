@@ -40,11 +40,18 @@ public class Pause : MonoBehaviour
 
     private bool justPausedSwitched;
 
+    public bool canPause = true;
+
     private void Awake()
     {
         player = GetComponent<PlayerManager>();
         input = GetComponent<StarterAssetsInputs>();
         playerInput = GetComponent<PlayerInput>();
+    }
+
+    public void ProhibitPause()
+    {
+        canPause = false;
     }
 
     public void OpenInventory()
@@ -80,6 +87,8 @@ public class Pause : MonoBehaviour
 
     private void OnPause(InputValue inputValue)
     {
+        if (!canPause) return;
+
         if (inputValue.Get<float>() == 0) return;
 
         if (justPausedSwitched) return;

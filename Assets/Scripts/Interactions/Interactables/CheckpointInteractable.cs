@@ -1,6 +1,7 @@
 using Cinemachine;
 using ProjectSteppe.Entities.Player;
 using ProjectSteppe.Managers;
+using ProjectSteppe.UI;
 using ProjectSteppe.UI.Menus;
 using System.Collections;
 using UnityEngine;
@@ -34,6 +35,8 @@ namespace ProjectSteppe.Interactions.Interactables
 
         public UnityEvent<CheckpointInteractable> OnCheckpointActivate;
         public UnityEvent OnCheckpointFirstInteraction;
+        public UnityEvent OnEnteredCheckpoint;
+        public UnityEvent OnExitedCheckpoint;
 
         public int levelIndex;
 
@@ -120,6 +123,7 @@ namespace ProjectSteppe.Interactions.Interactables
             GetComponentInChildren<CinemachineVirtualCamera>().Priority = 11;
 
             checkpointUI.EnterCheckpoint(this);
+            OnEnteredCheckpoint.Invoke();
         }
 
         private void ActivateCheckpointEffects()

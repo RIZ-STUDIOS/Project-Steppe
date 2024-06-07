@@ -33,7 +33,7 @@ namespace ProjectSteppe
             statName.text = Enum.GetName(typeof(PlayerStatisticType), statType);
         }
 
-        private void OnSelect(BaseEventData baseEventData)
+        public void OnSelect(BaseEventData baseEventData)
         {
             Debug.Log("YUP!");
         }
