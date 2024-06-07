@@ -1,8 +1,12 @@
 using Cinemachine;
+using ProjectSteppe.Managers;
+using ProjectSteppe.UI;
 using StarterAssets;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace ProjectSteppe.Entities.Player
 {
@@ -25,7 +29,8 @@ namespace ProjectSteppe.Entities.Player
         private float walkSpeed = 2f;
 
         [SerializeField]
-        private float speedChangeRate = 10;
+        [Range(0.0f, 0.3f)]
+        private float speedChangeRate = 0.12f;
 
         [Range(0.0f, 0.3f)]
         public float RotationSmoothTime = 0.12f;
@@ -64,6 +69,12 @@ namespace ProjectSteppe.Entities.Player
         private float dashTimer;
         private float dashCooldownTimer;
 
+        [Header("Running")]
+
+        [SerializeField]
+        [FormerlySerializedAs("sprintSpeed")]
+        private float sprintSpeedModifier;
+
         [Header("Events")]
         public UnityEvent onJump;
         public UnityEvent onDashStart;
@@ -75,15 +86,17 @@ namespace ProjectSteppe.Entities.Player
         private bool usingGravity = true;
 
         private bool grounded;
+        private bool previousGrounded;
         private float speed;
         private float animationBlend;
         private float targetRotation;
+        private float cameraRotDash;
 
         public bool Grounded => grounded;
 
         private StarterAssetsInputs _input;
         private CharacterController characterController;
-        //private Animator animator;
+        private Animator animator;
         private PlayerInput playerInput;
         private PlayerManager playerManager;
 
@@ -92,17 +105,25 @@ namespace ProjectSteppe.Entities.Player
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
         private float _rotationVelocity;
+        private float _moveVelocity;
+        private float _animVelocity;
+        private Vector2 _inputVelocity;
 
         private const float _threshold = 0.01f;
+        private const float _thresholdMove = 0.03f;
 
         private bool dashing;
 
         private Vector3 moveDirection;
+        private Vector2 smoothMoveDirection;
 
         [System.NonSerialized]
         public bool jumping;
 
         public UnityEvent onFootstep;
+
+        [System.NonSerialized]
+        public bool sprinting;
 
         protected override void Awake()
         {
@@ -110,7 +131,7 @@ namespace ProjectSteppe.Entities.Player
             characterController = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
             playerInput = GetComponent<PlayerInput>();
-            //animator = GetComponent<Animator>();
+            animator = GetComponent<Animator>();
             virtualCamera = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
             playerManager = GetComponent<PlayerManager>();
             playerManager.onCapabilityChange.AddListener(OnPlayerCapability);
@@ -124,15 +145,42 @@ namespace ProjectSteppe.Entities.Player
 
         private void Update()
         {
+            CheckSprint();
             CheckJump();
             CheckGrounded();
             CheckDash();
             CheckMovement();
+            KeepToGround();
+        }
+
+        private void KeepToGround()
+        {
+            /*if (!characterController.enabled) return;
+            if(Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, out var hitInfo, groundedRadius, groundLayers))
+            {
+                verticalVelocity = -hitInfo.distance * 5;
+            }*/
         }
 
         private void LateUpdate()
         {
             CameraRotation();
+        }
+
+        private void CheckSprint()
+        {
+            if(UIPlayerInput.Instance.controlScheme == UIPlayerInput.ControlScheme.KeyboardMouse)
+            {
+                sprinting = _input.sprinting;
+            }
+            else
+            {
+                if (_input.sprinting)
+                {
+                    sprinting = !sprinting;
+                    _input.sprinting = false;
+                }
+            }
         }
 
         public void OnFootstep()
@@ -149,6 +197,7 @@ namespace ProjectSteppe.Entities.Player
                     dashing = true;
                     dashTimer = 0;
                     Entity.EntityHealth.SetInvicible(true);
+                    cameraRotDash = playerCamera.transform.eulerAngles.y;
                     onDashStart.Invoke();
                     Entity.EntityAttacking.DisableWeaponCollision();
                 }
@@ -217,26 +266,36 @@ namespace ProjectSteppe.Entities.Player
                     }
                 }
 
-                if (verticalVelocity < 0)
+                if (Physics.Raycast(transform.position + Vector3.up * (groundedRadius/2f), Vector3.down, groundedRadius, groundLayers))
                 {
-                    verticalVelocity = -2;
+                    verticalVelocity = -200;
                 }
+
+                /*if (verticalVelocity < 0)
+                {
+                    verticalVelocity = 0;
+                }*/
             }
             else
             {
-
+                if (previousGrounded)
+                {
+                    verticalVelocity = 0;
+                }
+                if (verticalVelocity > terminalVelocity && usingGravity)
+                {
+                    verticalVelocity += playerGravity * Time.deltaTime;
+                }
             }
 
-            if (verticalVelocity > terminalVelocity && usingGravity)
-            {
-                verticalVelocity += playerGravity * Time.deltaTime;
-            }
+            
         }
 
         private void CheckGrounded()
         {
             Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - groundedOffset,
                 transform.position.z);
+            previousGrounded = grounded;
             grounded = Physics.CheckSphere(spherePosition, groundedRadius, groundLayers,
                 QueryTriggerInteraction.Ignore);
         }
@@ -244,6 +303,7 @@ namespace ProjectSteppe.Entities.Player
         private void CheckMovement()
         {
             float targetSpeed = dashing ? dashSpeed : walkSpeed;
+            if (sprinting) targetSpeed *= sprintSpeedModifier;
 
             if (!dashing && (_input.move == Vector2.zero || !playerManager.HasCapability(PlayerCapability.Move))) targetSpeed = 0;
 
@@ -253,24 +313,25 @@ namespace ProjectSteppe.Entities.Player
             float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
 
             // accelerate or decelerate to target speed
-            /*if (currentHorizontalSpeed < targetSpeed - speedOffset ||
-                currentHorizontalSpeed > targetSpeed + speedOffset)
+            if ((speed < targetSpeed - speedOffset ||
+                speed > targetSpeed + speedOffset))
             {
                 // creates curved result rather than a linear one giving a more organic speed change
                 // note T in Lerp is clamped, so we don't need to clamp our speed
-                speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
-                    Time.deltaTime * speedChangeRate);
+                speed = Mathf.SmoothDamp(speed, targetSpeed * inputMagnitude, ref _moveVelocity, speedChangeRate);
 
                 // round speed to 3 decimal places
                 //speed = Mathf.Round(speed * 1000f) / 1000f;
             }
             else
             {
-            }*/
-            speed = targetSpeed;
+                speed = targetSpeed;
+            }
 
-            animationBlend = Mathf.Lerp(animationBlend, targetSpeed, Time.deltaTime * speedChangeRate);
+            animationBlend = Mathf.SmoothDamp(animationBlend, targetSpeed, ref _animVelocity, speedChangeRate);
             if (animationBlend < 0.01f) animationBlend = 0f;
+
+            smoothMoveDirection = Vector2.SmoothDamp(smoothMoveDirection, _input.move, ref _inputVelocity, speedChangeRate);
 
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
@@ -280,11 +341,14 @@ namespace ProjectSteppe.Entities.Player
                 {
                     if (dashing)
                     {
-                        targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
+                        if (playerManager.PlayerTargetLock.lockOn)
+                            targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
+                        else
+                            targetRotation = cameraRotDash + Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
                     }
                     else
                     {
-                        if (playerManager.PlayerTargetLock.lockOn)
+                        if (playerManager.PlayerTargetLock.lockOn && !sprinting)
                         {
                             targetRotation = playerCamera.transform.eulerAngles.y;
                         }
@@ -324,13 +388,17 @@ namespace ProjectSteppe.Entities.Player
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
 
-            if (playerManager.PlayerTargetLock.lockOn && !dashing)
+            if (!sprinting)
             {
-                targetDirection = Quaternion.Euler(0, targetRotation + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg, 0) * Vector3.forward;
-            }
-            else if (playerManager.PlayerTargetLock.lockOn && dashing)
-            {
-                targetDirection = Quaternion.Euler(0, targetRotation, 0) * Vector3.forward;
+                if (playerManager.PlayerTargetLock.lockOn && !dashing)
+                {
+                    targetDirection = Quaternion.Euler(0, targetRotation + Mathf.Atan2(smoothMoveDirection.x, smoothMoveDirection.y) * Mathf.Rad2Deg, 0) * Vector3.forward;
+                    //Debug.Log("Target Dir: "+targetDirection + " Target Rot: " + targetRotation + " Input: " + _input.move + " Atan2: " + Mathf.Atan2(inputDirection.x, inputDirection.z));
+                }
+                else if (playerManager.PlayerTargetLock.lockOn && dashing)
+                {
+                    targetDirection = Quaternion.Euler(0, targetRotation, 0) * Vector3.forward;
+                }
             }
 
             //if (jumping) targetDirection.y = Mathf.Sqrt(5 * 2 * -9.8f);
@@ -340,38 +408,36 @@ namespace ProjectSteppe.Entities.Player
 
 
             // FOR ANIMATOR //
-            float velX;
-            float velY;
-
-            if (playerManager.PlayerTargetLock.lockOn)
+            if (Time.timeScale > 0)
             {
-                velX = _input.move.x;
-                velY = _input.move.y;
+                Vector2 animVel = _input.move;
 
-                if(velY < 0)
+                if (playerManager.PlayerTargetLock.lockOn && !sprinting)
                 {
-                    velX *= -1;
+                    animVel.x = smoothMoveDirection.x * (animationBlend / walkSpeed);
+                    animVel.y = smoothMoveDirection.y * (animationBlend / walkSpeed);
+                    //animVel.Normalize();
+
+                    if (dashing)
+                    {
+                        var d = moveDirection.normalized;
+                        animVel.x = d.x > 0 ? 1 : 0;
+                        animVel.y = d.z > 0 ? 1 : 0;
+                    }
+                }
+                else
+                {
+                    animVel.x = 0;
+                    animVel.y = animationBlend / walkSpeed;
                 }
 
-                if (velX < 0)
+                if (playerManager.PlayerTargetLock.lockOn)
                 {
-                    velY *= -1;
+                    playerManager.PlayerAnimator.SetBool("Strafing", !sprinting);
                 }
 
-                if (dashing)
-                {
-                    var d = moveDirection.normalized;
-                    velX = d.x > 0 ? 1 : 0;
-                    velY = d.z > 0 ? 1 : 0;
-                }
+                onMoveAnimator?.Invoke(animationBlend, inputMagnitude, animVel.x, animVel.y);
             }
-            else
-            {
-                velX = 0;
-                velY = animationBlend / walkSpeed;
-            }
-
-            onMoveAnimator?.Invoke(animationBlend, inputMagnitude, velX, velY);
         }
 
 

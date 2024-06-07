@@ -48,7 +48,6 @@ namespace ProjectSteppe.UI
             //StartCoroutine(canvasGroup.FadeOut(true, true, fadeSpeedMod: 6));
 
             GetComponentInParent<PlayerManager>().PlayerInput.OnInteraction.RemoveListener(HideMessage);
-            GetComponentInParent<PlayerManager>().PlayerAnimator.SetBool("Sitting", false);
 
             playerManager.PlayerInteractor.onInteractionEnded?.Invoke(.25f);
             closeAudio.Play();

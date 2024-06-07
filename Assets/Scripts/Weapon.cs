@@ -33,7 +33,7 @@ namespace ProjectSteppe
         private Coroutine ignoreHitCoroutine;
 
         [SerializeField]
-        private TrailRenderer trailRenderer;
+        private ParticleSystem trailFX;
 
         [SerializeField]
         private Renderer weaponMeshRenderer;
@@ -43,6 +43,12 @@ namespace ProjectSteppe
         private List<Material> weaponMaterials = new List<Material>();
 
         private Coroutine unblockCoroutine;
+
+        [SerializeField]
+        private Color normalTrailColor = new Color(1, 1, 1, .1f);
+
+        [SerializeField]
+        private Color unblockableTrailColor = new Color(1, .5f, 0, .1f);
 
         private void Awake()
         {
@@ -66,13 +72,13 @@ namespace ProjectSteppe
         public void EnableColliders()
         {
             WeaponSwingAction(true);
-            trailRenderer.emitting = true;
+            trailFX.Play();
         }
 
         public void DisableColliders()
         {
             WeaponSwingAction(false);
-            trailRenderer.emitting = false;
+            trailFX.Stop();
         }
 
         public void ToggleAttack(float startTime, float endTime)
@@ -129,7 +135,7 @@ namespace ProjectSteppe
 
                     if (parentEntity.EntityAttacking.currentAttack.balanceBlockPassthrough)
                     {
-                        hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage);
+                        hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage, parentEntity);
                     }
                     hitbox.ParentEntity.EntityBlock.OnBlockAttack.Invoke();
                 }
@@ -138,7 +144,7 @@ namespace ProjectSteppe
                     if (parentEntity.EntityAttacking.currentAttack.balanceBlockPassthrough)
                     {
                         hitbox.ParentEntity.EntityHealth.DamageBalance(parentEntity.EntityAttacking.currentAttack.balanceDamage);
-                        hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage);
+                        hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage, parentEntity);
                         hitbox.ParentEntity.EntityBlock.ChangeBlockColor(false);
                     }
                     else
@@ -155,7 +161,7 @@ namespace ProjectSteppe
             }
             else
             {
-                hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage);
+                hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage, parentEntity);
                 hitbox.ParentEntity.EntityHealth.DamageBalance(parentEntity.EntityAttacking.currentAttack.balanceDamage);
             }
 
@@ -229,12 +235,16 @@ namespace ProjectSteppe
             {
                 material.SetColor("_EmissionColor", Color.black);
             }
+
+            var fxMain = trailFX.main;
+            fxMain.startColor = normalTrailColor;
         }
 
         private IEnumerator ShowUnblockableCoroutine()
         {
             float timer = 0;
             var startColor = weaponMaterials[0].GetColor("_EmissionColor");
+
             while (timer < 1)
             {
                 foreach (var material in weaponMaterials)
@@ -248,6 +258,9 @@ namespace ProjectSteppe
             {
                 material.SetColor("_EmissionColor", unblockableColor);
             }
+
+            var fxMain = trailFX.main;
+            fxMain.startColor = unblockableTrailColor;
         }
     }
 }

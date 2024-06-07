@@ -16,12 +16,12 @@ namespace StarterAssets
         public Vector2 look;
         public Vector2 targetLook;
         public bool jump;
-        public bool sprint;
         public bool dash;
         public bool attack;
         public bool targetLock;
         public bool blocking;
         public bool useable;
+        public bool sprinting;
 
         [Header("Movement Settings")]
         public bool analogMovement;
@@ -36,7 +36,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM
         public void OnMove(InputValue value)
         {
-            if (!respondToData) return;
+            //if (!respondToData) return;
             MoveInput(value.Get<Vector2>());
         }
 
@@ -63,13 +63,11 @@ namespace StarterAssets
 
         public void OnJump(InputValue value)
         {
-            if (!respondToData) return;
             JumpInput(value.isPressed);
         }
 
         public void OnSprint(InputValue value)
         {
-            if (!respondToData) return;
             SprintInput(value.isPressed);
         }
 
@@ -117,7 +115,7 @@ namespace StarterAssets
 
         public void SprintInput(bool newSprintState)
         {
-            sprint = newSprintState;
+            sprinting = newSprintState;
         }
 
         public void DashInput(bool newDashState)
@@ -157,7 +155,7 @@ namespace StarterAssets
 
         public void ResetInputs()
         {
-            MoveInput(Vector2.zero);
+            //MoveInput(Vector2.zero);
             LookInput(Vector2.zero);
             DashInput(false);
         }

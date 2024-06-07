@@ -1,3 +1,4 @@
+using Cinemachine.Utility;
 using ProjectSteppe.AI.States;
 using ProjectSteppe.Entities;
 using System.Collections;
@@ -124,6 +125,10 @@ namespace ProjectSteppe.AI
                     var diff = targetEntity.transform.position - previousPosition;
                     var thisFrameTargetFuturePosition = targetEntity.transform.position + ((diff * (1 / Time.deltaTime)) * futurePositionAccuracy);
                     targetFuturePosition = Vector3.MoveTowards(targetFuturePosition, thisFrameTargetFuturePosition, 20 * Time.deltaTime);
+                }
+                if (targetFuturePosition.IsNaN())
+                {
+                    targetFuturePosition = targetEntity.transform.position;
                 }
                 previousPosition = targetEntity.transform.position;
                 if (rotateTowardsTarget)

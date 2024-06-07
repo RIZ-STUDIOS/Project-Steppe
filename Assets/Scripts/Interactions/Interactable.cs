@@ -7,9 +7,11 @@ namespace ProjectSteppe.Interactions
     {
         public abstract string InteractText { get; }
 
-        protected PlayerManager player;
+        public PlayerManager player;
 
         public abstract bool OneTime { get; }
+
+        public virtual bool CanInteract => true;
 
         public abstract bool Interacted { get; set; }
 

@@ -46,6 +46,16 @@ namespace ProjectSteppe
         public AudioSource bossMusic;
 
         [SerializeField]
+        private float secondPhaseSpeed;
+
+        [SerializeField]
+        private float secondPhaseTimeBeforeBalanceRegeneration = 1.5f;
+
+        [SerializeField]
+        [Range(0f, 1f)]
+        private float secondPhaseBalanceRegenerationRate = 0.2f;
+
+        [SerializeField]
         private Weapon footWeapon;
 
         [SerializeField]
@@ -195,6 +205,7 @@ namespace ProjectSteppe
                 health.SetInvicible(true);
                 MortalBlow();
                 health.ResetHealth();
+                navMeshAgent.speed = secondPhaseSpeed;
             }
         }
 

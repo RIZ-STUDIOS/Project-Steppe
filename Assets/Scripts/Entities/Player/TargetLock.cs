@@ -149,13 +149,24 @@ namespace ProjectSteppe.Entities.Player
                 playerTargetLockLookAt.position = Vector3.MoveTowards(playerTargetLockLookAt.position, lookAtTransform.position, 90 * Time.deltaTime);
 
                 var distance = Vector3.Distance(transform.position, lookAtTransform.position);
+                var framingTransposer = playerManager.PlayerCamera.targetLockVCam.GetCinemachineComponent<CinemachineFramingTransposer>();
+                var composer = playerManager.PlayerCamera.targetLockVCam.GetCinemachineComponent<CinemachineComposer>();
                 if (distance < startDistance)
                 {
-                    playerManager.PlayerCamera.cinemachineCameraOffset.m_Offset.y = -Mathf.Lerp(0, .35f, 1 - ((distance - endDistance) / (startDistance - endDistance)));
+                    var diff = lookAtTransform.position.y - playerManager.PlayerCamera.targetLockVCam.Follow.position.y;
+                    var sign = diff < 0 ? -1 : 1;
+                    framingTransposer.m_TrackedObjectOffset = new Vector3(0, Mathf.Lerp(0, .5f, ((distance - endDistance) / (startDistance - endDistance))), 0);
+                    //framingTransposer.m_TrackedObjectOffset.y = 0.5f + diff;
+                    //composer.m_TrackedObjectOffset.y = Mathf.Lerp(0, framingTransposer.m_TrackedObjectOffset.y + Mathf.Abs(diff), 1 -((distance - endDistance) / (startDistance - endDistance)));
+                    //playerManager.PlayerCamera.cinemachineCameraOffset.m_Offset.y = -Mathf.Lerp(0, Mathf.Abs(lookAtTransform.position.y - playerManager.PlayerCamera.targetLockVCam.Follow.position.y) / 2f + .35f, 1 - ((distance - endDistance) / (startDistance - endDistance)));
                 }
                 else
                 {
-                    playerManager.PlayerCamera.cinemachineCameraOffset.m_Offset.y = 0;
+                    framingTransposer.m_TrackedObjectOffset = new Vector3(0, 0.5f, 0);
+                    //framingTransposer.m_CameraDistance = 5;
+                    //framingTransposer.m_TrackedObjectOffset.y = .5f;
+                    //composer.m_TrackedObjectOffset.y = 0;
+                    //playerManager.PlayerCamera.cinemachineCameraOffset.m_Offset.y = 0;
                 }
             }
             else
@@ -259,6 +270,7 @@ namespace ProjectSteppe.Entities.Player
             this.lockOn = lockOn;
             //playerMovement.strafe = lockOn;
 
+            if(!playerManager.PlayerMovement.sprinting)
             playerManager.PlayerAnimator.SetBool("Strafing", lockOn);
 
             onLockStateChange.Invoke();

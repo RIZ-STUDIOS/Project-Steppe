@@ -18,7 +18,8 @@ namespace ProjectSteppe
 
         private void Update()
         {
-            if (Physics.Raycast(mainCam.position, mainCam.forward, out RaycastHit hit, 200, LayerMask.GetMask("Environment", "Enemy")))
+            if (Time.timeScale == 0) return;
+            if (Physics.Raycast(mainCam.position, mainCam.forward, out RaycastHit hit, 200, LayerMask.GetMask("Environment")))
             {
                 transform.position = hit.point;
             }

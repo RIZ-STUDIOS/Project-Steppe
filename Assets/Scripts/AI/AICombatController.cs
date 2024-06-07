@@ -31,26 +31,34 @@ namespace ProjectSteppe.AI
             var aiTarget = other.GetComponent<AITarget>();
             if (aiTarget)
             {
-                if (!aiTarget.nearbyControllers.Contains(controller))
-                    aiTarget.nearbyControllers.Add(controller);
-                controller.targetEntity = aiTarget.GetComponentInParent<Entity>();
+                var entity = aiTarget.GetComponentInParent<Entity>();
+                if (entity && controller.targetEntity != entity)
+                {
+                    if (!aiTarget.nearbyControllers.Contains(controller))
+                        aiTarget.nearbyControllers.Add(controller);
+                    controller.targetEntity = entity;
 
-                OnPlayerEnter();
+                    OnPlayerEnter();
+                }
             }
         }
         private void OnTriggerExit(Collider other)
         {
-            var aiTarget = other.GetComponent<AITarget>();
+            var aiTarget = other.GetComponentInParent<AITarget>();
             if (aiTarget)
             {
+                var entity = aiTarget.GetComponentInParent<Entity>();
 
-                if (aiTarget.nearbyControllers.Contains(controller))
-                    aiTarget.nearbyControllers.Remove(controller);
-                OnPlayerExit(aiTarget);
-                if(aiTarget.GetComponentInParent<Entity>() == controller.targetEntity)
-                controller.targetEntity = null;
-
-                Debug.Log("Left!");
+                if (entity)
+                {
+                    if (aiTarget.nearbyControllers.Contains(controller))
+                        aiTarget.nearbyControllers.Remove(controller);
+                    if (controller.targetEntity == entity)
+                    {
+                        controller.targetEntity = null;
+                        OnPlayerExit(aiTarget);
+                    }
+                }
             }
         }
 

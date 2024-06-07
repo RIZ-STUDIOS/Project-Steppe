@@ -19,7 +19,7 @@ namespace ProjectSteppe.ZedExtensions
 
         public static IEnumerator FadeIn(this CanvasGroup canvasGroup, bool isInteractable = false, bool canBlockRaycasts = false, float fadeSpeedMod = 2)
         {
-            IEnumerator lerpIn = LerpCanvasAlphaOverTime(canvasGroup, 1);
+            IEnumerator lerpIn = LerpCanvasAlphaOverTime(canvasGroup, 1, fadeSpeedMod);
             yield return lerpIn;
 
             ToggleCanvasGroupInteraction(canvasGroup, true, isInteractable, canBlockRaycasts);

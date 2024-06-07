@@ -13,11 +13,11 @@ namespace ProjectSteppe.Entities
         private bool blocking;
 
         [SerializeField]
-        [ColorUsage(false)]
+        //[ColorUsage(false)]
         private Color normalBlockColor;
 
         [SerializeField]
-        [ColorUsage(false)]
+        //[ColorUsage(false)]
         private Color perfectBlockColor;
 
         [SerializeField]
@@ -89,10 +89,10 @@ namespace ProjectSteppe.Entities
         {
             foreach (var fx in blockFX)
             {
-                var main = fx.main;
+                var renderer = fx.GetComponent<ParticleSystemRenderer>();
                 var color = isPerfect ? perfectBlockColor : normalBlockColor;
                 color.a = 1;
-                main.startColor = color;
+                renderer.sharedMaterials[1].SetColor("_EmissionColor", color);
             }
         }
 
