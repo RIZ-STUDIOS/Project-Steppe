@@ -304,8 +304,13 @@ namespace ProjectSteppe.Entities.Player
 
         private void CheckMovement()
         {
+            if (_input.move == Vector2.zero && UIPlayerInput.Instance.controlScheme != UIPlayerInput.ControlScheme.KeyboardMouse)
+            {
+                sprinting = false;
+            }
+
             float targetSpeed = dashing ? dashSpeed : walkSpeed;
-            if (sprinting) targetSpeed *= sprintSpeedModifier;
+            if (!dashing && sprinting) targetSpeed *= sprintSpeedModifier;            
 
             if (!dashing && (_input.move == Vector2.zero || !playerManager.HasCapability(PlayerCapability.Move))) targetSpeed = 0;
 
@@ -360,8 +365,24 @@ namespace ProjectSteppe.Entities.Player
                         {
                             targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
                         }
-                        if (_input.move != Vector2.zero)
-                            this.moveDirection = inputDirection;
+
+                        if (UIPlayerInput.Instance.controlScheme == UIPlayerInput.ControlScheme.KeyboardMouse)
+                        {
+                            if (_input.move != Vector2.zero)
+                                this.moveDirection = inputDirection;
+                        }
+                        else
+                        {
+                            if (Mathf.Abs(_input.move.x) > _thresholdMove)
+                            {
+                                moveDirection.x = _input.move.x;
+                            }
+
+                            if (Mathf.Abs(_input.move.y) > _thresholdMove)
+                            {
+                                moveDirection.z = _input.move.y;
+                            }
+                        }
                     }
 
                     float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref _rotationVelocity,

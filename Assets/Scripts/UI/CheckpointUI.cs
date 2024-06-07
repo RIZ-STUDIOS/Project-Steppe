@@ -76,7 +76,9 @@ namespace ProjectSteppe.UI
             int costValue = Mathf.CeilToInt(
                 sh.BASE_STATISTIC_COST *
                 (sh.totalStatLevel + pointsCost));
-            costTMP.text = "<color=red>- " + costValue.ToString("N0");
+            costTMP.text = pointsCost > 0 ?
+                "<color=red>- " + costValue.ToString("N0") :
+                0.ToString();
 
             var cc = checkpoint.player.CurrencyContainer;
             int currDeduc = Mathf.CeilToInt(
