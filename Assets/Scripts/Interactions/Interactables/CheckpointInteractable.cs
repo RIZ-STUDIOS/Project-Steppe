@@ -114,7 +114,6 @@ namespace ProjectSteppe.Interactions.Interactables
 
         private void CheckpointInteract()
         {
-            if (player.bossDead) GameManager.Instance.RespawnCharacter();
             player.PlayerUsableItemSlot.currentUsable.Recharge();
             player.PlayerEntity.EntityHealth.ResetHealth();
             player.PlayerAnimator.SetTrigger("ForceAnimation");
