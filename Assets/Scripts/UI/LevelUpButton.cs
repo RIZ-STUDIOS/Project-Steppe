@@ -46,7 +46,7 @@ namespace ProjectSteppe
 
         private void Start()
         {
-            playerInput = GetComponentInParent<CheckpointUI>().playerInput;
+            playerInput = UIPlayerInput.Instance;
             statName.text = Enum.GetName(typeof(PlayerStatisticType), statType);
         }
 
@@ -74,11 +74,11 @@ namespace ProjectSteppe
 
             if (input.x < 0)
             {
-                shifterLeft.SetTrigger("Pulse");
+                shifterLeft.Play("Pulse");
             }
             else if (input.x > 0)
             {
-                shifterRight.SetTrigger("Pulse");
+                shifterRight.Play("Pulse");
             }
         }
     }

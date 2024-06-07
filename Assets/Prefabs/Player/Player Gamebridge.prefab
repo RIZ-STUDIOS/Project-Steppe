@@ -2414,8 +2414,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 660, y: 85}
-  m_SizeDelta: {x: 1300, y: 150}
+  m_AnchoredPosition: {x: 835, y: 85}
+  m_SizeDelta: {x: 1650, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &5423373155528945002
 CanvasGroup:
@@ -2441,6 +2441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72567378be20eac46bcb38323efecc6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInput: {fileID: 0}
   firstButton: {fileID: 2952396723083194765}
   restartButton: {fileID: 2612816203203997422}
   levelUpCG: {fileID: 9013198554132483261}
@@ -33084,6 +33085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f0d546e53b3f740bdb34d444343067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInput: {fileID: 0}
   player: {fileID: 3793405948792583533}
   buttonPrefab: {fileID: 1887094934468200121, guid: ddf8986b3b535e144bf491203c9071b3,
     type: 3}
@@ -59577,6 +59579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d23e07fd5c2303b4d87fde29ad894df7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInput: {fileID: 0}
   defaultSelectable: {fileID: 6696633484380395326}
   inventoryMenu: {fileID: 8008654707767285710}
   settingsMenu: {fileID: 8235077997030005657}
