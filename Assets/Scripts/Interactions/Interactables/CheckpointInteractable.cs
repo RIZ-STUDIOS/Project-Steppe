@@ -1,3 +1,4 @@
+using Cinemachine;
 using ProjectSteppe.Entities.Player;
 using ProjectSteppe.Managers;
 using System.Collections;
@@ -23,15 +24,7 @@ namespace ProjectSteppe.Interactions.Interactables
         [SerializeField] private AudioSource initialBlastSound;
         [SerializeField] private AudioSource checkpointLoop;
 
-        public override string InteractText
-        {
-            get
-            {
-                if (player.bossDead) return "<sprite=9>Respawn Foes";
-                if (Interacted) return "<sprite=9>Rest";
-                return "<sprite=9>Kindle Respite";
-            }
-        }
+        public override string InteractText => Interacted ? "<sprite=9>Rest" : "<sprite=9>Kindle Respite";
 
         public override bool OneTime => false;
 
@@ -49,6 +42,9 @@ namespace ProjectSteppe.Interactions.Interactables
         public float flickerMaxIntensity;
         public float flickerSpeed;
         private Light firelight;
+
+        [SerializeField]
+        private Transform headLook;
 
         private void Awake()
         {
@@ -108,9 +104,16 @@ namespace ProjectSteppe.Interactions.Interactables
             if (player.bossDead) GameManager.Instance.RespawnCharacter();
             player.PlayerUsableItemSlot.currentUsable.Recharge();
             player.PlayerEntity.EntityHealth.ResetHealth();
-            player.PlayerUI.messagePrompt.ShowMessage("...");
             player.PlayerAnimator.SetTrigger("ForceAnimation");
             player.PlayerAnimator.SetBool("Sitting", true);
+
+            // AESTHETICS
+            player.transform.LookAt(transform.position);
+            player.GetComponentInChildren<HeadLook>().transform.position = headLook.position;
+            player.GetComponentInChildren<HeadLook>().enabled = false;
+            player.PlayerCamera.mainCamera.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Time = 2.5f;
+            player.PlayerCamera.mainCamera.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Style = CinemachineBlendDefinition.Style.EaseInOut;
+            GetComponentInChildren<CinemachineVirtualCamera>().Priority = 11;
         }
 
         private void ActivateCheckpointEffects()
