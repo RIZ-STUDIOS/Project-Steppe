@@ -340,7 +340,7 @@ namespace ProjectSteppe.Entities.Player
             animationBlend = Mathf.SmoothDamp(animationBlend, targetSpeed, ref _animVelocity, speedChangeRate);
             if (animationBlend < 0.01f) animationBlend = 0f;
 
-            smoothMoveDirection = Vector2.SmoothDamp(smoothMoveDirection, _input.move, ref _inputVelocity, speedChangeRate);
+            smoothMoveDirection = Vector2.SmoothDamp(smoothMoveDirection, _input.move.normalized, ref _inputVelocity, speedChangeRate);
 
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
