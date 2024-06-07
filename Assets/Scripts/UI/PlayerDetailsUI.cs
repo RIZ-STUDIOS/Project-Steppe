@@ -1,4 +1,5 @@
 using ProjectSteppe.ZedExtensions;
+using System;
 using UnityEngine;
 
 namespace ProjectSteppe.UI
@@ -17,8 +18,6 @@ namespace ProjectSteppe.UI
         public void ShowPlayerDetails()
         {
             StartCoroutine(canvasGroup.FadeIn());
-            //StartCoroutine(healthUI.FadeIn());
-            //StartCoroutine(balanceUI.FadeIn());
         }
 
         public void HideBalance()
@@ -26,11 +25,24 @@ namespace ProjectSteppe.UI
             StartCoroutine(balanceUI.FadeOut());
         }
 
+        public void HideHealthBar()
+        {
+            StartCoroutine(balanceUI.FadeOut());
+        }
+
+        public void ShowHealthBar()
+        {
+            StartCoroutine(healthUI.FadeIn());
+        }
+
+        public void ShowBalanceBar()
+        {
+            StartCoroutine(balanceUI.FadeIn());
+        }
+
         public void HidePlayerDetails()
         {
             StartCoroutine(canvasGroup.FadeOut());
-            //StartCoroutine(healthUI.FadeOut());
-            //StartCoroutine(balanceUI.FadeOut());
         }
     }
 }

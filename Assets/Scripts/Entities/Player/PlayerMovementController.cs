@@ -2,7 +2,6 @@ using Cinemachine;
 using ProjectSteppe.Managers;
 using ProjectSteppe.UI;
 using StarterAssets;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -27,6 +26,8 @@ namespace ProjectSteppe.Entities.Player
 
         [SerializeField]
         private float walkSpeed = 2f;
+
+        public float speedMultiplier = 1;
 
         [SerializeField]
         [Range(0.0f, 0.3f)]
@@ -302,10 +303,17 @@ namespace ProjectSteppe.Entities.Player
 
         private void CheckMovement()
         {
+            if (speed < 0.2f && UIPlayerInput.Instance.controlScheme != UIPlayerInput.ControlScheme.KeyboardMouse)
+            {
+                sprinting = false;
+            }
+
             float targetSpeed = dashing ? dashSpeed : walkSpeed;
-            if (sprinting) targetSpeed *= sprintSpeedModifier;
+            if (!dashing && sprinting) targetSpeed *= sprintSpeedModifier;            
 
             if (!dashing && (_input.move == Vector2.zero || !playerManager.HasCapability(PlayerCapability.Move))) targetSpeed = 0;
+
+            targetSpeed *= speedMultiplier;
 
             float currentHorizontalSpeed = new Vector3(characterController.velocity.x, 0.0f, characterController.velocity.z).magnitude;
 
@@ -331,9 +339,30 @@ namespace ProjectSteppe.Entities.Player
             animationBlend = Mathf.SmoothDamp(animationBlend, targetSpeed, ref _animVelocity, speedChangeRate);
             if (animationBlend < 0.01f) animationBlend = 0f;
 
-            smoothMoveDirection = Vector2.SmoothDamp(smoothMoveDirection, _input.move, ref _inputVelocity, speedChangeRate);
+            smoothMoveDirection = Vector2.SmoothDamp(smoothMoveDirection, _input.move.normalized, ref _inputVelocity, speedChangeRate);
 
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+
+            if (!dashing)
+            {
+                if (UIPlayerInput.Instance.controlScheme == UIPlayerInput.ControlScheme.KeyboardMouse)
+                {
+                    if (_input.move != Vector2.zero)
+                        this.moveDirection = inputDirection;
+                }
+                else
+                {
+                    if (Mathf.Abs(_input.move.x) > _thresholdMove)
+                    {
+                        moveDirection.x = _input.move.x;
+                    }
+
+                    if (Mathf.Abs(_input.move.y) > _thresholdMove)
+                    {
+                        moveDirection.z = _input.move.y;
+                    }
+                }
+            }
 
             if (characterController.enabled)
             {
@@ -356,8 +385,8 @@ namespace ProjectSteppe.Entities.Player
                         {
                             targetRotation = playerCamera.transform.eulerAngles.y + Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
                         }
-                        if (_input.move != Vector2.zero)
-                            this.moveDirection = inputDirection;
+
+                        
                     }
 
                     float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref _rotationVelocity,

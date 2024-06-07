@@ -87,6 +87,12 @@ namespace ProjectSteppe.Entities
             Health = amount;
         }
 
+        public void ChangeMaxHealth(float newHealth)
+        {
+            maxHealth = newHealth;
+            Health = maxHealth;
+        }
+
         public void DamageHealth(float amount)
         {
             if (vulnerable)

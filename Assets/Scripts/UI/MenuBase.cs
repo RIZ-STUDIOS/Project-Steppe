@@ -140,6 +140,10 @@ namespace ProjectSteppe.UI.Menus
             playerInput.playerInput.UI.Cancel.performed -= OnCancelPerformed;
             playerInput.playerInput.UI.Cancel.canceled -= OnCancelCanceled;
 
+            playerInput.playerInput.UI.Submit.started -= OnSubmitStarted;
+            playerInput.playerInput.UI.Submit.performed -= OnSubmitPerformed;
+            playerInput.playerInput.UI.Submit.canceled -= OnSubmitCanceled;
+
             playerInput.playerInput.UI.RightBumper.started -= OnRightBumperStarted;
             playerInput.playerInput.UI.RightBumper.performed -= OnRightBumperPerformed;
             playerInput.playerInput.UI.RightBumper.canceled -= OnRightBumperCanceled;
@@ -154,6 +158,10 @@ namespace ProjectSteppe.UI.Menus
             playerInput.playerInput.UI.Cancel.started += OnCancelStarted;
             playerInput.playerInput.UI.Cancel.performed += OnCancelPerformed;
             playerInput.playerInput.UI.Cancel.canceled += OnCancelCanceled;
+
+            playerInput.playerInput.UI.Submit.started += OnSubmitStarted;
+            playerInput.playerInput.UI.Submit.performed += OnSubmitPerformed;
+            playerInput.playerInput.UI.Submit.canceled += OnSubmitCanceled;
 
             playerInput.playerInput.UI.RightBumper.started += OnRightBumperStarted;
             playerInput.playerInput.UI.RightBumper.performed += OnRightBumperPerformed;
@@ -180,6 +188,21 @@ namespace ProjectSteppe.UI.Menus
         }
 
         protected virtual void OnCancelCanceled(InputAction.CallbackContext callbackContext)
+        {
+
+        }
+
+        protected virtual void OnSubmitStarted(InputAction.CallbackContext callbackContext)
+        {
+
+        }
+
+        protected virtual void OnSubmitPerformed(InputAction.CallbackContext callbackContext)
+        {
+
+        }
+
+        protected virtual void OnSubmitCanceled(InputAction.CallbackContext callbackContext)
         {
 
         }

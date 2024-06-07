@@ -43,7 +43,8 @@ namespace ProjectSteppe.UI
         {
             yield return new WaitForSeconds(waitTime);
 
-            GameManager.Instance.playerManager.PlayerUI.playerDetails.HidePlayerDetails();
+            GameManager.Instance.playerManager.PlayerUI.playerDetails.HideHealthBar();
+            GameManager.Instance.playerManager.PlayerUI.playerDetails.HideBalance();
             killedEntity.EntityDetails.HideDetails();
 
             contextTMP.text = "DEMO FINISHED";

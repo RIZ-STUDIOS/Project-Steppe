@@ -64,7 +64,8 @@ namespace ProjectSteppe.AI
 
         protected virtual void OnPlayerEnter()
         {
-            GameManager.Instance.playerManager.PlayerUI.playerDetails.ShowPlayerDetails();
+            GameManager.Instance.playerManager.PlayerUI.playerDetails.ShowHealthBar();
+            GameManager.Instance.playerManager.PlayerUI.playerDetails.ShowBalanceBar();
             controller.AIEntity.EntityDetails.ShowDetails();
         }
 

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -15,10 +16,10 @@ namespace ProjectSteppe
     public class LevelUpButton : MonoBehaviour
     {
         [SerializeField]
-        private TextMeshProUGUI statName;
+        private TextMeshProUGUI nameTMP;
 
         [SerializeField]
-        private TextMeshProUGUI statValue;        
+        private TextMeshProUGUI valueTMP;        
 
         [SerializeField]
         private PlayerStatisticType statType;
@@ -38,6 +39,15 @@ namespace ProjectSteppe
         private Animator shifterRight;
 
         private UIPlayerInput playerInput;
+        private PlayerStatisticHandler playerStats;
+        private PlayerStatistic playerStat;
+        public int currentValue;
+
+        [SerializeField]
+        private TextMeshProUGUI costTMP;
+        private int cost;
+
+        public UnityEvent<int, LevelUpButton> OnValueChange;
 
         private void Awake()
         {
@@ -47,14 +57,23 @@ namespace ProjectSteppe
         private void Start()
         {
             playerInput = UIPlayerInput.Instance;
-            statName.text = Enum.GetName(typeof(PlayerStatisticType), statType);
+            nameTMP.text = Enum.GetName(typeof(PlayerStatisticType), statType);           
+        }
+
+        public void ActivateButtons()
+        {
+            playerStats = GetComponentInParent<PlayerStatisticHandler>();
+            playerStat = playerStats.statistics.Find(s => s.type == statType);
+
+            currentValue = playerStat.Level;
+            valueTMP.text = currentValue.ToString();
         }
 
         public void OnSelect(BaseEventData baseEventData)
         {
             descriptionBox.SetActive(true);
-            statName.color = selectedColor;
-            statValue.color = selectedColor;
+            nameTMP.color = selectedColor;
+            valueTMP.color = selectedColor;
 
             playerInput.playerInput.UI.Navigate.performed += OnNavigate;
         }
@@ -62,8 +81,8 @@ namespace ProjectSteppe
         public void OnDeselect(BaseEventData baseEventData)
         {
             descriptionBox.SetActive(false);
-            statName.color = Color.white;
-            statValue.color = Color.white;
+            nameTMP.color = Color.white;
+            valueTMP.color = Color.white;
 
             playerInput.playerInput.UI.Navigate.performed -= OnNavigate;
         }
@@ -75,11 +94,18 @@ namespace ProjectSteppe
             if (input.x < 0)
             {
                 shifterLeft.Play("Pulse");
+                currentValue--;
+                if (currentValue < playerStat.Level) currentValue = playerStat.Level;
+                else OnValueChange.Invoke(-1, this);
             }
             else if (input.x > 0)
             {
                 shifterRight.Play("Pulse");
+                currentValue++;
+                OnValueChange.Invoke(1, this);
             }
+
+            valueTMP.text = currentValue.ToString();
         }
     }
 }
