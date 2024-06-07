@@ -1,4 +1,5 @@
 using Cinemachine;
+using ProjectSteppe.Currencies;
 using ProjectSteppe.Entities.Player;
 using ProjectSteppe.Interactions.Interactables;
 using ProjectSteppe.UI.Menus;
@@ -35,6 +36,9 @@ namespace ProjectSteppe.UI
         [SerializeField]
         private TextMeshProUGUI costTMP;
 
+        [SerializeField]
+        private TextMeshProUGUI currencyTMP;
+
         private int pointsCost;
 
 
@@ -68,7 +72,17 @@ namespace ProjectSteppe.UI
         public void RefreshCostText(int change)
         {
             pointsCost += change;
-            costTMP.text = pointsCost.ToString();
+            var sh = checkpoint.player.StatisticHandler;
+            int costValue = Mathf.CeilToInt(
+                sh.BASE_STATISTIC_COST *
+                (sh.totalStatLevel + pointsCost));
+            costTMP.text = "<color=red>- " + costValue.ToString("N0");
+
+            var cc = checkpoint.player.CurrencyContainer;
+            int currDeduc = Mathf.CeilToInt(
+                cc.GetCurrencyAmount(CurrencyType.Experience) -
+                costValue);
+            currencyTMP.text = currDeduc.ToString(); 
         }
 
         public void DisableLevelUpInterface()

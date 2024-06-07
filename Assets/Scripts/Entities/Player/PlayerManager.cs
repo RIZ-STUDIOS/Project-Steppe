@@ -1,4 +1,5 @@
 using Cinemachine;
+using ProjectSteppe.Currencies;
 using ProjectSteppe.Managers;
 using ProjectSteppe.UI;
 using StarterAssets;
@@ -20,6 +21,8 @@ namespace ProjectSteppe.Entities.Player
         private PlayerInventory playerInventory;
         private PlayerUsableItemSlot playerUsableItemSlot;
         private CinemachineVirtualCamera virtualCamera;
+        private PlayerStatisticHandler statisticHandler;
+        private CurrencyContainer currencyContainer;
 
         public TargetLock PlayerTargetLock => this.GetComponentIfNull(ref playerTargetLock);
         public Animator PlayerAnimator => this.GetComponentIfNull(ref playerAnimator);
@@ -42,6 +45,8 @@ namespace ProjectSteppe.Entities.Player
                 return virtualCamera;
             }
         }
+        public PlayerStatisticHandler StatisticHandler => this.GetComponentIfNull(ref statisticHandler);
+        public CurrencyContainer CurrencyContainer => this.GetComponentIfNull(ref currencyContainer);
 
 
         private PlayerCapability capabilities = (PlayerCapability)0b111111;
