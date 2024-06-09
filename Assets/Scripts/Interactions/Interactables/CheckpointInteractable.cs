@@ -114,10 +114,11 @@ namespace ProjectSteppe.Interactions.Interactables
 
         private void CheckpointInteract()
         {
-            player.PlayerUsableItemSlot.currentUsable.Recharge();
-            player.PlayerEntity.EntityHealth.ResetHealth();
             player.PlayerAnimator.SetTrigger("ForceAnimation");
-            player.PlayerAnimator.SetBool("Sitting", true);
+            SitdownPlayer();
+            /*player.PlayerUsableItemSlot.currentUsable.Recharge();
+            player.PlayerEntity.EntityHealth.ResetHealth();
+            
 
             // AESTHETICS
             player.transform.LookAt(transform.position);
@@ -133,6 +134,37 @@ namespace ProjectSteppe.Interactions.Interactables
 
             virtualCam.Priority = 12;
 
+            checkpointUI.EnterCheckpoint(this);
+            OnEnteredCheckpoint.Invoke();*/
+        }
+
+        public void SitdownPlayer()
+        {
+            if (!player)
+            {
+                player = GameManager.Instance.playerManager;
+                if (!player)
+                {
+                    player = FindObjectOfType<PlayerManager>();
+                }
+            }
+            player.PlayerUsableItemSlot.currentUsable.Recharge();
+            player.PlayerEntity.EntityHealth.ResetHealth();
+            player.PlayerAnimator.SetBool("Sitting", true);
+
+            // AESTHETICS
+            player.transform.LookAt(transform.position);
+            player.GetComponentInChildren<HeadLook>().transform.position = headLook.position;
+            player.GetComponentInChildren<HeadLook>().enabled = false;
+
+            var cineBrain = player.PlayerCamera.mainCamera.GetComponent<CinemachineBrain>();
+            cineBrainBlend = cineBrain.m_DefaultBlend.m_Time;
+            cineBrainStyle = cineBrain.m_DefaultBlend.m_Style;
+
+            cineBrain.m_DefaultBlend.m_Time = 2.5f;
+            cineBrain.m_DefaultBlend.m_Style = CinemachineBlendDefinition.Style.EaseInOut;
+
+            virtualCam.Priority = 12;
             checkpointUI.EnterCheckpoint(this);
             OnEnteredCheckpoint.Invoke();
         }

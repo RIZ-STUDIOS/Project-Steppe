@@ -46,7 +46,8 @@ namespace ProjectSteppe.Managers
 
         private void SetPlayerSpawnLocation()
         {
-            checkpoints[SaveHandler.CurrentSave.currentCheckpointIndex].spawnPoint.transform.GetPositionAndRotation(out var spawnPos, out var spawnRot);
+            var currentCheckpoint = checkpoints[SaveHandler.CurrentSave.currentCheckpointIndex];
+            currentCheckpoint.spawnPoint.transform.GetPositionAndRotation(out var spawnPos, out var spawnRot);
             spawnRot.x = 0;
             spawnRot.z = 0;
 
@@ -61,6 +62,16 @@ namespace ProjectSteppe.Managers
             player.VirtualCamera.Follow.transform.rotation = spawnRot;
 
             player.GetComponent<CharacterController>().enabled = true;
+
+            if (GameManager.Instance.playerStartSat)
+            {
+                var playerInteractor = player.GetComponentInChildren<PlayerInteractor>();
+                typeof(PlayerInteractor).GetField("_currentInteractable", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(playerInteractor, currentCheckpoint);
+                //player.GetComponent<PlayerInteractor>().CurrentInteractable = currentCheckpoint;
+                player.PlayerAnimator.Play("Sit Idle");
+                currentCheckpoint.SitdownPlayer();
+                GameManager.Instance.playerStartSat = false;
+            }
         }
 
         private void InitCheckpoints()

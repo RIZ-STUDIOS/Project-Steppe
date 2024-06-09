@@ -46,6 +46,8 @@ namespace ProjectSteppe.Managers
         [System.NonSerialized]
         public List<TargetLockTarget> visibleTargets = new List<TargetLockTarget>();
 
+        public bool playerStartSat;
+
         protected override void Awake()
         {
             base.Awake();

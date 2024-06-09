@@ -51,12 +51,12 @@ namespace ProjectSteppe.UI.Menus
         protected virtual void Awake()
         {
             canvasGroup = GetComponent<CanvasGroup>();
+            eventSystem = EventSystem.current;
+            playerInput = UIPlayerInput.Instance;
         }
 
         protected virtual void Start()
         {
-            eventSystem = EventSystem.current;
-            playerInput = UIPlayerInput.Instance;
         }
 
         protected virtual void Update()

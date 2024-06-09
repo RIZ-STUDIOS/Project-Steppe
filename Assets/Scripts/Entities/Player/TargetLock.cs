@@ -319,19 +319,19 @@ namespace ProjectSteppe.Entities.Player
         //Animation
         public void StoreCurrentTarget()
         {
-            storedTarget = currentTargetLock;
+            /*storedTarget = currentTargetLock;
             StopLockOn();
-            canLock = false;
+            canLock = false;*/
         }
 
         public void RestoreTarget()
         {
-            if (storedTarget)
+            /*if (storedTarget)
             {
                 SetLockTarget(storedTarget);
                 SetLockOn(true);
             }
-            canLock = true;
+            canLock = true;*/
         }
     }
 }
