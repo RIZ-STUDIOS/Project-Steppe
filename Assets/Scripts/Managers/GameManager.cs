@@ -26,6 +26,8 @@ namespace ProjectSteppe.Managers
         [SerializeField]
         private TMP_SpriteAsset kbm;
 
+        public OnLoadFadeInUI onLoadFadeIn;
+
 #if UNITY_EDITOR
         [SerializeField]
         private InputType debugInput;

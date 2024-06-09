@@ -78,7 +78,7 @@ namespace ProjectSteppe.UI.Menus
             canvasGroup.blocksRaycasts = true;
         }
 
-        protected void HideMenuCoroutine(float speed)
+        protected void HideMenuCoroutine(float speed, System.Action onFinish = null)
         {
             if (showHideCoroutine != null)
             {
@@ -86,10 +86,10 @@ namespace ProjectSteppe.UI.Menus
                 showHideCoroutine = null;
             }
 
-            showHideCoroutine = StartCoroutine(HideMenuIEnumerator(speed));
+            showHideCoroutine = StartCoroutine(HideMenuIEnumerator(speed, onFinish));
         }
 
-        protected void ShowMenuCoroutine(float speed)
+        protected void ShowMenuCoroutine(float speed, System.Action onFinish = null)
         {
             if (showHideCoroutine != null)
             {
@@ -97,16 +97,17 @@ namespace ProjectSteppe.UI.Menus
                 showHideCoroutine = null;
             }
 
-            showHideCoroutine = StartCoroutine(FadeInCanvas(speed));
+            showHideCoroutine = StartCoroutine(FadeInCanvas(speed, onFinish));
         }
 
-        private IEnumerator HideMenuIEnumerator(float speed)
+        private IEnumerator HideMenuIEnumerator(float speed, System.Action onFinish)
         {
             yield return FadeOutCanvas(speed);
+            onFinish?.Invoke();
             ShowCurrentMenu();
         }
 
-        protected IEnumerator FadeInCanvas(float speed)
+        protected IEnumerator FadeInCanvas(float speed, System.Action onFinish)
         {
             float alpha = canvasGroup.alpha;
             while (alpha < 1)
@@ -118,6 +119,7 @@ namespace ProjectSteppe.UI.Menus
             alpha = 1;
             canvasGroup.alpha = alpha;
             canvasGroup.blocksRaycasts = true;
+            onFinish?.Invoke();
         }
 
         protected IEnumerator FadeOutCanvas(float speed)

@@ -70,10 +70,5 @@ namespace ProjectSteppe.UI.Menus
             FreeCamera.instance.enabled = true;
             FreeCamera.instance.menu = this;
         }
-
-        protected override void OnCancelPerformed(InputAction.CallbackContext callbackContext)
-        {
-            pause.UnpauseGameFromMenu();
-        }
     }
 }

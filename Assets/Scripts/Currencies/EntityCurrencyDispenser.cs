@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace ProjectSteppe
 {
-    public class EntityCurrencyDispenser : CurrencyDispenser
+    public class EntityCurrencyDispenser : CurrencyDispenser, IReloadable
     {
         [SerializeField]
         private float dispenseDelay = 3;
@@ -29,8 +29,14 @@ namespace ProjectSteppe
         {
             transform.SetParent(null);
             yield return new WaitForSeconds(dispenseDelay);
+            if (!parentHealth || !parentHealth.mostRecentEntityHitBy) yield break;
             parentHealth.mostRecentEntityHitBy.TryGetComponent(out CurrencyContainer container);
             DispenseCurrencyPayloads(container);
+            Destroy(gameObject);
+        }
+
+        public void OnReload()
+        {
             Destroy(gameObject);
         }
     }

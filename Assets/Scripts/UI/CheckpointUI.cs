@@ -2,9 +2,11 @@ using Cinemachine;
 using ProjectSteppe.Currencies;
 using ProjectSteppe.Entities.Player;
 using ProjectSteppe.Interactions.Interactables;
+using ProjectSteppe.Managers;
 using ProjectSteppe.Saving;
 using ProjectSteppe.UI.Menus;
 using ProjectSteppe.ZedExtensions;
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Windows;
 
 namespace ProjectSteppe.UI
 {
@@ -98,14 +101,10 @@ namespace ProjectSteppe.UI
         {
             checkpoint = activeCheckpoint;
 
-            checkpoint.player.GetComponent<Pause>().ProhibitPause();
+            //checkpoint.player.GetComponent<Pause>().ProhibitPause();
 
             SetMenu(this);
             ShowCurrentMenu();
-
-            checkpoint.player.PlayerUI.playerDetails.HidePlayerDetails();
-
-            EventSystem.current.SetSelectedGameObject(firstButton);
         }
 
         public void EnableLevelUpInterface()
@@ -185,7 +184,6 @@ namespace ProjectSteppe.UI
 
         public void Rest()
         {
-            EventSystem.current.enabled = false;
             StartCoroutine(OnRest());
         }
 
@@ -197,18 +195,52 @@ namespace ProjectSteppe.UI
 
         protected override void ShowMenu()
         {
-            StartCoroutine(canvasGroup.FadeIn(true, true, 4));
+            //StartCoroutine(canvasGroup.FadeIn(true, true, 4));
+            GameManager.Instance.playerManager.GetComponent<Pause>().ProhibitPause();
+            checkpoint.player.PlayerUI.playerDetails.HidePlayerDetails();
+            var input = GameManager.Instance.playerManager.GetComponent<StarterAssetsInputs>();
+            input.respondToData = false;
+            input.ResetInputs();
+            ShowMenuCoroutine(4, () =>
+            {
+                EventSystem.current.SetSelectedGameObject(firstButton);
+            });
         }
 
         protected override void HideMenu()
         {
-            StartCoroutine(canvasGroup.FadeOut(true, true, 4));
+            //StartCoroutine(canvasGroup.FadeOut(true, true, 4));
+            EventSystem.current.SetSelectedGameObject(null);
+            HideMenuCoroutine(4, () =>
+            {
+                StartCoroutine(ReEnableControls());
+            });
+        }
+
+        private IEnumerator ReEnableControls()
+        {
+            yield return null;
+            var input = GameManager.Instance.playerManager.GetComponent<StarterAssetsInputs>();
+            input.respondToData = true;
+            GameManager.Instance.playerManager.GetComponent<Pause>().AllowPause();
+            //player.EnableCapability(PlayerCapability.Dash);
+            //player.EnableCapability(PlayerCapability.Drink);
         }
 
         private IEnumerator OnRest()
         {
+            var eventSystem = EventSystem.current;
+            eventSystem.enabled = false;
+            playerInput.playerInput.Disable();
             yield return checkpoint.player.PlayerUI.blackFade.FadeIn();
-            SceneManager.LoadScene(SceneConstants.LEVEL_1_INDEX);
+            var reloadables = FindObjectsOfType<MonoBehaviour>().OfType<IReloadable>();
+            foreach (var reloadable in reloadables)
+            {
+                reloadable.OnReload();
+            }
+            yield return GameManager.Instance.onLoadFadeIn.FadeInCoroutine();
+            playerInput.playerInput.Enable();
+            eventSystem.enabled = true;
         }
 
         public void OnExitCheckpoint()
@@ -217,9 +249,9 @@ namespace ProjectSteppe.UI
             checkpoint.player.GetComponentInChildren<HeadLook>().enabled = true;
             checkpoint.player.PlayerAnimator.SetBool("Sitting", false);
             SetMenu(null);
-            EventSystem.current.SetSelectedGameObject(null);
-            checkpoint.player.PlayerUI.playerDetails.ShowPlayerDetails();
-            checkpoint.player.GetComponent<Pause>().AllowPause();
+            //EventSystem.current.SetSelectedGameObject(null);
+            //checkpoint.player.PlayerUI.playerDetails.ShowPlayerDetails();
+            //checkpoint.player.GetComponent<Pause>().AllowPause();
         }
     }
 }
