@@ -26,6 +26,12 @@ namespace ProjectSteppe.AI.States
         private AIAttackState chargeAttackState;
 
         [SerializeField]
+        private AIAttackState wideAttackState;
+
+        [SerializeField]
+        private AIAttackState lightAttackState;
+
+        [SerializeField]
         private AIAttackState fullBasicHeavyAttackState;
 
         [SerializeField]
@@ -48,6 +54,12 @@ namespace ProjectSteppe.AI.States
 
         [SerializeField]
         private AIAttackState buttPokeAroundTheWorldAttackState;
+
+        [SerializeField]
+        private AIAttackState lightLightAttackState;
+
+        [SerializeField]
+        private AIAttackState wideAroundTheWorldAttackState;
 
         [SerializeField]
         private BlockAIAttack blockState;
@@ -143,18 +155,24 @@ namespace ProjectSteppe.AI.States
             if(rollDice <= .6f)
             {
                 rollDice = Random.value;
-                if (rollDice <= .5f)
+                if (rollDice <= .3f)
                     return fullBasicAttackState;
+                else if (rollDice < .5f)
+                    return lightAttackState;
+                else if (rollDice < .7f)
+                    return wideAttackState;
                 else if (rollDice < .8f)
                     return thrustAttackState;
                 return heavyAttackState;
             }
             rollDice = Random.value;
-            if (rollDice <= .25f)
+            if (rollDice <= .20f)
                 return fullBasicHeavyAttackState;
-            else if (rollDice <= .5f)
+            else if (rollDice <= .4f)
+                return lightLightAttackState;
+            else if (rollDice <= .6f)
                 return thrustHeavyAttackState;
-            else if (rollDice <= .75f)
+            else if (rollDice <= .8f)
                 return kickHeavyAttackState;
             return chargeHeavyAttackState;
         }
@@ -176,7 +194,12 @@ namespace ProjectSteppe.AI.States
             if(rollDice <= .2f)
             {
                 return aroundTheWorldAttackState;
-            }else if(rollDice <= .4f)
+            }
+            else if(rollDice <= .3f)
+            {
+                return wideAroundTheWorldAttackState;
+            }
+            else if(rollDice <= .4f)
             {
                 return thrustAroundTheWorldAttackState;
             }else if(rollDice <= .6f)
