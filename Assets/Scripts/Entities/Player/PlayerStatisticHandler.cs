@@ -61,15 +61,15 @@ namespace ProjectSteppe.Entities.Player
         {
             var toughness = statistics.Find(t => t.type == PlayerStatisticType.Toughness);
             var playerHealth = GetComponent<EntityHealth>();
-            playerHealth.ChangeMaxHealth(playerMaxHealth * (1 + (0.03f * toughness.Level)));
+            playerHealth.ChangeMaxHealth(playerMaxHealth * (1 + (0.03f * (toughness.Level - 1))));
 
             var precision = statistics.Find(p => p.type == PlayerStatisticType.Precision);
             var playerAttack = GetComponent<EntityAttacking>();
-            playerAttack.damageMultiplier = 1 + (0.03f * precision.Level);
+            playerAttack.damageMultiplier = 1 + (0.03f * (precision.Level - 1));
 
             var swiftness = statistics.Find(sw => sw.type == PlayerStatisticType.Swiftness);
             var playerMovement = GetComponent<PlayerMovementController>();
-            playerMovement.speedMultiplier = 1 + (0.03f * swiftness.Level);
+            playerMovement.speedMultiplier = 1 + (0.03f * (swiftness.Level - 1));
 
         }
     }
