@@ -136,7 +136,7 @@ namespace UnityEngine.UI.Extensions
 		private void TryToScrollToSelection()
 		{
 			// update references if selection changed
-			GameObject selection = EventSystem.current.currentSelectedGameObject;
+			GameObject selection = EventSystem.current ? EventSystem.current.currentSelectedGameObject : null;
 
 			if (selection == null || selection.activeInHierarchy == false || selection == lastCheckedSelection ||
 				selection.transform.IsChildOf(transform) == false)
