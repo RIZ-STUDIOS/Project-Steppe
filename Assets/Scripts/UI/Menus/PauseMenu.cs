@@ -70,5 +70,13 @@ namespace ProjectSteppe.UI.Menus
             FreeCamera.instance.enabled = true;
             FreeCamera.instance.menu = this;
         }
+
+        protected override void OnCancelPerformed(InputAction.CallbackContext callbackContext)
+        {
+            if(UIPlayerInput.Instance.controlScheme == UIPlayerInput.ControlScheme.Gamepad)
+            {
+                pause.UnpauseGameFromMenu();
+            }
+        }
     }
 }

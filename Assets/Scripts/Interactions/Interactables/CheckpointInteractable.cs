@@ -58,6 +58,8 @@ namespace ProjectSteppe.Interactions.Interactables
         private float cineBrainBlend;
         private CinemachineBlendDefinition.Style cineBrainStyle;
 
+        private bool switchingOff;
+
         private void Awake()
         {
             firelight = GetComponentInChildren<Light>();
@@ -169,11 +171,24 @@ namespace ProjectSteppe.Interactions.Interactables
             OnEnteredCheckpoint.Invoke();
         }
 
+        private void Update()
+        {
+            if (switchingOff)
+            {
+                if (!CinemachineCore.Instance.IsLive(virtualCam))
+                {
+                    var cineBrain = player.PlayerCamera.mainCamera.GetComponent<CinemachineBrain>();
+                    cineBrain.m_DefaultBlend.m_Time = cineBrainBlend;
+                    cineBrain.m_DefaultBlend.m_Style = cineBrainStyle;
+                    checkpointUI.ReEnableControls();
+                    switchingOff = false;
+                }
+            }
+        }
+
         public void ResetCameraBrain()
         {
-            var cineBrain = player.PlayerCamera.mainCamera.GetComponent<CinemachineBrain>();
-            cineBrain.m_DefaultBlend.m_Time = cineBrainBlend;
-            cineBrain.m_DefaultBlend.m_Style = cineBrainStyle;
+            switchingOff = true;
             virtualCam.Priority = 0;
         }
 

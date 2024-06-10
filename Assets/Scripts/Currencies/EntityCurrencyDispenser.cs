@@ -1,5 +1,6 @@
 using ProjectSteppe.Currencies;
 using ProjectSteppe.Entities;
+using ProjectSteppe.Managers;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,11 +13,9 @@ namespace ProjectSteppe
         [SerializeField]
         private float dispenseDelay = 3;
 
-        private EntityHealth parentHealth;
-
         private void Awake()
         {
-            parentHealth = GetComponentInParent<EntityHealth>();
+            var parentHealth = GetComponentInParent<EntityHealth>();
             if (parentHealth != null) parentHealth.onKill.AddListener(OnParentDeath);
         }
 
@@ -29,9 +28,7 @@ namespace ProjectSteppe
         {
             transform.SetParent(null);
             yield return new WaitForSeconds(dispenseDelay);
-            if (!parentHealth || !parentHealth.mostRecentEntityHitBy) yield break;
-            parentHealth.mostRecentEntityHitBy.TryGetComponent(out CurrencyContainer container);
-            DispenseCurrencyPayloads(container);
+            DispenseCurrencyPayloads(GameManager.Instance.playerManager.CurrencyContainer);
             Destroy(gameObject);
         }
 

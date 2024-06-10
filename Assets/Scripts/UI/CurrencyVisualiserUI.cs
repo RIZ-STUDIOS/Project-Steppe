@@ -76,7 +76,8 @@ namespace ProjectSteppe
                 int amount = Mathf.CeilToInt(Mathf.Lerp(previousAmount, container.GetCurrencyAmount(currencyType), timer));
                 counterTMP.text = amount.ToString("N0");
 
-                timer += Time.deltaTime * flavourSpeed;
+                timer += Time.deltaTime * flavourSpeed * 2;
+                yield return null;
                 yield return null;
             }
 

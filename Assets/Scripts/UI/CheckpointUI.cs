@@ -211,13 +211,16 @@ namespace ProjectSteppe.UI
         {
             //StartCoroutine(canvasGroup.FadeOut(true, true, 4));
             EventSystem.current.SetSelectedGameObject(null);
-            HideMenuCoroutine(4, () =>
-            {
-                StartCoroutine(ReEnableControls());
-            });
+            checkpoint.player.PlayerUI.playerDetails.ShowPlayerDetails();
+            HideMenuCoroutine(4);
         }
 
-        private IEnumerator ReEnableControls()
+        public void ReEnableControls()
+        {
+            StartCoroutine(ReEnableControlsIEnumerator());
+        }
+
+        private IEnumerator ReEnableControlsIEnumerator()
         {
             yield return null;
             var input = GameManager.Instance.playerManager.GetComponent<StarterAssetsInputs>();

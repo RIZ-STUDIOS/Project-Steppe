@@ -116,12 +116,6 @@ namespace ProjectSteppe.Entities
             }
         }
 
-        public void DamageHealth(float amount, Entity attackingEntity)
-        {
-            mostRecentEntityHitBy = attackingEntity;
-            DamageHealth(amount);
-        }
-
         public void ResetHealth()
         {
             Health = maxHealth;
