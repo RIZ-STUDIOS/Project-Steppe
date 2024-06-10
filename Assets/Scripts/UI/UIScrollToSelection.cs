@@ -176,6 +176,16 @@ namespace UnityEngine.UI.Extensions
 				(selectionCorners[0].y < corners[0].y ? selectionCorners[0].y - corners[0].y : 0) +
 				(selectionCorners[1].y > corners[1].y ? selectionCorners[1].y - corners[1].y : 0);
 
+			/*Debug.Log(selectionCorners[0].y);
+			Debug.Log(selectionCorners[1].y);
+			Debug.Log(corners[0].y);
+			Debug.Log(corners[1].y);
+			Debug.Log(offsetToSelection.y);*/
+			if (Mathf.Abs(offsetToSelection.y) > 0.001f)
+				offsetToSelection.y *= 2;
+			else
+				offsetToSelection.y = 0;
+
 			// calculate final scroll speed
 			float finalScrollSpeed = ScrollSpeed;
 

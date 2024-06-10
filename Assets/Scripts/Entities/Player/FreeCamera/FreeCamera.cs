@@ -9,6 +9,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
 using UnityEngine.Windows;
 
 namespace ProjectSteppe
@@ -16,7 +18,7 @@ namespace ProjectSteppe
     public class FreeCamera : MonoBehaviour
     {
         private CinemachineBrain brain;
-        private FreeCameraInput input;
+        public FreeCameraInput input;
         private new Camera camera;
 
         [SerializeField]
@@ -47,6 +49,9 @@ namespace ProjectSteppe
         [SerializeField]
         private RectTransform controlsRectTransform;
 
+        [SerializeField]
+        private FreeCamOptionsMenu options;
+
         private Vector2 moveVector;
         private float verticalMovement;
 
@@ -69,6 +74,10 @@ namespace ProjectSteppe
 
         private ScreenshotTaker screenshotTaker;
 
+        [SerializeField]
+        private VolumeProfile volumeProfile;
+        private DepthOfField depthOfField;
+
         private void Awake()
         {
             camera = GetComponent<Camera>();
@@ -84,10 +93,9 @@ namespace ProjectSteppe
             input.Player.Look.canceled += Look_canceled;
             input.Player.Back.performed += Back_performed;
             input.Player.Screenshot.performed += Screenshot_performed;
-            input.Player.SlowDown.performed += SlowDown_performed;
-            input.Player.SlowDown.canceled += SlowDown_canceled;
-            input.Player.Zoom.performed += Zoom_performed;
+            //input.Player.Zoom.performed += Zoom_performed;
             input.Player.ToggleCanvas.performed += ToggleCanvas_performed;
+            volumeProfile.TryGet(out depthOfField);
         }
 
         private void ToggleCanvas_performed(InputAction.CallbackContext obj)
@@ -122,14 +130,14 @@ namespace ProjectSteppe
             camera.fieldOfView = fov;
         }
 
-        private void SlowDown_canceled(InputAction.CallbackContext obj)
+        public void SetSlowMode(bool value)
         {
-            speedMultiplier = 1;
+            speedMultiplier = value ? speedDownMultipler : 1;
         }
 
-        private void SlowDown_performed(InputAction.CallbackContext obj)
+        public void SetDoF(bool value)
         {
-            speedMultiplier = speedDownMultipler;
+            depthOfField.active = value;
         }
 
         private void Screenshot_performed(InputAction.CallbackContext obj)
@@ -243,6 +251,8 @@ namespace ProjectSteppe
             var pos = controlsRectTransform.anchoredPosition;
             pos.x = -controlsRectTransform.sizeDelta.x / 2f;
             controlsRectTransform.anchoredPosition = pos;
+
+            options.SelectFirstElement();
         }
 
         private void OnDisable()
@@ -250,6 +260,7 @@ namespace ProjectSteppe
             GameManager.Instance.playerManager.PlayerMovement.enabled = playerMovementEnabled;
             brain.enabled = true;
             input.Disable();
+            options.DisableOptions();
 
             foreach (var canvas in canvases)
             {
@@ -267,6 +278,7 @@ namespace ProjectSteppe
             }
 
             freeCamCanvas.enabled = false;
+            SetDoF(true);
         }
     }
 }
