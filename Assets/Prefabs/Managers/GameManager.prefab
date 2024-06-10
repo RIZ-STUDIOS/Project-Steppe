@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2242751757130392920}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 491.75208, y: 254.18501, z: 550.76697}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -45,10 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   font: {fileID: 11400000, guid: d486df5020bdf1d4997d6e8bdccde247, type: 2}
-  ps5: {fileID: 11400000, guid: 44a21995f9e822a49ad374784f039468, type: 2}
+  ps5: {fileID: 11400000, guid: dba5a879c85ef82468ab7e1606cfcd13, type: 2}
   xbox: {fileID: 11400000, guid: ef70c7dd6e4ec98468c616255460f6fa, type: 2}
   kbm: {fileID: 11400000, guid: 396adba57a0ef3240ae221631c6fd1c3, type: 2}
+  onLoadFadeIn: {fileID: 0}
   debugInput: 0
   defaultGameSceneIndex: 2
   availableItems: {fileID: 11400000, guid: 6c63ace70dd65394385dda46039f0067, type: 2}
   playerManager: {fileID: 0}
+  playerStartSat: 0
