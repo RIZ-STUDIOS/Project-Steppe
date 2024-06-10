@@ -109,7 +109,7 @@ namespace ProjectSteppe.AI.States
 
         private AIAttackState BalanceCheck()
         {
-            if(controller.AIEntity.EntityHealth.BalancePer >= balanceCheckPer)
+            if (controller.AIEntity.EntityHealth.BalancePer >= balanceCheckPer)
             {
                 return HealthCheck();
             }
