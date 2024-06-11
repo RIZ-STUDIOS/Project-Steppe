@@ -29906,21 +29906,14 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 32
-    messageOptions: 0
-  - time: 0
-    functionName: DisableWeaponCollision
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
+    intParameter: 16
     messageOptions: 0
   - time: 0
     functionName: DisableCapability
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 16
+    intParameter: 32
     messageOptions: 0
   - time: 0
     functionName: DisableBlocking
@@ -29928,6 +29921,13 @@ AnimationClip:
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 8
+    messageOptions: 0
+  - time: 0
+    functionName: DisableWeaponCollision
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
     messageOptions: 0
   - time: 0
     functionName: DisableCapability
@@ -30109,7 +30109,21 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
+    intParameter: 16
+    messageOptions: 0
+  - time: 0.8
+    functionName: EnableCapability
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
     intParameter: 2
+    messageOptions: 0
+  - time: 0.8
+    functionName: EnableCapability
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 4
     messageOptions: 0
   - time: 0.8
     functionName: EnableBlocking
@@ -30124,18 +30138,4 @@ AnimationClip:
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 32
-    messageOptions: 0
-  - time: 0.8
-    functionName: EnableCapability
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 16
-    messageOptions: 0
-  - time: 0.8
-    functionName: EnableCapability
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 4
     messageOptions: 0
