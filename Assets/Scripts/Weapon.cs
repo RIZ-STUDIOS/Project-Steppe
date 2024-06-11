@@ -131,7 +131,7 @@ namespace ProjectSteppe
 
                 if (!hitbox.ParentEntity.EntityBlock.IsPerfectBlock())
                 {
-                    hitbox.ParentEntity.EntityHealth.DamageBalance(parentEntity.EntityAttacking.currentAttack.balanceDamage);
+                    hitbox.ParentEntity.EntityHealth.DamageBalance(parentEntity.EntityAttacking.currentAttack.balanceDamage * parentEntity.EntityAttacking.damageMultiplier);
 
                     if (parentEntity.EntityAttacking.currentAttack.balanceBlockPassthrough)
                     {
@@ -143,13 +143,13 @@ namespace ProjectSteppe
                 {
                     if (parentEntity.EntityAttacking.currentAttack.balanceBlockPassthrough)
                     {
-                        hitbox.ParentEntity.EntityHealth.DamageBalance(parentEntity.EntityAttacking.currentAttack.balanceDamage);
+                        hitbox.ParentEntity.EntityHealth.DamageBalance(parentEntity.EntityAttacking.currentAttack.balanceDamage * parentEntity.EntityAttacking.damageMultiplier);
                         hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage * parentEntity.EntityAttacking.damageMultiplier);
                         hitbox.ParentEntity.EntityBlock.ChangeBlockColor(false);
                     }
                     else
                     {
-                        parentEntity.EntityHealth.DamageBalance(parentEntity.EntityAttacking.currentAttack.perfectBlockBalanceDamage);
+                        parentEntity.EntityHealth.DamageBalance(parentEntity.EntityAttacking.currentAttack.perfectBlockBalanceDamage * parentEntity.EntityAttacking.damageMultiplier);
                         hitbox.ParentEntity.EntityAttacking.CurrentWeapon.onParry?.Invoke();
                         hitbox.ParentEntity.EntityBlock.OnParryAttack.Invoke();
                     }
@@ -162,7 +162,7 @@ namespace ProjectSteppe
             else
             {
                 hitbox.ParentEntity.EntityHealth.DamageHealth(parentEntity.EntityAttacking.currentAttack.healthDamage * parentEntity.EntityAttacking.damageMultiplier);
-                hitbox.ParentEntity.EntityHealth.DamageBalance(parentEntity.EntityAttacking.currentAttack.balanceDamage);
+                hitbox.ParentEntity.EntityHealth.DamageBalance(parentEntity.EntityAttacking.currentAttack.balanceDamage * parentEntity.EntityAttacking.damageMultiplier);
             }
 
             hitEntity = hitbox.ParentEntity;
